@@ -1,0 +1,60 @@
+html,
+body {
+    height: 100%;
+}
+
+.my-bg-primary {
+    background-color: #6489a8;
+}
+.my-bg-secondary {
+    background-color: #f98771;
+}
+.my-color-primary {
+    color: #6489a8;
+}
+.my-color-secondary {
+    color: #f98771;
+}
+
+.hero-img {
+    height: 550px;
+    width: auto;
+}
+
+.form-login {
+    max-width: 100%;
+    padding: 1rem;
+    margin: 20px;
+}
+
+.form-register {
+    max-width: 100%;
+    padding: 1rem;
+    margin: 20px;
+}
+
+.form-login .form-floating,
+.form-register .form-floating {
+    padding: 2px 0;
+}
+.form-login .form-floating input,
+.form-register .form-floating input {
+    height: 50px;
+}
+
+.form-login .form-floating:focus-within,
+.form-register .form-floating:focus-within {
+    z-index: 2;
+}
+
+.auth-button {
+    color: aliceblue;
+}
+.auth-button:hover {
+    font-weight: 600;
+    background-color: #83b2da;
+    box-shadow: 1px 2px 9px #6489a8;
+}
+.auth-button:focus {
+    color: #4c3030;
+}

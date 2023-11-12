@@ -1,0 +1,90 @@
+*,
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.preloader {
+    display: -ms-flexbox;
+    display: flex;
+    background-color: rgba(51, 51, 51, 0.788);
+    height: 100vh;
+    width: 100%;
+    transition: height 0.2s linear;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 9999;
+}
+
+.my-bg-primary {
+    background-color: #6489a8;
+}
+.my-bg-secondary {
+    background-color: #f98771;
+}
+.my-color-primary {
+    color: #6489a8;
+}
+.my-color-secondary {
+    color: #f98771;
+}
+
+.link_profile:hover {
+    border-bottom: 2px solid #40596d;
+}
+
+.profile-active {
+    border-bottom: 2px solid #6489a8;
+}
+
+.menu-active {
+    color: aliceblue !important;
+    background-color: #6489a8;
+}
+
+.menu-active:hover {
+    color: #6489a8 !important;
+}
+
+.submenu-active {
+    color: #6489a8 !important;
+    font-weight: 600;
+    padding-left: 17px;
+}
+/* 
+.submenu-active::after {
+    position: absolute;
+    content: "";
+    width: 85%;
+    left: 15px;
+    bottom: 0;
+    border-bottom: 2px solid #6489a8;
+} */
+
+.sidebar-search-results .list-group a {
+    background-color: #749dbf !important;
+}
+
+/* Page -- Content */
+.btn-add {
+    color: #4291d1 !important;
+    font-weight: 600;
+    right: 0;
+    padding: 0;
+    font-size: 18px;
+}
+.btn-add:hover {
+    color: #749dbf !important;
+}
+
+.my-button-save {
+    background-color: #4291d1 !important;
+    color: #fff;
+}
+.my-button-save:hover {
+    background-color: #749dbf !important;
+    color: #fff;
+    box-shadow: 1px 2px 2px rgb(165, 214, 214);
+}
