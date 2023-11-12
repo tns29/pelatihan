@@ -13,9 +13,6 @@
   </div><!-- /.container-fluid -->
 </div>
 
-<input type="hidden" id="valid" value="<?= session()->has('success') ?>">
-<input type="hidden" id="invalid" value="<?= session()->has('failed') ?>">
-
 <!-- Main content -->
 <section class="content">
     <div class="container-fluid">
@@ -84,8 +81,9 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="{{ route('category.update', 1) }}" method="PATCH">
+      <form method="POST">
         @csrf
+        @method('PUT')
         <div class="modal-body p-3">
           <div class="row" id="content-edit">
             
@@ -109,8 +107,9 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form >
+      <form method="POST">
         @csrf
+        @method('DELETE')
         <div class="modal-body p-3">
           <div class="row" id="content-delete">
             

@@ -11,4 +11,9 @@ class Category extends Model
 
     public $guarded = ['id'];
     public $timestamps = false;
+
+    public function Training(): HasMany
+    {
+        return $this->hasMany(Training::class, 'category_id', 'id');
+    }
 }

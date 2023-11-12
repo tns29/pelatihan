@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Admin;
+use App\Models\Training;
 
 function testHelper() {
     die('Helper is ready');
@@ -82,6 +83,21 @@ function getLasCodeAdmin() {
         $code = "ADM".date('Ymd').$code_;
     } else {
         $code = "ADM".date('Ymd')."0001";
+    }
+
+    return $code;
+}
+
+function getLasIdTraining() {
+        
+    $lastId = Training::last('id');
+
+    if($lastId) {
+        $lastId = $lastId;
+        $code_ = sprintf('%03d', $lastId+1);
+        $code = $code_;
+    } else {
+        $code = 1;
     }
 
     return $code;

@@ -130,7 +130,7 @@
                             </div>
     
                             <div class="col-lg-12 col-md-12 col-sm-12 mt-2">
-                                <label for="date_of_birth">Alamat Lengkap</label>
+                                <label for="address">Alamat Lengkap</label>
                                 <textarea name="address" id="address" class="form-control" cols="30" rows="5"></textarea>
                             </div>
     
@@ -164,7 +164,6 @@
                         <section style="float: right;">
                             <a href="/data-admin" class="btn btn-outline-secondary mr-2"><i class="fas fa-backspace"></i> Batal</a>
                             <button class="btn my-button-save"><i class="far fa-save"></i> Simpan</button>
-    
                         </section>
                     </section>
                 </div>

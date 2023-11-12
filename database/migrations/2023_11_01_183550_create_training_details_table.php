@@ -16,7 +16,7 @@ return new class extends Migration
             $table->char('initials', 10);
             $table->unsignedBigInteger('training_id')->nullable(false);
             $table->foreign('training_id')->on('trainings')->references('id');
-            $table->string('title', 10);
+            $table->string('title', 30);
             $table->string('description', 200);
             $table->date('date');
             $table->double('price');

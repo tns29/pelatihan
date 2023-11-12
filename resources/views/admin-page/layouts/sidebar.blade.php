@@ -80,7 +80,7 @@
                     </a> 
                 </li> 
                 <li class="nav-header">Layanan</li>
-                <li class="nav-item {{ Request::segment(1) === 'category' || Request::segment(1) === 'data-participant' ? 'menu-is-opening menu-open' : '' }}">
+                <li class="nav-item {{ Request::segment(1) === 'category' || Request::segment(1) === 'service' || Request::segment(1) === 'service-detail' ? 'menu-is-opening menu-open' : '' }}">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-cubes"></i>
                         <p>

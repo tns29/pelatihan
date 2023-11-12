@@ -5,6 +5,7 @@ use App\Http\Controllers\Dashboard;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\TrainingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,7 +46,9 @@ Route::middleware('admin')->group(function () {
 
     Route::get('/registrant', [AdminController::class, 'registrant']);
     
-    Route::resource('/category', CategoryController::class); 
+    Route::resource('/category', CategoryController::class)->only("index", "store", "update", "destroy");
+    
+    Route::resource('/service', TrainingController::class)->except("show");
 
     Route::post('/logout-admin', [AuthAdmin::class, 'logout']);
 });

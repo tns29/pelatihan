@@ -5,7 +5,7 @@ function add_m_category() {
 
     var html = `<div class="col mb-2">
                     <label for="name" style="margin-left: 10px;">Nama Kategori<label>
-                    <input type="text" name="name" id="name" class="form-control" style="margin-left: 30px;">
+                    <input type="text" autocomplete="off" autofocus name="name" id="name" class="form-control" style="margin-left: 30px;">
                 </div>`;
 
     $("#content-add").append(html);
@@ -14,8 +14,7 @@ function add_m_category() {
 function edit_m_category(id, name) {
     $("#modal-edit").modal("show");
     $(".modal-title").text("Ubah Data");
-    // $("#modal-edit form").attr("action", "/category/" + id);
-    // $("#modal-edit form").attr("method", "PUT");
+    $("#modal-edit form").attr("action", "/category/" + id);
     $("#content-edit").html("");
 
     var html =
@@ -24,7 +23,7 @@ function edit_m_category(id, name) {
         id +
         `">
                 <label for="name" style="margin-left: 10px;">Nama Kategori<label>
-                <input type="text" name="name" id="name" class="form-control" style="margin-left: 30px;" value="` +
+                <input type="text" autocomplete="off" autofocus name="name" id="name" class="form-control" style="margin-left: 30px;" value="` +
         name +
         `">
                 </div>`;
@@ -36,7 +35,6 @@ function delete_m_category(id, name) {
     $("#modal-delete").modal("show");
     $(".modal-title").text("Hapus Data");
     $("#modal-delete form").attr("action", "/category/" + id);
-    $("#modal-delete form").attr("method", "DELETE");
     $("#content-delete").html("");
 
     var html =

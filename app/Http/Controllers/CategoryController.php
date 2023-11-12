@@ -31,11 +31,6 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $code = Auth::guard('admin')->user();
-        return view('admin-page.add_m_category', [
-            'title' => 'Profile',
-            'auth_user' => $code
-        ]);
     }
 
     /**
@@ -43,7 +38,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $result = Category::create(['name' => $request['name']]);
+        $result = Category::create(['name' => ucwords($request['name'])]);
         if($result) {
             $request->session()->flash('success', 'Kategori berhasil dibuat');
         } else {
@@ -71,10 +66,9 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, int $id)
     {
-        // dd($id);
-        $result = Category::find($id)->update($request->all());
+        $result = Category::find($id)->update(['name'=>ucwords($request['name'])]);
         if($result) {
             $request->session()->flash('success', 'Kategori berhasil diubah');
         } else {
@@ -86,10 +80,10 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, int $id)
     {
-        dd($id);
-        $result = Category::find($id)->delete();
+        $category = Category::find($id);
+        $result = $category->delete();
         if($result) {
             $request->session()->flash('success', 'Kategori berhasil diubah');
         } else {

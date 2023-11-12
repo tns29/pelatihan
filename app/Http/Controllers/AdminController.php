@@ -88,7 +88,7 @@ class AdminController extends Controller
             $request->session()->flash('success', 'Akun berhasil dibuat');
             return redirect('/data-admin');
         } else {
-            $request->session()->flash('success', 'Proses gagal, Hubungi administrator');
+            $request->session()->flash('failed', 'Proses gagal, Hubungi administrator');
             return redirect('/form-add-admin');
         }
         
