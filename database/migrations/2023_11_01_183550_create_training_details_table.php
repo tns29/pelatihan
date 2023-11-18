@@ -17,9 +17,9 @@ return new class extends Migration
             $table->unsignedBigInteger('training_id')->nullable(false);
             $table->foreign('training_id')->on('trainings')->references('id');
             $table->string('title', 30);
-            $table->string('description', 200);
+            $table->text('description');
             // $table->date('date');
-            $table->double('price');
+            // $table->double('price');
             $table->text('images')->nullable();
             $table->enum('is_active', ["Y", "N"])->default('Y');
             $table->dateTime('created_at')->nullable();
