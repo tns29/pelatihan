@@ -14,12 +14,12 @@ class Admin extends Authenticatable
 {
     use HasFactory, Notifiable;
     
-    public $primaryKey = 'code';
+    public $primaryKey = 'number';
     public $keyType = 'string';
     public $timestamps = false;
 
     protected $fillable = [
-        'code',
+        'number',
         'fullname',
         'username',
         'gender',
@@ -31,9 +31,9 @@ class Admin extends Authenticatable
         'is_active',
         'email',
         'password',
-        'created_on',
+        'created_at',
         'created_by',
-        'updated_on',
+        'updated_at',
         'updated_by',
     ];
 

@@ -52,7 +52,6 @@ if (!function_exists('getMonthName')) {
                 $bulan = 'Desember';
                 break;
             default:
-                # code...
                 break;
         }
         return $bulan;
@@ -73,16 +72,16 @@ function getContentScript($isAdmin, $filename) {
     return $filename_script;
 }
 
-function getLasCodeAdmin() {
+function getLasNumberAdmin() {
         
-    $lastCode = Admin::max('code');
+    $lastCode = Admin::max('number');
 
     if($lastCode) {
         $lastCode = substr($lastCode, -4);
         $code_ = sprintf('%04d', $lastCode+1);
-        $code = "ADM".date('Ymd').$code_;
+        $numberFix = "ADM".date('Ymd').$code_;
     } else {
-        $code = "ADM".date('Ymd')."0001";
+        $numberFix = "ADM".date('Ymd')."0001";
     }
 
     return $code;
@@ -90,7 +89,7 @@ function getLasCodeAdmin() {
 
 function getLasIdTraining() {
         
-    $lastId = Training::last('id');
+    $lastId = Training::max('id');
 
     if($lastId) {
         $lastId = $lastId;

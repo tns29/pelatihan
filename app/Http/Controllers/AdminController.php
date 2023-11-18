@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Route;
 class AdminController extends Controller
 {
     function index() {
-        $code = Auth::guard('admin')->user()->code;
-        $data = Admin::with('admin_level')->find($code)->first();  
+        $number = Auth::guard('admin')->user()->number;
+        $data = Admin::with('admin_level')->find($number)->first();  
         return view('admin-page.profile', [
             'title' => 'Profile',
             'auth_user' => $data
@@ -36,13 +36,13 @@ class AdminController extends Controller
     }
 
     function getDetailAdmin (Request $request) {
-        $code = $request->code;
-        $data = Admin::with('admin_level')->find($code)->first();
+        $number = $request->number;
+        $data = Admin::with('admin_level')->find($number)->first();
 
         $data->address = $data->address ? $data->address : " - ";
         $data->place_of_birth = $data->place_of_birth ? $data->place_of_birth : " - ";
         $data->date_of_birth = $data->date_of_birth ? date('d-m-Y', strtotime($data->date_of_birth)) : " - - -";
-        $data->created_on = date('d-m-Y', strtotime($data->created_on));
+        $data->created_at = date('d-m-Y', strtotime($data->created_at));
         $data->gender = $data->gender == "M" ? "Laki-laki" : "Perempuan";
         $data->level = $data->admin_level->name;
         echo json_encode($data);
@@ -77,8 +77,8 @@ class AdminController extends Controller
             'password'      => 'required|min:6|max:255',
         ]);
         
-        $validatedData['code'] = getLasCodeAdmin();
-        $validatedData['created_on'] = date('Y-m-d H:i:s');
+        $validatedData['number'] = getLasNumberAdmin();
+        $validatedData['created_at'] = date('Y-m-d H:i:s');
         $validatedData['created_by'] = Auth::guard('admin')->user()->username;
         $validatedData['password'] = Hash::make($validatedData['password']);
         $validatedData['level_id'] = 1;
@@ -94,12 +94,12 @@ class AdminController extends Controller
         
     }
 
-    function editFormAdmin($code) {
+    function editFormAdmin($number) {
         $filename = 'edit_new_admin';
         $filename_script = getContentScript(true, $filename);
 
         $data = Auth::guard('admin')->user();
-        $data_admin = Admin::find($code);
+        $data_admin = Admin::find($number);
         $admin_level = AdminLevel::get();  
         return view('admin-page.'.$filename, [
             'script' => $filename_script,
@@ -126,8 +126,8 @@ class AdminController extends Controller
             $username_exist = Admin::where('username', $request['username'])->first();
         }
         
-        $validatedData['code'] = $request['code'];
-        $validatedData['updated_on'] = date('Y-m-d H:i:s');
+        $validatedData['number'] = $request['number'];
+        $validatedData['updated_at'] = date('Y-m-d H:i:s');
         $validatedData['updated_by'] = Auth::guard('admin')->user()->username;
         if($request['password']) {
             $request['password'] = Hash::make($request['password']);
@@ -135,18 +135,18 @@ class AdminController extends Controller
         $validatedData['level_id'] = $validatedData['level_id'];
         
         if($username_exist === false) {
-            $result = Admin::where(['code' => $validatedData['code']])->update($validatedData);
+            $result = Admin::where(['number' => $validatedData['number']])->update($validatedData);
             
             if($result) {
                 $request->session()->flash('success', 'Akun berhasil dibuat');
                 return redirect('/data-admin');
             } else {
                 $request->session()->flash('failed', 'Proses gagal, Hubungi administrator');
-                return redirect('/form-edit-admin/'.$validatedData['code']);
+                return redirect('/form-edit-admin/'.$validatedData['number']);
             }
         } else {
             $request->session()->flash('failed', 'Username sudah ada');
-            return redirect('/form-edit-admin/'.$validatedData['code']);
+            return redirect('/form-edit-admin/'.$validatedData['number']);
         }
 
     }

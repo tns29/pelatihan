@@ -12,11 +12,11 @@ class Participant extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    public $primaryKey = 'code';
+    public $primaryKey = 'number';
     public $timestamps = false;
 
     protected $fillable = [
-        'code',
+        'number',
         'fullname',
         'username',
         'gender',
@@ -28,9 +28,9 @@ class Participant extends Model
         'is_active',
         'email',
         'password',
-        'created_on',
+        'created_at',
         'created_by',
-        'updated_on',
+        'updated_at',
         'updated_by',
     ];
     

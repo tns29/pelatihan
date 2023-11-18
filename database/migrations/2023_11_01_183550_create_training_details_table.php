@@ -18,13 +18,13 @@ return new class extends Migration
             $table->foreign('training_id')->on('trainings')->references('id');
             $table->string('title', 30);
             $table->string('description', 200);
-            $table->date('date');
+            // $table->date('date');
             $table->double('price');
             $table->text('images')->nullable();
             $table->enum('is_active', ["Y", "N"])->default('Y');
-            $table->dateTime('created_on')->nullable();
+            $table->dateTime('created_at')->nullable();
             $table->string('created_by', 50)->nullable();
-            $table->dateTime('updated_on')->nullable();
+            $table->dateTime('updated_at')->nullable();
             $table->string('updated_by', 50)->nullable();
         });
     }

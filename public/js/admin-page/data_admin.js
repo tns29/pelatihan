@@ -22,7 +22,7 @@ function getDetailUser(code) {
         data: { code: code },
         success: (data) => {
             console.log(data);
-            $("#since").text("Tanggal daftar " + data.created_on);
+            $("#since").text("Tanggal daftar " + data.created_at);
             $(".imgProfile").attr("src", "img/userDefault.png");
 
             var html =

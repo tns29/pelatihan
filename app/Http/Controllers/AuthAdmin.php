@@ -62,8 +62,8 @@ class AuthAdmin extends Controller
             'password_confirmation' => 'required|min:6|max:255'
         ]);
         
-        $validatedData['code'] = $this->getLasCode();
-        $validatedData['created_on'] = date('Y-m-d H:i:s');
+        $validatedData['number'] = $this->getLasNumber();
+        $validatedData['created_at'] = date('Y-m-d H:i:s');
         $validatedData['created_by'] = $validatedData['username'];
         $validatedData['password'] = Hash::make($validatedData['password']);
         $validatedData['level_id'] = 1;
@@ -85,18 +85,18 @@ class AuthAdmin extends Controller
         return redirect('/login-admin');
     }
 
-    function getLasCode() {
+    function getLasNumber() {
         
-        $lastCode = Admin::max('code');
+        $lastNumber = Admin::max('number');
 
-        if($lastCode) {
-            $lastCode = substr($lastCode, -4);
-            $code_ = sprintf('%04d', $lastCode+1);
-            $code = "ADM".date('Ymd').$code_;
+        if($lastNumber) {
+            $lastNumber = substr($lastNumber, -4);
+            $code_ = sprintf('%04d', $lastNumber+1);
+            $numberFix = "ADM".date('Ymd').$code_;
         } else {
-            $code = "ADM".date('Ymd')."0001";
+            $numberFix = "ADM".date('Ymd')."0001";
         }
 
-        return $code;
+        return $numberFix;
     }
 }

@@ -37,13 +37,13 @@
               <tbody>
                 @foreach ($dataAdmin as $row)
                   <tr>
-                      <td onclick="getDetailUser(`{{$row->code}}`)" style="cursor: pointer" class="text-info">{{ $row->code }}</td>
+                      <td onclick="getDetailUser(`{{$row->number}}`)" style="cursor: pointer" class="text-info">{{ $row->number }}</td>
                       <td>{{ $row->fullname }}</td>
                       <td>{{ $row->gender == 'M' ? 'Laki-laki' : 'Perempuan' }}</td>
                       <td>{{ $row->email }}</td>
                       <td>{{ $row->admin_level->name }}</td>
                       <td style=" text-align: center;">
-                        <a href="/form-edit-admin/{{$row->code}}" class="text-warning"><i class="fas fa-edit"></i></a>
+                        <a href="/form-edit-admin/{{$row->number}}" class="text-warning"><i class="fas fa-edit"></i></a>
                         &nbsp;
                         <a href="/delete-data" class="text-danger"><i class="fas fa-trash-alt"></i></a>
                       </td>

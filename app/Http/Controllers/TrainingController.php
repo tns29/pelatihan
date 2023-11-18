@@ -51,14 +51,22 @@ class TrainingController extends Controller
      */
     public function store(Request $request)
     {
+
         $validatedData = $request->validate([
             'category_id'      => 'required',
-            'title'      => 'required|max:20',
-            'date'      => 'required|',
+            'title'      => 'required|max:30',
+            'image'     => 'image|file|max:1024'
         ]);
 
-        $validatedData['initial'] = getLasIdTraining().$validatedData['category_id'];
-        $validatedData['created_on'] = date('Y-m-d H:i:s');
+        if($request->file('image')) {
+            $validatedData['images'] = $request->file('image')->store('service-images');
+        }
+
+        $validatedData['initials'] = getLasIdTraining().$validatedData['category_id'];
+        $validatedData['is_active'] = $request['is_active'] == 'Y' ? 'Y' : "N";
+        $validatedData['title'] = ucwords($validatedData['title']);
+        $validatedData['description'] = ucwords($request['description']);
+        $validatedData['created_at'] = date('Y-m-d H:i:s');
         $validatedData['created_by'] = Auth::guard('admin')->user()->username;
         
         $result = Training::create($validatedData);
@@ -67,7 +75,7 @@ class TrainingController extends Controller
         } else {
             $request->session()->flash('failed', 'Proses gagal, Hubungi administrator');
         }
-        return redirect('/data-admin');
+        return redirect('/service');
     }
 
     /**
@@ -81,9 +89,22 @@ class TrainingController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Request $request, int $id)
     {
-        //
+        $data = Training::find($id);
+        
+        $filename = 'edit_training';
+        $filename_script = getContentScript(true, $filename);
+
+        $code = Auth::guard('admin')->user(); 
+        $category = Category::get();
+        return view('admin-page.'.$filename, [
+            'script' => $filename_script,
+            'title' => 'Tambah Layanan Baru',
+            'auth_user' => $code, 
+            'dataCategory' => $category, 
+            'dataTraining' => $data 
+        ]);
     }
 
     /**
@@ -91,7 +112,31 @@ class TrainingController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validatedData = $request->validate([
+            'category_id'      => 'required',
+            'title'      => 'required|max:30',
+            'image'     => 'image|file|max:1024'
+        ]);
+
+        if($request->file('image')) {
+            $validatedData['images'] = $request->file('image')->store('service-images');
+        }
+        $validatedData['initials'] = getLasIdTraining().$validatedData['category_id'];
+        $validatedData['is_active'] = $request['is_active'] == 'Y' ? 'Y' : "N";
+        $validatedData['title'] = ucwords($validatedData['title']);
+        $validatedData['description'] = ucwords($request['description']);
+        $validatedData['updated_at'] = date('Y-m-d H:i:s');
+        $validatedData['updated_by'] = Auth::guard('admin')->user()->username;
+        
+        $result = Training::where(['id' => $id])->update($validatedData);
+        if($result) {
+            $request->session()->flash('success', 'Layanan berhasil dibuat');
+        } else {
+            $request->session()->flash('failed', 'Proses gagal, Hubungi administrator');
+        }
+
+        return redirect('/service');
+
     }
 
     /**

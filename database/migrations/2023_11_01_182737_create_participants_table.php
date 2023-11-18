@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('participants', function (Blueprint $table) {
-            $table->char('code', 20)->primary();
+            $table->char('number', 20)->primary();
             $table->string('fullname', 50);
             $table->char('username', 30)->unique('users_username_unique');
             $table->enum('gender', ["M", "F"]);
@@ -26,9 +26,9 @@ return new class extends Migration
             $table->foreign('grade_id')->on('grades')->references('id');
             $table->enum('is_active', ["Y", "N"])->default('N');
             $table->text('images')->nullable();
-            $table->dateTime('created_on')->nullable()->default(date('Y-m-d H:i:s'));
+            $table->dateTime('created_at')->nullable()->default(date('Y-m-d H:i:s'));
             $table->string('created_by', 50)->nullable();
-            $table->dateTime('updated_on')->nullable();
+            $table->dateTime('updated_at')->nullable();
             $table->string('updated_by', 50)->nullable();
         });
     }

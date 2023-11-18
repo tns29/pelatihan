@@ -13,7 +13,6 @@
     </div><!-- /.container-fluid -->
 </div>
 
-
 <!-- Main content -->
 <section class="content">
     <div class="container-fluid">
@@ -26,6 +25,8 @@
                   <tr class="my-bg-primary text-white">
                       <th style="width: 11%">Id Pelatihan</th>
                       <th>Nama Pelatihan</th>
+                      <th>Deskripsi</th>
+                      <th style="width: 10%; text-align: center;">Status</th>
                       <th style="width: 10%; text-align: center;">Aksi</th>
                   </tr>
               </thead>
@@ -33,9 +34,11 @@
                 @foreach ($dataTraining as $row)
                   <tr>
                       <td>{{ $row->id }}</td>
-                      <td>{{ $row->name }}</td>
+                      <td>{{ $row->title }}</td>
+                      <td>{{ Str::substr($row->description, 0, 30).'...' }}</td>
+                      <td style=" text-align: center;">{{ $row->is_active == 'Y' ? 'Aktif' : 'Tidak Aktif' }}</td>
                       <td style=" text-align: center;">
-                        <a href="/service/edit/{{$row->id}}" class="text-warning"><i class="fas fa-edit"></i></a>
+                        <a href="/service/{{$row->id}}/edit" class="text-warning"><i class="fas fa-edit"></i></a>
                         &nbsp; 
                         <a href="/service/delete/{{$row->id}}" class="text-danger"><i class="fas fa-trash-alt"></i></i></a> 
                       </td>

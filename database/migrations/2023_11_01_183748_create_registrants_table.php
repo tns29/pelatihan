@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('registrants', function (Blueprint $table) {
             $table->id();
-            $table->char('participant_code')->nullable(false);
-            $table->foreign('participant_code')->on('participants')->references('code');
+            $table->char('participant_number')->nullable(false);
+            $table->foreign('participant_number')->on('participants')->references('number');
             $table->dateTime('date')->nullable(false);
             $table->string('status', 1);
             $table->enum('is_active', ["Y", "N"]);

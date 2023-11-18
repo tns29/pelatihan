@@ -27,8 +27,8 @@
                             <input type="hidden" id="invalid" value="<?= session()->has('failed') ?>">
     
                             <div class="col-lg-7 col-md-7 col-sm-12 mt-2">
-                                <label for="code">Nomor Admin</label>
-                                <input type="text" class="form-control" name="code" id="code" value="{{$data_admin->code}}" readonly>
+                                <label for="number">Nomor Admin</label>
+                                <input type="text" class="form-control" name="number" id="number" value="{{$data_admin->number}}" readonly>
                             </div>
                             
                             <div class="col-lg-5 col-md-5 col-sm-5 mt-2">

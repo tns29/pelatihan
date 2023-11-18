@@ -35,7 +35,7 @@
               <tbody>
                 @foreach ($dataAdmin as $row)
                   <tr>
-                      <td onclick="getDetailUser(`{{$row->code}}`)" style="cursor: pointer" class="text-info">{{ $row->code }}</td>
+                      <td onclick="getDetailUser(`{{$row->number}}`)" style="cursor: pointer" class="text-info">{{ $row->number }}</td>
                       <td>{{ $row->fullname }}</td>
                       <td>{{ $row->gender == 'M' ? 'Laki-laki' : 'Perempuan' }}</td>
                       <td>{{ $row->email }}</td>

@@ -5,6 +5,7 @@ use App\Http\Controllers\Dashboard;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\TrainingController;
 
 /*
@@ -39,18 +40,21 @@ Route::middleware('admin')->group(function () {
     Route::get('/getDetailAdmin', [AdminController::class, 'getDetailAdmin']);
     Route::get('/form-add-admin', [AdminController::class, 'addFormAdmin']);
     Route::post('/add-new-admin', [AdminController::class, 'storeAdmin']);
-    Route::get('/form-edit-admin/{code}', [AdminController::class, 'editFormAdmin']);
+    Route::get('/form-edit-admin/{number}', [AdminController::class, 'editFormAdmin']);
     Route::post('/edit-new-admin', [AdminController::class, 'updateAdmin']);
 
     Route::get('/data-participant', [AdminController::class, 'dataParticipant']);
-
+    
     Route::get('/registrant', [AdminController::class, 'registrant']);
     
     Route::resource('/category', CategoryController::class)->only("index", "store", "update", "destroy");
     
     Route::resource('/service', TrainingController::class)->except("show");
-
-    Route::post('/logout-admin', [AuthAdmin::class, 'logout']);
+    
+    Route::get('/settings', [SettingsController::class, 'index']);
+    Route::post('/settings', [SettingsController::class, 'update']);
+    
+    Route::put('/logout-admin', [AuthAdmin::class, 'logout']);
 });
 
 Route::get('/', function () {

@@ -4,7 +4,7 @@
 
 <!-- Main Sidebar Container -->
 {{-- <aside class="main-sidebar sidebar-dark-primary elevation-4"> --}}
-<aside class="main-sidebar sidebar-light-lightblue elevation-4">
+<aside class="main-sidebar sidebar-light-lightblue elevation-2">
     <!-- Brand Logo -->
     <a href="/dashboard" class="brand-link">
         <img src="{{ asset('img/logo-bussiness.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-1" style="opacity: 1">
@@ -112,7 +112,7 @@
                 
                 <li class="nav-header">Lainnya</li>
                 <li class="nav-item">
-                    <a href="https://adminlte.io/docs/3.1/" class="nav-link">
+                    <a href="/settings" class="nav-link {{ Request::segment(1) === 'settings' ? 'submenu-active' : '' }}">
                         <i class="nav-icon fas fa-tools"></i>
                         <p>Pengaturan</p>
                     </a>
