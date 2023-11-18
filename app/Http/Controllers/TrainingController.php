@@ -121,6 +121,7 @@ class TrainingController extends Controller
         if($request->file('image')) {
             $validatedData['images'] = $request->file('image')->store('service-images');
         }
+        
         $validatedData['initials'] = getLasIdTraining().$validatedData['category_id'];
         $validatedData['is_active'] = $request['is_active'] == 'Y' ? 'Y' : "N";
         $validatedData['title'] = ucwords($validatedData['title']);
