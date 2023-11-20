@@ -18,6 +18,7 @@
     <div class="container-fluid">
         
       <div class="row">
+        
         <div class="col-lg-7">
             <div class="p-3 elevation-2 rounded-2">
                 <div class="row">

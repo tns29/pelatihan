@@ -50,6 +50,19 @@
                         <p> Dashboard  </p>
                     </a> 
                 </li> 
+                
+                <li class="nav-item ">
+                    <a href="/posts" class="nav-link {{ Request::segment(1) === 'posts' ? 'menu-active' : '' }}">
+                        <i class="nav-icon fas fa-mail-bulk"></i>
+                        <p> Daftar Berita </p>
+                    </a> 
+                </li> 
+                <li class="nav-item ">
+                    <a href="/registrant" class="nav-link {{ Request::segment(1) === 'registrant' ? 'menu-active' : '' }}">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p> Data Pendaftar  </p>
+                    </a> 
+                </li> 
                 <li class="nav-item {{ Request::segment(1) === 'data-admin' || Request::segment(1) === 'data-participant' ? 'menu-is-opening menu-open' : '' }}">
                     <a href="#" class="nav-link ">
                         <i class="nav-icon fas fa-users"></i>
@@ -72,13 +85,7 @@
                             </a> 
                         </li>
                     </ul>
-                </li>  
-                <li class="nav-item ">
-                    <a href="/registrant" class="nav-link {{ Request::segment(1) === 'registrant' ? 'menu-active' : '' }}">
-                        <i class="nav-icon fas fa-book"></i>
-                        <p> Data Pendaftar  </p>
-                    </a> 
-                </li> 
+                </li>
                 <li class="nav-header">Layanan</li>
                 <li class="nav-item {{ Request::segment(1) === 'category' || Request::segment(1) === 'service' || Request::segment(1) === 'service-detail' ? 'menu-is-opening menu-open' : '' }}">
                     <a href="#" class="nav-link">
@@ -98,13 +105,43 @@
                         <li class="nav-item">
                             <a href="/service" class="nav-link {{ Request::segment(1) === 'service' ? 'submenu-active' : '' }}">
                                 » &nbsp;
-                                <p>Daftar Layanan</p>
+                                <p>Daftar Pelatihan</p>
                             </a> 
                         </li>
                         <li class="nav-item">
                             <a href="/service-detail" class="nav-link {{ Request::segment(1) === 'service-detail' ? 'submenu-active' : '' }}">
                                 » &nbsp;
-                                <p>Daftar Konten Layanan</p>
+                                <p>Daftar Konten Pelatihan</p>
+                            </a> 
+                        </li>
+                    </ul>
+                </li> 
+                <li class="nav-header">Laporan</li>
+                <li class="nav-item ">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-file"></i>
+                        <p>
+                            Data Laporan
+                        <i class="fas fa-angle-right right"></i> 
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview ml-3">
+                        <li class="nav-item">
+                            <a href="/category" class="nav-link {{ Request::segment(1) === 'category' ? 'submenu-active' : '' }}">
+                                » &nbsp;
+                                <p>Laporan Pendaftar</p>
+                            </a> 
+                        </li>
+                        <li class="nav-item">
+                            <a href="/category" class="nav-link {{ Request::segment(1) === 'category' ? 'submenu-active' : '' }}">
+                                » &nbsp;
+                                <p>Laporan Peserta</p>
+                            </a> 
+                        </li>
+                        <li class="nav-item">
+                            <a href="/category" class="nav-link {{ Request::segment(1) === 'category' ? 'submenu-active' : '' }}">
+                                » &nbsp;
+                                <p>Laporan Peserta UJK</p>
                             </a> 
                         </li>
                     </ul>

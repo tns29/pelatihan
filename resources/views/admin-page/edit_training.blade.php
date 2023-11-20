@@ -16,7 +16,7 @@
 <!-- Main content -->
 <section class="content">
     <div class="container-fluid">
-        <div class="card mx-3 elevation-1 p-3 w-75">
+        <div class="card mx-2 elevation-1 p-3 w-75">
             <form action="/service/{{$dataTraining->id}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method("PUT")
@@ -59,6 +59,26 @@
                         <textarea name="description" id="description" class="form-control" cols="30" rows="5">{{ $dataTraining->description }}</textarea>
                     </div>
                     
+                    <div class="col-lg-6 col-md-6 col-sm-6 mt-4">
+                        <label for="image">Gambar</label> 
+                        <input type="file" name="image" id="image" class="form-control @error('image')is-invalid @enderror">
+                        @error('image')
+                        <small class="invalid-feedback">
+                            File {{ $message }}
+                        </small>
+                        @enderror
+                    </div>
+                    
+                    <div class="col-lg-6 col-md-6 col-sm-6 mt-2">
+                        <label for="image">&nbsp;</label> 
+                        <div class="card img-bordered ml-5 p-2">
+                            @if ($dataTraining->image)
+                                <img id="blah" src="{{ asset('/storage').'/'.$dataTraining->image }}" alt="preview" style="height: 250px;"/>
+                            @else
+                                <img id="blah" src="{{ asset('/img/no_preview.jpg') }}" alt="preview" style="height: 250px;"/>
+                            @endif
+                        </div>
+                    </div>
                     {{-- <div class="col-lg-6 col-md-6 col-sm-6 mt-2">
                         <label for="date">Tanggal</label>
                         <input type="date" class="form-control @error('date')is-invalid @enderror" name="date" id="date" value="{{ old('date') }}">
@@ -75,7 +95,7 @@
                 <div class="row justify-content-end mx-3">
                     <section class="col-lg-4">
                         <section style="float: right;">
-                            <a href="/data-admin" class="btn btn-outline-secondary mr-2"><i class="fas fa-backspace"></i> Batal</a>
+                            <a href="/service" class="btn btn-outline-secondary mr-2"><i class="fas fa-backspace"></i> Batal</a>
                             <button class="btn my-button-save"><i class="far fa-save"></i> Simpan</button>
                         </section>
                     </section>

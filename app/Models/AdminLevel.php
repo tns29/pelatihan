@@ -11,16 +11,16 @@ class AdminLevel extends Model
 {
     use HasFactory;
 
-    public $timestamps = false;
     protected $guarded = ['id'];
+    public $timestamps = false;
 
     /**
      * Get all of the admins for the AdminLevel
      *
      * @return HasMany
      */
-    public function admins(): HasMany
-    {
-        return $this->hasMany(Admin::class, 'level_id', 'id');
-    }
+    // public function admins(): HasMany
+    // {
+    //     return $this->hasMany(Admin::class, 'level_id', 'id');
+    // }
 }

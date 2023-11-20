@@ -16,12 +16,12 @@ class CategoryController extends Controller
         $filename = 'category';
         $filename_script = getContentScript(true, $filename);
 
-        $code = Auth::guard('admin')->user();
+        $user = Auth::guard('admin')->user();
         $data = Category::get();
         return view('admin-page.'.$filename, [
             'script' => $filename_script,
             'title' => 'Master Kategori',
-            'auth_user' => $code,
+            'auth_user' => $user,
             'dataCategory' => $data
         ]);
     }

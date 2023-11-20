@@ -35,7 +35,7 @@ class AdminController extends Controller
         ]);
     }
 
-    function getDetailAdmin (Request $request) {
+    function getDetailAdmin(Request $request) {
         $number = $request->number;
         $data = Admin::with('admin_level')->find($number)->first();
 

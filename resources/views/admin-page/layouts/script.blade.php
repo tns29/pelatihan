@@ -26,6 +26,10 @@
 <script src="{{ asset('dist/js/demo.js') }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 
+{{-- ckeditor5-build-classic --}}
+<script src="{{ asset('ckeditor5-build-classic/ckeditor.js') }}"></script>
+
+
 <?php 
   $dashboard = Request::segment(1) === 'dashboard' ? true : false;
 ?>

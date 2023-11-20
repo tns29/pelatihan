@@ -40,7 +40,7 @@ class TrainingController extends Controller
         $category = Category::get();
         return view('admin-page.'.$filename, [
             'script' => $filename_script,
-            'title' => 'Tambah Layanan Baru',
+            'title' => 'Tambah Layanan',
             'auth_user' => $code, 
             'dataCategory' => $category, 
         ]);
@@ -59,7 +59,7 @@ class TrainingController extends Controller
         ]);
 
         if($request->file('image')) {
-            $validatedData['images'] = $request->file('image')->store('service-images');
+            $validatedData['image'] = $request->file('image')->store('service-images');
         }
 
         $validatedData['initials'] = getLasIdTraining().$validatedData['category_id'];
@@ -71,7 +71,7 @@ class TrainingController extends Controller
         
         $result = Training::create($validatedData);
         if($result) {
-            $request->session()->flash('success', 'Layanan berhasil dibuat');
+            $request->session()->flash('success', 'Pelatihan berhasil dibuat');
         } else {
             $request->session()->flash('failed', 'Proses gagal, Hubungi administrator');
         }
@@ -91,16 +91,17 @@ class TrainingController extends Controller
      */
     public function edit(Request $request, int $id)
     {
-        $data = Training::find($id);
-        
         $filename = 'edit_training';
         $filename_script = getContentScript(true, $filename);
-
+        
         $code = Auth::guard('admin')->user(); 
         $category = Category::get();
+        $data = Training::find($id);
+        if(!$data) return redirect('/posts');
+        
         return view('admin-page.'.$filename, [
             'script' => $filename_script,
-            'title' => 'Tambah Layanan Baru',
+            'title' => 'Edit Layanan ',
             'auth_user' => $code, 
             'dataCategory' => $category, 
             'dataTraining' => $data 
@@ -119,7 +120,7 @@ class TrainingController extends Controller
         ]);
 
         if($request->file('image')) {
-            $validatedData['images'] = $request->file('image')->store('service-images');
+            $validatedData['image'] = $request->file('image')->store('service-images');
         }
         
         $validatedData['initials'] = getLasIdTraining().$validatedData['category_id'];
@@ -143,8 +144,15 @@ class TrainingController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, int $id)
     {
-        //
+        $data = Training::find($id);
+        $result = $data->delete();
+        if($result) {
+            $request->session()->flash('success', 'Data berhasil diubah');
+        } else {
+            $request->session()->flash('success', 'Proses gagal, Hubungi administrator');
+        }
+        return redirect('/service');
     }
 }

@@ -6,11 +6,11 @@ function getDetailUser(code) {
     $("#tb-detail").html("");
     $("#modal-detail").modal("show");
 
-    var controllerName = "getDetailAdmin";
+    var route = "getDetailAdmin";
     $.ajax({
         type: "GET",
         dataType: "JSON",
-        url: controllerName,
+        url: route,
         data: { code: code },
         success: (data) => {
             console.log(data);

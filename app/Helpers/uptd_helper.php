@@ -62,13 +62,20 @@ if (!function_exists('getMonthName')) {
 function getContentScript($isAdmin, $filename) {
     if($isAdmin === true) {
         $filename_script = base_path() . '/public/js/admin-page/' . $filename . '.js';
-    }
-
-    if (file_exists($filename_script)) {
-        $filename_script = 'js/admin-page/'. $filename;
+        if (file_exists($filename_script)) {
+            $filename_script = 'js/admin-page/'. $filename;
+        } else {
+            $filename_script = 'js/admin-page/default_script';
+        }
     } else {
-        $filename_script = 'js/admin-page/default_script';
+        $filename_script = base_path() . '/public/js/user-page/' . $filename . '.js';
+        if (file_exists($filename_script)) {
+            $filename_script = 'js/user-page/'. $filename;
+        } else {
+            $filename_script = 'js/admin-page/default_script';
+        }
     }
+    
     return $filename_script;
 }
 
