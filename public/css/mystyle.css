@@ -11,6 +11,11 @@ body {
     font-family: "Nutino";
 }
 
+.custom-tooltip {
+    --bs-tooltip-bg: #af4c4c;
+    --bs-tooltip-color: #477991;
+}
+
 .primary-color {
     color: #477991;
 }
@@ -19,6 +24,9 @@ body {
 }
 .bg-primary-color {
     background-color: #477991;
+}
+.bg-primary-color:hover {
+    background-color: #5793af;
 }
 .bg-secondary-color {
     background-color: #f98771;

@@ -46,6 +46,14 @@
     @endif
 
     <script>
+
+      
+      $('#logout').on('click', () => {
+        $('#logout-modal').modal('show')
+      })
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+      
       function doSomething(scrollPos) {
         if(scrollPos >= 99) {
           document.getElementById('navigasi').classList.remove('bg-transparent')

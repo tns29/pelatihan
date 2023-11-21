@@ -81,3 +81,5 @@ Route::get('/_profile', [ParticipantController::class, 'profile']);
 Route::get('/update-profile', [ParticipantController::class, 'updateProfile']);
 Route::put('/update-profile/{number}', [ParticipantController::class, 'updateProfileData']);
 Route::get('/getVillages/', [GeneralController::class, 'getVillages']);
+
+Route::post('/logout', [ParticipantController::class, 'logout']);

@@ -112,7 +112,7 @@
                 <select name="sub_district" id="sub_district" class="form-control form-select">
                     <option value="">Pilih kecamatan</option>
                     @foreach ($subDistrict as $item)
-                        <option value="{{ old('sub_district', $item->id) }}" {{ $item->name == $auth_user->sub_district ? 'selected' : '' }} > » &nbsp; {{ $item->name }}</option>
+                        <option value="{{ old('sub_district', $item->id) }}" {{ $item->id == $auth_user->sub_district ? 'selected' : '' }} > » &nbsp; {{ $item->name }}</option>
                     @endforeach
                 </select>
                 @error('sub_district')
@@ -122,9 +122,10 @@
                 @enderror
             </div>
             <div class=" mt-2 d-flex">
+                <input type="hidden" id="village_" value="{{$auth_user->village}}">
                 <label for="village" class="col-md-3 ms-3">Desa / Kelurahan</label>
                 <select name="village" id="village" class="form-control form-select">
-                    <option value="">Pilih kelurahan</option>
+                    {{-- <option value="">Pilih kelurahan</option> --}}
                     {{-- load in script --}}
                 </select>
                 @error('village')

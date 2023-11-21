@@ -5,7 +5,7 @@ function add_m_category() {
 
     var html = `<div class="col mb-2">
                     <label for="name" style="margin-left: 10px;">Nama Kategori<label>
-                    <input type="text" autocomplete="off" autofocus name="name" id="name" class="form-control" style="margin-left: 30px;">
+                    <input type="text" autocomplete="off" name="name" id="name" class="form-control" style="margin-left: 30px;">
                 </div>`;
 
     $("#content-add").append(html);
@@ -23,7 +23,7 @@ function edit_m_category(id, name) {
         id +
         `">
                 <label for="name" style="margin-left: 10px;">Nama Kategori<label>
-                <input type="text" autocomplete="off" autofocus name="name" id="name" class="form-control" style="margin-left: 30px;" value="` +
+                <input type="text" autocomplete="off" name="name" id="name" class="form-control" style="margin-left: 30px;" value="` +
         name +
         `">
                 </div>`;
@@ -49,3 +49,7 @@ function delete_m_category(id, name) {
 
     $("#content-delete").append(html);
 }
+
+setTimeout(() => {
+    $("input#name").focus();
+}, 1500);

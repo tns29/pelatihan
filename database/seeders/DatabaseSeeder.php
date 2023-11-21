@@ -116,20 +116,48 @@ class DatabaseSeeder extends Seeder
             17 => [
                 'Cicalengka','Cihuni','Cijantra','Jatake','Kadu Sirung','Karang Tengah','Lengkong Kulon','Malang Nengah','Pagedangan','Situ Gadung','Medang',
             ],
+            18 => [
+                'Buaran Bambu','Buaran Mangga','Bunisari','Gaga','Kalibaru','Kiara Payung','Kohod','Kramat','Laksana','Paku Alam','Rawa Boni','Sukawali','Surya Bahari','Pakuhaji',
+            ],
+            19 => [
+                'Ciakar','Mekar Jaya','Panongan','Peusar','Ranca Iyuh','Ranca Kalapa','Serdang Kulon','Mekar Bakti',
+            ],
+            20 => [
+                'Gelam Jaya','Pangadegan','Pasar Kemis','Suka Asih','Sukamantri','Kuta Baru','Kutabumi','Kuta Jaya','Sindangsari',
+            ],
+            21 => [
+                'Daon','Jambu Karya','Lembangsari','Mekarsari','Pangarengan','Rajeg','Rajeg Mulya','Ranca Bango','Sukamanah','Sukasari','Tanjakan','Tanjakan Mekar','Sukatani',
+            ],
+            22 => [
+                'Gempol Sari','Jati Mulya','Kampung Kelor','Kedaung Barat','Lebak Wangi','Pondok Kelor','Sangiang','Tanah Merah',
+            ],
+            23 => [
+                'Karet','Kayu Agung','Kayu Bongkok','Mekar Jaya','Pisangan Jaya','Pondok Jaya','Sarakan','Sepatan',
+            ],
+            24 => [
+                'Badak Anom','Sindangasih','Sindang Jaya','Sindangpanon','Sindangsono','Sukaharja','Wanakerta',
+            ],
+            25 => [
+                'Cikareo','Cikasungka','Cikuya','Cireundeu','Munjul','Pasanggrahan','Solear',
+            ],
+            26 => [
+                'Buaran Jati','Gintung','Karang Serang','Kosambi','Mekar Kondang','Pekayon','Rawa Kidang','Sukadiri',
+            ],
+            27 => [
+                'Benda','Bunar','Buniayu','Kaliasin','Kubang','Merak','Parahu','Sukamulya',
+            ],
+            28 => [
+                'Babakan Asem','Bojong Renged','Kampung Besar','Kampung Melayu Barat','Kampung Melayu Timur','Keboncau','Lemo','Muara','Pangkalan','Tanjung Burung','Tanjung Pasir','Tegal Angus','Teluknaga',
+            ],
+            29 => [
+                'Bantar Panjang','Cileles','Cisereh','Margasari','Matagara','Pasir Bolang','Pasir Nangka','Pematang','Pete','Sodong','Tapos','Tegalsari','Kadu Agung','Tigaraksa',
+            ],
         ];
         $x = 0;
         foreach ($villages as $row) {
             $x++;
-            // echo ' == ';
-            // print_r($x++);
-            // echo ' == ';
-            // print_r($row);
             $i = 1;
             foreach ($row as $val) {
-                // echo ' == ';
-                // print_r($i++);
-                // echo ' == ';
-                // print_r($val);
                 Village::create(['sub_district_id' => $x, 'name' => $val]);
             }
         }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\FE;
 use App\Models\Participant;
 use App\Models\SubDistrict;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -105,8 +106,10 @@ class ParticipantController extends Controller
         if(!auth('participant')->user()) {
             return redirect('/login');
         }
-        $number = Auth::guard('participant')->user()->number;
-        $data = Participant::find($number)->first();  
+        
+        $participant = new Participant;
+        $data = $participant->getUserProfile();
+
         return view('user-page.'.$filename, [
             'script' => $filename_script,
             'title' => 'Profil Saya',
@@ -167,5 +170,13 @@ class ParticipantController extends Controller
             $request->session()->flash('success', 'Proses gagal, Hubungi administrator');
             return redirect('/update-profile');
         }
+    }
+
+    // LOGOUT PARTICIPANT //
+    function logout(Request $request) {
+        Auth::guard('participant')->logout();
+        
+        $request->session()->flash('success', 'Anda berhasil logout');
+        return redirect('/login');
     }
 }

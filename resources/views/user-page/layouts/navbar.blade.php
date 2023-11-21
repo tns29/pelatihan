@@ -58,9 +58,14 @@
             </li> --}}
             @if (auth('participant')->user())
               <li class="nav-item mx-2">
-                <a href="/_profile" class="btn btn-outline-danger register py-1 mt-1">
+                <a href="/_profile" class="btn btn-outline-danger register py-1 mt-1" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Profile">
                  Hi, {{ auth('participant')->user()->fullname }}
                 </a>
+              </li>
+              <li class="nav-item mx-2">
+                <button type="button" class="btn btn-danger" id="logout" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Logout">
+                  <i class="fas fa-sign-out-alt"></i>
+                </button>
               </li>
             @else
               <div class="mt-1">&nbsp; &nbsp; </div>
@@ -76,3 +81,25 @@
       </div>
     </div>
   </nav>
+
+
+  <div class="modal fade" id="logout-modal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><b>Logout</b></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Anda yakin ingin keluar dari sistem ?</p>
+        </div>
+        <form action="/logout" method="post">
+          @csrf
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+            <button type="submit" class="btn text-white bg-primary-color">Ya</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

@@ -11,17 +11,25 @@ image.onchange = (evt) => {
 $("#sub_district").on("change", function () {
     $("#village").html("");
     $("#village").val("");
+
+    loadVillages($(this).val());
+});
+
+loadVillages($("#sub_district").val());
+
+function loadVillages(id) {
     $.ajax({
         type: "GET",
         dataType: "JSON",
         url: "getVillages",
-        data: { sub_district_id: $(this).val() },
+        data: { sub_district_id: id },
+        async: false,
         success: function (result) {
             var html = `<option value="">Pilih kelurahan</option>`;
             result.map((item) => {
                 html +=
                     `<option value="` +
-                    item.name +
+                    item.id +
                     `">  » &nbsp; ` +
                     item.name +
                     `</option>`;
@@ -30,4 +38,7 @@ $("#sub_district").on("change", function () {
             $("#village").append(html);
         },
     });
-});
+}
+
+var village = $("#village_").val();
+$("#village").val(village).change();

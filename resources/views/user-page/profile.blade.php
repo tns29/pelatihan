@@ -2,7 +2,10 @@
 @extends('user-page.layouts.user_main')
 
 @section('content-pages')
-
+<?php 
+// dd($auth_user->date_of_birth);
+$date_of_birth = $auth_user->date_of_birth ? date('d, M Y', strtotime($auth_user->date_of_birth)) : '';
+?>
 <hr>
 <div class="p-3 rounded-2 shadow">
     <div class="row justify-content-center">
@@ -41,7 +44,11 @@
                 
                 <tr>
                     <th style="width: 30%;">Tempat Tanggal Lahir</th>
-                    <td><b> : &nbsp; {{ $auth_user->place_of_birth.', '.date('d, M Y', strtotime($auth_user->date_of_birth)) }}</b></td>
+                    <td>
+                        <b> : &nbsp; 
+                        {{ $auth_user->place_of_birth.', '. $date_of_birth }}
+                        </b>
+                    </td>
                 </tr>
                 <tr>
                     <th style="width: 30%;">Email</th>
@@ -80,11 +87,11 @@
                 </tr>
                 <tr>
                     <th style="width: 30%;">Kecamatan</th>
-                    <td><b> : &nbsp; {{ $auth_user->sub_district }} </b></td>
+                    <td><b> : &nbsp; {{ $auth_user->sub_district_name }} </b></td>
                 </tr>
                 <tr>
                     <th style="width: 30%;">Kelurahan</th>
-                    <td><b> : &nbsp; {{ $auth_user->village }} </b></td>
+                    <td><b> : &nbsp; {{ $auth_user->village_name }} </b></td>
                 </tr>
             </table>
         </div>
@@ -94,11 +101,11 @@
             <table class="table">
                 <tr>
                     <th style="width: 30%;">Ak 1 / kartu kuning</th>
-                    <td><b> : &nbsp; no file </b></td>
+                    <td><b> : &nbsp; <a href="{{asset('/storage/'.$auth_user->ak1)}}" target="_blank">Lihat file</a> </b></td>
                 </tr>
                 <tr>
                     <th style="width: 30%;">Ijazah</th>
-                    <td><b> : &nbsp; no file </b></td>
+                    <td><b> : &nbsp; <a href="{{asset('/storage/'.$auth_user->ijazah)}}" target="_blank">Lihat file</a> </b></td>
                 </tr>
             </table>
         </div>

@@ -19,7 +19,7 @@
     <div class="container-fluid">
         <div class="row mx-2">
           <div class="row justify-content-end mb-2 w-100">
-            <a href="/add-data-admin" class="btn float-right btn-add "><i class="fas fa-plus-square"></i> &nbsp; Data</a>
+            {{-- <a href="/add-data-admin" class="btn float-right btn-add "><i class="fas fa-plus-square"></i> &nbsp; Data</a> --}}
           </div>
           <table class="table table-bordered table-sm">
               <thead>
@@ -28,18 +28,18 @@
                       <th>Nama</th>
                       <th style="width: 11%">Jenis Kelamin</th>
                       <th>Email</th>
-                      <th style="width: 10%">Tingkat</th>
+                      {{-- <th style="width: 10%">Tingkat</th> --}}
                       <th style="width: 10%; text-align: center;">Aksi</th>
                   </tr>
               </thead>
               <tbody>
-                @foreach ($dataAdmin as $row)
+                @foreach ($dataParticipants as $row)
                   <tr>
                       <td onclick="getDetailUser(`{{$row->number}}`)" style="cursor: pointer" class="text-info">{{ $row->number }}</td>
                       <td>{{ $row->fullname }}</td>
                       <td>{{ $row->gender == 'M' ? 'Laki-laki' : 'Perempuan' }}</td>
                       <td>{{ $row->email }}</td>
-                      <td>{{ $row->admin_level->name }}</td>
+                      {{-- <td>{{ $row->admin_level->name }}</td> --}}
                       <td style=" text-align: center;">
                         <a href="/edit-data-admin" class="text-warning"><i class="fas fa-edit"></i></a>
                         &nbsp;
