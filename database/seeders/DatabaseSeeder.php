@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Admin;
+use App\Models\Period;
 use App\Models\Setting;
 use App\Models\Village;
 use App\Models\AdminLevel;
@@ -32,7 +33,7 @@ class DatabaseSeeder extends Seeder
 
         Admin::create([
             'number' => 'ADM202311050001',
-            'fullname' => 'Admin Utama',
+            'fullname' => 'Admin UPTD',
             'username' => 'admin_123',
             'gender' => 'M',
             'no_telp' => '08986564321',
@@ -52,6 +53,11 @@ class DatabaseSeeder extends Seeder
         Setting::create([
             'id'=> 2,
             'name' => 'Tanggal Pelatihan'
+        ]);
+
+        Period::create([
+            'id'=> 1,
+            'name' => 'Gelombang Pertama'
         ]);
 
         $sub_districs = [

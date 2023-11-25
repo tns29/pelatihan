@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('title', 30);
             $table->text('description');
             // $table->date('date');
-            // $table->double('price');
+            $table->double('period_id');
             $table->text('image')->nullable();
             $table->enum('is_active', ["Y", "N"])->default('Y');
             $table->dateTime('created_at')->nullable();

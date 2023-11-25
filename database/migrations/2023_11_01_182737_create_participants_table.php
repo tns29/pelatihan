@@ -34,6 +34,7 @@ return new class extends Migration
             $table->string('password');
             // $table->unsignedBigInteger('grade_id')->nullable(false);
             // $table->foreign('grade_id')->on('grades')->references('id');
+            $table->enum('participant', ["Y", "N"])->default('N');
             $table->enum('is_active', ["Y", "N"])->default('N');
             $table->dateTime('created_at')->nullable()->default(date('Y-m-d H:i:s'));
             $table->string('created_by', 50)->nullable();
