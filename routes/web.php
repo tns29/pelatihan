@@ -52,6 +52,8 @@ Route::middleware('admin')->group(function () {
     Route::post('/edit-new-admin', [AdminController::class, 'updateAdmin']);
 
     Route::get('/data-participant', [AdminController::class, 'dataParticipant']);
+    Route::get('/detail-participant/{number}', [AdminController::class, 'detailParticipant']);
+    Route::put('/acc-participant/{number}', [GeneralController::class, 'accParticipant']);
     
     Route::get('/registrant', [AdminController::class, 'registrant']);
     
@@ -62,6 +64,8 @@ Route::middleware('admin')->group(function () {
     
     Route::get('/settings', [SettingsController::class, 'index']);
     Route::post('/settings', [SettingsController::class, 'update']);
+    Route::get('/set-period', [SettingsController::class, 'setPeriod']);
+    Route::post('/set-period', [SettingsController::class, 'savePeriodActive']);
     
     Route::post('/logout-admin', [AuthAdmin::class, 'logout']);
 });
@@ -77,9 +81,11 @@ Route::post('/register', [ParticipantController::class, 'store']);
 Route::get('/login', [ParticipantController::class, 'login']);
 Route::post('/login', [ParticipantController::class, 'loginValidation']);
 
+Route::get('/wishlist', [ParticipantController::class, 'wishlist']);
 Route::get('/_profile', [ParticipantController::class, 'profile']);
 Route::get('/update-profile', [ParticipantController::class, 'updateProfile']);
 Route::put('/update-profile/{number}', [ParticipantController::class, 'updateProfileData']);
 Route::get('/getVillages/', [GeneralController::class, 'getVillages']);
+Route::get('/checkDataUser/{id}', [GeneralController::class, 'checkDataUser']);
 
 Route::post('/logout', [ParticipantController::class, 'logout']);
