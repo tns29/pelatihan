@@ -56,4 +56,14 @@ class Participant extends Authenticatable
             ->first();
         return $data;
     }
+
+    public function getUserProfileByNumber($number) {
+        $data = DB::table('participants')
+            ->select('participants.*','sub_districts.name as sub_district_name', 'villages.name as village_name')
+            ->leftJoin('sub_districts', 'participants.sub_district', '=', 'sub_districts.id')
+            ->leftJoin('villages', 'participants.village', '=', 'villages.id')
+            ->where(['number' => $number])
+            ->first();
+        return $data;
+    }
 }
