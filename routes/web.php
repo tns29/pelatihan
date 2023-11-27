@@ -77,16 +77,18 @@ Route::get('/pelatihan', [ServiceController::class, 'index']);
 Route::get('/pelatihan/{id}', [ServiceController::class, 'detail']);
 Route::get('/getDataServices', [ServiceController::class, 'getDataServices']);
 
+Route::middleware('participant')->group(function () {
+    Route::get('/wishlist', [ParticipantController::class, 'wishlist']);
+    Route::get('/_profile', [ParticipantController::class, 'profile']);
+    Route::get('/update-profile', [ParticipantController::class, 'updateProfile']);
+    Route::put('/update-profile/{number}', [ParticipantController::class, 'updateProfileData']);
+    Route::get('/getVillages/', [GeneralController::class, 'getVillages']);
+    Route::get('/checkDataUser/{id}', [GeneralController::class, 'checkDataUser']);
+    
+    Route::post('/logout', [ParticipantController::class, 'logout']);
+});
+
 Route::get('/register', [ParticipantController::class, 'index']);
 Route::post('/register', [ParticipantController::class, 'store']);
 Route::get('/login', [ParticipantController::class, 'login']);
 Route::post('/login', [ParticipantController::class, 'loginValidation']);
-
-Route::get('/wishlist', [ParticipantController::class, 'wishlist']);
-Route::get('/_profile', [ParticipantController::class, 'profile']);
-Route::get('/update-profile', [ParticipantController::class, 'updateProfile']);
-Route::put('/update-profile/{number}', [ParticipantController::class, 'updateProfileData']);
-Route::get('/getVillages/', [GeneralController::class, 'getVillages']);
-Route::get('/checkDataUser/{id}', [GeneralController::class, 'checkDataUser']);
-
-Route::post('/logout', [ParticipantController::class, 'logout']);
