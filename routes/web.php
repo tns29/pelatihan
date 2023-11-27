@@ -72,6 +72,7 @@ Route::middleware('admin')->group(function () {
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/berita', [HomeController::class, 'posts']);
+
 Route::get('/pelatihan', [ServiceController::class, 'index']);
 Route::get('/pelatihan/{id}', [ServiceController::class, 'detail']);
 Route::get('/getDataServices', [ServiceController::class, 'getDataServices']);
