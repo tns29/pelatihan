@@ -55,10 +55,27 @@ class DatabaseSeeder extends Seeder
             'name' => 'Tanggal Pelatihan'
         ]);
 
-        Period::create([
-            'id'=> 1,
-            'name' => 'Gelombang Pertama'
-        ]);
+        $gelombang = [
+            'Gelombang 1',
+            'Gelombang 2',
+            'Gelombang 3',
+            'Gelombang 4',
+            'Gelombang 5',
+            'Gelombang 6',
+            'Gelombang 7',
+            'Gelombang 8',
+            'Gelombang 9',
+            'Gelombang 10',
+            'Gelombang 11',
+            'Gelombang 12',
+        ];
+        foreach ($gelombang as $val) {
+            if ($val == 'Gelombang 1') {
+                Period::create(['name' => $val, 'is_active' => 'Y']);
+            } else {
+                Period::create(['name' => $val]);
+            }
+        }
 
         $sub_districs = [
             'Balaraja', 'Cikupa', 'Cisauk', 'Curug', 'Gunung Kaler', 'Jambe', 'Jayanti', 'Kelapa Dua', 'Kemiri', 'Kosambi', 'Kresek', 'Kronjo', 'Legok', 'Mauk', 'Mekar Baru', 'Pengadegan', 'Pakuhaji', 'Panongan', 'Pasar Kamis', 'Rajeg', 'Sepatan', 'Sepatan Timur', 'Sindang Jaya', 'Solear', 'Sukadiri', 'Sukamulya', 'Teluknaga', 'Tigaraksa'
