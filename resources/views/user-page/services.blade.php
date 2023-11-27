@@ -50,9 +50,10 @@
     </section>
     <section class="pt-1">
       <div class="justify-content-center">
+        <button class="alert alert-light py-0 mx-1 btn-category-all" data-id="all" onclick="getCategory('all')">Semua Kategori</button>
         @foreach ($category as $item)
           <button class="alert alert-light py-0 mx-1 btn-category-{{$item->id}}" data-id="{{$item->id}}" onclick="getCategory({{$item->id}})">{{$item->name}}</button>
-        @endforeach
+          @endforeach
       </div>
       <input type="hidden" name="count-id-category" id="count-id-category" value="{{ count($category) }}">
       <input type="hidden" name="category" id="category" value="">

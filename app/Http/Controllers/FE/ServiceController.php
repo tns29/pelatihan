@@ -6,6 +6,7 @@ use App\Models\Setting;
 use App\Models\Category;
 use App\Models\Training;
 use Illuminate\Http\Request;
+use App\Models\TrainingDetail;
 use App\Http\Controllers\Controller;
 
 class ServiceController extends Controller
@@ -40,6 +41,7 @@ class ServiceController extends Controller
     function detail(int $id) {
         $category = Category::get();
         $services = Training::with('category')->find($id);
+        $services_detail = TrainingDetail::where('training_id', $id)->get();
         
         if(!$services) {
             return redirect('/pelatihan');
@@ -50,6 +52,7 @@ class ServiceController extends Controller
             'title' => 'Home',
             'category' => $category,
             'service' => $services,
+            'services_detail' => $services_detail,
             'setting' => Setting::find(2)
         ]);
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\FE;
 
+use App\Models\Registrant;
 use App\Models\Participant;
 use App\Models\SubDistrict;
 use Illuminate\Http\Request;
@@ -96,6 +97,22 @@ class ParticipantController extends Controller
         return $numberFix;
     }
 
+    // Pelatihan saya //
+    function wishlist() {
+        
+        $filename = 'wishlist';
+        $filename_script = getContentScript(false, $filename);
+
+        $number = Auth::guard('participant')->user()->number;
+
+        $registrant = new Registrant;
+        $result = $registrant->getWishlist($number);
+        
+        return view('user-page.'.$filename, [
+            'title' => 'Daftar Pelatihan saya',
+            'wishlist' => $result
+        ]);
+    }
 
     // USER PROFILE - PARTICIPANT (PESERTA) //
 
@@ -122,7 +139,8 @@ class ParticipantController extends Controller
         $filename_script = getContentScript(false, $filename);
 
         $number = Auth::guard('participant')->user()->number;
-        $data = Participant::find($number)->first();  
+        $data = Participant::where('number', $number)->first();  
+        
         $subDistrict = SubDistrict::get();
         return view('user-page.'.$filename, [
             'script' => $filename_script,
@@ -135,8 +153,10 @@ class ParticipantController extends Controller
     function updateProfileData(Request $request, string $number) {
         // dd($request);
         $validatedData = $request->validate([
+            'no_wa'    => 'required|max:15',
             'place_of_birth'    => 'required|max:30',
             'date_of_birth'    => 'required',
+            'address'            => 'required|max:200',
             'height'            => 'required|max:10',
             'religion'          => 'required|max:20',
             'material_status'    => 'required|max:30',

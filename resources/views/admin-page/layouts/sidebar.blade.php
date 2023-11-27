@@ -57,13 +57,7 @@
                         <p> Daftar Berita </p>
                     </a> 
                 </li> 
-                <li class="nav-item ">
-                    <a href="/registrant" class="nav-link {{ Request::segment(1) === 'registrant' ? 'menu-active' : '' }}">
-                        <i class="nav-icon fas fa-book"></i>
-                        <p> Data Pendaftar  </p>
-                    </a> 
-                </li> 
-                <li class="nav-item {{ Request::segment(1) === 'data-admin' || Request::segment(1) === 'data-participant' ? 'menu-is-opening menu-open' : '' }}">
+                <li class="nav-item {{ Request::segment(1) === 'data-admin' || Request::segment(1) === 'data-participant' || Request::segment(1) === 'detail-participant' ? 'menu-is-opening menu-open' : '' }}">
                     <a href="#" class="nav-link ">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
@@ -79,13 +73,21 @@
                             </a> 
                         </li>
                         <li class="nav-item">
-                            <a href="/data-participant" class="nav-link {{ Request::segment(1) === 'data-participant' ? 'submenu-active' : '' }}">
+                            <a href="/data-participant" class="nav-link {{ Request::segment(1) === 'data-participant' || Request::segment(1) === 'detail-participant' ? 'submenu-active' : '' }}">
                                 » &nbsp;
                                 <p>Data Peserta</p>
                             </a> 
                         </li>
                     </ul>
                 </li>
+                
+                <li class="nav-item ">
+                    <a href="/registrant" class="nav-link {{ Request::segment(1) === 'registrant' ? 'menu-active' : '' }}">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p> Pendaftar Pelatihan </p>
+                    </a> 
+                </li> 
+
                 <li class="nav-header">Layanan</li>
                 <li class="nav-item {{ Request::segment(1) === 'category' || Request::segment(1) === 'service' || Request::segment(1) === 'service-detail' ? 'menu-is-opening menu-open' : '' }}">
                     <a href="#" class="nav-link">
@@ -148,6 +150,13 @@
                 </li> 
                 
                 <li class="nav-header">Lainnya</li>
+                <li class="nav-item">
+                    <a href="/set-period" class="nav-link {{ Request::segment(1) === 'set-period' ? 'submenu-active' : '' }}">
+                        <i class="nav-icon fas fa-calendar-minus"></i>
+                        <p>Periode</p>
+                    </a>
+                </li> 
+                
                 <li class="nav-item">
                     <a href="/settings" class="nav-link {{ Request::segment(1) === 'settings' ? 'submenu-active' : '' }}">
                         <i class="nav-icon fas fa-tools"></i>

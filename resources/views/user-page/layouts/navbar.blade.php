@@ -58,6 +58,11 @@
             </li> --}}
             @if (auth('participant')->user())
               <li class="nav-item mx-2">
+                <a href="/wishlist" class="btn {{ Request::segment(1) == 'wishlist' ? 'btn-success' : 'btn-outline-success' }} register py-1 mt-1" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Pelatihan saya">
+                  <i class="fas fa-chart-bar"></i>
+                </a>
+              </li>
+              <li class="nav-item mx-2">
                 <a href="/_profile" class="btn btn-outline-danger register py-1 mt-1" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Profile">
                  Hi, {{ auth('participant')->user()->fullname }}
                 </a>

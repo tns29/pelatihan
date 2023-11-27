@@ -1,22 +1,26 @@
 getServicesList();
 
 function getCategory(id) {
-    $("#category").val(id);
-    const categoryId = $("#category").val();
-    const countCategory = $("#count-id-category").val();
+    if (id == "all") {
+        getServicesList();
+    } else {
+        $("#category").val(id);
+        const categoryId = $("#category").val();
+        const countCategory = $("#count-id-category").val();
 
-    for (let i = 1; i <= countCategory; i++) {
-        const attrId = "btn-category-" + i;
-        if (categoryId == i) {
-            $("." + attrId).css("background", "#000");
-            $("." + attrId).css("color", "#FFF");
-        } else {
-            $("." + attrId).css("background", "#FFF");
-            $("." + attrId).css("color", "#000");
+        for (let i = 1; i <= countCategory; i++) {
+            const attrId = "btn-category-" + i;
+            if (categoryId == i) {
+                $("." + attrId).css("background", "#000");
+                $("." + attrId).css("color", "#FFF");
+            } else {
+                $("." + attrId).css("background", "#FFF");
+                $("." + attrId).css("color", "#000");
+            }
         }
-    }
 
-    getServicesList(categoryId);
+        getServicesList(categoryId);
+    }
 }
 
 function getServicesList(categoryId) {

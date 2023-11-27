@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use App\Models\AdminLevel;
+use App\Models\Registrant;
 use App\Models\Participant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -164,14 +165,32 @@ class AdminController extends Controller
             'dataParticipants' => $dataParticipants
         ]);
     }
+
+    function detailParticipant(string $number) {
+        $filename = 'detail_participant';
+        $filename_script = getContentScript(true, $filename);
+
+        $data = Auth::guard('admin')->user();  
+        $participant = new Participant;
+        $data_part = $participant->getUserProfileByNumber($number);
+        // dd($participant);
+        return view('admin-page.'.$filename, [
+            'script' => $filename_script,
+            'title' => 'Detail Peserta',
+            'auth_user' => $data,
+            'detailParticipant' => $data_part
+        ]);
+    }
     
     function registrant() {
         $data = Auth::guard('admin')->user();  
-        $participant = Participant::all();  
+        $registrant = new Registrant;
+        $result = $registrant->getRegistrants();
+        // dd($result);
         return view('admin-page.registrant', [
             'title' => 'Data Pendaftar',
             'auth_user' => $data,
-            'participant' => $participant
+            'participant' => $result
         ]);
     }
     

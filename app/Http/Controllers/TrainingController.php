@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use view;
+use App\Models\Period;
 use App\Models\Category;
+use App\Models\Training;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Training;
 
 class TrainingController extends Controller
 {
@@ -22,7 +23,7 @@ class TrainingController extends Controller
         $data = Training::get();
         return view('admin-page.'.$filename, [
             'script' => $filename_script,
-            'title' => 'Daftar Layanan',
+            'title' => 'Daftar Pelatihan',
             'auth_user' => $code,
             'dataTraining' => $data
         ]);
@@ -40,7 +41,7 @@ class TrainingController extends Controller
         $category = Category::get();
         return view('admin-page.'.$filename, [
             'script' => $filename_script,
-            'title' => 'Tambah Layanan',
+            'title' => 'Tambah Pelatihan',
             'auth_user' => $code, 
             'dataCategory' => $category, 
         ]);
@@ -51,7 +52,6 @@ class TrainingController extends Controller
      */
     public function store(Request $request)
     {
-
         $validatedData = $request->validate([
             'category_id'      => 'required',
             'title'      => 'required|max:30',
@@ -62,6 +62,9 @@ class TrainingController extends Controller
             $validatedData['image'] = $request->file('image')->store('service-images');
         }
 
+        $active_period = Period::where('is_active', 'Y')->first();
+
+        $validatedData['period_id'] = $active_period->id;
         $validatedData['initials'] = getLasIdTraining().$validatedData['category_id'];
         $validatedData['is_active'] = $request['is_active'] == 'Y' ? 'Y' : "N";
         $validatedData['title'] = ucwords($validatedData['title']);
@@ -101,7 +104,7 @@ class TrainingController extends Controller
         
         return view('admin-page.'.$filename, [
             'script' => $filename_script,
-            'title' => 'Edit Layanan ',
+            'title' => 'Edit Pelatihan ',
             'auth_user' => $code, 
             'dataCategory' => $category, 
             'dataTraining' => $data 
@@ -132,7 +135,7 @@ class TrainingController extends Controller
         
         $result = Training::where(['id' => $id])->update($validatedData);
         if($result) {
-            $request->session()->flash('success', 'Layanan berhasil dibuat');
+            $request->session()->flash('success', 'Pelatihan berhasil dibuat');
         } else {
             $request->session()->flash('failed', 'Proses gagal, Hubungi administrator');
         }

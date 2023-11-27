@@ -17,7 +17,8 @@ class AuthAdmin
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::guard('admin')->user() == false) {
-            return redirect('admin'); 
+            $request->session()->flash('failed', 'Anda belum login.');
+            return redirect('/login-admin'); 
         }
         return $next($request);
     }

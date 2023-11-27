@@ -103,7 +103,7 @@ function getLasIdTraining() {
         $code_ = sprintf('%03d', $lastId+1);
         $code = $code_;
     } else {
-        $code = 1;
+        $code = 001;
     }
 
     return $code;

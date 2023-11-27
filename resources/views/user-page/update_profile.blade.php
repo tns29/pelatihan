@@ -31,6 +31,15 @@
         </div>
         <div class="col-lg-9 col-md-9 col-sm-9 mt-4">
             <div class=" mt-2 d-flex">
+                <label for="no_wa" class="col-md-3 ms-3">No. WA </label>
+                <input type="text" class="form-control inline-block @error('no_wa')is-invalid @enderror" maxlength="15" name="no_wa" id="no_wa" value="{{ old('no_wa', $auth_user->no_wa) }}">
+                @error('no_wa')
+                <small class="invalid-feedback">
+                    No. WA {{ $message }}
+                </small>
+                @enderror
+            </div>
+            <div class=" mt-2 d-flex">
                 <label for="place_of_birth" class="col-md-3 ms-3">Tempat Lahir </label>
                 <input type="text" class="form-control inline-block @error('place_of_birth')is-invalid @enderror" name="place_of_birth" id="place_of_birth" value="{{ old('place_of_birth', $auth_user->place_of_birth) }}">
                 @error('place_of_birth')
@@ -47,6 +56,10 @@
                     Tanggal lahir {{ $message }}
                 </small>
                 @enderror
+            </div>
+            <div class=" mt-2 d-flex">
+                <label for="address" class="col-md-3 ms-3">Alamat </label>
+                <input type="text" class="form-control inline-block @error('address')is-invalid @enderror" name="address" id="address" value="{{ old('address', $auth_user->address) }}">
             </div>
             <div class=" mt-2 d-flex">
                 <label for="height" class="col-md-3 ms-3">Tinggi Badan <i class="text-danger">(cm)</i></label>

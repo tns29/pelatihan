@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('place_of_birth', 50)->nullable();
             $table->date('date_of_birth')->nullable();
             $table->string('no_telp', 20)->nullable();
+            $table->string('no_wa', 20)->nullable();
             $table->string('address')->nullable();
             $table->string('email', 100)->unique('users_email_unique');
             $table->double('height')->nullable();

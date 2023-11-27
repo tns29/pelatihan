@@ -4,7 +4,7 @@
 @section('content-pages')
 <?php 
 // dd($auth_user->date_of_birth);
-$date_of_birth = $auth_user->date_of_birth ? date('d, M Y', strtotime($auth_user->date_of_birth)) : '';
+$date_of_birth = $auth_user->date_of_birth ? date('d, M Y', strtotime($auth_user->date_of_birth)) : '-- / -- / ----';
 ?>
 <hr>
 <div class="p-3 rounded-2 shadow">
@@ -12,9 +12,9 @@ $date_of_birth = $auth_user->date_of_birth ? date('d, M Y', strtotime($auth_user
         <h3 class="text-center mb-4"><b> {{ $auth_user->fullname }} </b></h3>
         <div class="col-lg-3">
             @if(!$auth_user->image)
-                <img src="{{ asset('img/userDefault.png') }}" class="shadow mb-2" style="height: 220px;" alt="User Image">
+                <img src="{{ asset('img/userDefault.png') }}" class="shadow mb-2" style="width : 282px;" alt="User Image">
             @else
-                <img src="{{ asset('/storage').'/'.$auth_user->image }}" class="shadow mb-2" style="height: 220px;" alt="User Image">
+                <img src="{{ asset('/storage').'/'.$auth_user->image }}" class="shadow mb-2" style="width : 282px;" alt="User Image">
             @endif
             <span class="text-left"><small class="pt-2">Bergabung sejak, {{ date('d, M Y', strtotime($auth_user->created_at)) }}</small></span>
         </div>
@@ -39,7 +39,7 @@ $date_of_birth = $auth_user->date_of_birth ? date('d, M Y', strtotime($auth_user
                 </tr>
                 <tr>
                     <th style="width: 30%;">No. Whatsapp</th>
-                    <td><b> : &nbsp; {{ $auth_user->no_telp }}</b></td>
+                    <td><b> : &nbsp; {{ $auth_user->no_wa }}</b></td>
                 </tr>
                 
                 <tr>
@@ -70,6 +70,10 @@ $date_of_birth = $auth_user->date_of_birth ? date('d, M Y', strtotime($auth_user
             <hr class="p-0 m-0">
             <table class="table">
                 <tr>
+                    <th style="width: 30%;">Alamat</th>
+                    <td><b> : &nbsp; {{ $auth_user->address }} </b></td>
+                </tr>
+                <tr>
                     <th style="width: 30%;">Agama</th>
                     <td><b> : &nbsp; {{ $auth_user->religion }} </b></td>
                 </tr>
@@ -79,7 +83,7 @@ $date_of_birth = $auth_user->date_of_birth ? date('d, M Y', strtotime($auth_user
                 </tr>
                 <tr>
                     <th style="width: 30%;">Tinggi Badan</th>
-                    <td><b> : &nbsp; {{ $auth_user->height }} cm</b></td>
+                    <td><b> : &nbsp; {{ $auth_user->height ? $auth_user->height.'cm' : '' }} </b></td>
                 </tr>
                 <tr>
                     <th style="width: 30%;">Pendidikan Terakhir</th>
@@ -101,11 +105,19 @@ $date_of_birth = $auth_user->date_of_birth ? date('d, M Y', strtotime($auth_user
             <table class="table">
                 <tr>
                     <th style="width: 30%;">Ak 1 / kartu kuning</th>
-                    <td><b> : &nbsp; <a href="{{asset('/storage/'.$auth_user->ak1)}}" target="_blank">Lihat file</a> </b></td>
+                    @if ($auth_user->ak1)
+                        <td><b> : &nbsp; <a href="{{asset('/storage/'.$auth_user->ak1)}}" target="_blank">Lihat file</a> </b></td>
+                    @else
+                        <td> : &nbsp; - </td>
+                    @endif
                 </tr>
                 <tr>
                     <th style="width: 30%;">Ijazah</th>
-                    <td><b> : &nbsp; <a href="{{asset('/storage/'.$auth_user->ijazah)}}" target="_blank">Lihat file</a> </b></td>
+                    @if ($auth_user->ijazah)
+                        <td><b> : &nbsp; <a href="{{asset('/storage/'.$auth_user->ijazah)}}" target="_blank">Lihat file</a> </b></td>
+                    @else
+                        <td> : &nbsp; - </td>
+                    @endif
                 </tr>
             </table>
         </div>
