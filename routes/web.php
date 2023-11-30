@@ -62,6 +62,10 @@ Route::middleware('admin')->group(function () {
     Route::resource('/service', TrainingController::class)->except("show");
     Route::resource('/service-detail', TrainingContentController::class)->except("show");
     
+    Route::get('/registrant-report', [GeneralController::class, 'registrantReport']);
+    Route::get('/registrant-rpt', [GeneralController::class, 'registrantRpt']);
+    Route::get('/open-registrant-rpt', [GeneralController::class, 'openRegistrantRpt']);
+
     Route::get('/settings', [SettingsController::class, 'index']);
     Route::post('/settings', [SettingsController::class, 'update']);
     Route::get('/set-period', [SettingsController::class, 'setPeriod']);
