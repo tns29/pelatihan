@@ -6,6 +6,7 @@ use App\Models\Village;
 use App\Models\Registrant;
 use App\Models\Participant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class GeneralController extends Controller {
@@ -73,4 +74,54 @@ class GeneralController extends Controller {
         
     }
 
+    function registrantReport() {
+        $filename = 'registrant_report';
+        $filename_script = getContentScript(true, $filename);
+
+        $admin = Auth::guard('admin')->user();
+        $registrant = Participant::where('participant', 'N')->get();
+        // $participants = Participant::where('participant', 'Y')->get();
+        return view('admin-page.'.$filename, [
+            'script' => $filename_script,
+            'title' => 'Laporan Pendaftar',
+            'auth_user' => $admin,
+            'registrant' => $registrant,
+            // 'participants' => $participants
+        ]);
+    }
+
+    function registrantRpt(Request $request) {
+
+        if($request->fullname) {
+            $request->session()->push('fullname', $request->fullname);
+        }
+        if($request->gender) {
+            $request->session()->push('gender', $request->gender);
+        }
+
+        echo json_encode('{}');
+    }
+
+    function openRegistrantRpt(Request $request) {
+        $where = ['participant' => 'N'];
+        
+        if($request->session()->get('fullname')) {
+            $where = ['number' => $request->session()->get('fullname'), 'participant' => 'N'];
+        }
+        if($request->session()->get('gender')) {
+            $where = ['gender' => $request->session()->get('gender'), 'participant' => 'N'];
+        }
+        
+        $data = DB::table('participants')
+            ->select('participants.*','sub_districts.name as sub_district_name', 'villages.name as village_name')
+            ->leftJoin('sub_districts', 'participants.sub_district', '=', 'sub_districts.id')
+            ->leftJoin('villages', 'participants.village', '=', 'villages.id')
+            ->where($where)
+            ->get();
+            
+        return view('admin-page.report.registrant_rpt', [
+            'title' => 'Laporan Pendaftar',
+            'data' => $data,
+        ]);
+    }
 }

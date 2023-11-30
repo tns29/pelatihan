@@ -119,7 +119,7 @@
                     </ul>
                 </li> 
                 <li class="nav-header">Laporan</li>
-                <li class="nav-item ">
+                <li class="nav-item {{ Request::segment(1) === 'registrant-report' || Request::segment(1) === 'participant-report' || Request::segment(1) === 'service-detail' ? 'menu-is-opening menu-open' : '' }}">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-file"></i>
                         <p>
@@ -129,13 +129,13 @@
                     </a>
                     <ul class="nav nav-treeview ml-3">
                         <li class="nav-item">
-                            <a href="/category" class="nav-link {{ Request::segment(1) === 'category' ? 'submenu-active' : '' }}">
+                            <a href="/registrant-report" class="nav-link {{ Request::segment(1) === 'registrant-report' ? 'submenu-active' : '' }}">
                                 » &nbsp;
                                 <p>Laporan Pendaftar</p>
                             </a> 
                         </li>
                         <li class="nav-item">
-                            <a href="/category" class="nav-link {{ Request::segment(1) === 'category' ? 'submenu-active' : '' }}">
+                            <a href="/participant-report" class="nav-link {{ Request::segment(1) === 'participant-report' ? 'submenu-active' : '' }}">
                                 » &nbsp;
                                 <p>Laporan Peserta</p>
                             </a> 

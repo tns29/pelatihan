@@ -44,6 +44,8 @@
     @if (isset($script))
       <script src="{{ asset($script) }}.js"></script>
     @endif
+    
+    <script src="{{ asset('js/custom.js') }}"></script>
 
     <script>
 

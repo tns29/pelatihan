@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\FE;
 
+use App\Models\Period;
 use App\Models\Setting;
 use App\Models\Category;
 use App\Models\Training;
@@ -34,8 +35,27 @@ class ServiceController extends Controller
         } else {
             $filter = ['is_active' => 'Y'];
         }
-        $services = Training::where($filter)->get();
-        echo json_encode($services);
+
+        $services = Training::with('category')->where($filter)->get();
+        
+        $active_period = Period::where('is_active', 'Y')->first();
+
+        $start_date = $active_period->start_date ? date('Y-m-d', strtotime($active_period->start_date)) : null;
+        if($start_date != null) {
+            $curent_date = date('Y-m-d');
+
+            if($curent_date >= $start_date) {
+                $result = array('status' => 'success', 'services' => $services, 'active_period'=>$active_period);
+            } else {
+                $result = array('status' => 'failed', 'messsage' => 'Mohon maaf, Pendaftaran pelatihan '.$active_period->name.' telah ditutup');
+            }
+            
+        } else {
+            $result = array('status' => 'failed', 'messsage' => 'Mohon maaf, Pendaftaran pelatihan belum dibuka kembali.');
+        }
+        
+        echo json_encode($result);
+
     }
 
     function detail(int $id) {

@@ -15,7 +15,7 @@ class ParticipantController extends Controller
 {
     function index() {
         return view('user-page/auth/register', [
-            'title' => 'Register Admin'
+            'title' => 'Register'
         ]);
     }
 
@@ -49,7 +49,7 @@ class ParticipantController extends Controller
 
     function login() {
         return view('user-page.auth.login', [
-            'title' => 'Login Admin'
+            'title' => 'Login'
         ]);
     }
 
@@ -109,6 +109,7 @@ class ParticipantController extends Controller
         $result = $registrant->getWishlist($number);
         
         return view('user-page.'.$filename, [
+            'script' => $filename_script,
             'title' => 'Daftar Pelatihan saya',
             'wishlist' => $result
         ]);

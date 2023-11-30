@@ -6,7 +6,7 @@
         <meta name="description" content="UPTD Latihan Kerja Dinas, Tenaga Kerja Kabupaten Tangerang">
         <meta name="author" content="Yusuf Aryadilla and Bootstrap contributors">
         <meta name="generator" content="UPTD">
-        <title>Register - Page · UPTD</title>
+        <title>Login - Page · UPTD</title>
       
         <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/auth.css') }}">

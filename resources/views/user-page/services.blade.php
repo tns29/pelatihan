@@ -61,6 +61,7 @@
     </section>
 
     <div class="row" id="services-list">
+      <div class="text-center mt-3">Sedang memuat...</div>
       {{-- load in javascript --}}
     </div>
 
