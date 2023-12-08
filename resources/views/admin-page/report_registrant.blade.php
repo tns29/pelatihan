@@ -22,7 +22,7 @@
                     @csrf
                     <div class="mb-4">
                         <div class="row">
-                            <div class="col-lg-6 col-md-6">
+                            <div class="col-lg-6 col-md-6 mt-2">
                                 <label for="fullname" class="ml-1">Nama Pendaftar</label>
                                 <select name="fullname" id="fullname" class="form-control form-select">
                                     <option value="">Semua Pendaftar</option>
@@ -31,12 +31,35 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-lg-6 col-md-6">
+                            <div class="col-lg-6 col-md-6 mt-2">
                                 <label for="gender" class="ml-1">Jenis Kelamin</label>
                                 <select name="gender" id="gender" class="form-control form-select">
                                     <option value="">Semua Jenis Kelamin</option>
                                     <option value="M">Laki-laki</option>
                                     <option value="F">Perempuan</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-6 col-md-6 mt-2">
+                                <label for="sub_district" class="ml-1">Kecamatan</label>
+                                <select name="sub_district" id="sub_district" class="form-control form-select">
+                                    <option value="">Pilih kecamatan</option>
+                                    @foreach ($subDistrict as $item)
+                                        <option value="{{ $item->id }}" >
+                                            » &nbsp; {{ $item->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-lg-6 col-md-6 mt-2">
+                                <input type="hidden" id="village_">
+                                <label for="village" class="ml-1">Desa / Kelurahan</label>
+                                <select name="village" id="village" class="form-control form-select">
+                                    <option value="">Pilih </option>
+                                    {{-- @foreach ($villages as $item)
+                                        <option value="{{ $item->id }}" >
+                                            » &nbsp; {{ $item->name }}
+                                        </option>
+                                    @endforeach --}}
                                 </select>
                             </div>
                             {{-- <div class="col-lg-6 col-md-6">

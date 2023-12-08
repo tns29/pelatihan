@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Period;
 use App\Models\Village;
+use App\Models\Training;
 use App\Models\Registrant;
 use App\Models\Participant;
+use App\Models\SubDistrict;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +29,7 @@ class GeneralController extends Controller {
 
     function checkDataUser(Request $request,int $serviceId) {
         $user = Auth::guard('participant')->user();
-        
+        // dd($user->number);
         if($user->place_of_birth == null OR
             $user->date_of_birth == null OR 
             $user->no_telp == null OR 
@@ -43,18 +46,33 @@ class GeneralController extends Controller {
             $user->ijazah == null OR 
             $user->image == null 
         ) {
-            $request->session()->flash('message', 'Anda belum bisa mendaftar, lengkapi data untuk mendaftar pelatihan');
+            $request->session()->flash('failed2', 'Anda belum bisa mendaftar, lengkapi data untuk mendaftar pelatihan.');
             return redirect('/pelatihan/'.$serviceId);
         } else {
             if($user->participant == 'N') {
-                $request->session()->flash('message', 'Anda belum bisa mendaftar, akun anda masih dalam pengecekan oleh admin');
+                $request->session()->flash('failed3', 'Anda belum bisa mendaftar, akun anda masih dalam pengecekan oleh admin');
+                return redirect('/pelatihan/'.$serviceId);
+            }
+
+            $usia = hitung_umur($user->date_of_birth);
+            
+            $getService = Training::find($serviceId);
+            $min_age = (int)$getService->min_age;
+            $max_age = (int)$getService->max_age;
+            if ($usia <= $min_age) {
+                $request->session()->flash('failed3', 'Anda belum bisa mendaftar, usia anda belum mencukupi untuk mengikuti pelatihan ini.');
                 return redirect('/pelatihan/'.$serviceId);
             }
             
-            $checkRegistrantId = Registrant::where(['training_id' => $serviceId, 'participant_number' => $user->number])->get();
+            if ($usia >= $max_age) {
+                $request->session()->flash('failed3', 'Anda belum bisa mendaftar, usia anda melebihi batas untuk mengikuti pelatihan ini.');
+                return redirect('/pelatihan/'.$serviceId);
+            }
+
+            $checkRegistrantId = Registrant::where(['training_id' => $serviceId, 'participant_number' => $user->number])->first();
             
             if($checkRegistrantId) {
-                $request->session()->flash('message', 'Anda telah mendaftar untuk pelatihan ini.');
+                $request->session()->flash('failed1', 'Anda telah mendaftar untuk pelatihan ini.');
                 return redirect('/pelatihan/'.$serviceId);
             }
 
@@ -68,49 +86,87 @@ class GeneralController extends Controller {
 
             $registrant->save();
             
-            $request->session()->flash('message', 'Anda telah mendaftar untuk pelatihan ini.');
+            $request->session()->flash('success', 'Anda berhasil mendaftar pelatihan.');
             return redirect('/pelatihan/'.$serviceId);
         }
         
     }
 
     function registrantReport() {
-        $filename = 'registrant_report';
+        $filename = 'report_registrant';
         $filename_script = getContentScript(true, $filename);
 
         $admin = Auth::guard('admin')->user();
-        $registrant = Participant::where('participant', 'N')->get();
-        // $participants = Participant::where('participant', 'Y')->get();
+        $registrant = Participant::get();
+        $subDistrict = SubDistrict::get();
+        $villages = Village::get();
+        
         return view('admin-page.'.$filename, [
             'script' => $filename_script,
             'title' => 'Laporan Pendaftar',
             'auth_user' => $admin,
             'registrant' => $registrant,
-            // 'participants' => $participants
+            'subDistrict' => $subDistrict,
+            'villages' => $villages
         ]);
     }
 
+    // PENDAFTAR (REPORT REGISTRANT)
     function registrantRpt(Request $request) {
-
+        // dd($request->fullname);
         if($request->fullname) {
+            if($request->session()->get('fullname') != $request->fullname) {
+                session()->forget('fullname');
+            }
             $request->session()->push('fullname', $request->fullname);
+        } else {
+            session()->forget('fullname');
         }
+        
         if($request->gender) {
+            if($request->session()->get('gender') != $request->gender) {
+                session()->forget('gender');
+            }
             $request->session()->push('gender', $request->gender);
+        } else {
+            session()->forget('gender');
+        }
+        
+        if($request->sub_district) {
+            if($request->session()->get('sub_district') != $request->sub_district) {
+                session()->forget('sub_district');
+            }
+            $request->session()->push('sub_district', $request->sub_district);
+        } else {
+            session()->forget('sub_district');
+        }
+        
+        if($request->village) {
+            if($request->session()->get('village') != $request->village) {
+                session()->forget('village');
+            }
+            $request->session()->push('village', $request->village);
+        } else {
+            session()->forget('village');
         }
 
         echo json_encode('{}');
     }
 
     function openRegistrantRpt(Request $request) {
-        $where = ['participant' => 'N'];
+        $where = ['participants.is_active' => 'Y'];
         
         if($request->session()->get('fullname')) {
-            $where = ['number' => $request->session()->get('fullname'), 'participant' => 'N'];
+            $where = ['participants.number' => $request->session()->get('fullname')];
         }
         if($request->session()->get('gender')) {
-            $where = ['gender' => $request->session()->get('gender'), 'participant' => 'N'];
+            $where = ['participants.gender' => $request->session()->get('gender')];
         }
+        if($request->session()->get('sub_district')) {
+            $where = ['participants.sub_district' => $request->session()->get('sub_district')];
+        }
+
+        // dd($where);
         
         $data = DB::table('participants')
             ->select('participants.*','sub_districts.name as sub_district_name', 'villages.name as village_name')
@@ -121,6 +177,137 @@ class GeneralController extends Controller {
             
         return view('admin-page.report.registrant_rpt', [
             'title' => 'Laporan Pendaftar',
+            'data' => $data,
+        ]);
+    }
+
+    // PESERTA (REPORT PARTICIPANTS) //
+    function participantReport() {
+        $filename = 'report_participant';
+        $filename_script = getContentScript(true, $filename);
+
+        $admin = Auth::guard('admin')->user();
+        $registrant = Participant::get();
+        $subDistrict = SubDistrict::get();
+        $villages = Village::get();
+        $period = Period::get();
+        
+        return view('admin-page.'.$filename, [
+            'script' => $filename_script,
+            'title' => 'Laporan Peserta Pelatihan',
+            'auth_user' => $admin,
+            'registrant' => $registrant,
+            'subDistrict' => $subDistrict,
+            'villages' => $villages,
+            'periods' => $period
+        ]);
+    }
+
+    function participantRpt(Request $request) {
+        // dd($request->fullname);
+        if($request->fullname) {
+            if($request->session()->get('fullname') != $request->fullname) {
+                session()->forget('fullname');
+            }
+            $request->session()->push('fullname', $request->fullname);
+        } else {
+            session()->forget('fullname');
+        }
+        
+        if($request->gender) {
+            if($request->session()->get('gender') != $request->gender) {
+                session()->forget('gender');
+            }
+            $request->session()->push('gender', $request->gender);
+        } else {
+            session()->forget('gender');
+        }
+        
+        if($request->sub_district) {
+            if($request->session()->get('sub_district') != $request->sub_district) {
+                session()->forget('sub_district');
+            }
+            $request->session()->push('sub_district', $request->sub_district);
+        } else {
+            session()->forget('sub_district');
+        }
+        
+        if($request->village) {
+            if($request->session()->get('village') != $request->village) {
+                session()->forget('village');
+            }
+            $request->session()->push('village', $request->village);
+        } else {
+            session()->forget('village');
+        }
+        if($request->material_status) {
+            if($request->session()->get('material_status') != $request->material_status) {
+                session()->forget('material_status');
+            }
+            $request->session()->push('material_status', $request->material_status);
+        } else {
+            session()->forget('material_status');
+        }
+        if($request->religioin) {
+            if($request->session()->get('religioin') != $request->religioin) {
+                session()->forget('religioin');
+            }
+            $request->session()->push('religioin', $request->religioin);
+        } else {
+            session()->forget('religioin');
+        }
+        
+        if($request->period) {
+            if($request->session()->get('period') != $request->period) {
+                session()->forget('period');
+            }
+            $request->session()->push('period', $request->period);
+        } else {
+            session()->forget('period');
+        }
+
+        echo json_encode('{}');
+    }
+
+    function openParticipantRpt(Request $request) {
+        $where = ['registrants.is_active' => 'Y'];
+        
+        if($request->session()->get('fullname')) {
+            $where = ['participants.number' => $request->session()->get('fullname')];
+        }
+        if($request->session()->get('gender')) {
+            $where = ['participants.gender' => $request->session()->get('gender')];
+        }
+        if($request->session()->get('sub_district')) {
+            $where = ['participants.sub_district' => $request->session()->get('sub_district')];
+        }
+        if($request->session()->get('village')) {
+            $where = ['participants.village' => $request->session()->get('village')];
+        }
+        if($request->session()->get('material_status')) {
+            $where = ['participants.material_status' => $request->session()->get('material_status')];
+        }
+        if($request->session()->get('religion')) {
+            $where = ['participants.religion' => $request->session()->get('religion')];
+        }
+        if($request->session()->get('period')) {
+            $where = ['trainings.period_id' => $request->session()->get('period')];
+        }
+
+        // dd($where);
+        
+        $data = DB::table('registrants')
+            ->select('registrants.*','participants.*','sub_districts.name as sub_district_name', 'villages.name as village_name', 'periods.name as gelombang')
+            ->leftJoin('trainings', 'trainings.id', '=', 'registrants.training_id')
+            ->leftJoin('periods', 'periods.id', '=', 'trainings.period_id')
+            ->leftJoin('participants', 'participants.number', '=', 'registrants.participant_number')
+            ->leftJoin('sub_districts', 'participants.sub_district', '=', 'sub_districts.id')
+            ->leftJoin('villages', 'participants.village', '=', 'villages.id')
+            ->where($where)
+            ->get();
+            
+        return view('admin-page.report.participant_rpt', [
+            'title' => 'Laporan Peserta Pelatihan',
             'data' => $data,
         ]);
     }

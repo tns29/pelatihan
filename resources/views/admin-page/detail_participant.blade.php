@@ -99,7 +99,7 @@ $date_of_birth = $detailParticipant->date_of_birth ? date('d, M Y', strtotime($d
                     <tr>
                         <th style="width: 30%;">Ijazah</th>
                         @if ($detailParticipant->ijazah)
-                            <td><b> : &nbsp; <a href="{{asset('/storage/'.$detailParticipant->ijazah)}}" target="_blank">Lihat file</a> </b></td>
+                            <td><b> : &nbsp; <a href="{{asset('/storage/'.$detailParticipant->ijazah)}}" target="_blank" download="true">Lihat file</a> </b></td>
                         @else
                             <td> : &nbsp; - </td>
                         @endif
@@ -121,7 +121,7 @@ $date_of_birth = $detailParticipant->date_of_birth ? date('d, M Y', strtotime($d
                         @csrf
                         @method('PUT')
                         <tr>
-                            <th>Terima Peserta</th>
+                            <th>Terima Calon Peserta</th>
                             <td>
                                 <select name="acc" id="acc" class="form-control form-select">
                                     <option value="">Pilih status</option>

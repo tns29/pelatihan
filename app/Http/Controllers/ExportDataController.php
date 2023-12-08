@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Exports\RegistrantExport;
+use App\Exports\ParticipantExport;
+use Maatwebsite\Excel\Facades\Excel;
+
+class ExportDataController extends Controller 
+{
+    public function registrant(Request $request) 
+    {
+        return Excel::download(new RegistrantExport($request), 'pendaftar_report'.date('_Ymd_His').'.xlsx');
+    }
+
+    public function participant(Request $request) 
+    {
+        return Excel::download(new ParticipantExport($request), 'participant_report'.date('_Ymd_His').'.xlsx');
+    }
+}

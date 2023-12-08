@@ -32,7 +32,9 @@
                     <div class="col-lg-8">
                         <h4 class="font-weight-bold">{{ $auth_user->number }}</h4>
                         <h4>{{ $auth_user->fullname }}</h4>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis fuga totam sapiente animi corrupti est cum necessitatibus pariatur dolores laborum vero, atque accusantium in quam, quia incidunt laboriosam qui voluptas.
+                        <hr>
+                        Pengelola Unit Pelaksana Teknis ( UPT ) yang secara  operasional merupakan penunjang sebagian tugas Disnaker Kabupaten Tangerang
+                        <br>
                     </div>
                 </div>
             </div>

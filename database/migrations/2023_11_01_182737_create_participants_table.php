@@ -29,6 +29,7 @@ return new class extends Migration
             $table->year('graduation_year')->nullable();
             $table->string('sub_district', 100)->nullable();
             $table->string('village', 100)->nullable();
+            $table->text('id_card')->nullable();
             $table->text('ak1')->nullable();
             $table->text('ijazah')->nullable();
             $table->text('image')->nullable();

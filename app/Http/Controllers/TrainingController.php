@@ -54,6 +54,8 @@ class TrainingController extends Controller
     {
         $validatedData = $request->validate([
             'category_id'      => 'required',
+            'min_age'      => 'required|max:3',
+            'max_age'      => 'required|max:3',
             'title'      => 'required|max:30',
             'image'     => 'image|file|max:1024'
         ]);
@@ -118,6 +120,8 @@ class TrainingController extends Controller
     {
         $validatedData = $request->validate([
             'category_id'      => 'required',
+            'min_age'      => 'required|max:3',
+            'max_age'      => 'required|max:3',
             'title'      => 'required|max:30',
             'image'     => 'image|file|max:1024'
         ]);

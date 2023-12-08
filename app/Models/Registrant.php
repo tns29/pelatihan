@@ -36,7 +36,7 @@ class Registrant extends Model
                 ->where(['participant_number' => $number])->get();
     }
 
-    function getRegistrants() {
+    function getRegistrants($status) {
         return DB::table('registrants')
                 ->select('registrants.*',
                         'participants.fullname as fullname', 'participants.gender as gender', 'participants.email as email',
@@ -46,6 +46,7 @@ class Registrant extends Model
                 ->leftJoin('trainings', 'trainings.id', '=', 'registrants.training_id')
                 ->leftJoin('periods', 'periods.id', '=', 'trainings.period_id') 
                 ->leftJoin('categories', 'categories.id', '=', 'trainings.category_id')
+                ->where(['registrants.is_active' => $status])
                 ->get();
     }
 }

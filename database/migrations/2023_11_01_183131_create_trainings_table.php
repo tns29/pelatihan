@@ -20,6 +20,8 @@ return new class extends Migration
             $table->text('description');
             // $table->date('date');
             $table->double('period_id');
+            $table->double('max_age');
+            $table->double('min_age');
             $table->text('image')->nullable();
             $table->enum('is_active', ["Y", "N"])->default('Y');
             $table->dateTime('created_at')->nullable();

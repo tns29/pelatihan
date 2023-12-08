@@ -43,7 +43,7 @@
             </li>
             
             <li class="nav-item mx-2">
-              <a class="nav-link {{ Request::segment(1) == '#' ? 'active-link' : '' }}" href="https://tangerangkab.go.id/" target="_blank">Website Kab. Tangerang</a>
+              <a class="nav-link {{ Request::segment(1) == '#' ? 'active-link' : '' }}" href="https://disnaker.tangerangkab.go.id/" target="_blank">Website Dinas Tenaga Kerja</a>
             </li>
             
             {{-- <li class="nav-item mx-2 dropdown">

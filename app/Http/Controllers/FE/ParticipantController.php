@@ -31,6 +31,7 @@ class ParticipantController extends Controller
             'password_confirmation' => 'required|min:6|max:255'
         ]);
         
+        $validatedData['fullname'] = ucwords($validatedData['fullname']);
         $validatedData['number'] = $this->getLasNumber();
         $validatedData['created_at'] = date('Y-m-d H:i:s');
         $validatedData['created_by'] = $validatedData['username'];
@@ -166,31 +167,66 @@ class ParticipantController extends Controller
             'sub_district'    => 'required|max:100',
             'village'    => 'required|max:100',
             'image'     => 'image|file|max:1024',
+            'id_card'     => 'file|max:1024',
             'ak1'     => 'file|max:1024',
             'ijazah'     => 'file|max:1024',
         ]);
 
         // dd($validatedData);
+
+        $getData = Participant::where(['number'=> $number])->first();
+        
         if($request->file('image')) {
             $validatedData['image'] = $request->file('image')->store('profile-images');
+            $is_valid_image = true;
+        } else if ($getData->image) {
+            $is_valid_image = true;
+        } else {
+            $is_valid_image = false;
+            $request->session()->flash('image', 'Pas Foto belum di upload');
+        }
+        
+        if($request->file('id_card')) {
+            $validatedData['id_card'] = $request->file('id_card')->store('doc');
+            $is_valid_id_card = true;
+        } else if ($getData->id_card) {
+            $is_valid_id_card = true;
+        } else {
+            $is_valid_id_card = false;
+            $request->session()->flash('id_card', 'KTP belum di upload');
         }
         
         if($request->file('ak1')) {
+            $is_valid_ak1 = true;
             $validatedData['ak1'] = $request->file('ak1')->store('doc');
+        } else if ($getData->ak1) {
+            $is_valid_ak1 = true;
+        } else {
+            $is_valid_ak1 = false;
+            $request->session()->flash('ak1', 'AK1 belum di upload');
         }
         
         if($request->file('ijazah')) {
+            $is_valid_ijazah = true;
             $validatedData['ijazah'] = $request->file('ijazah')->store('doc');
+        } else if ($getData->ijazah) {
+            $is_valid_ijazah = true;
+        } else {
+            $is_valid_ijazah = false;
+            $request->session()->flash('ijazah', 'Ijazah belum di upload');
+        }
+
+        if(!$is_valid_image || !$is_valid_id_card || !$is_valid_ak1 || !$is_valid_ijazah) {
+            return redirect('/update-profile');
         }
         
         $result = Participant::where(['number'=> $number])->update($validatedData);
         if($result) {
             $request->session()->flash('success', 'Data Berhasil diperbaharui');
-            return redirect('/_profile');
         } else {
-            $request->session()->flash('success', 'Proses gagal, Hubungi administrator');
-            return redirect('/update-profile');
+            $request->session()->flash('failed', 'Proses gagal, Hubungi administrator');
         }
+        return redirect('/_profile');
     }
 
     // LOGOUT PARTICIPANT //

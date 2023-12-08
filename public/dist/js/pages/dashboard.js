@@ -129,3 +129,11 @@ $(function () {
         height: "250px",
     });
 });
+
+function declineTraining() {
+    $("#declineTraining").submit();
+}
+
+function approveTraining() {
+    $("#approveTraining").submit();
+}

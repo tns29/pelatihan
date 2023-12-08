@@ -10,6 +10,7 @@ use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\TrainingController;
+use App\Http\Controllers\ExportDataController;
 use App\Http\Controllers\FE\ServiceController;
 use App\Http\Controllers\FE\ParticipantController;
 use App\Http\Controllers\TrainingContentController;
@@ -44,6 +45,8 @@ Route::middleware('admin')->group(function () {
     
     Route::resource('/posts', PostsController::class)->except('show');
 
+    Route::get('/export/admin', [ExportDataController::class, 'export']);
+
     Route::get('/data-admin', [AdminController::class, 'dataAdmin']);
     Route::get('/getDetailAdmin', [AdminController::class, 'getDetailAdmin']);
     Route::get('/form-add-admin', [AdminController::class, 'addFormAdmin']);
@@ -56,15 +59,26 @@ Route::middleware('admin')->group(function () {
     Route::put('/acc-participant/{number}', [GeneralController::class, 'accParticipant']);
     
     Route::get('/registrant', [AdminController::class, 'registrant']);
+    Route::post('/approve/{number}', [AdminController::class, 'approveParticipant']);
+    Route::delete('/decline/{number}', [AdminController::class, 'declineParticipant']);
     
     Route::resource('/category', CategoryController::class)->only("index", "store", "update", "destroy");
     
     Route::resource('/service', TrainingController::class)->except("show");
     Route::resource('/service-detail', TrainingContentController::class)->except("show");
     
+    // REPORTING //
     Route::get('/registrant-report', [GeneralController::class, 'registrantReport']);
     Route::get('/registrant-rpt', [GeneralController::class, 'registrantRpt']);
     Route::get('/open-registrant-rpt', [GeneralController::class, 'openRegistrantRpt']);
+    Route::get('/export_registrant', [ExportDataController::class, 'registrant']);
+    
+    Route::get('/participant-report', [GeneralController::class, 'participantReport']);
+    Route::get('/participant-rpt', [GeneralController::class, 'participantRpt']);
+    Route::get('/open-participant-rpt', [GeneralController::class, 'openParticipantRpt']);
+    Route::get('/export_participant', [ExportDataController::class, 'participant']);
+
+    // END REPORTING //
 
     Route::get('/settings', [SettingsController::class, 'index']);
     Route::post('/settings', [SettingsController::class, 'update']);
@@ -80,13 +94,13 @@ Route::get('/berita', [HomeController::class, 'posts']);
 Route::get('/pelatihan', [ServiceController::class, 'index']);
 Route::get('/pelatihan/{id}', [ServiceController::class, 'detail']);
 Route::get('/getDataServices', [ServiceController::class, 'getDataServices']);
+Route::get('/getVillages/', [GeneralController::class, 'getVillages']);
 
 Route::middleware('participant')->group(function () {
     Route::get('/wishlist', [ParticipantController::class, 'wishlist']);
     Route::get('/_profile', [ParticipantController::class, 'profile']);
     Route::get('/update-profile', [ParticipantController::class, 'updateProfile']);
     Route::put('/update-profile/{number}', [ParticipantController::class, 'updateProfileData']);
-    Route::get('/getVillages/', [GeneralController::class, 'getVillages']);
     Route::get('/checkDataUser/{id}', [GeneralController::class, 'checkDataUser']);
     
     Route::post('/logout', [ParticipantController::class, 'logout']);

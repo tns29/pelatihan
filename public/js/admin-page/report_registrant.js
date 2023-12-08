@@ -1,13 +1,3 @@
-const image = document.getElementById("image");
-let preview = document.getElementById("preview");
-image.onchange = (evt) => {
-    const [file] = image.files;
-    // console.log(file);
-    if (file) {
-        preview.src = URL.createObjectURL(file);
-    }
-};
-
 $("#sub_district").on("change", function () {
     $("#village").html("");
     $("#village").val("");
@@ -16,14 +6,12 @@ $("#sub_district").on("change", function () {
     loadVillages($("#sub_district").val());
 });
 
-loadVillages($("#sub_district").val());
-
 function loadVillages(id) {
     console.log(id);
     $.ajax({
         type: "GET",
         dataType: "JSON",
-        url: "getVillages",
+        url: "/getVillages",
         data: { sub_district_id: id },
         async: false,
         success: function (result) {
@@ -44,3 +32,33 @@ function loadVillages(id) {
 
 var village = $("#village_").val();
 $("#village").val(village).change();
+
+$("#submitRpt").on("click", function () {
+    var fullname = $("#fullname").val();
+    var gender = $("#gender").val();
+    var sub_district = $("#sub_district").val();
+    var village = $("#village").val();
+
+    $.ajax({
+        type: "GET",
+        url: "/registrant-rpt",
+        dataType: "JSON",
+        data: {
+            fullname: fullname,
+            gender: gender,
+            sub_district: sub_district,
+            village: village,
+        },
+        success: function (data) {
+            openRpt();
+        },
+    });
+});
+
+function openRpt() {
+    window.popup = window.open(
+        "/open-registrant-rpt",
+        "rpt",
+        "width=1550, height=600, top=10, left=10, toolbar=1"
+    );
+}

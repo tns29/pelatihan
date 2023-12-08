@@ -20,6 +20,9 @@
                         <p class="mt-2">{{$item->description}}</p>
                         <span class="alert alert-warning px-2 py-0"> {{$item->gelombang}}</span>
                         <br>
+                        <br>
+                        <small class="text-success">{{ $item->approve == 'Y' ? 'Pelatihan Sedang Berlangsung' : 'Pelatihan belum dimulai'}}</small>
+                        <br>
                         <button class="btn btn-success btn-sm mt-3" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Kartu Pelatihan" onclick="printCard({{$item->id}})">
                             <i class="far fa-address-card mr-1"></i> Lihat Kartu
                         </button>
@@ -48,7 +51,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-          <button class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Kartu Pelatihan" onclick="printCard({{$item->id}})">
+          <button class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Kartu Pelatihan" >
             <i class="fas fa-print me-1"></i> Cetak
         </button>
         </div>

@@ -28,7 +28,7 @@
                       <th>Nama Lengkap</th>
                       <th style="width: 11%">Jenis Kelamin</th>
                       <th>Email</th>
-                      <th style="width: 10%; text-align: center;">Peserta</th>
+                      <th style="width: 10%; text-align: center;">Status</th>
                       <th style="width: 10%; text-align: center;">Aksi</th>
                   </tr>
               </thead>

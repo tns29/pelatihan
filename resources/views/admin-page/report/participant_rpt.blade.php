@@ -30,7 +30,7 @@
         .wrapper {
             padding: 0 10px;
         }
-        
+
     </style>
 </head>
 
@@ -38,7 +38,7 @@
 
     <div class="wrapper">
         <div style="float: right;">
-            <a href="/export_registrant">
+            <a href="/export_participant">
                 <img src="{{ asset('img/excel.png') }}" alt="excel" style="height: 40px;">
                 <label for="print" style="display : block; font-size: 12px; margin-left: 4px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">export</label>
                 <br>
@@ -60,6 +60,8 @@
                     <th style="text-align: left;">Agama</th>
                     <th style="text-align: left;">Pendidikan Terakhir</th>
                     <th style="text-align: left;">Tahun Lulus</th>
+                    <th style="text-align: left;">Tanggal</th>
+                    <th style="text-align: left;">Gelombang</th>
                     <th style="text-align: center;">Status</th>
                 </tr>
                 @foreach ($data as $item)
@@ -77,12 +79,14 @@
                         <td>{{$item->religion}}</td>
                         <td>{{$item->last_education}}</td>
                         <td>{{$item->graduation_year}}</td>
-                        <td style="text-align: center">{{$item->participant == 'Y' ? '✅' : '❌'}}</td>
+                        <td>{{ date('d/m/Y', strtotime($item->date)) }}</td>
+                        <td>{{$item->gelombang}}</td>
+                        <td style="text-align: center">{{$item->approve == 'Y' ? 'Peliatihan Sedang Berlangsung' : 'Menunggu Persetujuan'}}</td>
                     </tr>
                 @endforeach
             </table>
         </div>
+  
     </div>
-        
 </body>
 </html>

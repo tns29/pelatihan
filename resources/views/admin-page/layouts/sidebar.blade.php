@@ -93,7 +93,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-cubes"></i>
                         <p>
-                            Data Produk
+                            Data Layanan
                         <i class="fas fa-angle-right right"></i> 
                         </p>
                     </a>
@@ -140,7 +140,7 @@
                                 <p>Laporan Peserta</p>
                             </a> 
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" hidden>
                             <a href="/category" class="nav-link {{ Request::segment(1) === 'category' ? 'submenu-active' : '' }}">
                                 » &nbsp;
                                 <p>Laporan Peserta UJK</p>
@@ -157,7 +157,7 @@
                     </a>
                 </li> 
                 
-                <li class="nav-item">
+                <li class="nav-item" hidden>
                     <a href="/settings" class="nav-link {{ Request::segment(1) === 'settings' ? 'submenu-active' : '' }}">
                         <i class="nav-icon fas fa-tools"></i>
                         <p>Pengaturan</p>

@@ -29,16 +29,17 @@ class ServiceController extends Controller
     }
 
     function getDataServices(Request $request) {
+        $active_period = Period::where('is_active', 'Y')->first();
+        
         $categorySelected = $request->categoryId;
         if($categorySelected) {
-            $filter = ['is_active' => 'Y', 'category_id' => $categorySelected];
+            $filter = ['period_id'  => $active_period->id, 'is_active' => 'Y', 'category_id' => $categorySelected];
         } else {
-            $filter = ['is_active' => 'Y'];
+            $filter = ['period_id'  => $active_period->id, 'is_active' => 'Y'];
         }
 
         $services = Training::with('category')->where($filter)->get();
         
-        $active_period = Period::where('is_active', 'Y')->first();
 
         $start_date = $active_period->start_date ? date('Y-m-d', strtotime($active_period->start_date)) : null;
         if($start_date != null) {

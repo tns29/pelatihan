@@ -18,9 +18,8 @@ return new class extends Migration
             $table->unsignedBigInteger('training_id')->nullable(true);
             $table->foreign('training_id')->on('trainings')->references('id');
             $table->dateTime('date')->nullable(false);
-            $table->string('status', 1);
             $table->enum('is_active', ["Y", "N"]);
-            // $table->enum('paid', ["Y", "N"]);
+            $table->enum('approve', ["Y", "N"])->default('N');
             $table->dateTime('approval_on')->nullable();
             $table->string('approval_by', 50)->nullable();
         });

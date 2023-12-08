@@ -10,9 +10,25 @@
 <div class="explain-product my-5 rounded">
 
   <div class="row my-3 p-3">
-    @if (session()->has('message'))
+    @if (session()->has('success'))
+        <div class="alert alert-success py-1 text-center">
+            <a href="#" class="text-decoration-none text-dark font-weight-bolder"> {{ session()->get('success') }}</a>
+        </div>
+    @endif
+    @if (session()->has('failed1'))
         <div class="alert alert-danger py-1 text-center">
-            <a href="/update-profile" class="text-decoration-none text-dark font-weight-bolder"> {{ session()->get('message') }}</a>
+            <a href="#" class="text-decoration-none text-dark font-weight-bolder"> {{ session()->get('failed1') }}</a>
+        </div>
+    @endif
+    @if (session()->has('failed2'))
+        <div class="alert alert-danger py-1 text-center">
+            {{ session()->get('failed2') }}
+            <a href="/update-profile" class="text-decoration-none text-primary font-weight-bolder"> Klik disini untuk melengkapi data </a>
+        </div>
+    @endif
+    @if (session()->has('failed3'))
+        <div class="alert alert-danger py-1 text-center">
+            {{ session()->get('failed3') }}
         </div>
     @endif
     <div class="col-lg-3 col-md-3 col-sm-6 mb-3">

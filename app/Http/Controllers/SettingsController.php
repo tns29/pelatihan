@@ -15,7 +15,7 @@ class SettingsController extends Controller
         $filename_script = getContentScript(true, $filename);
 
         $admin = Auth::guard('admin')->user();
-        $data = Setting::get();
+        $data = Setting::whereBetween('id',[1,2])->get();
         return view('admin-page.'.$filename, [
             'script' => $filename_script,
             'title' => 'Pengaturan',

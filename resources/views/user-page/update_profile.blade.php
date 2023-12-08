@@ -19,14 +19,12 @@
             </div>
             <div class=" mt-2">
                 <label for="image">Pas Foto</label>
-
-                <input type="file" name="image" id="image" class="form-control @error('image')is-invalid @enderror">
-                
-                @error('image')
-                <small class="invalid-feedback">
-                    File {{ $message }}
+                <input type="file" name="image" id="image" class="form-control @if(session()->has('image') == true)is-invalid @endif">
+                @if(session()->has('image') == true)
+                <small class="invalid-feedback ms-2" style="color: red">
+                    File {{ session()->get('image') }}
                 </small>
-                @enderror
+                @endif
             </div>
         </div>
         <div class="col-lg-9 col-md-9 col-sm-9 mt-4">
@@ -125,7 +123,9 @@
                 <select name="sub_district" id="sub_district" class="form-control form-select">
                     <option value="">Pilih kecamatan</option>
                     @foreach ($subDistrict as $item)
-                        <option value="{{ old('sub_district', $item->id) }}" {{ $item->id == $auth_user->sub_district ? 'selected' : '' }} > » &nbsp; {{ $item->name }}</option>
+                        <option value="{{ $item->id }}" {{ $item->id == $auth_user->sub_district || $item->id == old('sub_district') ? 'selected' : '' }} >
+                            » &nbsp; {{ $item->name }}
+                        </option>
                     @endforeach
                 </select>
                 @error('sub_district')
@@ -151,24 +151,41 @@
             {{-- DOKUMEN --}}
     
             <div class=" mt-2 d-flex">
+                <label for="id_card" class="col-md-3 ms-3">KTP</label>
+                <input type="file" name="id_card" id="id_card" class="form-control @if(session()->has('id_card') == true)is-invalid @endif" value="{{ old('id_card', $auth_user->id_card) }}">
+                @if ($auth_user->id_card)
+                    <small class="w-25 pt-2 ms-2"><b> &nbsp; <a href="{{asset('/storage/'.$auth_user->id_card)}}" target="_blank">Lihat file</a> </b></small>
+                @endif
+                @if(session()->has('id_card') == true)
+                    <small class="invalid-feedback ms-2" style="color: red">
+                        File {{ session()->get('id_card') }}
+                    </small>
+                @endif
+            </div>
+
+            <div class=" mt-2 d-flex">
                 <label for="ak1" class="col-md-3 ms-3">Ak1 / Kartu Kuning</label>
-                <input type="file" name="ak1" id="ak1" class="form-control @error('ak1')is-invalid @enderror">
-                
-                @error('ak1')
-                <small class="invalid-feedback">
-                    File {{ $message }}
-                </small>
-                @enderror
+                <input type="file" name="ak1" id="ak1" class="form-control @if(session()->has('ak1') == true)is-invalid @endif" >
+                @if ($auth_user->ak1)
+                    <small class="w-25 pt-2 ms-2"><b> &nbsp; <a href="{{asset('/storage/'.$auth_user->ak1)}}" target="_blank">Lihat file</a> </b></small>
+                @endif
+                @if(session()->has('ak1') == true)
+                    <small class="invalid-feedback ms-2" style="color: red">
+                        File {{ session()->get('ak1') }}
+                    </small>
+                @endif
             </div>
             <div class=" mt-2 d-flex">
                 <label for="ijazah" class="col-md-3 ms-3">Ijazah Terakhir</label>
-                <input type="file" name="ijazah" id="ijazah" class="form-control @error('ijazah')is-invalid @enderror">
-                
-                @error('ijazah')
-                <small class="invalid-feedback">
-                    File {{ $message }}
-                </small>
-                @enderror
+                <input type="file" name="ijazah" id="ijazah" class="form-control @if(session()->has('ijazah') == true)is-invalid @endif">
+                @if ($auth_user->ijazah)
+                    <small class="w-25 pt-2 ms-2"><b> &nbsp; <a href="{{asset('/storage/'.$auth_user->ijazah)}}" target="_blank">Lihat file</a> </b></small>
+                @endif
+                @if(session()->has('ijazah') == true)
+                    <small class="invalid-feedback ms-2" style="color: red">
+                        File {{ session()->get('ijazah') }}
+                    </small>
+                @endif
             </div>
         </div>
         <button type="submit" class="btn btn-outline-success mt-3">Simpan Data</button>

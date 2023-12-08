@@ -104,6 +104,14 @@ $date_of_birth = $auth_user->date_of_birth ? date('d, M Y', strtotime($auth_user
             <hr class="p-0 m-0">
             <table class="table">
                 <tr>
+                    <th style="width: 30%;">KTP </th>
+                    @if ($auth_user->id_card)
+                        <td><b> : &nbsp; <a href="{{asset('/storage/'.$auth_user->id_card)}}" target="_blank">Lihat file</a> </b></td>
+                    @else
+                        <td> : &nbsp; - </td>
+                    @endif
+                </tr>
+                <tr>
                     <th style="width: 30%;">Ak 1 / kartu kuning</th>
                     @if ($auth_user->ak1)
                         <td><b> : &nbsp; <a href="{{asset('/storage/'.$auth_user->ak1)}}" target="_blank">Lihat file</a> </b></td>

@@ -182,16 +182,47 @@ class AdminController extends Controller
         ]);
     }
     
-    function registrant() {
+    function registrant(Request $request) {
+        $filename = 'registrant';
+        $filename_script = getContentScript(true, $filename);
+        
+        $status = $request->status ? $request->status : 'Y';
+
         $data = Auth::guard('admin')->user();  
         $registrant = new Registrant;
-        $result = $registrant->getRegistrants();
+        $result = $registrant->getRegistrants($status);
         // dd($result);
-        return view('admin-page.registrant', [
+        return view('admin-page.'.$filename, [
+            'status' => $status,
+            'script' => $filename_script,
             'title' => 'Data Pendaftar',
             'auth_user' => $data,
             'participant' => $result
         ]);
+    }
+
+    function approveParticipant(Request $request, $number) {
+
+        $data = Auth::guard('admin')->user();
+
+        $dataUpdate = [
+            'approval_on' => date('Y-m-d H:i:s'),
+            'approval_by' => $data->username,
+            'approve' => 'Y',
+        ];
+
+        Registrant::where(['participant_number'=> $number, 'training_id' => $request->training_id])->update($dataUpdate);
+        
+        return redirect('registrant');
+    }
+    
+    function declineParticipant(Request $request, $number) {
+        // dd($request);
+        $dataUpdate = [
+            'is_active' => 'N',
+        ];
+        Registrant::where(['participant_number'=> $number, 'training_id' => $request->training_id])->update($dataUpdate);
+        return redirect('registrant');
     }
     
 }

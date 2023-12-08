@@ -54,6 +54,12 @@ class DatabaseSeeder extends Seeder
             'id'=> 2,
             'name' => 'Tanggal Pelatihan'
         ]);
+        
+        Setting::create([
+            'id'=> 3,
+            'name' => 'expired',
+            'end_date' => '2024-01-10'
+        ]);
 
         $gelombang = [
             'Gelombang 1',
@@ -78,7 +84,7 @@ class DatabaseSeeder extends Seeder
         }
 
         $sub_districs = [
-            'Balaraja', 'Cikupa', 'Cisauk', 'Curug', 'Gunung Kaler', 'Jambe', 'Jayanti', 'Kelapa Dua', 'Kemiri', 'Kosambi', 'Kresek', 'Kronjo', 'Legok', 'Mauk', 'Mekar Baru', 'Pengadegan', 'Pakuhaji', 'Panongan', 'Pasar Kamis', 'Rajeg', 'Sepatan', 'Sepatan Timur', 'Sindang Jaya', 'Solear', 'Sukadiri', 'Sukamulya', 'Teluknaga', 'Tigaraksa'
+            'Balaraja', 'Cikupa', 'Cisauk', 'Cisoka', 'Curug', 'Gunung Kaler', 'Jambe', 'Jayanti', 'Kelapa Dua', 'Kemiri', 'Kosambi', 'Kresek', 'Kronjo', 'Legok', 'Mauk', 'Mekar Baru', 'Pengadegan', 'Pakuhaji', 'Panongan', 'Pasar Kamis', 'Rajeg', 'Sepatan', 'Sepatan Timur', 'Sindang Jaya', 'Solear', 'Sukadiri', 'Sukamulya', 'Teluknaga', 'Tigaraksa'
         ];
         foreach ($sub_districs as $val) {
             SubDistrict::create(['name' => $val]);
@@ -90,9 +96,6 @@ class DatabaseSeeder extends Seeder
             ],
             2 => [
                 'Bitung Jaya','Bojong','Budi Mulya','Cibadak','Cikupa','Dukuh','Pasir Gadung','Pasir Jaya','Sukadamai','Sukanagara','Talaga','Talagasari','Bunder','Sukamulya'
-            ],
-            3 => [
-                'Cibogo', 'Dangdang', 'Mekar Wangi', 'Sampora', 'Suradita', 'Cisauk'
             ],
             3 => [
                 'Cibogo', 'Dangdang', 'Mekar Wangi', 'Sampora', 'Suradita', 'Cisauk'

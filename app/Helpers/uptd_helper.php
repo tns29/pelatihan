@@ -2,9 +2,41 @@
 
 use App\Models\Admin;
 use App\Models\Training;
+use Illuminate\Support\Facades\DB;
 
 function testHelper() {
     die('Helper is ready');
+}
+
+function last_query($result = '') {
+    DB::enableQueryLog();
+
+    // and then you can get query log
+
+    dd(DB::getQueryLog());
+}
+
+function hitung_umur($tanggal_lahir){
+	$birthDate = new DateTime($tanggal_lahir);
+	$today = new DateTime("today");
+	if ($birthDate > $today) { 
+	    exit("0 tahun 0 bulan 0 hari");
+	}
+	$y = $today->diff($birthDate)->y;
+	// $m = $today->diff($birthDate)->m;
+	// $d = $today->diff($birthDate)->d;
+	// return $y." tahun ".$m." bulan ".$d." hari";
+    return $y;
+}
+
+function getNotif() {
+    $data = DB::table('participants')
+            ->select('participants.*','sub_districts.name as sub_district_name', 'villages.name as village_name')
+            ->leftJoin('sub_districts', 'participants.sub_district', '=', 'sub_districts.id')
+            ->leftJoin('villages', 'participants.village', '=', 'villages.id')
+            ->where('participant', 'N')
+            ->get();
+    return $data;
 }
 
 function rupiah($angka) {
