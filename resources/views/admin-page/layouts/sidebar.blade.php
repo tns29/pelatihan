@@ -141,7 +141,7 @@
                             </a> 
                         </li>
                         <li class="nav-item" hidden>
-                            <a href="/category" class="nav-link {{ Request::segment(1) === 'category' ? 'submenu-active' : '' }}">
+                            <a href="/ujk_report" class="nav-link {{ Request::segment(1) === 'ujk_report' ? 'submenu-active' : '' }}">
                                 » &nbsp;
                                 <p>Laporan Peserta UJK</p>
                             </a> 
