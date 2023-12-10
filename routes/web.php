@@ -53,6 +53,7 @@ Route::middleware('admin')->group(function () {
     Route::post('/add-new-admin', [AdminController::class, 'storeAdmin']);
     Route::get('/form-edit-admin/{number}', [AdminController::class, 'editFormAdmin']);
     Route::post('/edit-new-admin', [AdminController::class, 'updateAdmin']);
+    Route::delete('/delete-admin/{number}', [AdminController::class, 'deleteAdmin']);
 
     Route::get('/data-participant', [AdminController::class, 'dataParticipant']);
     Route::get('/detail-participant/{number}', [AdminController::class, 'detailParticipant']);
