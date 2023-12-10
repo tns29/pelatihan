@@ -60,7 +60,7 @@ class AdminController extends Controller
             'script' => $filename_script,
             'title' => 'Tambah Data Admin',
             'auth_user' => $data,
-            'level' => $admin_level
+            'level_id' => $admin_level
         ]);
     }
 
@@ -70,7 +70,7 @@ class AdminController extends Controller
             'fullname'      => 'required|max:50',
             'username'      => 'required|max:30|unique:admins',
             'gender'        => 'required',
-            'level'        => 'required',
+            'level_id'        => 'required',
             'place_of_birth'    => 'required|max:40',
             'date_of_birth'     => 'required',
             'no_telp'       => 'required|max:15',
@@ -82,7 +82,7 @@ class AdminController extends Controller
         $validatedData['created_at'] = date('Y-m-d H:i:s');
         $validatedData['created_by'] = Auth::guard('admin')->user()->username;
         $validatedData['password'] = Hash::make($validatedData['password']);
-        $validatedData['level_id'] = 1;
+        // $validatedData['level_id'] = 1;
         // dd($validatedData);
         $result = Admin::create($validatedData);
         if($result) {
@@ -150,6 +150,22 @@ class AdminController extends Controller
             return redirect('/form-edit-admin/'.$validatedData['number']);
         }
 
+    }
+
+    function deleteAdmin(Request $request, string $number) {
+
+        if(auth()->guard('admin')->user()->number == $number) {
+            $request->session()->flash('failed', 'Proses gagal, Anda tidak dapat menghapus akun anda sendiri');
+            return redirect('/data-admin');
+        }
+        $data = Admin::where(['number' => $number]);
+        $result = $data->delete();
+        if($result) {
+            $request->session()->flash('success', 'Transaksi berhasil diubah');
+        } else {
+            $request->session()->flash('failed', 'Proses gagal, Hubungi administrator');
+        }
+        return redirect('/data-admin');
     }
 
     function dataParticipant() {
