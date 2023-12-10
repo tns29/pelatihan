@@ -123,7 +123,7 @@ function getLasNumberAdmin() {
         $numberFix = "ADM".date('Ymd')."0001";
     }
 
-    return $code;
+    return $numberFix;
 }
 
 function getLasIdTraining() {
@@ -133,12 +133,12 @@ function getLasIdTraining() {
     if($lastId) {
         $lastId = $lastId;
         $code_ = sprintf('%03d', $lastId+1);
-        $code = $code_;
+        $numberFix = $code_;
     } else {
-        $code = 001;
+        $numberFix = 001;
     }
 
-    return $code;
+    return $numberFix;
 }
 
 ?>
