@@ -28,7 +28,7 @@
     
                             <div class="col-lg-7 col-md-7 col-sm-12 mt-2">
                                 <label for="code">Nomor Admin</label>
-                                <input type="text" class="form-control" name="code" id="code" value="{{getLasCodeAdmin()}}" readonly>
+                                <input type="text" class="form-control" name="code" id="code" value="{{getLasNumberAdmin()}}" readonly>
                             </div>
                             
                             <div class="col-lg-5 col-md-5 col-sm-5 mt-2">
