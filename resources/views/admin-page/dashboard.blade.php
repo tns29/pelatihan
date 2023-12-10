@@ -189,7 +189,7 @@
     </div>
     <!-- Main row -->
     <div class="row">   
-      <section class="col-lg-7 connectedSortable">
+      <section class="col-lg-12 connectedSortable">
 
         <!-- PRODUCT LIST -->
         <div class="card">
@@ -273,117 +273,6 @@
         </div>
         <!-- /.card -->
 
-        <!-- USERS LIST -->
-        <div class="card">
-          <div class="card-header">
-            <h3 class="card-title">Latest Members</h3>
-
-            <div class="card-tools">
-              <span class="badge badge-danger">8 New Members</span>
-              <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                <i class="fas fa-minus"></i>
-              </button>
-              <button type="button" class="btn btn-tool" data-card-widget="remove">
-                <i class="fas fa-times"></i>
-              </button>
-            </div>
-          </div>
-          <!-- /.card-header -->
-          <div class="card-body p-0">
-            <ul class="users-list clearfix">
-              <li>
-                <img src="dist/img/user1-128x128.jpg" alt="User Image">
-                <a class="users-list-name" href="#">Alexander Pierce</a>
-                <span class="users-list-date">Today</span>
-              </li>
-              <li>
-                <img src="dist/img/user8-128x128.jpg" alt="User Image">
-                <a class="users-list-name" href="#">Norman</a>
-                <span class="users-list-date">Yesterday</span>
-              </li>
-              <li>
-                <img src="dist/img/user7-128x128.jpg" alt="User Image">
-                <a class="users-list-name" href="#">Jane</a>
-                <span class="users-list-date">12 Jan</span>
-              </li>
-              <li>
-                <img src="dist/img/user6-128x128.jpg" alt="User Image">
-                <a class="users-list-name" href="#">John</a>
-                <span class="users-list-date">12 Jan</span>
-              </li>
-              <li>
-                <img src="dist/img/user2-160x160.jpg" alt="User Image">
-                <a class="users-list-name" href="#">Alexander</a>
-                <span class="users-list-date">13 Jan</span>
-              </li>
-              <li>
-                <img src="dist/img/user5-128x128.jpg" alt="User Image">
-                <a class="users-list-name" href="#">Sarah</a>
-                <span class="users-list-date">14 Jan</span>
-              </li>
-              <li>
-                <img src="dist/img/user4-128x128.jpg" alt="User Image">
-                <a class="users-list-name" href="#">Nora</a>
-                <span class="users-list-date">15 Jan</span>
-              </li>
-              <li>
-                <img src="dist/img/user3-128x128.jpg" alt="User Image">
-                <a class="users-list-name" href="#">Nadia</a>
-                <span class="users-list-date">15 Jan</span>
-              </li>
-            </ul>
-            <!-- /.users-list -->
-          </div>
-          <!-- /.card-body -->
-          <div class="card-footer text-center">
-            <a href="javascript:">View All Users</a>
-          </div>
-          <!-- /.card-footer -->
-        </div>
-        <!--/.card -->  
-
-      </section>
-      
-      <section class="col-lg-5 connectedSortable">
-        <!-- Calendar -->
-        <div class="card bg-gradient-success">
-          <div class="card-header border-0">
-
-            <h3 class="card-title">
-              <i class="far fa-calendar-alt"></i>
-              Calendar
-            </h3>
-            <!-- tools card -->
-            <div class="card-tools">
-              <!-- button with a dropdown -->
-              <div class="btn-group">
-                <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" data-offset="-52">
-                  <i class="fas fa-bars"></i>
-                </button>
-                <div class="dropdown-menu" role="menu">
-                  <a href="#" class="dropdown-item">Add new event</a>
-                  <a href="#" class="dropdown-item">Clear events</a>
-                  <div class="dropdown-divider"></div>
-                  <a href="#" class="dropdown-item">View calendar</a>
-                </div>
-              </div>
-              <button type="button" class="btn btn-success btn-sm" data-card-widget="collapse">
-                <i class="fas fa-minus"></i>
-              </button>
-              <button type="button" class="btn btn-success btn-sm" data-card-widget="remove">
-                <i class="fas fa-times"></i>
-              </button>
-            </div>
-            <!-- /. tools -->
-          </div>
-          <!-- /.card-header -->
-          <div class="card-body pt-0">
-            <!--The calendar -->
-            <div id="calendar" style="width: 100%"></div>
-          </div>
-          <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
       </section>
     </div>
     <!-- /.row (main row) -->
