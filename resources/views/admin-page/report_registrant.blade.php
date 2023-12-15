@@ -18,7 +18,7 @@
     <div class="container-fluid">
         <div class="row mx-2">
             <div class="col-lg-8 elevation-1 p-4">
-                <form action="/settings" method="POST">
+                <form action="" method="POST">
                     @csrf
                     <div class="mb-4">
                         <div class="row">
