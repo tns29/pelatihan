@@ -9,13 +9,19 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="#">WhatsApp</a>
+            <a class="nav-link" href="https://wa.me/+6285179626211" target="_blank">
+              <i class="fab fa-whatsapp" style="font-size: 18px;"></i>
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Instagram</a>
+            <a class="nav-link" href="https://www.instagram.com/uptdlkdisnakerkab.tangerang?igshid=NGVhN2U2NjQ0Yg%3D%3D" target="_blank">
+              <i class="fab fa-instagram" style="font-size: 18px;"></i>
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Facebook</a>
+            <a class="nav-link" href="https://web.facebook.com/rezaandhika27?mibextid=LQQJ4d&_rdc=1&_rdr" target="_blank">
+              <i class="fab fa-facebook" style="font-size: 18px;"></i>
+            </a>
           </li>
         </ul>
       </div>
