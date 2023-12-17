@@ -250,13 +250,13 @@ class GeneralController extends Controller {
         } else {
             session()->forget('material_status');
         }
-        if($request->religioin) {
-            if($request->session()->get('religioin') != $request->religioin) {
-                session()->forget('religioin');
+        if($request->religion) {
+            if($request->session()->get('religion') != $request->religion) {
+                session()->forget('religion');
             }
-            $request->session()->push('religioin', $request->religioin);
+            $request->session()->push('religion', $request->religion);
         } else {
-            session()->forget('religioin');
+            session()->forget('religion');
         }
         
         if($request->period) {
@@ -273,27 +273,27 @@ class GeneralController extends Controller {
 
     function openParticipantRpt(Request $request) {
         $where = ['registrants.is_active' => 'Y'];
-        
+
         if($request->session()->get('fullname')) {
-            $where = ['participants.number' => $request->session()->get('fullname')];
+            $where['participants.number'] = $request->session()->get('fullname')[0];
         }
         if($request->session()->get('gender')) {
-            $where = ['participants.gender' => $request->session()->get('gender')];
+            $where['participants.gender'] = $request->session()->get('gender')[0];
         }
         if($request->session()->get('sub_district')) {
-            $where = ['participants.sub_district' => $request->session()->get('sub_district')];
+            $where['participants.sub_district'] = $request->session()->get('sub_district')[0];
         }
         if($request->session()->get('village')) {
-            $where = ['participants.village' => $request->session()->get('village')];
+            $where['participants.village'] = $request->session()->get('village')[0];
         }
         if($request->session()->get('material_status')) {
-            $where = ['participants.material_status' => $request->session()->get('material_status')];
+            $where['participants.material_status'] = $request->session()->get('material_status')[0];
         }
         if($request->session()->get('religion')) {
-            $where = ['participants.religion' => $request->session()->get('religion')];
+            $where['participants.religion'] = $request->session()->get('religion')[0];
         }
         if($request->session()->get('period')) {
-            $where = ['trainings.period_id' => $request->session()->get('period')];
+            $where['trainings.period_id'] = $request->session()->get('period')[0];
         }
 
         // dd($where);
