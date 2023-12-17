@@ -54,6 +54,7 @@ Route::middleware('admin')->group(function () {
     Route::get('/form-edit-admin/{number}', [AdminController::class, 'editFormAdmin']);
     Route::post('/edit-new-admin', [AdminController::class, 'updateAdmin']);
     Route::delete('/delete-admin/{number}', [AdminController::class, 'deleteAdmin']);
+    Route::get('/getRegistrant', [GeneralController::class, 'getRegistrant']);
 
     Route::get('/data-participant', [AdminController::class, 'dataParticipant']);
     Route::get('/detail-participant/{number}', [AdminController::class, 'detailParticipant']);
@@ -73,7 +74,7 @@ Route::middleware('admin')->group(function () {
     Route::get('/registrant-rpt', [GeneralController::class, 'registrantRpt']);
     Route::get('/open-registrant-rpt', [GeneralController::class, 'openRegistrantRpt']);
     Route::get('/export_registrant', [ExportDataController::class, 'registrant']);
-    
+
     Route::get('/participant-report', [GeneralController::class, 'participantReport']);
     Route::get('/participant-rpt', [GeneralController::class, 'participantRpt']);
     Route::get('/open-participant-rpt', [GeneralController::class, 'openParticipantRpt']);
