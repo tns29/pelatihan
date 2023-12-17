@@ -165,6 +165,9 @@ class GeneralController extends Controller {
         if($request->session()->get('sub_district')) {
             $where = ['participants.sub_district' => $request->session()->get('sub_district')];
         }
+        if($request->session()->get('village')) {
+            $where = ['participants.village' => $request->session()->get('village')];
+        }
 
         // dd($where);
         
