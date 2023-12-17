@@ -106,6 +106,13 @@ class TrainingContentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $data = TrainingDetail::find($id);
+        $result = $data->delete();
+        if($result) {
+            $request->session()->flash('success', 'Data berhasil diubah');
+        } else {
+            $request->session()->flash('success', 'Proses gagal, Hubungi administrator');
+        }
+        return redirect('/service-detail');
     }
 }

@@ -19,12 +19,17 @@
             </div>
             <div class=" mt-2">
                 <label for="image">Pas Foto</label>
-                <input type="file" name="image" id="image" class="form-control @if(session()->has('image') == true)is-invalid @endif">
+                <input type="file" name="image" id="image" class="form-control @if(session()->has('image') == true)is-invalid @endif @error('image')is-invalid @enderror">
                 @if(session()->has('image') == true)
                 <small class="invalid-feedback ms-2" style="color: red">
                     File {{ session()->get('image') }}
                 </small>
                 @endif
+                @error('image')
+                <small class="invalid-feedback">
+                    File {{ $message }}
+                </small>
+                @enderror
             </div>
         </div>
         <div class="col-lg-9 col-md-9 col-sm-9 mt-4">

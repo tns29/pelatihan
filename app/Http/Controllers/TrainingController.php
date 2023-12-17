@@ -153,10 +153,9 @@ class TrainingController extends Controller
      */
     public function destroy(Request $request, int $id)
     {
-        $data = Training::find($id);
-        $result = $data->delete();
+        $result = Training::find($id)->delete();
         if($result) {
-            $request->session()->flash('success', 'Data berhasil diubah');
+            $request->session()->flash('success', 'Data berhasil dihapus');
         } else {
             $request->session()->flash('success', 'Proses gagal, Hubungi administrator');
         }

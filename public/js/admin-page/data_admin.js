@@ -95,7 +95,7 @@ function delete_data(number, name) {
                 <input type="hidden" name="number" id="number" value="` +
         number +
         `">
-                <span style="margin-left: 10px;">Hapus Product <b>` +
+                <span style="margin-left: 10px;">Hapus Data <b>` +
         name +
         `</b> ?<span>
                 </div>`;

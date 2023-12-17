@@ -40,7 +40,7 @@
                       <td style=" text-align: center;">
                         <a href="/service/{{$row->id}}/edit" class="text-warning"><i class="fas fa-edit"></i></a>
                         &nbsp; 
-                        <a href="/service/delete/{{$row->id}}" class="text-danger"><i class="fas fa-trash-alt"></i></i></a> 
+                        <a href="#" onclick="delete_data(`{{$row->id}}`, `{{$row->title}}`)" class="text-danger"><i class="fas fa-trash-alt"></i></i></a> 
                       </td>
                   </tr>
                 @endforeach
@@ -52,3 +52,29 @@
 </section> 
     
 @endsection
+
+<div class="modal fade" id="modal-delete" tabindex="-1">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title ml-2 font-weight-bold">Title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form method="POST">
+        @csrf
+        @method('DELETE')
+        <div class="modal-body p-3">
+          <div class="row" id="content-delete">
+            
+          </div>
+        </div> 
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
+          <button type="submit" class="btn btn-primary">Ya</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
