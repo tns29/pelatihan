@@ -104,7 +104,7 @@ class TrainingContentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, int $id)
     {
         $data = TrainingDetail::find($id);
         $result = $data->delete();
