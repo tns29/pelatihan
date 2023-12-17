@@ -5,7 +5,7 @@ $("#status").on("change", function () {
 function approve(nomor, name, training_nomor, trainingsTitle) {
     $("#modal-edit").modal("show");
     $(".modal-title").text("Approve Pelatihan");
-    $("#modal-edit form").attr("action", "/approve/" + id);
+    $("#modal-edit form").attr("action", "/approve/" + nomor);
     $("#content-edit").html("");
 
     var html =
