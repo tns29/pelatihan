@@ -59,12 +59,12 @@ class GeneralController extends Controller {
             $getService = Training::find($serviceId);
             $min_age = (int)$getService->min_age;
             $max_age = (int)$getService->max_age;
-            if ($usia <= $min_age) {
+            if ($usia < $min_age) {
                 $request->session()->flash('failed3', 'Anda belum bisa mendaftar, usia anda belum mencukupi untuk mengikuti pelatihan ini.');
                 return redirect('/pelatihan/'.$serviceId);
             }
             
-            if ($usia >= $max_age) {
+            if ($usia > $max_age) {
                 $request->session()->flash('failed3', 'Anda belum bisa mendaftar, usia anda melebihi batas untuk mengikuti pelatihan ini.');
                 return redirect('/pelatihan/'.$serviceId);
             }
@@ -81,7 +81,6 @@ class GeneralController extends Controller {
             $registrant->participant_number = $user->number;
             $registrant->training_id = $serviceId;
             $registrant->date = date('Y-m-d H:i:s');
-            $registrant->status = 1;
             $registrant->is_active = 'Y';
 
             $registrant->save();
