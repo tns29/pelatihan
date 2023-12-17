@@ -57,11 +57,7 @@ $date_of_birth = $detailParticipant->date_of_birth ? date('d, M Y', strtotime($d
                     </tr>
 
                     {{-- lainnya --}}
-                    
-                    <tr>
-                        <th style="width: 30%;">Alamat</th>
-                        <td> {{ $detailParticipant->address }} </td>
-                    </tr>
+                
                     <tr>
                         <th style="width: 30%;">Agama</th>
                         <td> {{ $detailParticipant->religion }} </td>
@@ -88,6 +84,14 @@ $date_of_birth = $detailParticipant->date_of_birth ? date('d, M Y', strtotime($d
                     </tr>
                     {{-- dokument --}}
                     
+                    <tr>
+                        <th style="width: 30%;">KTP</th>
+                        @if ($detailParticipant->id_card)
+                            <td><b> : &nbsp; <a href="{{asset('/storage/'.$detailParticipant->id_card)}}" target="_blank">Lihat file</a> </b></td>
+                        @else
+                            <td> : &nbsp; - </td>
+                        @endif
+                    </tr>
                     <tr>
                         <th style="width: 30%;">Ak 1 / kartu kuning</th>
                         @if ($detailParticipant->ak1)
