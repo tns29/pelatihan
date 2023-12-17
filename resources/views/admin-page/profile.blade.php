@@ -23,10 +23,10 @@
             <div class="p-3 elevation-2 rounded-2">
                 <div class="row">
                     <div class="col-lg-3">
-                        @if(!$auth_user->image)
+                        @if(!$auth_user->images)
                             <img src="{{ asset('img/userDefault.png') }}" class="img-circle elevation-0" style="height: 150px;" alt="User Image">
                         @else
-                            <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-0" alt="User Image">
+                            <img src="{{ asset('/storage').'/'.$auth_user->images }}" class="img-circle elevation-0" style="height: 150px; width: 155px;" alt="User Image">
                         @endif
                     </div>
                     <div class="col-lg-8">

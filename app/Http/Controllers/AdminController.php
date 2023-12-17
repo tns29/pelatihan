@@ -65,7 +65,7 @@ class AdminController extends Controller
     }
 
     function storeAdmin(Request $request) {
-
+        // dd($request);
         $validatedData = $request->validate([
             'fullname'      => 'required|max:50',
             'username'      => 'required|max:30|unique:admins',
@@ -76,13 +76,19 @@ class AdminController extends Controller
             'no_telp'       => 'required|max:15',
             'email'         => 'required|max:100|email|unique:admins',
             'password'      => 'required|min:6|max:255',
+            'images'     => 'image|file|max:1024',
         ]);
+
+        if($request->file('images')) {
+            $validatedData['images'] = $request->file('images')->store('profile-images');
+        }
         
         $validatedData['number'] = getLasNumberAdmin();
+        $validatedData['address'] = $request['address'];
         $validatedData['created_at'] = date('Y-m-d H:i:s');
         $validatedData['created_by'] = Auth::guard('admin')->user()->username;
         $validatedData['password'] = Hash::make($validatedData['password']);
-        // $validatedData['level_id'] = 1;
+        $validatedData['level_id'] = $validatedData['level_id'];
         // dd($validatedData);
         $result = Admin::create($validatedData);
         if($result) {
@@ -112,6 +118,7 @@ class AdminController extends Controller
     }
 
     function updateAdmin(Request $request) {
+        // dd($request);
         $validatedData = $request->validate([
             'fullname'      => 'required|max:50',
             'username'      => 'required|max:30',
@@ -120,6 +127,7 @@ class AdminController extends Controller
             'place_of_birth'    => 'required|max:40',
             'date_of_birth'     => 'required',
             'no_telp'       => 'required|max:15',
+            'images'     => 'image|file|max:1024',
         ]);
         
         $username_exist = false;
@@ -127,7 +135,12 @@ class AdminController extends Controller
             $username_exist = Admin::where('username', $request['username'])->first();
         }
         
+        if($request->file('images')) {
+            $validatedData['images'] = $request->file('images')->store('profile-images');
+        }
+
         $validatedData['number'] = $request['number'];
+        $validatedData['address'] = $request['address'];
         $validatedData['updated_at'] = date('Y-m-d H:i:s');
         $validatedData['updated_by'] = Auth::guard('admin')->user()->username;
         if($request['password']) {

@@ -1,5 +1,14 @@
 $(function () {
     console.log("ready");
+    const imgInp = document.getElementById("images");
+    let blah = document.getElementById("blah");
+    imgInp.onchange = (evt) => {
+        const [file] = imgInp.files;
+
+        if (file) {
+            blah.src = URL.createObjectURL(file);
+        }
+    };
 });
 
 function changeUsername() {

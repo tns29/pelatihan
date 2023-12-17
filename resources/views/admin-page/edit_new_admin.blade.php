@@ -17,7 +17,7 @@
 <section class="content">
     <div class="container-fluid">
         <div class="card mx-3 elevation-1 p-3">
-            <form action="/edit-new-admin" method="POST">
+            <form action="/edit-new-admin" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row my-4 mx-3">
                     <div class="col-lg-6 col-md-6 col-sm-12" >
@@ -131,7 +131,7 @@
     
                             <div class="col-lg-12 col-md-12 col-sm-12 mt-2">
                                 <label for="address">Alamat Lengkap</label>
-                                <textarea name="address" id="address" class="form-control" cols="30" rows="5"></textarea>
+                                <textarea name="address" id="address" class="form-control" cols="30" rows="5">{{ $data_admin->address }}</textarea>
                             </div>
     
                         </div>
@@ -139,14 +139,24 @@
                     <div class="bg-transparent col" style="max-width: 5%"></div>
                     <div class="col" >
                         <div class="elevation-1">
-                            <img src="{{ asset('img/who_icon.jpg')}}" class="img-fluid" alt="defaul_user" style="height: 390px; padding: 10px;">
+                            @if ($data_admin->images)
+                                <img src="{{ asset('/storage').'/'.$data_admin->images }}"" class="img-fluid" alt="defaul_user" id="blah" style="height: 390px; padding: 10px;">
+                                @else
+                                <img src="{{ asset('img/who_icon.jpg')}}" class="img-fluid" alt="defaul_user" id="blah" style="height: 390px; padding: 10px;">
+                            @endif
                             <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 10px; margin-top: -10px;">
-                                <input type="file" class="form-control border-0" name="image" id="image">
+                                <input type="file" name="images" id="images" class="form-control border-0 @error('images')is-invalid @enderror">
+                                @error('images')
+                                <small class="invalid-feedback">
+                                    File {{ $message }}
+                                </small>
+                                @enderror
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 mt-4">
-                                <label for="password">Password</label>
+                            <div class="col-lg-12 col-md-12 col-sm-12 mt-4"> 
+                                <label for="password">Password</label> 
+                                <small class="text-danger"><i>"Kosongkan jika tidak ingin mengubah password"</i></small>
                                 <input type="password" class="form-control @error('password')is-invalid @enderror" name="password" id="password">
                                 @error('password')
                                 <small class="invalid-feedback">
