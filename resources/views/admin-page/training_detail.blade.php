@@ -23,7 +23,7 @@
           <table class="table table-bordered table-sm">
               <thead>
                   <tr class="my-bg-primary text-white">
-                      <th style="width: 5%">No.</th>
+                      {{-- <th style="width: 5%">No.</th> --}}
                       <th style="width: 14%">Pelatihan</th>
                       <th style="width: 14%">Konten Pelatihan</th>
                       <th>Deskripsi Konten</th>
@@ -34,7 +34,7 @@
               <tbody>
                 @foreach ($dataTrainingDetail as $row)
                   <tr>
-                      <td>{{ $row->id }}</td>
+                      {{-- <td>{{ $row->id }}</td> --}}
                       <td>{{ $row->training->title }}</td>
                       <td>{{ $row->title }}</td>
                       <td>{{ Str::length($row->description) > 90 ? Str::substr($row->description, 0, 90).'...' : Str::substr($row->description, 0, 90) }}</td>

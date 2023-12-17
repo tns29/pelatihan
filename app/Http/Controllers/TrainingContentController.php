@@ -19,7 +19,9 @@ class TrainingContentController extends Controller
         $filename_script = getContentScript(true, $filename);
         
         $code = Auth::guard('admin')->user();
-        $data = TrainingDetail::with('training')->get();
+        $data = TrainingDetail::with('training')
+                                ->orderBy('training_id')
+                                ->get();
         return view('admin-page.'.$filename, [
             'script' => $filename_script,
             'title' => 'Daftar Konten Pelatihan ',
@@ -80,7 +82,7 @@ class TrainingContentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(int $id)
     {
         
     }
@@ -88,17 +90,52 @@ class TrainingContentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(int $id)
     {
-        //
+        $filename = 'edit_training_detail';
+        $filename_script = getContentScript(true, $filename);
+
+        $code = Auth::guard('admin')->user(); 
+        $training = Training::get();
+        $result = TrainingDetail::find($id);
+        return view('admin-page.'.$filename, [
+            'script' => $filename_script,
+            'title' => 'Edit Kontent Pelatihan',
+            'auth_user' => $code, 
+            'dataTraining' => $training, 
+            'data' => $result, 
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, int $id)
     {
-        //
+        $validatedData = $request->validate([
+            'training_id'      => 'required',
+            'title'      => 'required|max:30',
+            'image'     => 'image|file|max:1024'
+        ]);
+
+        if($request->file('image')) {
+            $validatedData['image'] = $request->file('image')->store('service-images');
+        }
+
+        $validatedData['training_id'] = $validatedData['training_id'];
+        $validatedData['is_active'] = $request['is_active'] == 'Y' ? 'Y' : "N";
+        $validatedData['title'] = ucwords($validatedData['title']);
+        $validatedData['description'] = ucwords($request['description']);
+        $validatedData['updated_at'] = date('Y-m-d H:i:s');
+        $validatedData['updated_by'] = Auth::guard('admin')->user()->username;
+        
+        $result = TrainingDetail::find($id)->update($validatedData);
+        if($result) {
+            $request->session()->flash('success', 'Kontent Pelatihan berhasil diubah');
+        } else {
+            $request->session()->flash('failed', 'Proses gagal, Hubungi administrator');
+        }
+        return redirect('/service-detail');
     }
 
     /**

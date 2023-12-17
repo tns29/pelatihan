@@ -18,6 +18,11 @@ class GeneralController extends Controller {
         $data = Village::where(['sub_district_id' => $request->sub_district_id])->get();
         echo json_encode($data);
     }
+    
+    function getRegistrant(Request $request) {
+        $result = Registrant::where(['training_id' => $request->training_id])->get();
+        echo json_encode($result);
+    }
 
     function accParticipant(Request $request, string $number) {
         
@@ -156,16 +161,16 @@ class GeneralController extends Controller {
         $where = ['participants.is_active' => 'Y'];
         
         if($request->session()->get('fullname')) {
-            $where = ['participants.number' => $request->session()->get('fullname')];
+            $where['participants.number'] = $request->session()->get('fullname')[0];
         }
         if($request->session()->get('gender')) {
-            $where = ['participants.gender' => $request->session()->get('gender')];
+            $where['participants.gender'] = $request->session()->get('gender')[0];
         }
         if($request->session()->get('sub_district')) {
-            $where = ['participants.sub_district' => $request->session()->get('sub_district')];
+            $where['participants.sub_district'] = $request->session()->get('sub_district')[0];
         }
         if($request->session()->get('village')) {
-            $where = ['participants.village' => $request->session()->get('village')];
+            $where['participants.village'] = $request->session()->get('village')[0];
         }
 
         // dd($where);
