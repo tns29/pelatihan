@@ -137,7 +137,7 @@
                         <li class="nav-item">
                             <a href="/participant-report" class="nav-link {{ Request::segment(1) === 'participant-report' ? 'submenu-active' : '' }}">
                                 » &nbsp;
-                                <p>Laporan Peserta</p>
+                                <p>Laporan Pelatihan Peserta</p>
                             </a> 
                         </li>
                         <li class="nav-item" hidden>

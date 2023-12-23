@@ -201,7 +201,7 @@ class GeneralController extends Controller {
         
         return view('admin-page.'.$filename, [
             'script' => $filename_script,
-            'title' => 'Laporan Peserta Pelatihan',
+            'title' => 'Laporan Pelatihan Peserta',
             'auth_user' => $admin,
             'registrant' => $registrant,
             'subDistrict' => $subDistrict,
