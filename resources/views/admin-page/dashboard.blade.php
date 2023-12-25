@@ -139,43 +139,21 @@
                 <!-- /.col -->
                 <div class="col-md-12">
                   <p class="text-center">
-                    <strong>Goal Completion</strong>
+                    <strong>Rekap Pendaftaran Berdasarkan Kecamatan</strong>
                   </p>
-
-                  <div class="progress-group">
-                    Add Products to Cart
-                    <span class="float-right"><b>160</b>/200</span>
-                    <div class="progress progress-sm">
-                      <div class="progress-bar bg-primary" style="width: 80%"></div>
+                  @foreach ($registrant_group as $item)
+                    <div class="progress-group">
+                      <p>
+                        
+                      </p>
+                      {{ $item->sub_district_name }}
+                      <span class="float-right"><b>{{ $item->count }}</b></span>
+                      <div class="progress progress-sm">
+                        <div class="progress-bar bg-primary" style="width: <?= ($item->count / $countRegistrant)*(1*100) ?>%"></div>
+                      </div>
                     </div>
-                  </div>
-                  <!-- /.progress-group -->
+                  @endforeach
 
-                  <div class="progress-group">
-                    Complete Purchase
-                    <span class="float-right"><b>310</b>/400</span>
-                    <div class="progress progress-sm">
-                      <div class="progress-bar bg-danger" style="width: 75%"></div>
-                    </div>
-                  </div>
-
-                  <!-- /.progress-group -->
-                  <div class="progress-group">
-                    <span class="progress-text">Visit Premium Page</span>
-                    <span class="float-right"><b>480</b>/800</span>
-                    <div class="progress progress-sm">
-                      <div class="progress-bar bg-success" style="width: 60%"></div>
-                    </div>
-                  </div>
-
-                  <!-- /.progress-group -->
-                  <div class="progress-group">
-                    Send Inquiries
-                    <span class="float-right"><b>250</b>/500</span>
-                    <div class="progress progress-sm">
-                      <div class="progress-bar bg-warning" style="width: 50%"></div>
-                    </div>
-                  </div>
                   <!-- /.progress-group -->
                 </div>
                 <!-- /.col -->
@@ -188,7 +166,7 @@
         <!-- /.col -->
     </div>
     <!-- Main row -->
-    <div class="row">   
+    <div class="row" hidden>
       <section class="col-lg-12 connectedSortable">
 
         <!-- PRODUCT LIST -->
