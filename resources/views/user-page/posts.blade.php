@@ -40,17 +40,22 @@
   @if (count($posts) > 0)
     @foreach ($posts as $item)
       <div class="row shadow rounded-3 p-3 mt-3">
-        <h3 class="h3">{{ $item->title }}</h3>
-        <div class="col-lg-12 col-md-12 col-sm-12">
-          <?= $item->body ?>
+        <div class="col">
+          <h3 class="h3">{{ $item->title }}</h3>
+          <div class="col-lg-12 col-md-12 col-sm-12">
+            <?= $item->body ?>
+          </div>
+          <small>
+            @if ($item->updated_at)
+              <i>updated at </i>{{ date('d M Y', strtotime($item->updated_at)) }}
+            @else
+              <i>posted at </i> {{ date('d M Y', strtotime($item->created_at)) }}
+            @endif
+          </small>
         </div>
-        <small>
-          @if ($item->updated_at)
-            <i>updated at </i>{{ date('d M Y', strtotime($item->updated_at)) }}
-          @else
-            <i>posted at </i> {{ date('d M Y', strtotime($item->created_at)) }}
-          @endif
-        </small>
+        <div class="col-md-4">
+          <img src="{{ asset('/storage').'/'.$item->image }}" class="img-fluid" style="max-width: 300px;" alt="img-news">
+        </div>
       </div>
     @endforeach
   @else

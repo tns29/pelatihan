@@ -28,7 +28,11 @@
                         </button>
                     </div>
                     <div class="col-lg-4">
+                      @if ($item->image)
                         <img src="{{asset('/storage/'.$item->image)}}" class="w-75" alt="serviceImg">
+                      @else
+                        <img src="/img/logo.png" class="w-75" alt="serviceImg">
+                      @endif
                     </div>
                 </div>
             </div>
