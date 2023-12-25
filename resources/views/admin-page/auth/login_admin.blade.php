@@ -24,7 +24,7 @@
                     <div class="row">
                         <div class="col">
                             <h1 class="h1 mb-2 pt-2 fw-bold my-color-primary">Masuk</h1>  
-                            <small class="ms-1 my-color-secondary"><b> Unit Pelaksana Teknis Dinas </b></small>
+                            <small class="ms-1 my-color-secondary"><b> Administrator </b></small>
                         </div>
                         <div class="col">
                             <img src="{{ asset('img/logo.png') }}" style="height: 100px" class="float-end p-2" alt="logo">
