@@ -224,7 +224,7 @@ class AdminController extends Controller
         return view('admin-page.'.$filename, [
             'status' => $status,
             'script' => $filename_script,
-            'title' => 'Data Pendaftar',
+            'title' => 'Data Pendaftar Pelatihan',
             'auth_user' => $data,
             'participant' => $result
         ]);
