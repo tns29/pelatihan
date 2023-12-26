@@ -108,7 +108,7 @@ class ParticipantController extends Controller
 
         $registrant = new Registrant;
         $result = $registrant->getWishlist($number);
-        
+        // dd($result);
         return view('user-page.'.$filename, [
             'script' => $filename_script,
             'title' => 'Daftar Pelatihan saya',

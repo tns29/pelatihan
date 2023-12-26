@@ -21,9 +21,15 @@
                         <span class="alert alert-warning px-2 py-0"> {{$item->gelombang}}</span>
                         <br>
                         <br>
-                        <small class="text-success">{{ $item->approve == 'Y' ? 'Pelatihan Sedang Berlangsung' : 'Pelatihan belum dimulai'}}</small>
+                        @if ($item->approve == 'Y')
+                          <small class="alert alert-success py-1">Pelatihan telah disetujui</small>
+                        @else
+                          <small class="alert alert-danger py-1">Menunggu Persetujuan</small>
+                        @endif
                         <br>
-                        <button class="btn btn-success btn-sm mt-3" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Kartu Pelatihan" onclick="printCard({{$item->id}})">
+                        <div class="text-success ms-1 mt-3">{{ $item->approve == 'Y' ? 'Pelatihan Sedang Berlangsung' : ''}}</div>
+                        <br>
+                        <button class="btn btn-success btn-sm mt-3" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Kartu Pelatihan" onclick="printCard(`{{$item->gelombang}}`, `{{$item->trainingsTitle}}`, `{{ date('d-m-Y', strtotime($item->date)) }}`)">
                             <i class="far fa-address-card mr-1"></i> Lihat Kartu
                         </button>
                     </div>
@@ -41,8 +47,6 @@
 
 </div>
 
-@endsection
-
 <div class="modal fade" id="printCard" tabindex="-1">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -51,14 +55,50 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>Modal body text goes here.</p>
+          <div class="row" id="content">
+            <div class="col">
+              <table class="table">
+                <tr>
+                  <th>Nomor Peserta</th>
+                  <td> : </td>
+                  <td id="number">{{auth()->guard('participant')->user()->number}}</td>
+                </tr>
+                <tr>
+                  <th>Nama Lengkap</th>
+                  <td> : </td>
+                  <td id="name">{{ auth()->guard('participant')->user()->fullname }}</td>
+                </tr>
+                <tr>
+                  <th>Nama Pelatihan</th>
+                  <td> : </td>
+                  <td id="training_name"></td>
+                </tr>
+                <tr>
+                  <th>Gelombang</th>
+                  <td> : </td>
+                  <td id="periode"></td>
+                </tr>
+                <tr>
+                  <th>Tanggal Pendaftaran</th>
+                  <td> : </td>
+                  <td id="date"></td>
+                </tr>
+              </table>
+            </div>
+            <div class="col-md-4 col-lg-4">
+              <img src="{{ asset('/storage').'/'.auth()->guard('participant')->user()->image }}" class="img-fluid" style="height: 200px;" alt="logo">
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-          <button class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Kartu Pelatihan" >
+          <button class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Kartu Pelatihan" onclick="printDiv()">
             <i class="fas fa-print me-1"></i> Cetak
         </button>
         </div>
       </div>
     </div>
-  </div>
+</div>
+
+@endsection
+
