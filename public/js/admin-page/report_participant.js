@@ -6,6 +6,13 @@ $("#sub_district").on("change", function () {
     loadVillages($("#sub_district").val());
 });
 
+$(document).ready(function () {
+    $(".select-fullname").select2({
+        placeholder: "Pilih Peserta",
+        width: "760",
+    });
+});
+
 function loadVillages(id) {
     console.log(id);
     $.ajax({

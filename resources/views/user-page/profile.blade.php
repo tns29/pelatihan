@@ -70,6 +70,10 @@ $date_of_birth = $auth_user->date_of_birth ? date('d, M Y', strtotime($auth_user
             <hr class="p-0 m-0">
             <table class="table">
                 <tr>
+                    <th style="width: 30%;">NIK</th>
+                    <td><b> : &nbsp; {{ $auth_user->nik }} </b></td>
+                </tr>
+                <tr>
                     <th style="width: 30%;">Alamat</th>
                     <td><b> : &nbsp; {{ $auth_user->address }} </b></td>
                 </tr>

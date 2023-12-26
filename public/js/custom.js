@@ -10,3 +10,8 @@ function dateFormat(type, date) {
         return day + "/" + (month + 1) + "/" + year;
     }
 }
+
+function onlyNumbers(input) {
+    // Remove non-numeric characters using a regular expression
+    input.value = input.value.replace(/[^0-9]/g, "");
+}

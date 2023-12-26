@@ -25,6 +25,7 @@ class RegistrantExport implements FromCollection, WithHeadings, ShouldAutoSize, 
     {
         return [
             'Nomor',
+            'NIK',
             'Nama Lengkap',
             'Jenis Kelamin',
             'No. Whatsapp',
@@ -90,7 +91,7 @@ class RegistrantExport implements FromCollection, WithHeadings, ShouldAutoSize, 
         }
 
         $data = DB::table('participants')
-        ->select('participants.number','participants.fullname',
+        ->select('participants.number','participants.nik','participants.fullname',
         DB::raw('(CASE WHEN participants.gender = "M" THEN "Laki-laki" ELSE "Perempuan" END) AS gender'),
         'participants.no_wa', 
         'sub_districts.name as sub_district_name', 'villages.name as village_name',

@@ -34,8 +34,17 @@
         </div>
         <div class="col-lg-9 col-md-9 col-sm-9 mt-4">
             <div class=" mt-2 d-flex">
+                <label for="nik" class="col-md-3 ms-3">NIK </label>
+                <input type="text" class="form-control inline-block @error('nik')is-invalid @enderror" maxlength="16" name="nik" id="nik" value="{{ old('nik', $auth_user->nik) }}" onkeyup="onlyNumbers(this)">
+                @error('nik')
+                <small class="invalid-feedback">
+                    Nik {{ $message }}
+                </small>
+                @enderror
+            </div>
+            <div class=" mt-2 d-flex">
                 <label for="no_wa" class="col-md-3 ms-3">No. WA </label>
-                <input type="text" class="form-control inline-block @error('no_wa')is-invalid @enderror" maxlength="15" name="no_wa" id="no_wa" value="{{ old('no_wa', $auth_user->no_wa) }}">
+                <input type="text" class="form-control inline-block @error('no_wa')is-invalid @enderror" maxlength="15" name="no_wa" id="no_wa" value="{{ old('no_wa', $auth_user->no_wa) }}" onkeyup="onlyNumbers(this)">
                 @error('no_wa')
                 <small class="invalid-feedback">
                     No. WA {{ $message }}

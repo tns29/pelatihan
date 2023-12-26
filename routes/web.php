@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthAdmin;
 use App\Http\Controllers\Dashboard;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\FE\HomeController;
@@ -112,3 +113,4 @@ Route::get('/register', [ParticipantController::class, 'index']);
 Route::post('/register', [ParticipantController::class, 'store']);
 Route::get('/login', [ParticipantController::class, 'login']);
 Route::post('/login', [ParticipantController::class, 'loginValidation']);
+

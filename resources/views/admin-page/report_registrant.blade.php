@@ -22,7 +22,16 @@
                     @csrf
                     <div class="mb-4">
                         <div class="row">
-                            <div class="col-lg-6 col-md-6 mt-2">
+                            <div class="col-lg-12 col-md-12 mt-2">
+                                <label for="fullname" class="ml-1">Nama Pendaftar</label>
+                                <select class="select-fullname form-control" name="fullname" id="fullname">
+                                    <option value="">Semua Pendaftar</option>
+                                    @foreach ($registrant as $item)
+                                        <option value="{{ $item->number }}"> » &nbsp; {{ $item->nik .' - '. $item->fullname }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            {{-- <div class="col-lg-6 col-md-6 mt-2">
                                 <label for="fullname" class="ml-1">Nama Pendaftar</label>
                                 <select name="fullname" id="fullname" class="form-control form-select">
                                     <option value="">Semua Pendaftar</option>
@@ -30,7 +39,7 @@
                                         <option value="{{ $item->number }}"> » &nbsp; {{ $item->fullname }}</option>
                                     @endforeach
                                 </select>
-                            </div>
+                            </div> --}}
                             <div class="col-lg-6 col-md-6 mt-2">
                                 <label for="gender" class="ml-1">Jenis Kelamin</label>
                                 <select name="gender" id="gender" class="form-control form-select">

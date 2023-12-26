@@ -42,3 +42,6 @@
   <script src="{{ asset($script) }}.js"></script>
 @endif
  
+{{-- SELRCT 2 --}}
+<link href="{{ asset('select2/dist/css/select2.min.css') }}" rel="stylesheet" />
+<script src="{{ asset('select2/dist/js/select2.min.js') }}"></script>

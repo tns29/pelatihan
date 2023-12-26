@@ -49,6 +49,7 @@
             <table class="table" style="width: 100%; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
                 <tr>
                     <th style="text-align: left;">Nomor</th>
+                    <th style="text-align: left;">NIK</th>
                     <th style="text-align: left;">Nama Lengkap</th>
                     <th style="text-align: left;">Jenis Kelamin</th>
                     {{-- <th style="text-align: left;">No. Telp</th> --}}
@@ -66,6 +67,7 @@
                 {{-- {{ dd($item) }} --}}
                     <tr>
                         <td>{{$item->number}}</td>
+                        <td>{{$item->nik}}</td>
                         <td>{{$item->fullname}}</td>
                         <td>{{$item->gender == 'M' ? 'Laki-laki' : 'Perempuan'}}</td>
                         {{-- <td>{{$item->no_telp}}</td> --}}

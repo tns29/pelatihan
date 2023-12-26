@@ -28,6 +28,10 @@ $date_of_birth = $detailParticipant->date_of_birth ? date('d, M Y', strtotime($d
                         <td>{{ $detailParticipant->number }} </td>
                     </tr>
                     <tr>
+                        <th>NIK</th>
+                        <td>{{ $detailParticipant->nik }} </td>
+                    </tr>
+                    <tr>
                         <th>Nama Lengkap</th>
                         <td>{{ $detailParticipant->fullname }} </td>
                     </tr>

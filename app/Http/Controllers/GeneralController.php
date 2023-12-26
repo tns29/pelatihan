@@ -35,7 +35,8 @@ class GeneralController extends Controller {
     function checkDataUser(Request $request,int $serviceId) {
         $user = Auth::guard('participant')->user();
         // dd($user->number);
-        if($user->place_of_birth == null OR
+        if($user->nik == null OR
+            $user->place_of_birth == null OR
             $user->date_of_birth == null OR 
             $user->no_telp == null OR 
             $user->no_wa == null OR 
@@ -194,7 +195,7 @@ class GeneralController extends Controller {
         $filename_script = getContentScript(true, $filename);
 
         $admin = Auth::guard('admin')->user();
-        $registrant = Participant::get();
+        $participant = Participant::get();
         $subDistrict = SubDistrict::get();
         $villages = Village::get();
         $period = Period::get();
@@ -203,7 +204,7 @@ class GeneralController extends Controller {
             'script' => $filename_script,
             'title' => 'Laporan Pelatihan Peserta',
             'auth_user' => $admin,
-            'registrant' => $registrant,
+            'participant' => $participant,
             'subDistrict' => $subDistrict,
             'villages' => $villages,
             'periods' => $period
