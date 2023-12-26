@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('participants', function (Blueprint $table) {
             $table->char('number', 20)->primary();
+            $table->string('nik', 16)->nullable();;
             $table->string('fullname', 50);
             $table->char('username', 30)->unique('users_username_unique');
             $table->enum('gender', ["M", "F"]);
