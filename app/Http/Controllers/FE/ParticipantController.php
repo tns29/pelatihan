@@ -22,7 +22,7 @@ class ParticipantController extends Controller
     public function store(Request $request) {
         
         $validatedData = $request->validate([
-            'fullname'      => 'required|max:50',
+            'fullname'      => 'required|max:90',
             'username'      => 'required|max:30|unique:participants',
             'gender'        => 'required',
             'no_telp'       => 'required',

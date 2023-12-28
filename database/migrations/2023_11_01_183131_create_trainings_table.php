@@ -16,7 +16,7 @@ return new class extends Migration
             $table->char('initials', 10);
             $table->unsignedBigInteger('category_id')->nullable(false);
             $table->foreign('category_id')->on('categories')->references('id');
-            $table->string('title', 30);
+            $table->string('title', 100);
             $table->text('description');
             // $table->date('date');
             $table->double('period_id');
