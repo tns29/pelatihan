@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Training;
+use App\Models\Participant;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -21,6 +22,11 @@ class Registrant extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
+
+     public function participants(): BelongsTo
+     {
+         return $this->belongsTo(Participant::class, 'participant_number', 'number');
+     }
     public function service(): BelongsTo
     {
         return $this->belongsTo(Training::class, 'training_id', 'id');

@@ -88,7 +88,7 @@
                 </li>
                 
                 <li class="nav-item ">
-                    <a href="/registrant" class="nav-link {{ Request::segment(1) === 'registrant' ? 'menu-active' : '' }}">
+                    <a href="/registrant" class="nav-link {{ Request::segment(1) === 'registrant' ||  Request::segment(1) === 'detail-participant-appr' ? 'menu-active' : '' }}">
                         <i class="nav-icon fas fa-book"></i>
                         <p> Pendaftar Pelatihan </p>
                     </a> 

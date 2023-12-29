@@ -1,8 +1,16 @@
-function printCard(periode, training_name, date) {
+function printCard(periode, training_name, date, is_passed) {
     $("#printCard").modal("show");
     $("#periode").text(periode);
     $("#training_name").text(training_name);
     $("#date").text(date);
+    if (is_passed == "Y") {
+        var span = `<span class="text-success"><b> L U L U S </b></span>`;
+    } else if (is_passed == "N") {
+        var span = `<span class="text-danger">TIDAK LULUS</span>`;
+    } else {
+        var span = `<span class="text-success"><b> Sedang Berlangsung </b></span>`;
+    }
+    $("#passed").html(span);
 }
 
 function printDiv() {

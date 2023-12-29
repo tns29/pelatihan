@@ -63,6 +63,10 @@ Route::middleware('admin')->group(function () {
     Route::get('/detail-participant/{number}/{page}', [AdminController::class, 'detailParticipant']);
     Route::put('/acc-participant/{number}', [GeneralController::class, 'accParticipant']);
     
+    // DETAIL PESERTA PELATIHAN YANG TELAH DI APPROVE
+    Route::get('/detail-participant-appr/{number}/{id}', [AdminController::class, 'detailParticipantAppr']);
+    Route::put('/passed-participant/{number}', [AdminController::class, 'passedParticipant']);
+    
     Route::get('/registrant', [AdminController::class, 'registrant']);
     Route::post('/approve/{number}', [AdminController::class, 'approveParticipant']);
     Route::delete('/decline/{number}', [AdminController::class, 'declineParticipant']);

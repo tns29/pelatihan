@@ -6,7 +6,11 @@
   <div class="container-fluid">
     <div class="row my-2">
       <div class="col-sm-6">
-        <h3 class="m-0 ml-2">{{ $title}}</h3>
+        @if ($candidate == 'Y')
+            <h3 class="m-0 ml-2">Detail Calon Peserta</h3>
+        @else
+            <h3 class="m-0 ml-2">Detail Pendaftar Akun Baru</h3>
+        @endif
       </div><!-- /.col --> 
     </div><!-- /.row -->
     <hr style="margin-bottom: 0">

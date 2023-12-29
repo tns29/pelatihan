@@ -18,20 +18,26 @@
                         <h2>{{$item->trainingsTitle}}</h2>
                         <span class="alert alert-info py-0"> {{$item->category}}</span>
                         <p class="mt-2">{{$item->description}}</p>
-                        <span class="alert alert-warning px-2 py-0"> {{$item->gelombang}}</span>
-                        <br>
-                        <br>
-                        @if ($item->approve == 'Y')
-                          <small class="alert alert-success py-1">Pelatihan telah disetujui</small>
-                        @elseif ($item->approve == 'N')
-                          <small class="alert alert-danger py-1">Pelatihan ditolak</small>
+                        <p>
+                          <span class="alert alert-warning px-2 py-0"> {{$item->gelombang}}</span>
+                        </p>
+                        
+                        {{-- <br> --}}
+                        @if ($item->passed == NULL)
+                          @if ($item->approve == 'Y')
+                            <small class="alert alert-success py-1">Pelatihan telah disetujui</small>
+                          @elseif ($item->approve == 'N')
+                            <small class="alert alert-danger py-1">Pelatihan ditolak</small>
+                          @else
+                            <small class="alert alert-warning py-1">Menunggu Persetujuan</small>
+                          @endif
+                          <br>
+                          <div class="text-success ms-1 mt-3">{{ $item->approve == 'Y' ? 'Pelatihan Sedang Berlangsung' : ''}}</div>
                         @else
-                          <small class="alert alert-warning py-1">Menunggu Persetujuan</small>
+                          <div class="text-primary ms-1 mt-3">{{ $item->approve == 'Y' ? 'Telah Selesai' : ''}}</div>
                         @endif
                         <br>
-                        <div class="text-success ms-1 mt-3">{{ $item->approve == 'Y' ? 'Pelatihan Sedang Berlangsung' : ''}}</div>
-                        <br>
-                        <button class="btn btn-success btn-sm mt-3" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Kartu Pelatihan" onclick="printCard(`{{$item->gelombang}}`, `{{$item->trainingsTitle}}`, `{{ date('d-m-Y', strtotime($item->date)) }}`)">
+                        <button class="btn btn-success btn-sm mt-3" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Kartu Pelatihan" onclick="printCard(`{{$item->gelombang}}`, `{{$item->trainingsTitle}}`, `{{ date('d-m-Y', strtotime($item->date)) }}`, `{{$item->passed}}`)">
                             <i class="far fa-address-card mr-1"></i> Lihat Kartu
                         </button>
                     </div>
@@ -85,6 +91,13 @@
                   <td> : </td>
                   <td id="date"></td>
                 </tr>
+                @if ($item->approve != NULL)
+                  <tr>
+                    <th>Status Kelulusan</th>
+                    <td> : </td>
+                    <td id="passed"></td>
+                  </tr>
+                @endif
               </table>
             </div>
             <div class="col-md-4 col-lg-4">

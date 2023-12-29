@@ -6,7 +6,7 @@
   <div class="container-fluid">
     <div class="row my-2">
       <div class="col-sm-6">
-        <h3 class="m-0 ml-2">{{ $title}}</h3>
+        <h3 class="m-0 ml-2">{{ $title }} </h3>
       </div><!-- /.col --> 
     </div><!-- /.row -->
     <hr style="margin-bottom: 0">

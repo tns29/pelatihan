@@ -73,16 +73,19 @@
                       <td style=" text-align: center;">
                         @if ($row->is_active == "Y")
                           @if ($row->approve == "Y")
-                            <a href="#" class="text-success"> <i class="fas fa-user-check"></i> </a>
+                            <a href="/detail-participant-appr/{{ $row->participant_number }}/{{$row->id}}" class="text-success"> <i class="fas fa-user-check"></i> Detail</a>
+                          @elseif($row->approve == "N")
+                            <i class="fas fa-minus-circle text-danger"></i>  
                           @else
                             <a href="#" onclick="approve(`{{$row->participant_number}}`, `{{$row->fullname}}`, `{{$row->training_id}}`, `{{$row->trainingsTitle}}`)" class="text-warning">
                               <i class="fas fa-user-edit"></i>
                             </a>
+                            <a href="#" onclick="decline(`{{$row->participant_number}}`, `{{$row->fullname}}`, `{{$row->training_id}}`, `{{$row->trainingsTitle}}`)" class="text-danger">
+                              <i class="fas fa-times-circle"></i>
+                            </a>
                           @endif
                           &nbsp;
-                          <a href="#" onclick="decline(`{{$row->participant_number}}`, `{{$row->fullname}}`, `{{$row->training_id}}`, `{{$row->trainingsTitle}}`)" class="text-danger">
-                            <i class="fas fa-times-circle"></i>
-                          </a>
+                          
                         @else
                           <i class="fas fa-minus-circle text-danger"></i>
                         @endif

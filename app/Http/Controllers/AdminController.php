@@ -211,7 +211,8 @@ class AdminController extends Controller
         ]);
     }
 
-    function detailParticipant(string $number, string $pageCandidate) {
+    // DETAIL CALON PESERTA 
+    function detailParticipant(string $number, $pageCandidate = '') {
         $filename = 'detail_participant';
         $filename_script = getContentScript(true, $filename);
 
@@ -268,6 +269,41 @@ class AdminController extends Controller
             'approve' => 'N',
         ];
         Registrant::where(['participant_number'=> $number, 'training_id' => $request->training_id])->update($dataUpdate);
+        return redirect('registrant');
+    }
+
+
+    // DETAIL PESERTA PELATIHAN YANG TELAH DI APPROVE
+    function detailParticipantAppr(string $number, int $training_id) {
+        // dd($training_id);
+        $filename = 'detail_participant_appr';
+        $filename_script = getContentScript(true, $filename);
+
+        $data = Auth::guard('admin')->user();  
+        $participant = new Participant;
+        // $data_part = $participant->getUserProfileByNumber($number);
+        $resultData = Registrant::with('participants', 'service.service_detail', 'service.periods')->where('participant_number', $number)->first();
+        // dd($resultData);
+        return view('admin-page.'.$filename, [
+            'script' => $filename_script,
+            'title' => 'Detail Peserta Pelatihan',
+            'auth_user' => $data,
+            // 'detailParticipant' => $data_part,
+            'resultData' => $resultData
+        ]);
+    }
+
+    function passedParticipant(Request $request, $number) {
+
+        $data = Auth::guard('admin')->user();
+
+        $dataUpdate = [
+            'passed_on' => date('Y-m-d H:i:s'),
+            'passed' => $request->passed,
+        ];
+
+        Registrant::where(['participant_number'=> $number, 'training_id' => $request->training_id])->update($dataUpdate);
+        
         return redirect('registrant');
     }
     
