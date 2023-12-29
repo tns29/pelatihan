@@ -29,7 +29,7 @@ class GeneralController extends Controller {
         $dataUpdate = ['participant' => $request->acc];
 
         $result = Participant::where(['number' => $number])->update($dataUpdate);
-        return redirect('/data-participant');
+        return redirect('/registrant-data');
     }
 
     function checkDataUser(Request $request,int $serviceId) {
@@ -108,7 +108,7 @@ class GeneralController extends Controller {
         
         return view('admin-page.'.$filename, [
             'script' => $filename_script,
-            'title' => 'Laporan Pendaftar',
+            'title' => 'Laporan Pendaftar Akun',
             'auth_user' => $admin,
             'registrant' => $registrant,
             'subDistrict' => $subDistrict,
@@ -184,7 +184,7 @@ class GeneralController extends Controller {
             ->get();
             
         return view('admin-page.report.registrant_rpt', [
-            'title' => 'Laporan Pendaftar',
+            'title' => 'Laporan Pendaftar Akun',
             'data' => $data,
         ]);
     }

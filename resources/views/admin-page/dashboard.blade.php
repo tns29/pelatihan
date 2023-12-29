@@ -24,6 +24,21 @@
   <div class="container-fluid">
     <!-- Small boxes (Stat box) -->
     <div class="row">
+      <!-- ./col -->
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+          <div class="inner">
+            <h3>{{$pendaftarBaru}}</h3>
+
+            <p>Pendaftar Akun Baru</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-stats-bars"></i>
+          </div>
+          <a href="/registrant-data" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
       <div class="col-lg-3 col-6">
         <!-- small box -->
         <div class="small-box bg-info">
@@ -35,22 +50,7 @@
           <div class="icon">
             <i class="ion ion-bag"></i>
           </div>
-          <a href="/data-participant" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-      </div>
-      <!-- ./col -->
-      <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-success">
-          <div class="inner">
-            <h3>{{$peserta}}</h3>
-
-            <p>Peserta</p>
-          </div>
-          <div class="icon">
-            <i class="ion ion-stats-bars"></i>
-          </div>
-          <a href="/data-participant" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          <a href="/candidate-data" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
       <!-- ./col -->
@@ -99,7 +99,7 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h5 class="card-title">Monthly Recap Report</h5>
+              <h5 class="card-title">Rekap Pendaftaran Pelatihan Berdasarkan Kecamatan</h5>
 
               {{-- <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -139,7 +139,7 @@
                 <!-- /.col -->
                 <div class="col-md-12">
                   <p class="text-center">
-                    <strong>Rekap Pendaftaran Berdasarkan Kecamatan</strong>
+                    {{-- <strong></strong> --}}
                   </p>
                   @foreach ($registrant_group as $item)
                     <div class="progress-group">

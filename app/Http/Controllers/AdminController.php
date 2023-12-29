@@ -181,21 +181,37 @@ class AdminController extends Controller
         return redirect('/data-admin');
     }
 
-    function dataParticipant() {
+    function registrantData() {
         $filename = 'data_participant';
         $filename_script = getContentScript(true, $filename);
 
         $data = Auth::guard('admin')->user();  
-        $dataParticipants = Participant::get();
+        $dataParticipants = Participant::where('participant', 'N')->get();
         return view('admin-page.'.$filename, [
+            'candidate' => '',
             'script' => $filename_script,
-            'title' => 'Data Peserta',
+            'title' => 'Data Pendaftar Akun',
             'auth_user' => $data,
             'dataParticipants' => $dataParticipants
         ]);
     }
 
-    function detailParticipant(string $number) {
+    function candidateData() {
+        $filename = 'data_participant';
+        $filename_script = getContentScript(true, $filename);
+
+        $data = Auth::guard('admin')->user();  
+        $dataParticipants = Participant::with('sub_districts')->where('participant', 'Y')->get();
+        return view('admin-page.'.$filename, [
+            'candidate' => 'Y',
+            'script' => $filename_script,
+            'title' => 'Data Calon Peserta',
+            'auth_user' => $data,
+            'dataParticipants' => $dataParticipants
+        ]);
+    }
+
+    function detailParticipant(string $number, string $pageCandidate) {
         $filename = 'detail_participant';
         $filename_script = getContentScript(true, $filename);
 
@@ -204,6 +220,7 @@ class AdminController extends Controller
         $data_part = $participant->getUserProfileByNumber($number);
         // dd($participant);
         return view('admin-page.'.$filename, [
+            'candidate' => $pageCandidate,
             'script' => $filename_script,
             'title' => 'Detail Peserta',
             'auth_user' => $data,
@@ -215,14 +232,14 @@ class AdminController extends Controller
         $filename = 'registrant';
         $filename_script = getContentScript(true, $filename);
         
-        $status = $request->status ? $request->status : 'Y';
+        $status_approve = $request->status ? $request->status : NULL;
 
         $data = Auth::guard('admin')->user();  
         $registrant = new Registrant;
-        $result = $registrant->getRegistrants($status);
+        $result = $registrant->getRegistrants($status_approve);
         // dd($result);
         return view('admin-page.'.$filename, [
-            'status' => $status,
+            'status' => $status_approve,
             'script' => $filename_script,
             'title' => 'Data Pendaftar Pelatihan',
             'auth_user' => $data,
@@ -248,7 +265,7 @@ class AdminController extends Controller
     function declineParticipant(Request $request, $number) {
         // dd($request);
         $dataUpdate = [
-            'is_active' => 'N',
+            'approve' => 'N',
         ];
         Registrant::where(['participant_number'=> $number, 'training_id' => $request->training_id])->update($dataUpdate);
         return redirect('registrant');

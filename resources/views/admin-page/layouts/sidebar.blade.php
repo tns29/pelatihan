@@ -57,7 +57,7 @@
                         <p> Daftar Berita </p>
                     </a> 
                 </li> 
-                <li class="nav-item {{ Request::segment(1) === 'data-admin' || Request::segment(1) === 'data-participant' || Request::segment(1) === 'detail-participant' ? 'menu-is-opening menu-open' : '' }}">
+                <li class="nav-item {{ Request::segment(1) === 'data-admin' || Request::segment(1) === 'registrant-data' || Request::segment(1) === 'detail-participant' || Request::segment(1) === 'candidate-data' ? 'menu-is-opening menu-open' : '' }}">
                     <a href="#" class="nav-link ">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
@@ -73,9 +73,15 @@
                             </a> 
                         </li>
                         <li class="nav-item">
-                            <a href="/data-participant" class="nav-link {{ Request::segment(1) === 'data-participant' || Request::segment(1) === 'detail-participant' ? 'submenu-active' : '' }}">
+                            <a href="/registrant-data" class="nav-link {{ Request::segment(1) === 'registrant-data' || Request::segment(1) === 'detail-participant' && Request::segment(3) != 'Y' ? 'submenu-active' : '' }}">
                                 » &nbsp;
-                                <p>Data Peserta</p>
+                                <p>Data Pendaftar Akun</p>
+                            </a> 
+                        </li>
+                        <li class="nav-item">
+                            <a href="/candidate-data" class="nav-link {{ Request::segment(1) === 'candidate-data' ? 'submenu-active' : '' }} {{ Request::segment(3) === 'Y' ? 'submenu-active' : ''}}">
+                                » &nbsp;
+                                <p>Data Calon Peserta</p>
                             </a> 
                         </li>
                     </ul>
@@ -131,7 +137,7 @@
                         <li class="nav-item">
                             <a href="/registrant-report" class="nav-link {{ Request::segment(1) === 'registrant-report' ? 'submenu-active' : '' }}">
                                 » &nbsp;
-                                <p>Laporan Pendaftar</p>
+                                <p>Laporan Pendaftar Akun</p>
                             </a> 
                         </li>
                         <li class="nav-item">

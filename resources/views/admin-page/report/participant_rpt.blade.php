@@ -16,8 +16,8 @@
         table, td, th {
             border: 1px solid black;
             padding: 0 5px;
-            font-family: Arial, Helvetica, sans-serif
-            font-size: 14px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 13.5px;
         }
 
         .table {
@@ -49,6 +49,7 @@
             <table class="table" style="width: 100%; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
                 <tr>
                     <th style="text-align: left;">Nomor</th>
+                    <th style="text-align: left;">Nik</th>
                     <th style="text-align: left;">Nama Lengkap</th>
                     <th style="text-align: left;">Jenis Kelamin</th>
                     {{-- <th style="text-align: left;">No. Telp</th> --}}
@@ -68,6 +69,7 @@
                 {{-- {{ dd($item) }} --}}
                     <tr>
                         <td>{{$item->number}}</td>
+                        <td>{{$item->nik}}</td>
                         <td>{{$item->fullname}}</td>
                         <td>{{$item->gender == 'M' ? 'Laki-laki' : 'Perempuan'}}</td>
                         {{-- <td>{{$item->no_telp}}</td> --}}
@@ -81,7 +83,16 @@
                         <td>{{$item->graduation_year}}</td>
                         <td>{{ date('d/m/Y', strtotime($item->date)) }}</td>
                         <td>{{$item->gelombang}}</td>
-                        <td style="text-align: center">{{$item->approve == 'Y' ? 'Peliatihan Sedang Berlangsung' : 'Menunggu Persetujuan'}}</td>
+                        <td style="text-align: center">
+                            {{$item->approve == 'Y' ? '' : ''}}
+                            @if ($item->approve == 'Y')
+                                <span style="color: rgb(0, 189, 0)"><b>Sedang Berlangsung</b></span>
+                            @elseif($item->approve == 'N')
+                                <span style="color: red"><b>X </b> Ditolak</span>
+                            @else
+                                Menunggu Persetujuan
+                            @endif
+                        </td>
                     </tr>
                 @endforeach
             </table>

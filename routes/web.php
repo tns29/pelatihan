@@ -57,8 +57,10 @@ Route::middleware('admin')->group(function () {
     Route::delete('/delete-admin/{number}', [AdminController::class, 'deleteAdmin']);
     Route::get('/getRegistrant', [GeneralController::class, 'getRegistrant']);
 
-    Route::get('/data-participant', [AdminController::class, 'dataParticipant']);
+    Route::get('/registrant-data', [AdminController::class, 'registrantData']); // pendaftar akun
+    Route::get('/candidate-data', [AdminController::class, 'candidateData']); // calon peserta
     Route::get('/detail-participant/{number}', [AdminController::class, 'detailParticipant']);
+    Route::get('/detail-participant/{number}/{page}', [AdminController::class, 'detailParticipant']);
     Route::put('/acc-participant/{number}', [GeneralController::class, 'accParticipant']);
     
     Route::get('/registrant', [AdminController::class, 'registrant']);

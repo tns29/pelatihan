@@ -56,6 +56,17 @@
                 {{ date('d M Y', strtotime($setting->end_date)) }}
             </small>
         </p>
+        <p>
+            <small class="card-text"> 
+                {{-- <i class="fas fa-calendar-minus me-2"></i>   --}}
+                Min Usia : &nbsp; {{ $service->min_age }} Tahun
+            </small> 
+            <br>
+            <small class="card-text"> 
+                {{-- <i class="fas fa-calendar-minus me-2"></i>   --}}
+                Max Usia : &nbsp; {{ $service->max_age }} Tahun
+            </small>
+        </p>
         <p class="text-black " style="font-size: 16.5px; line-height: 1.6; text-align: justify"><?= $service->description ?></p>
         <a href="/checkDataUser/{{$service->id}}" class="btn bg-secondary-color text-white"><i class="fab fa-get-pocket"></i> Daftar Sekarang</a>
 
@@ -77,7 +88,7 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <img src="{{ asset('/storage/'.$item->images) }}" alt="">
+                <img src="{{ asset('/storage/'.$item->image) }}" alt="conntent-img" style="height: 170px; width:auto;">
             </div>
         </div>
     @endforeach

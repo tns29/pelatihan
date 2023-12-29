@@ -125,6 +125,7 @@ $date_of_birth = $detailParticipant->date_of_birth ? date('d, M Y', strtotime($d
                         @endif
                         <div class="text-left"><small class="pt-2">Bergabung sejak, {{ date('d, M Y', strtotime($detailParticipant->created_at)) }}</small></div>
                     </tr>
+                    @if ($candidate != 'Y') 
                     <form action="/acc-participant/{{ $detailParticipant->number }}" method="POST">
                         @csrf
                         @method('PUT')
@@ -141,8 +142,20 @@ $date_of_birth = $detailParticipant->date_of_birth ? date('d, M Y', strtotime($d
                         <tr>
                             <td colspan="2"><button class="btn btn-outline-info py-1 float-right w-full">Simpan dan keluar &nbsp; <i class="fas fa-share-square"></i> </button></td>
                         </tr>
-
+                        
                     </form>
+                    @elseif($candidate == 'Y')
+                    <tr>
+                        <th>Status Calon Peserta</th>
+                        <td>
+                            Telah diterima
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><a href="/candidate-data" class="btn btn-outline-info py-1 float-right w-full">Keluar <i class="fas fa-share-square"></i> </a></td>
+                    </tr>
+                    @endif
+                    
 
                 </table>
             </div>

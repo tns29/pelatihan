@@ -23,8 +23,10 @@
                         <br>
                         @if ($item->approve == 'Y')
                           <small class="alert alert-success py-1">Pelatihan telah disetujui</small>
+                        @elseif ($item->approve == 'N')
+                          <small class="alert alert-danger py-1">Pelatihan ditolak</small>
                         @else
-                          <small class="alert alert-danger py-1">Menunggu Persetujuan</small>
+                          <small class="alert alert-warning py-1">Menunggu Persetujuan</small>
                         @endif
                         <br>
                         <div class="text-success ms-1 mt-3">{{ $item->approve == 'Y' ? 'Pelatihan Sedang Berlangsung' : ''}}</div>

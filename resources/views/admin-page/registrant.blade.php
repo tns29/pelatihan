@@ -19,14 +19,19 @@
     <div class="container-fluid">
         <div class="row mx-2">
           <div class="row justify-content-end mb-2 w-100">
-            {{-- <a href="/add-data-admin" class="btn float-right btn-add "><i class="fas fa-plus-square"></i> &nbsp; Data</a> --}}
-            <form id="submitForm" action="registrant" method="GET">
+            
+            <form id="submitForm" action="registrant" method="GET" >
               @csrf
-              <select name="status" id="status" class="form-select form-control">
-                {{-- <option value=""> Status</option> --}}
-                <option value="Y" {{ $status == 'Y' ? 'selected' : '' }}> Diterima</option>
-                <option value="N" {{ $status == 'N' ? 'selected' : '' }}> Ditolak</option>
-              </select>
+              <div class="row">
+                <div class="col d-flex">
+                  <span class="pr-3 pt-2">Status </span>
+                  <select name="status" id="status" class="form-select form-control" style="display: inline">
+                    <option value=""> Menunggu</option>
+                    <option value="Y" {{ $status == 'Y' ? 'selected' : '' }}> Diterima</option>
+                    <option value="N" {{ $status == 'N' ? 'selected' : '' }}> Ditolak</option>
+                  </select>
+                </div>
+              </div>
 
             </form>
           </div>
@@ -39,8 +44,8 @@
                       <th>Pelatihan</th>
                       <th style="width: 15%;">Tanggal Dftr Pelatihan</th>
                       <th>Periode </th>
-                      <th style="text-align: center; width:5%;">Peserta</th>
-                      <th style="width: 10%; text-align: center;">Aksi</th>
+                      <th style="text-align: center; width: 9%;">Status </th>
+                      <th style="width: 8%; text-align: center;">Aksi</th>
                   </tr>
               </thead>
               <tbody>
@@ -54,9 +59,15 @@
                       <td>{{ $row->gelombang }}</td>
                       <td style=" text-align: center;">
                         @if ($row->is_active == "Y")
-                          <?= $row->approve == 'Y' ? ' <i class="fas fa-check-square text-success"></i>' : ' <i class="far fa-question-circle text-secondary"></i>' ?>
+                          @if ($row->approve == 'Y')
+                            <span class="text-success"><i class="fas fa-check-square text-success"> </i> Approved</span>
+                          @elseif($row->approve == "N")
+                            <span class="text-red"><i class="fas fa-window-close text-danger"> </i> Rejected</span>
+                            @else
+                            <span class="text-secondary"><i class="far fa-question-circle text-secondary"> </i> Waiting</span>
+                          @endif
                         @else
-                          <i class="fas fa-window-close text-danger"></i>
+                          TELAH SELESAI
                         @endif
                       </td>
                       <td style=" text-align: center;">

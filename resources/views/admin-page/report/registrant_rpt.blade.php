@@ -16,8 +16,8 @@
         table, td, th {
             border: 1px solid black;
             padding: 0 5px;
-            font-family: Arial, Helvetica, sans-serif
-            font-size: 14px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 13.5px;
         }
 
         .table {

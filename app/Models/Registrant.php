@@ -46,7 +46,7 @@ class Registrant extends Model
                 ->leftJoin('trainings', 'trainings.id', '=', 'registrants.training_id')
                 ->leftJoin('periods', 'periods.id', '=', 'trainings.period_id') 
                 ->leftJoin('categories', 'categories.id', '=', 'trainings.category_id')
-                ->where(['registrants.is_active' => $status])
+                ->where(['registrants.approve' => $status])
                 ->get();
     }
 }
