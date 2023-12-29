@@ -94,6 +94,13 @@
                     </a> 
                 </li> 
 
+                <li class="nav-item ">
+                    <a href="/participant-passed" class="nav-link {{ Request::segment(1) === 'participant-passed' ||  Request::segment(1) === 'detail-participant-appr' ? 'menu-active' : '' }}">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p> Kelulusan Peserta </p>
+                    </a> 
+                </li> 
+
                 <li class="nav-header">Layanan</li>
                 <li class="nav-item {{ Request::segment(1) === 'category' || Request::segment(1) === 'service' || Request::segment(1) === 'service-detail' ? 'menu-is-opening menu-open' : '' }}">
                     <a href="#" class="nav-link">

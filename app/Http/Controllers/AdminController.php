@@ -237,12 +237,33 @@ class AdminController extends Controller
 
         $data = Auth::guard('admin')->user();  
         $registrant = new Registrant;
-        $result = $registrant->getRegistrants($status_approve);
+        $result = $registrant->getRegistrants($status_approve,$request->fullname);
         // dd($result);
         return view('admin-page.'.$filename, [
             'status' => $status_approve,
+            'search_name' => $request->fullname,
             'script' => $filename_script,
             'title' => 'Data Pendaftar Pelatihan',
+            'auth_user' => $data,
+            'participant' => $result
+        ]);
+    }
+    
+    function participantPassed(Request $request) {
+        $filename = 'participant_passed';
+        $filename_script = getContentScript(true, $filename);
+        
+        $status_passed = $request->passed ? $request->passed : NULL;
+
+        $data = Auth::guard('admin')->user();  
+        $registrant = new Registrant;
+        $result = $registrant->getParticipantPassed($status_passed, $request->fullname);
+        // dd($result);
+        return view('admin-page.'.$filename, [
+            'passed' => $status_passed,
+            'search_name' => $request->fullname,
+            'script' => $filename_script,
+            'title' => 'Data Kelulusan Pelatihan',
             'auth_user' => $data,
             'participant' => $result
         ]);

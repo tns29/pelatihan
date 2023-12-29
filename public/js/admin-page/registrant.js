@@ -1,6 +1,9 @@
 $("#status").on("change", function () {
     $("#submitForm").submit();
 });
+$("#search").on("click", function () {
+    $("#submitForm").submit();
+});
 
 function approve(nomor, name, training_nomor, trainingsTitle) {
     $("#modal-edit").modal("show");

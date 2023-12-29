@@ -63,14 +63,17 @@ Route::middleware('admin')->group(function () {
     Route::get('/detail-participant/{number}/{page}', [AdminController::class, 'detailParticipant']);
     Route::put('/acc-participant/{number}', [GeneralController::class, 'accParticipant']);
     
-    // DETAIL PESERTA PELATIHAN YANG TELAH DI APPROVE
-    Route::get('/detail-participant-appr/{number}/{id}', [AdminController::class, 'detailParticipantAppr']);
-    Route::put('/passed-participant/{number}', [AdminController::class, 'passedParticipant']);
-    
     Route::get('/registrant', [AdminController::class, 'registrant']);
     Route::post('/approve/{number}', [AdminController::class, 'approveParticipant']);
     Route::delete('/decline/{number}', [AdminController::class, 'declineParticipant']);
     
+    // DETAIL PESERTA PELATIHAN YANG TELAH DI APPROVE
+    Route::get('/detail-participant-appr/{number}/{id}', [AdminController::class, 'detailParticipantAppr']);
+    Route::put('/passed-participant/{number}', [AdminController::class, 'passedParticipant']);
+    
+    Route::get('/participant-passed', [AdminController::class, 'participantPassed']);
+    
+
     Route::resource('/category', CategoryController::class)->only("index", "store", "update", "destroy");
     
     Route::resource('/service', TrainingController::class)->except("show");
