@@ -42,7 +42,7 @@
                         </div>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 mt-2">
-                        <label for="title">Sub Judul Pelatihan</label>
+                        <label for="title">Unit Kompetensi</label>
                         <input type="text" class="form-control @error('title')is-invalid @enderror" name="title" id="title" value="{{ old('title') }}">
                         @error('title')
                         <small class="invalid-feedback">
@@ -52,7 +52,8 @@
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 mt-2">
                         <label for="description">Deskripsi</label>
-                        <textarea name="description" id="description" class="form-control" cols="30" rows="5"></textarea>
+                        {{-- <textarea name="description" id="description" class="form-control" cols="30" rows="5"></textarea> --}}
+                        <textarea name="description" id="description"></textarea>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 mt-2">
                         <label for="image">Gambar</label>

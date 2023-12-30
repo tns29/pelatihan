@@ -84,7 +84,7 @@
             <div class="col-md-6">
                 <div data-bs-spy="scroll" data-bs-target="#simple-list-example" data-bs-offset="0" data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0">
                     <h6 id="simple-list-item-{{$item->id}}" class="font-weight-bolder"> <b>Kontent {{ $item->title }}</b> </h6>
-                    <p class="text-justify">{{ $item->description }}</p>
+                    <p class="text-justify"><?= $item->description ?></p>
                 </div>
             </div>
             <div class="col-md-3">

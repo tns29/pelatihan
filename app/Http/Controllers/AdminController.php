@@ -186,7 +186,7 @@ class AdminController extends Controller
         $filename_script = getContentScript(true, $filename);
 
         $data = Auth::guard('admin')->user();  
-        $dataParticipants = Participant::where('participant', 'N')->get();
+        $dataParticipants = Participant::get();
         return view('admin-page.'.$filename, [
             'candidate' => '',
             'script' => $filename_script,
