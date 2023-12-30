@@ -48,14 +48,14 @@
         <div class="mb-2">
             <small class="alert alert-warning py-0">{{ $service->category->name }}</small>
         </div>
-        <p>
+        {{-- <p hidden>
             <small class="card-text"> 
                 <i class="fas fa-calendar-minus me-2"></i>  
                 Periode
                 {{ date('d M Y', strtotime($setting->start_date)) }} s/d
                 {{ date('d M Y', strtotime($setting->end_date)) }}
             </small>
-        </p>
+        </p> --}}
         <p>
             <small class="card-text"> 
                 {{-- <i class="fas fa-calendar-minus me-2"></i>   --}}
