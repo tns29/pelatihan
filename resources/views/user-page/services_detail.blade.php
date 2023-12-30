@@ -88,7 +88,11 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <img src="{{ asset('/storage/'.$item->image) }}" alt="conntent-img" style="height: 170px; width:auto;">
+                @if ($item->image)
+                    <img src="{{ asset('/storage/'.$item->image) }}" alt="conntent-img" style="height: 170px; width:auto;">
+                @else
+                    
+                @endif
             </div>
         </div>
     @endforeach
