@@ -55,7 +55,7 @@ class TrainingContentController extends Controller
     {
         $validatedData = $request->validate([
             'training_id'      => 'required',
-            'title'      => 'required|max:30',
+            'title'      => 'required|max:70',
             'image'     => 'image|file|max:1024'
         ]);
 
@@ -114,7 +114,7 @@ class TrainingContentController extends Controller
     {
         $validatedData = $request->validate([
             'training_id'      => 'required',
-            'title'      => 'required|max:30',
+            'title'      => 'required|max:70',
             'image'     => 'image|file|max:1024'
         ]);
 
