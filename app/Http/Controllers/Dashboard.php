@@ -33,7 +33,7 @@ class Dashboard extends Controller
             'title' => 'Dashboard',
             'cur_page' => $cur_route,
             'auth_user' => $data,
-            'pendaftarBaru' => DB::table('participants')->where('participant', '=', 'N')->count(),
+            'pendaftarBaru' => DB::table('participants')->count(),
             'calonPeserta' => DB::table('participants')->where('participant', '=', 'Y')->count(),
             'pesertaApprove' => DB::table('registrants')->where('approve', '=', 'Y')->count(),
             'pesertaDecline' => DB::table('registrants')->where('approve', '=', 'N')->count(),
