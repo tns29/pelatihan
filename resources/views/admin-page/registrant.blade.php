@@ -82,7 +82,7 @@
                       <td style=" text-align: center;">
                         @if ($row->is_active == "Y")
                           @if ($row->approve == "Y")
-                            <a href="/detail-participant-appr/{{ $row->participant_number }}/{{$row->id}}" class="text-success"> <i class="fas fa-user-check"></i> Detail</a>
+                            <a href="/detail-participant-appr/{{ $row->participant_number }}/{{$row->training_id}}" class="text-success"> <i class="fas fa-user-check"></i> Detail</a>
                           @elseif($row->approve == "N")
                             <i class="fas fa-minus-circle text-danger"></i>  
                           @else

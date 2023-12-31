@@ -31,7 +31,7 @@
           <div class="inner">
             <h3>{{$pendaftarBaru}}</h3>
 
-            <p>Pendaftar Akun Baru</p>
+            <p>Pendaftar Akun </p>
           </div>
           <div class="icon">
             <i class="ion ion-stats-bars"></i>
@@ -43,52 +43,52 @@
         <!-- small box -->
         <div class="small-box bg-info">
           <div class="inner">
-            <h3>{{$calonPeserta}}</h3>
-
-            <p>Calon Peserta</p>
-          </div>
-          <div class="icon">
-            <i class="ion ion-bag"></i>
-          </div>
-          <a href="/candidate-data" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-      </div>
-      <!-- ./col -->
-      <div class="col-lg-3 col-6">
-        <form id="approveTraining" action="registrant" method="GET" hidden>
-          @csrf
-          <input type="text" name="status" id="status" value="Y">
-        </form>
-        <!-- small box -->
-        <div class="small-box bg-warning">
-          <div class="inner">
             <h3>{{$pesertaApprove}}</h3>
 
             <p>Pendaftar Pelatihan</p>
           </div>
           <div class="icon">
-            <i class="ion ion-person-add"></i>
+            <i class="ion ion-bag"></i>
           </div>
-          <a href="#" onclick="approveTraining()" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          <a href="/registrant" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
       <!-- ./col -->
       <div class="col-lg-3 col-6">
-        <form id="declineTraining" action="registrant" method="GET" hidden>
+        <form id="pesertaLulus" action="participant-passed" method="GET" hidden>
           @csrf
-          <input type="text" name="status" id="status" value="N">
+          <input type="text" name="passed" id="passed" value="Y">
+        </form>
+        <!-- small box -->
+        <div class="small-box bg-warning">
+          <div class="inner">
+            <h3>{{$pesertaLulus}}</h3>
+
+            <p>Peserta Lulus</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-person-add"></i>
+          </div>
+          <a href="#" onclick="pesertaLulus()" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      <!-- ./col -->
+      <div class="col-lg-3 col-6">
+        <form id="pesertaTidakLulus" action="participant-passed" method="GET" hidden>
+          @csrf
+          <input type="text" name="passed" id="passed" value="N">
         </form>
         <!-- small box -->
         <div class="small-box bg-danger">
           <div class="inner">
-            <h3>{{$pesertaDecline}}</h3>
+            <h3>{{$pesertaTidakLulus}}</h3>
 
-            <p>Pendaftar Pelatihan Ditolak</p>
+            <p>Peserta Tidak Lulus</p>
           </div>
           <div class="icon">
             <i class="ion ion-pie-graph"></i>
           </div>
-          <a href="#" onclick="declineTraining()" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          <a href="#" onclick="pesertaTidakLulus()" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
       <!-- ./col -->

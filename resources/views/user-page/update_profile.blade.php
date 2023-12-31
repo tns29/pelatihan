@@ -37,7 +37,7 @@
                 <label for="nik" class="col-md-3 ms-3">NIK </label>
                 <input type="text" class="form-control inline-block @error('nik')is-invalid @enderror" maxlength="16" name="nik" id="nik" value="{{ old('nik', $auth_user->nik) }}" onkeyup="onlyNumbers(this)">
                 @error('nik')
-                <small class="invalid-feedback">
+                <small class="invalid-feedback ms-3">
                     Nik {{ $message }}
                 </small>
                 @enderror
@@ -46,7 +46,7 @@
                 <label for="no_wa" class="col-md-3 ms-3">No. WA </label>
                 <input type="text" class="form-control inline-block @error('no_wa')is-invalid @enderror" maxlength="15" name="no_wa" id="no_wa" value="{{ old('no_wa', $auth_user->no_wa) }}" onkeyup="onlyNumbers(this)">
                 @error('no_wa')
-                <small class="invalid-feedback">
+                <small class="invalid-feedback ms-3">
                     No. WA {{ $message }}
                 </small>
                 @enderror
@@ -55,7 +55,7 @@
                 <label for="place_of_birth" class="col-md-3 ms-3">Tempat Lahir </label>
                 <input type="text" class="form-control inline-block @error('place_of_birth')is-invalid @enderror" name="place_of_birth" id="place_of_birth" value="{{ old('place_of_birth', $auth_user->place_of_birth) }}">
                 @error('place_of_birth')
-                <small class="invalid-feedback">
+                <small class="invalid-feedback ms-3">
                     Tempat lahir {{ $message }}
                 </small>
                 @enderror
@@ -64,7 +64,7 @@
                 <label for="date_of_birth" class="col-md-3 ms-3">Tanggal Lahir </label>
                 <input type="date" class="form-control inline-block @error('date_of_birth')is-invalid @enderror" name="date_of_birth" id="date_of_birth" value="{{ old('date_of_birth', $auth_user->date_of_birth) }}">
                 @error('date_of_birth')
-                <small class="invalid-feedback">
+                <small class="invalid-feedback ms-3">
                     Tanggal lahir {{ $message }}
                 </small>
                 @enderror
@@ -77,7 +77,7 @@
                 <label for="height" class="col-md-3 ms-3">Tinggi Badan <i class="text-danger">(cm)</i></label>
                 <input type="text" class="form-control inline-block @error('height')is-invalid @enderror" name="height" id="height" value="{{ old('height', $auth_user->height) }}">
                 @error('height')
-                <small class="invalid-feedback">
+                <small class="invalid-feedback ms-3">
                     Tinggi Badan {{ $message }}
                 </small>
                 @enderror
@@ -93,7 +93,7 @@
                     <option value="Konghucu" {{ old('religion', $auth_user->religion) == 'Konghucu' ? 'selected' : ''}}> » &nbsp; Konghucu</option>
                 </select>
                 @error('religion')
-                <small class="invalid-feedback">
+                <small class="invalid-feedback ms-3">
                     Agama {{ $message }}
                 </small>
                 @enderror
@@ -108,7 +108,7 @@
                     <option value="Duda" {{ old('Duda', $auth_user->material_status == 'Duda' ? 'selected' : '' ) }}> » &nbsp; Duda</option>
                 </select>
                 @error('material_status')
-                <small class="invalid-feedback">
+                <small class="invalid-feedback ms-3">
                     Status Pernikahan {{ $message }}
                 </small>
                 @enderror
@@ -118,7 +118,7 @@
                 <label for="last_education" class="col-md-3 ms-3">Pendidikan Terakhir</label>
                 <input type="text" class="form-control @error('last_education')is-invalid @enderror" name="last_education" id="last_education" value="{{ old('last_education', $auth_user->last_education) }}">
                 @error('last_education')
-                <small class="invalid-feedback">
+                <small class="invalid-feedback ms-3">
                     Pendidikan Terakhir {{ $message }}
                 </small>
                 @enderror
@@ -127,7 +127,7 @@
                 <label for="graduation_year" class="col-md-3 ms-3">Tahun Lulus</label>
                 <input type="text" class="form-control @error('graduation_year')is-invalid @enderror" name="graduation_year" id="graduation_year" value="{{ old('graduation_year', $auth_user->graduation_year) }}">
                 @error('graduation_year')
-                <small class="invalid-feedback">
+                <small class="invalid-feedback ms-3">
                     Tahun Lulus {{ $message }}
                 </small>
                 @enderror
@@ -143,7 +143,7 @@
                     @endforeach
                 </select>
                 @error('sub_district')
-                <small class="invalid-feedback">
+                <small class="invalid-feedback ms-3">
                     Kecamatan {{ $message }}
                 </small>
                 @enderror
@@ -156,7 +156,7 @@
                     {{-- load in script --}}
                 </select>
                 @error('village')
-                <small class="invalid-feedback">
+                <small class="invalid-feedback ms-3">
                     Kelurahan {{ $message }}
                 </small>
                 @enderror

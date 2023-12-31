@@ -303,7 +303,8 @@ class AdminController extends Controller
         $data = Auth::guard('admin')->user();  
         $participant = new Participant;
         // $data_part = $participant->getUserProfileByNumber($number);
-        $resultData = Registrant::with('participants', 'service.service_detail', 'service.periods')->where('participant_number', $number)->first();
+        $resultData = Registrant::with('participants', 'service.service_detail', 'service.periods')
+                                ->where(['participant_number'=> $number, 'training_id' => $training_id])->first();
         // dd($resultData);
         return view('admin-page.'.$filename, [
             'script' => $filename_script,
@@ -317,7 +318,7 @@ class AdminController extends Controller
     function passedParticipant(Request $request, $number) {
 
         $data = Auth::guard('admin')->user();
-
+        // dd($request->training_id);
         $dataUpdate = [
             'passed_on' => date('Y-m-d H:i:s'),
             'passed' => $request->passed,

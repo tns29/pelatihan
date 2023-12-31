@@ -34,9 +34,9 @@ class Dashboard extends Controller
             'cur_page' => $cur_route,
             'auth_user' => $data,
             'pendaftarBaru' => DB::table('participants')->count(),
-            'calonPeserta' => DB::table('participants')->where('participant', '=', 'Y')->count(),
             'pesertaApprove' => DB::table('registrants')->where('approve', '=', 'Y')->count(),
-            'pesertaDecline' => DB::table('registrants')->where('approve', '=', 'N')->count(),
+            'pesertaLulus' => DB::table('registrants')->where('passed', '=', 'Y')->count(),
+            'pesertaTidakLulus' => DB::table('registrants')->where('passed', '=', 'N')->count(),
             'registrant_group' => $registrant_group,
             'countRegistrant' => $countRegistrant,
         ]);
