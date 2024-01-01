@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreign('category_id')->on('categories')->references('id');
             $table->string('title', 100);
             $table->text('description');
-            // $table->date('date');
+            $table->string('duration')->nullable();
             $table->double('period_id');
             $table->double('max_age');
             $table->double('min_age');

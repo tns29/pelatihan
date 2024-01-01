@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Period;
 use App\Models\Village;
+use App\Models\Category;
 use App\Models\Training;
 use App\Models\Registrant;
 use App\Models\Participant;
@@ -195,6 +196,8 @@ class GeneralController extends Controller {
         $filename_script = getContentScript(true, $filename);
 
         $admin = Auth::guard('admin')->user();
+        $categories = Category::get();
+        $trainings = Training::get();
         $participant = Participant::get();
         $subDistrict = SubDistrict::get();
         $villages = Village::get();
@@ -204,6 +207,8 @@ class GeneralController extends Controller {
             'script' => $filename_script,
             'title' => 'Laporan Pelatihan Peserta',
             'auth_user' => $admin,
+            'categories' => $categories,
+            'trainings' => $trainings,
             'participant' => $participant,
             'subDistrict' => $subDistrict,
             'villages' => $villages,
@@ -212,7 +217,7 @@ class GeneralController extends Controller {
     }
 
     function participantRpt(Request $request) {
-        // dd($request->fullname);
+        
         if($request->fullname) {
             if($request->session()->get('fullname') != $request->fullname) {
                 session()->forget('fullname');
@@ -220,6 +225,24 @@ class GeneralController extends Controller {
             $request->session()->push('fullname', $request->fullname);
         } else {
             session()->forget('fullname');
+        }
+        
+        if($request->category_id) {
+            if($request->session()->get('category_id') != $request->category_id) {
+                session()->forget('category_id');
+            }
+            $request->session()->push('category_id', $request->category_id);
+        } else {
+            session()->forget('category_id');
+        }
+        
+        if($request->training_id) {
+            if($request->session()->get('training_id') != $request->training_id) {
+                session()->forget('training_id');
+            }
+            $request->session()->push('training_id', $request->training_id);
+        } else {
+            session()->forget('training_id');
         }
         
         if($request->gender) {
@@ -282,6 +305,12 @@ class GeneralController extends Controller {
 
         if($request->session()->get('fullname')) {
             $where['participants.number'] = $request->session()->get('fullname')[0];
+        }
+        if($request->session()->get('category_id')) {
+            $where['trainings.category_id'] = $request->session()->get('category_id')[0];
+        }
+        if($request->session()->get('training_id')) {
+            $where['registrants.training_id'] = $request->session()->get('training_id')[0];
         }
         if($request->session()->get('gender')) {
             $where['participants.gender'] = $request->session()->get('gender')[0];

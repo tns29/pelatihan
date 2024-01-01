@@ -42,6 +42,8 @@ $("#village").val(village).change();
 
 $("#submitRpt").on("click", function () {
     var fullname = $("#fullname").val();
+    var category_id = $("#category_id").val();
+    var training_id = $("#training_id").val();
     var gender = $("#gender").val();
     var sub_district = $("#sub_district").val();
     var village = $("#village").val();
@@ -55,6 +57,8 @@ $("#submitRpt").on("click", function () {
         dataType: "JSON",
         data: {
             fullname: fullname,
+            category_id: category_id,
+            training_id: training_id,
             gender: gender,
             sub_district: sub_district,
             village: village,

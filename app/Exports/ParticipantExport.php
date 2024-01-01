@@ -73,6 +73,8 @@ class ParticipantExport implements FromCollection, WithHeadings, ShouldAutoSize,
     public function collection()
     {
         $fullname = $this->session->get('fullname') ? $this->session->get('fullname')[0] : false;
+        $category_id = $this->session->get('category_id') ? $this->session->get('category_id')[0] : false;
+        $training_id = $this->session->get('training_id') ? $this->session->get('training_id')[0] : false;
         $gender = $this->session->get('gender') ? $this->session->get('gender')[0] : false;
         $sub_district = $this->session->get('sub_district') ? $this->session->get('sub_district')[0] : false;
         $village = $this->session->get('village') ? $this->session->get('village')[0] : false;
@@ -84,6 +86,12 @@ class ParticipantExport implements FromCollection, WithHeadings, ShouldAutoSize,
         
         if($fullname) {
             $where = ['participants.number' => $fullname];
+        }
+        if($category_id) {
+            $where = ['trainings.category_id' => $category_id];
+        }
+        if($training_id) {
+            $where = ['registrants.training_id' => $training_id];
         }
         if($gender) {
             $where = ['participants.gender' => $gender];

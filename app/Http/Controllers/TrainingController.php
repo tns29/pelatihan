@@ -53,10 +53,11 @@ class TrainingController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
+            'title'      => 'required|max:90',
             'category_id'      => 'required',
+            'duration'      => 'required',
             'min_age'      => 'required|max:3',
             'max_age'      => 'required|max:3',
-            'title'      => 'required|max:30',
             'image'     => 'image|file|max:1024'
         ]);
 
@@ -119,10 +120,11 @@ class TrainingController extends Controller
     public function update(Request $request, string $id)
     {
         $validatedData = $request->validate([
+            'title'      => 'required|max:90',
+            'duration'      => 'required',
             'category_id'      => 'required',
             'min_age'      => 'required|max:3',
             'max_age'      => 'required|max:3',
-            'title'      => 'required|max:30',
             'image'     => 'image|file|max:1024'
         ]);
 

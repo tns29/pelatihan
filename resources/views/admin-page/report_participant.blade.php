@@ -18,7 +18,7 @@
     <div class="container-fluid">
         <div class="row mx-2">
             <div class="col-lg-8 elevation-1 p-4">
-                <form action="/settings" method="POST">
+                <form action="" method="POST">
                     @csrf
                     <div class="mb-4">
                         <div class="row">
@@ -40,6 +40,28 @@
                                     @endforeach
                                 </select>
                             </div> --}}
+                            <div class="col-lg-6 col-md-6 mt-2">
+                                <label for="category_id" class="ml-1">Kategori</label>
+                                <select name="category_id" id="category_id" class="form-control form-select">
+                                    <option value="">Pilih Kategori</option>
+                                    @foreach ($categories as $item)
+                                        <option value="{{ $item->id }}" >
+                                            » &nbsp; {{ $item->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-lg-6 col-md-6 mt-2">
+                                <label for="training_id" class="ml-1">Pelatihan</label>
+                                <select name="training_id" id="training_id" class="form-control form-select">
+                                    <option value="">Pilih Pelatihan</option>
+                                    @foreach ($trainings as $item)
+                                        <option value="{{ $item->id }}" >
+                                            » &nbsp; {{ $item->title }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
                             <div class="col-lg-6 col-md-6 mt-2">
                                 <label for="gender" class="ml-1">Jenis Kelamin</label>
                                 <select name="gender" id="gender" class="form-control form-select">

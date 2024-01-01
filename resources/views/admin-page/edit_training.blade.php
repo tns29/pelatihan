@@ -22,7 +22,7 @@
                 @method("PUT")
                 <div class="row mx-2">
                     {{-- <input type="hidden" name="id" value="{{$dataTraining->id}}"> --}}
-                    <div class="col-lg-6 col-md-6 col-sm-6 mt-2">
+                    <div class="col-lg-4 col-md-4 col-sm-4 mt-2">
                         <label for="category_id">Kategori</label>
                         <select class="form-control @error('category_id')is-invalid @enderror" name="category_id" id="category_id">
                             <option value="">Pilih Kategori</option>
@@ -37,6 +37,18 @@
                             Kategori {{ $message }}
                         </small>
                         @enderror
+                    </div>
+                    
+                    <div class="col-lg-2 col-md-2 col-sm-2 mt-2">
+                        <div class="form-check mt-1">
+                            <label for="duration">Durasi</label>
+                            <input type="text" name="duration" id="duration" class="form-control @error('title')is-invalid @enderror" value="{{ old('duration', $dataTraining->duration) }}">
+                            @error('duration')
+                            <small class="invalid-feedback">
+                                Durasi {{ $message }}
+                            </small>
+                            @enderror
+                        </div>
                     </div>
                     
                     <div class="col-lg-2 col-md-2 col-sm-2 mt-2">

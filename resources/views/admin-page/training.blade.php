@@ -23,8 +23,9 @@
           <table class="table table-bordered table-sm">
               <thead>
                   <tr class="my-bg-primary text-white">
-                      <th style="width: 9%">Id Pelatihan</th>
+                      <th style="width: 3%">#</th>
                       <th>Nama Pelatihan</th>
+                      <th style="width: 4%;">Durasi</th>
                       <th>Deskripsi</th>
                       <th style="width: 10%; text-align: center;">Status</th>
                       <th style="width: 10%; text-align: center;">Aksi</th>
@@ -35,6 +36,7 @@
                   <tr>
                       <td>{{ $row->id }}</td>
                       <td>{{ $row->title }}</td>
+                      <td>{{ $row->duration }}</td>
                       <td>{{ Str::substr($row->description, 0, 90).'...' }}</td>
                       <td style=" text-align: center;">{{ $row->is_active == 'Y' ? 'Aktif' : 'Tidak Aktif' }}</td>
                       <td style=" text-align: center;">

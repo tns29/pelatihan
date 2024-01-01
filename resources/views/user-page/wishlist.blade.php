@@ -91,7 +91,7 @@
                   <td> : </td>
                   <td id="date"></td>
                 </tr>
-                @if ($item->approve != NULL)
+                @if (isset($item->approve) != NULL)
                   <tr>
                     <th>Status Kelulusan</th>
                     <td> : </td>
