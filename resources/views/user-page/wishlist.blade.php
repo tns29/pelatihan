@@ -17,6 +17,7 @@
                     <div class="col-lg-8">
                         <h2>{{$item->trainingsTitle}}</h2>
                         <span class="alert alert-info py-0"> {{$item->category}}</span>
+                        <span class="alert alert-danger py-0">Durasi {{$item->duration}}</span>
                         <p class="mt-2">{{$item->description}}</p>
                         <p>
                           <span class="alert alert-warning px-2 py-0"> {{$item->gelombang}}</span>
@@ -37,7 +38,7 @@
                           <div class="text-primary ms-1 mt-3">{{ $item->approve == 'Y' ? 'Telah Selesai' : ''}}</div>
                         @endif
                         <br>
-                        <button class="btn btn-success btn-sm mt-3" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Kartu Pelatihan" onclick="printCard(`{{$item->gelombang}}`, `{{$item->trainingsTitle}}`, `{{ date('d-m-Y', strtotime($item->date)) }}`, `{{$item->passed}}`)">
+                        <button class="btn btn-success btn-sm mt-3" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Kartu Pelatihan" onclick="printCard(`{{$item->gelombang}}`, `{{$item->trainingsTitle}}`, `{{ date('d-m-Y', strtotime($item->date)) }}`, `{{$item->passed}}`, `{{ $item->approve }}`)">
                             <i class="far fa-address-card mr-1"></i> Lihat Kartu
                         </button>
                     </div>
@@ -91,13 +92,11 @@
                   <td> : </td>
                   <td id="date"></td>
                 </tr>
-                @if (isset($item->approve) != NULL)
-                  <tr>
-                    <th>Status Kelulusan</th>
-                    <td> : </td>
-                    <td id="passed"></td>
-                  </tr>
-                @endif
+                <tr id="tr_approve">
+                  <th>Status Kelulusan</th>
+                  <td> : </td>
+                  <td id="passed"></td>
+                </tr>
               </table>
             </div>
             <div class="col-md-4 col-lg-4">

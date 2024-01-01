@@ -1,4 +1,4 @@
-function printCard(periode, training_name, date, is_passed) {
+function printCard(periode, training_name, date, is_passed, approve) {
     $("#printCard").modal("show");
     $("#periode").text(periode);
     $("#training_name").text(training_name);
@@ -9,6 +9,12 @@ function printCard(periode, training_name, date, is_passed) {
         var span = `<span class="text-danger">TIDAK LULUS</span>`;
     } else {
         var span = `<span class="text-success"><b> Sedang Berlangsung </b></span>`;
+    }
+
+    if (approve) {
+        $("#tr_approve").show();
+    } else {
+        $("#tr_approve").hide();
     }
     $("#passed").html(span);
 }

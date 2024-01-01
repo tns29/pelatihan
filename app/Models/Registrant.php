@@ -34,7 +34,7 @@ class Registrant extends Model
 
     function getWishlist($number) {
         return DB::table('registrants')
-                ->select('registrants.*','trainings.title as trainingsTitle', 'trainings.description as description', 'trainings.image as image',
+                ->select('registrants.*','trainings.title as trainingsTitle',  'trainings.duration', 'trainings.description as description', 'trainings.image as image',
                         'periods.name as gelombang', 'categories.name as category')
                 ->leftJoin('trainings', 'trainings.id', '=', 'registrants.training_id')
                 ->leftJoin('periods', 'periods.id', '=', 'trainings.period_id') 
