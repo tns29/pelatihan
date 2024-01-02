@@ -92,7 +92,7 @@ class DatabaseSeeder extends Seeder
         
         $villages = [
             1 => [
-                'Cangkudu','Gembong','Saga','Sentul','Sentul','Jaya','Sukamurni','Talagasari','Tobat','Balaraja'
+                'Cangkudu','Gembong','Saga','Sentul','Jaya','Sukamurni','Talagasari','Tobat','Balaraja'
             ],
             2 => [
                 'Bitung Jaya','Bojong','Budi Mulya','Cibadak','Cikupa','Dukuh','Pasir Gadung','Pasir Jaya','Sukadamai','Sukanagara','Talaga','Talagasari','Bunder','Sukamulya'
