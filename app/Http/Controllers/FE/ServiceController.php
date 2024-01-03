@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\FE;
 
+use DateTime;
 use App\Models\Period;
 use App\Models\Setting;
 use App\Models\Category;
@@ -42,10 +43,16 @@ class ServiceController extends Controller
         
 
         $start_date = $active_period->start_date ? date('Y-m-d', strtotime($active_period->start_date)) : null;
+        $curent_date = date('Y-m-d');
+        
+        $tgl1 = new DateTime($curent_date);
+        $tgl2 = new DateTime($start_date);
+        $jarak = $tgl2->diff($tgl1);
+        
         if($start_date != null) {
-            $curent_date = date('Y-m-d');
 
-            if($curent_date >= $start_date) {
+            // if($curent_date >= $start_date) {
+            if($jarak->days > 0) {
                 $result = array('status' => 'success', 'services' => $services, 'active_period'=>$active_period);
             } else {
                 $result = array('status' => 'failed', 'messsage' => 'Mohon maaf, Pendaftaran pelatihan '.$active_period->name.' telah ditutup');
