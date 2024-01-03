@@ -48,6 +48,7 @@
         <div class="mb-2">
             <small class="alert alert-warning py-0">{{ $service->category->name }}</small>
         </div>
+        <small class="alert alert-primary py-0">{{ $service->duration }}</small>
         {{-- <p hidden>
             <small class="card-text"> 
                 <i class="fas fa-calendar-minus me-2"></i>  
