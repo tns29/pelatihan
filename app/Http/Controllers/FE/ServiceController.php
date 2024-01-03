@@ -43,16 +43,34 @@ class ServiceController extends Controller
         
 
         $start_date = $active_period->start_date ? date('Y-m-d', strtotime($active_period->start_date)) : null;
+        $end_date = $active_period->end_date ? date('Y-m-d', strtotime($active_period->end_date)) : null;
         $curent_date = date('Y-m-d');
         
-        $tgl1 = new DateTime($curent_date);
-        $tgl2 = new DateTime($start_date);
-        $jarak = $tgl2->diff($tgl1);
+        // $now = new DateTime($curent_date);
+        $now = date_create();
+        $start = new DateTime($start_date);
+        $end = new DateTime($end_date);
+        // $jarak_mulai = $now->diff($start);
+        // $jarak_selesai = $end->diff($now);
         
+        $jarak_mulai  = date_diff($now, $start);
+        $jarak_selesai  = date_diff($now, $end);
+        if($jarak_mulai->days > 0 && $jarak_mulai->invert > 0) {
+            $telah_dimulai = true;
+        } else {
+            $telah_dimulai = false;
+        }
+        if($jarak_selesai->days > 0 && $jarak_selesai->invert > 0) {
+            $telah_selesai = true;
+        } else {
+            $telah_selesai = false;
+        }
+        // dd($jarak_mulai);
+
         if($start_date != null) {
 
             // if($curent_date >= $start_date) {
-            if($jarak->days > 0) {
+            if($telah_dimulai == true && $telah_selesai == false) {
                 $result = array('status' => 'success', 'services' => $services, 'active_period'=>$active_period);
             } else {
                 $result = array('status' => 'failed', 'messsage' => 'Mohon maaf, Pendaftaran pelatihan '.$active_period->name.' telah ditutup');
