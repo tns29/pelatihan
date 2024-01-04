@@ -50,7 +50,7 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'title'      => 'required|max:30',
+            'title'      => 'required|max:100',
             'body'      => 'required',
             'image'     => 'image|file|max:1024'
         ]);
@@ -105,7 +105,7 @@ class PostsController extends Controller
     public function update(Request $request, string $id)
     {
          $validatedData = $request->validate([
-            'title'      => 'required|max:30',
+            'title'      => 'required|max:100',
             'body'      => 'required',
             'image'     => 'image|file|max:1024'
         ]);
