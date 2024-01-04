@@ -54,7 +54,10 @@
           </small>
         </div>
         <div class="col-md-4">
-          <img src="{{ asset('/storage').'/'.$item->image }}" class="img-fluid" style="max-width: 300px;" alt="img-news">
+          <img src="{{ asset('/storage').'/'.$item->image }}" class="img-fluid shadow p-2" style="max-width: 300px;" alt="img-news">
+          <div class="mt-2">
+            <a href="{{ asset('/storage').'/'.$item->image }}" class="text-decoration-none" download>Download gambar</a>
+          </div>
         </div>
       </div>
     @endforeach
