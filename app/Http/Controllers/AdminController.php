@@ -144,7 +144,7 @@ class AdminController extends Controller
         $validatedData['updated_at'] = date('Y-m-d H:i:s');
         $validatedData['updated_by'] = Auth::guard('admin')->user()->username;
         if($request['password']) {
-            $request['password'] = Hash::make($request['password']);
+            $validatedData['password'] = Hash::make($request['password']);
         }
         $validatedData['level_id'] = $validatedData['level_id'];
         
