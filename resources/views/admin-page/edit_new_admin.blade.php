@@ -155,7 +155,7 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 mt-4"> 
-                                <label for="password">Password</label> 
+                                <label for="password">Password</label> <small class="text-danger"> ( Kosongkan jika tidak ingin mengubah password )</small>
                                 <small class="text-danger"><i>"Kosongkan jika tidak ingin mengubah password"</i></small>
                                 <input type="password" class="form-control @error('password')is-invalid @enderror" name="password" id="password">
                                 @error('password')
