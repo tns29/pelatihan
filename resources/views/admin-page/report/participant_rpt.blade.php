@@ -86,6 +86,7 @@
                     <th style="text-align: left; width: 42px;">Tahun Lulus</th>
                     <th style="text-align: left;">Tanggal</th>
                     <th style="text-align: left;">Gelombang</th>
+                    <th style="text-align: left;">Tahun</th>
                     <th style="text-align: center;">Status</th>
                 </tr>
                 @foreach ($data as $item)
@@ -107,7 +108,7 @@
                         <td>{{$item->graduation_year}}</td>
                         <td>{{ date('d/m/Y', strtotime($item->date)) }}</td>
                         <td>{{$item->gelombang}}</td>
-                        <td>{{$item->gelombang}}</td>
+                        <td>{{$item->year}}</td>
                         <td style="text-align: center">
                             @switch($item->passed)
                                 @case("Y")
