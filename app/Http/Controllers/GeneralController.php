@@ -334,7 +334,7 @@ class GeneralController extends Controller {
         // dd($where);
         
         $data = DB::table('registrants')
-            ->select('registrants.*','participants.*','sub_districts.name as sub_district_name', 'villages.name as village_name', 'periods.name as gelombang')
+            ->select('registrants.*','participants.*','sub_districts.name as sub_district_name', 'villages.name as village_name', 'periods.name as gelombang', 'trainings.title AS training_name')
             ->leftJoin('trainings', 'trainings.id', '=', 'registrants.training_id')
             ->leftJoin('periods', 'periods.id', '=', 'trainings.period_id')
             ->leftJoin('participants', 'participants.number', '=', 'registrants.participant_number')

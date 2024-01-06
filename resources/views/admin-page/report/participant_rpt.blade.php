@@ -56,11 +56,12 @@
                     <th style="text-align: left;">No. WA</th>
                     <th style="text-align: left;">Kecamatan</th>
                     <th style="text-align: left;">Desa / Kelurahan</th>
-                    <th style="text-align: left;">Alamat Lengkap</th>
+                    <th style="text-align: left;">Judul Pelatihan</th>
+                    {{-- <th style="text-align: left;">Alamat Lengkap</th> --}}
                     <th style="text-align: left;">Email</th>
                     <th style="text-align: left;">Agama</th>
-                    <th style="text-align: left;">Pendidikan Terakhir</th>
-                    <th style="text-align: left;">Tahun Lulus</th>
+                    <th style="text-align: left; width: 52px;">Pendidikan Terakhir</th>
+                    <th style="text-align: left; width: 42px;">Tahun Lulus</th>
                     <th style="text-align: left;">Tanggal</th>
                     <th style="text-align: left;">Gelombang</th>
                     <th style="text-align: center;">Status</th>
@@ -76,7 +77,8 @@
                         <td>{{$item->no_wa}}</td>
                         <td>{{$item->sub_district_name}}</td>
                         <td>{{$item->village_name}}</td>
-                        <td>{{$item->address}}</td>
+                        <td>{{$item->training_name}}</td>
+                        {{-- <td>{{$item->address}}</td> --}}
                         <td>{{$item->email}}</td>
                         <td>{{$item->religion}}</td>
                         <td>{{$item->last_education}}</td>
