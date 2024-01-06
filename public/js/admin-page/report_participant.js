@@ -14,8 +14,9 @@ $(document).ready(function () {
 
     let startYear = 2010;
     let endYear = new Date().getFullYear();
-    for (var i = startYear; i <= endYear + 1; i++) {
-        $("#year").append($("<option />").val(i).html(i));
+    for (var listYear = startYear; listYear <= endYear; listYear++) {
+        console.log(listYear);
+        $("#year").append($("<option />").val(listYear).html(listYear));
     }
     $("#year").val(endYear).change();
 });
