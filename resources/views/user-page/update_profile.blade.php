@@ -36,6 +36,7 @@
             <div class=" mt-2 d-flex">
                 <label for="nik" class="col-md-3 ms-3">NIK </label>
                 <input type="text" class="form-control inline-block @error('nik')is-invalid @enderror" maxlength="16" name="nik" id="nik" value="{{ old('nik', $auth_user->nik) }}" onkeyup="onlyNumbers(this)">
+                <input type="hidden" name="nik1" value="{{ old('nik', $auth_user->nik) }}">
                 @error('nik')
                 <small class="invalid-feedback ms-3">
                     Nik {{ $message }}

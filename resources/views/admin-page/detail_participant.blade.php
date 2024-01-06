@@ -127,7 +127,14 @@ $date_of_birth = $detailParticipant->date_of_birth ? date('d, M Y', strtotime($d
                         @else
                             <img src="{{ asset('/storage').'/'.$detailParticipant->image }}" class="shadow mb-2" style="width : 100%;" alt="User Image">
                         @endif
-                        <div class="text-left"><small class="pt-2">Bergabung sejak, {{ date('d, M Y', strtotime($detailParticipant->created_at)) }}</small></div>
+                        <div class="row">
+                            <div class="text-left col"><small class="pt-2">Bergabung sejak, {{ date('d, M Y', strtotime($detailParticipant->created_at)) }}</small></div>
+                            <div class="text-right col">
+                                <small class="pt-2">
+                                    <a href="{{ asset('/storage').'/'.$detailParticipant->image }}" download="">Download gambar </a>
+                                </small>
+                            </div>
+                        </div>
                     </tr>
                     @if ($candidate != 'Y') 
                     <form action="/acc-participant/{{ $detailParticipant->number }}" method="POST">
