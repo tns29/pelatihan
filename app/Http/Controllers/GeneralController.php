@@ -304,7 +304,7 @@ class GeneralController extends Controller {
         $where = ['registrants.is_active' => 'Y'];
 
         if($request->session()->get('fullname')) {
-            $where['participants.number'] = $request->session()->get('fullname')[0];
+            $where['participants.number'] = (string)$request->session()->get('fullname')[0];
         }
         if($request->session()->get('category_id')) {
             $where['trainings.category_id'] = $request->session()->get('category_id')[0];
@@ -331,8 +331,6 @@ class GeneralController extends Controller {
             $where['trainings.period_id'] = $request->session()->get('period')[0];
         }
 
-        // dd($where);
-        
         $data = DB::table('registrants')
             ->select('registrants.*','participants.*','sub_districts.name as sub_district_name', 'villages.name as village_name', 'periods.name as gelombang', 'trainings.title AS training_name')
             ->leftJoin('trainings', 'trainings.id', '=', 'registrants.training_id')
@@ -343,9 +341,20 @@ class GeneralController extends Controller {
             ->where($where)
             ->get();
             
+        $count = DB::table('registrants')
+            ->select('registrants.*','participants.*','sub_districts.name as sub_district_name', 'villages.name as village_name', 'periods.name as gelombang', 'trainings.title AS training_name')
+            ->leftJoin('trainings', 'trainings.id', '=', 'registrants.training_id')
+            ->leftJoin('periods', 'periods.id', '=', 'trainings.period_id')
+            ->leftJoin('participants', 'participants.number', '=', 'registrants.participant_number')
+            ->leftJoin('sub_districts', 'participants.sub_district', '=', 'sub_districts.id')
+            ->leftJoin('villages', 'participants.village', '=', 'villages.id')
+            ->where($where)
+            ->count();
+        // dd($count);
         return view('admin-page.report.participant_rpt', [
             'title' => 'Laporan Peserta Pelatihan',
             'data' => $data,
+            'count' => $count,
         ]);
     }
 }
