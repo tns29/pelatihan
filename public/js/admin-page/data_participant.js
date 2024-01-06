@@ -1,5 +1,10 @@
 $(function () {
     console.log("ready");
+
+    setTimeout(() => {
+        $("#message").hide(500);
+        $("#success").hide(500);
+    }, 4000);
 });
 
 function getDetailUser(code) {
@@ -73,4 +78,24 @@ function getDetailUser(code) {
             $("#tb-detail").append(html);
         },
     });
+}
+
+function delete_data(number, name) {
+    //
+    $("#modal-delete").modal("show");
+    $(".modal-title").text("Hapus Data");
+    $("#modal-delete form").attr("action", "/delete-registrant/" + number);
+    $("#content-delete").html("");
+
+    var html =
+        `<div class="col mb-2">
+                <input type="hidden" name="number" id="number" value="` +
+        number +
+        `">
+                <span style="margin-left: 10px;">Hapus Data <b>` +
+        name +
+        `</b> ?<span>
+                </div>`;
+
+    $("#content-delete").append(html);
 }

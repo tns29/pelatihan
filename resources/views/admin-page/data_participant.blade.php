@@ -23,6 +23,16 @@ $candidatePage = $candidate == "Y" ? "Y"  : '';
         <div class="row mx-2">
           <div class="row justify-content-end mb-2 w-100">
             {{-- <a href="/add-data-admin" class="btn float-right btn-add "><i class="fas fa-plus-square"></i> &nbsp; Data</a> --}}
+            @if (session()->has('success'))
+              <div class="alert alert-success py-1" id="success">
+                <?= session()->get('success') ?>
+              </div>
+            @endif
+            @if (session()->has('message'))
+              <div class="alert alert-warning py-1" id="message">
+                <?= session()->get('message') ?>
+              </div>
+            @endif
           </div>
           <table class="table table-bordered table-sm">
               <thead>
@@ -37,7 +47,7 @@ $candidatePage = $candidate == "Y" ? "Y"  : '';
                       @else
                         <th style="width: 8%; text-align: center;">Status</th>
                       @endif
-                      <th style="width: 10%; text-align: center;">Aksi</th>
+                      <th style="width: 7%; text-align: center;">Aksi</th>
                   </tr>
               </thead>
               <tbody>
@@ -66,7 +76,13 @@ $candidatePage = $candidate == "Y" ? "Y"  : '';
                         </td>
                       @endif
                       <td style=" text-align: center;">
-                        <a href="/detail-participant/{{ $row->number }}/{{$candidatePage}}" class="text-info">Detail <i class="fas fa-info-circle"></i></a>
+                        @if ($candidatePage == 'Y')
+                          <a href="/detail-participant/{{ $row->number }}/{{$candidatePage}}" class="text-info">Detail <i class="fas fa-info-circle"></i></a>
+                        @else
+                          <a href="/detail-participant/{{ $row->number }}/{{$candidatePage}}" class="text-info"> <i class="fas fa-info-circle"></i></a>
+                          &nbsp;
+                          <a href="#" onclick="delete_data(`{{ $row->number }}`, `{{ $row->fullname }}`)" class="text-danger"> <i class="fas fa-trash"></i></a>
+                        @endif
                       </td>
                   </tr>
                 @endforeach
@@ -75,5 +91,31 @@ $candidatePage = $candidate == "Y" ? "Y"  : '';
         </div>
     </div>
 </section> 
+
+<div class="modal fade" id="modal-delete" tabindex="-1">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title ml-2 font-weight-bold">Title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form method="POST">
+        @csrf
+        @method('DELETE')
+        <div class="modal-body p-3">
+          <div class="row" id="content-delete">
+            
+          </div>
+        </div> 
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
+          <button type="submit" class="btn btn-primary">Ya</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 @endsection

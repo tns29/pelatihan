@@ -176,7 +176,7 @@ class AdminController extends Controller
         $data = Admin::where(['number' => $number]);
         $result = $data->delete();
         if($result) {
-            $request->session()->flash('success', 'Transaksi berhasil diubah');
+            $request->session()->flash('success', 'Data berhasil dihapus');
         } else {
             $request->session()->flash('failed', 'Proses gagal, Hubungi administrator');
         }
@@ -196,6 +196,22 @@ class AdminController extends Controller
             'auth_user' => $data,
             'dataParticipants' => $dataParticipants
         ]);
+    }
+
+    function deleteRegistrant(Request $request, string $number) {
+        $checkDataExist = Registrant::where("participant_number", $number)->count();
+        if($checkDataExist > 0) {
+            $request->session()->flash('message', 'Akun tidak dapat dihapus, karna telah mengikuti pelatihan');
+            return redirect('/registrant-data');
+        }
+        $data = Participant::where(['number' => $number]);
+        $result = $data->delete();
+        if($result) {
+            $request->session()->flash('success', 'Data berhasil dihapus');
+        } else {
+            $request->session()->flash('failed', 'Proses gagal, Hubungi administrator');
+        }
+        return redirect('/registrant-data');
     }
 
     function candidateData() {

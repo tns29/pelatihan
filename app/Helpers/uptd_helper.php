@@ -34,7 +34,7 @@ function getNotif() {
     //         ->where('participant', '')
     //         ->get();
 
-    $data = DB::select('select * from participants where participant = " " ');
+    $data = DB::select('select * from participants where participant IS NULL ');
     return $data;
 }
 
