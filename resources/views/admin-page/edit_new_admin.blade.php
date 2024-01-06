@@ -34,7 +34,7 @@
                             <div class="col-lg-5 col-md-5 col-sm-5 mt-2">
                                 <div class="form-check mt-1">
                                     <label for="is_active">Status Aktif ?</label>
-                                    <input class="form-check-input mt-5" type="checkbox" checked value="Y" name="is_active" id="is_active" style="width: 1.3rem; height: 1.3rem; top:-1rem; left: 2.5rem;">
+                                    <input class="form-check-input mt-5" type="checkbox" {{ $data_admin->is_active == 'Y' ? "checked" : "" }} value="Y" name="is_active" id="is_active" style="width: 1.3rem; height: 1.3rem; top:-1rem; left: 2.5rem;">
                                     <div class="form-check-label" style="margin-left: 30px">Ya</div>
                                 </div>
                             </div>
