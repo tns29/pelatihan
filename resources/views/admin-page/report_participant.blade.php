@@ -71,6 +71,16 @@
                                 </select>
                             </div>
                             <div class="col-lg-6 col-md-6 mt-2">
+                                <label for="rematerial_statusligion" class="ml-1">Status Pernikahan</label>
+                                <select name="material_status" id="material_status" class="form-control form-select">
+                                    <option value="">Pilih status</option>
+                                    <option value="Kawin" > » &nbsp; Kawin</option>
+                                    <option value="Belum Kawin"> » &nbsp; Belum Kawin</option>
+                                    <option value="Janda" > » &nbsp; Janda</option>
+                                    <option value="Duda" > » &nbsp; Duda</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-6 col-md-6 mt-2">
                                 <label for="sub_district" class="ml-1">Kecamatan</label>
                                 <select name="sub_district" id="sub_district" class="form-control form-select">
                                     <option value="">Pilih kecamatan</option>
@@ -91,16 +101,6 @@
                                             » &nbsp; {{ $item->name }}
                                         </option>
                                     @endforeach --}}
-                                </select>
-                            </div>
-                            <div class="col-lg-6 col-md-6 mt-2">
-                                <label for="rematerial_statusligion" class="ml-1">Status Pernikahan</label>
-                                <select name="material_status" id="material_status" class="form-control form-select">
-                                    <option value="">Pilih status</option>
-                                    <option value="Kawin" > » &nbsp; Kawin</option>
-                                    <option value="Belum Kawin"> » &nbsp; Belum Kawin</option>
-                                    <option value="Janda" > » &nbsp; Janda</option>
-                                    <option value="Duda" > » &nbsp; Duda</option>
                                 </select>
                             </div>
                             <div class="col-lg-6 col-md-6 mt-2">

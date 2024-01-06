@@ -1,12 +1,12 @@
-$("#sub_district").on("change", function () {
-    $("#village").html("");
-    $("#village").val("");
-    // console.log($(this).val());
-    // loadVillages($(this).val());
-    loadVillages($("#sub_district").val());
-});
-
 $(document).ready(function () {
+    $("#sub_district").on("change", function () {
+        $("#village").html("");
+        $("#village").val("");
+        // console.log($(this).val());
+        // loadVillages($(this).val());
+        loadVillages($("#sub_district").val());
+    });
+
     $(".select-fullname").select2({
         placeholder: "Pilih Peserta",
         width: "760",
@@ -15,14 +15,12 @@ $(document).ready(function () {
     let startYear = 2010;
     let endYear = new Date().getFullYear();
     for (var listYear = startYear; listYear <= endYear; listYear++) {
-        console.log(listYear);
         $("#year").append($("<option />").val(listYear).html(listYear));
     }
     $("#year").val(endYear).change();
 });
 
 function loadVillages(id) {
-    console.log(id);
     $.ajax({
         type: "GET",
         dataType: "JSON",
