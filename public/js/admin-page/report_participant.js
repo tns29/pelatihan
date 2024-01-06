@@ -11,6 +11,13 @@ $(document).ready(function () {
         placeholder: "Pilih Peserta",
         width: "760",
     });
+
+    let startYear = 2010;
+    let endYear = new Date().getFullYear();
+    for (var i = startYear; i <= endYear + 1; i++) {
+        $("#year").append($("<option />").val(i).html(i));
+    }
+    $("#year").val(endYear).change();
 });
 
 function loadVillages(id) {
@@ -50,6 +57,7 @@ $("#submitRpt").on("click", function () {
     var material_status = $("#material_status").val();
     var religion = $("#religion").val();
     var period = $("#period").val();
+    var year = $("#year").val();
 
     $.ajax({
         type: "GET",
@@ -65,6 +73,7 @@ $("#submitRpt").on("click", function () {
             material_status: material_status,
             religion: religion,
             period: period,
+            year: year,
         },
         success: function (data) {
             openRpt();

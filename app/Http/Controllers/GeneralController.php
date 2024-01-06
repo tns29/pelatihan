@@ -308,6 +308,15 @@ class GeneralController extends Controller {
         } else {
             session()->forget('period');
         }
+        
+        if($request->year) {
+            if($request->session()->get('year') != $request->year) {
+                session()->forget('year');
+            }
+            $request->session()->push('year', $request->year);
+        } else {
+            session()->forget('year');
+        }
 
         echo json_encode('{}');
     }
@@ -341,6 +350,9 @@ class GeneralController extends Controller {
         }
         if($request->session()->get('period')) {
             $where['trainings.period_id'] = $request->session()->get('period')[0];
+        }
+        if($request->session()->get('year')) {
+            $where['registrants.year'] = $request->session()->get('year')[0];
         }
 
         $data = DB::table('registrants')
