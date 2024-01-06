@@ -61,6 +61,9 @@ class GeneralController extends Controller {
                 return redirect('/pelatihan/'.$serviceId);
             }
 
+            
+            $active_period = Period::where('is_active', 'Y')->first();
+            
             $usia = hitung_umur($user->date_of_birth);
             
             $getService = Training::find($serviceId);
@@ -88,8 +91,10 @@ class GeneralController extends Controller {
             $registrant->participant_number = $user->number;
             $registrant->training_id = $serviceId;
             $registrant->date = date('Y-m-d H:i:s');
+            $registrant->year = date('Y');
             $registrant->is_active = 'Y';
-
+            $registrant->period_id = $active_period->id;
+            // dd($registrant);
             $registrant->save();
             
             $request->session()->flash('success', 'Anda berhasil mendaftar pelatihan.');
