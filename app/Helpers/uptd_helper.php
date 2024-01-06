@@ -30,12 +30,11 @@ function hitung_umur($tanggal_lahir){
 }
 
 function getNotif() {
-    $data = DB::table('participants')
-            ->select('participants.*','sub_districts.name as sub_district_name', 'villages.name as village_name')
-            ->leftJoin('sub_districts', 'participants.sub_district', '=', 'sub_districts.id')
-            ->leftJoin('villages', 'participants.village', '=', 'villages.id')
-            ->where('participant', 'N')
-            ->get();
+    // $data = DB::table('participants')
+    //         ->where('participant', '')
+    //         ->get();
+
+    $data = DB::select('select * from participants where participant = " " ');
     return $data;
 }
 

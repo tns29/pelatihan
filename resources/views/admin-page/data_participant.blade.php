@@ -27,7 +27,7 @@ $candidatePage = $candidate == "Y" ? "Y"  : '';
           <table class="table table-bordered table-sm">
               <thead>
                   <tr class="my-bg-primary text-white">
-                      <th style="width: 11%">Nomor</th>
+                      <th style="width: 12.5%">Nomor</th>
                       <th>Nama Lengkap</th>
                       <th style="width: 11%">Jenis Kelamin</th>
                       <th>Email</th>
@@ -35,7 +35,7 @@ $candidatePage = $candidate == "Y" ? "Y"  : '';
                       <th style="width: 10%; text-align: left;">No. WA</th>
                         <th style="width: 15%; text-align: left;">Kecamatan</th>
                       @else
-                        <th style="width: 10%; text-align: center;">Status</th>
+                        <th style="width: 8%; text-align: center;">Status</th>
                       @endif
                       <th style="width: 10%; text-align: center;">Aksi</th>
                   </tr>
@@ -52,7 +52,17 @@ $candidatePage = $candidate == "Y" ? "Y"  : '';
                         <td>{{ $row->sub_districts->name }}</td>
                       @else
                         <td style=" text-align: center;">
-                          <?= $row->participant == 'Y' ? ' <i class="fas fa-check-square text-success"></i>' : ' <i class="fas fa-window-close text-danger"></i>' ?>
+                          @switch($row->participant)
+                              @case('Y')
+                                    <i class="fas fa-check-square text-success"></i>
+                                  @break
+                              @case('N')
+                                    <i class="fas fa-window-close text-danger"></i>
+                                  @break
+                              @default
+                                    <i class="far fa-question-circle"></i>
+                          @endswitch
+                          {{-- <?= $row->participant == 'Y' ? ' <i class="fas fa-check-square text-success"></i>' : ' <i class="fas fa-window-close text-danger"></i>' ?> --}}
                         </td>
                       @endif
                       <td style=" text-align: center;">
