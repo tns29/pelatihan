@@ -6,6 +6,9 @@
     <title><?= $title ?></title>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
         @font-face {
             font-family: Nutino;
             src: url(../font/Nunito/Nunito-VariableFont_wght.ttf);
@@ -30,6 +33,17 @@
         .wrapper {
             padding: 0 10px;
         }
+
+        .icon-export {
+            float: right; 
+            padding: 0px;
+        }
+
+        .row-export::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
         
     </style>
 </head>
@@ -37,14 +51,22 @@
 <body>
 
     <div class="wrapper">
-        <div style="float: right;">
-            <a href="/export_registrant">
-                <img src="{{ asset('img/excel.png') }}" alt="excel" style="height: 40px;">
-                <label for="print" style="display : block; font-size: 12px; margin-left: 4px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">export</label>
-                <br>
-            </a>
-        </div>
         <h1> {{ $title }} </h1>
+        <div class="row-export">
+            <div class="icon-export">
+                <a href="/export_participant">
+                    <img src="{{ asset('img/excel.png') }}" alt="excel" style="height: 40px;">
+                    <label for="print" style="display : block; font-size: 12px; margin-left: 4px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">export</label>
+                    <br>
+                </a>
+            </div> 
+        </div>
+        <div style=" background: black; width:100% height:100px;">
+            <div style="float: right; right:0;font-family: 'Nutino';">
+                <small><b>Total Pendaftar Akun : {{$count}}</b></small>
+            </div>
+        </div> 
+
         <div style="display: flex; width: 100%;">
             <table class="table" style="width: 100%; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
                 <tr>

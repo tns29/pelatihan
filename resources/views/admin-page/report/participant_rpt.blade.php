@@ -62,11 +62,11 @@
             </div> 
         </div>
         <div style=" background: black; width:100% height:100px;">
-            
             <div style="float: right; right:0;font-family: 'Nutino';">
                 <small><b>Total Peserta Pelatihan : {{$count}}</b></small>
             </div>
         </div>
+        
         <div style="display: flex; width: 100%;">
             <table class="table" style="width: 100%; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
                 <tr>
