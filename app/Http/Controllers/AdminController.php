@@ -247,6 +247,20 @@ class AdminController extends Controller
         ]);
     }
     
+    function resetPassword(Request $request, string $number) {
+        
+        $password = Hash::make($request->password);
+
+        $result = Participant::where('number', $number)->update(['password'=>$password]);
+        
+        if($result) {
+            $request->session()->flash('success', 'Password baru berhasil disimpan');
+        } else {
+            $request->session()->flash('failed', 'Proses gagal, Hubungi administrator');
+        }
+        return redirect('/detail-participant/'.$number);
+    }
+
     function registrant(Request $request) {
         $filename = 'registrant';
         $filename_script = getContentScript(true, $filename);

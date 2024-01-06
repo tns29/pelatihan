@@ -58,9 +58,10 @@ Route::middleware('admin')->group(function () {
     Route::get('/getRegistrant', [GeneralController::class, 'getRegistrant']);
 
     Route::get('/registrant-data', [AdminController::class, 'registrantData']); // pendaftar akun
-    Route::delete('/delete-registrant/{number}', [AdminController::class, 'deleteRegistrant']); // hapus pendaftar akun
     Route::get('/candidate-data', [AdminController::class, 'candidateData']); // calon peserta
     Route::get('/detail-participant/{number}', [AdminController::class, 'detailParticipant']);
+    Route::delete('/delete-registrant/{number}', [AdminController::class, 'deleteRegistrant']); // hapus pendaftar akun
+    Route::put('/reset-password/{number}', [AdminController::class, 'resetPassword']); // reset password pendaftar akun
     Route::get('/detail-participant/{number}/{page}', [AdminController::class, 'detailParticipant']);
     Route::put('/acc-participant/{number}', [GeneralController::class, 'accParticipant']);
     

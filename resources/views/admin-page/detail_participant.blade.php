@@ -144,7 +144,17 @@ $date_of_birth = $detailParticipant->date_of_birth ? date('d, M Y', strtotime($d
                             </td>
                         </tr>
                         <tr>
+                            <td><a href="#" onclick="popUpResetPassword()">Reset Password</a></td>
                             <td colspan="2"><button class="btn btn-outline-info py-1 float-right w-full">Simpan dan keluar &nbsp; <i class="fas fa-share-square"></i> </button></td>
+                        </tr>
+                        <tr class="bg-success">
+                            @if (session()->has('success'))
+                                <td colspan="3">
+                                    <span class="alert alert-success py-1" id="success">
+                                        <?= session()->get('success') ?>
+                                    </span>
+                                </td>
+                            @endif
                         </tr>
                         
                     </form>
@@ -168,28 +178,31 @@ $date_of_birth = $detailParticipant->date_of_birth ? date('d, M Y', strtotime($d
     </div>
 </section> 
 
-<div class="modal fade" id="modal-detail" tabindex="-1">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title ml-3 font-weight-bold">Detail Pengguna</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body p-3">
-        <div class="row">
-          <div class="col-lg-3 px-1" style="max-width: 28%;">
-            <img src="" class="imgProfile" alt="imgProfile" style="height: 210px;">
-            <div id="since" class="text-center text-sm w-100"></div>
-          </div>
-          <div class="col-lg-8">
-            <table class="table table-striped" id="tb-detail"></table>
-          </div> 
+<div class="modal fade" id="modal-reset-password" tabindex="-1">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title ml-2 font-weight-bold">Reset Password</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-      </div> 
+        <form method="POST" action="/reset-password/{{ $detailParticipant->number }}">
+          @csrf
+          @method('PUT')
+          <div class="modal-body mx-3 px-3">
+            <div class="row">
+              <label for="label">Kata Sandi Baru</label>
+              <input type="password" name="password" class="form-control" placeholder="Masukkan kata sandi baru" required>
+            </div>
+          </div> 
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
-</div>
 
 @endsection
