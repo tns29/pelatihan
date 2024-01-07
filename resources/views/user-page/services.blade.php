@@ -43,7 +43,8 @@
         <input type="text" class="form-control" name="keyword" id="keyword" placeholder="Apa yg ingin anda pelajari ?">
       </div>
       <div class="col" style="width: 8%; padding: 0 !important;">
-        <button class="btn btn-info float-end">
+        
+        <button class="btn btn-info float-end" onclick="searchButton()">
           <i class="fas fa-search pe-2"></i> Cari
         </button>
       </div>

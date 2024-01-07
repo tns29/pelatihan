@@ -36,13 +36,19 @@ function getCategory(id) {
     }
 }
 
-function getServicesList(categoryId) {
-    var route = "getDataServices";
+function searchButton() {
+    var category = $("#category").val();
+    var search_name = $("#keyword").val();
+    getServicesList(category, search_name);
+}
+
+function getServicesList(categoryId, search_name) {
+    var route = "/getDataServices";
     $.ajax({
         type: "GET",
         dataType: "JSON",
         url: route,
-        data: { categoryId: categoryId },
+        data: { categoryId: categoryId, search_name: search_name },
         success: function (data) {
             if (data.status == "success") {
                 var html = "";

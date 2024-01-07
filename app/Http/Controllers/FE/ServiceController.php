@@ -38,8 +38,12 @@ class ServiceController extends Controller
         } else {
             $filter = ['period_id'  => $active_period->id, 'is_active' => 'Y'];
         }
+        $search_name = $request->search_name;
 
-        $services = Training::with('category')->where($filter)->get();
+        $services = Training::with('category')
+                            ->where($filter)
+                            ->where('title', 'like', '%' . $search_name . '%')
+                            ->get();
         
 
         $start_date = $active_period->start_date ? date('Y-m-d', strtotime($active_period->start_date)) : null;
