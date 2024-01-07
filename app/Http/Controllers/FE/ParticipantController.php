@@ -167,9 +167,9 @@ class ParticipantController extends Controller
             'sub_district'    => 'required|max:100',
             'village'    => 'required|max:100',
             'image'     => 'image|file|max:1024',
-            'id_card'     => 'file|max:1024',
-            'ak1'     => 'file|max:1024',
-            'ijazah'     => 'file|max:1024',
+            'id_card'     => 'image|file|max:2048',
+            'ak1'     => 'file|max:2048',
+            'ijazah'     => 'file|max:2048',
         ]);
 
         // dd($validatedData);
