@@ -19,7 +19,7 @@ class HomeController extends Controller
     }
 
     function posts() {
-        $post = Post::get();
+        $post = Post::orderBy('id', 'DESC')->get();
         return view('user-page/posts', [
             'title' => 'Pemberitahuan',
             'posts' => $post,
