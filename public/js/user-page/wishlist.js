@@ -8,7 +8,13 @@ function printCard(periode, training_name, date, is_passed, approve) {
     } else if (is_passed == "N") {
         var span = `<span class="text-danger">TIDAK LULUS</span>`;
     } else {
-        var span = `<span class="text-success"><b> Sedang Berlangsung </b></span>`;
+        if (approve == "Y") {
+            var span = `<span class="text-success"><b> Sedang Berlangsung </b></span>`;
+        } else if (approve == "N") {
+            var span = `<span class="text-danger"><b> Pelatihan ditolak </b></span>`;
+        } else {
+            var span = `<span class="text-warning"><b> Menunggu persetujuan </b></span>`;
+        }
     }
 
     if (approve) {
