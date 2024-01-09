@@ -39,7 +39,7 @@
 
   @if (count($posts) > 0)
     @foreach ($posts as $item)
-      <div class="row shadow rounded-3 p-3 mt-3">
+      <div class="row shadow bg-white rounded-3 p-3 mt-3">
         <div class="col">
           <h3 class="h3">{{ $item->title }}</h3>
           <div class="col-lg-12 col-md-12 col-sm-12">
