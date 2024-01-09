@@ -29,8 +29,9 @@
       <footer style="bottom:0 !important;">
         <br>
         <hr>
-        <div> &copy; UPTD KAB. TANGERANG {{ date('Y') }} by 
-            <a href="https://yusufarya.my.id" target="_blank" class="text-decoration-none">29tech.id</a>
+        <div> Copyright &copy; UPTD Kab. Tangerang {{ date('Y') }} 
+            {{-- by  --}}
+            {{-- <a href="https://yusufarya.my.id" target="_blank" class="text-decoration-none">29tech.id</a> --}}
             All rights reserved.</div>
       </footer>
     </main>
