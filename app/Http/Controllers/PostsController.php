@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostsController extends Controller
 {
@@ -132,7 +133,13 @@ class PostsController extends Controller
     public function destroy(Request $request, int $id)
     {
         $data = Post::find($id);
+        
+        if($data->image) {
+            Storage::delete($data->image);
+        }
+
         $result = $data->delete();
+        
         if($result) {
             $request->session()->flash('success', 'Berita berhasil diubah');
         } else {

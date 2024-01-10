@@ -92,7 +92,7 @@
                 <div class="row justify-content-end mx-3">
                     <section class="col-lg-4">
                         <section style="float: right;">
-                            <a href="/service" class="btn btn-outline-secondary mr-2"><i class="fas fa-backspace"></i> Batal</a>
+                            <a href="/service-detail" class="btn btn-outline-secondary mr-2"><i class="fas fa-backspace"></i> Batal</a>
                             <button class="btn my-button-save"><i class="far fa-save"></i> Simpan</button>
                         </section>
                     </section>

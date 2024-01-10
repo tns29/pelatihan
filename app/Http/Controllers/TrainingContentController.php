@@ -6,6 +6,7 @@ use App\Models\Training;
 use Illuminate\Http\Request;
 use App\Models\TrainingDetail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class TrainingContentController extends Controller
 {
@@ -144,6 +145,9 @@ class TrainingContentController extends Controller
     public function destroy(Request $request, int $id)
     {
         $data = TrainingDetail::find($id);
+        if($data->image) {
+            Storage::delete($data->image);
+        }
         $result = $data->delete();
         if($result) {
             $request->session()->flash('success', 'Data berhasil diubah');

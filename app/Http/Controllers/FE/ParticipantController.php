@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class ParticipantController extends Controller
 {
@@ -180,7 +181,7 @@ class ParticipantController extends Controller
             ]);
         }
 
-        $getData = Participant::where(['number'=> $number])->first();
+        $getData = Participant::find($number);
         
         if($request->file('image')) {
             $validatedData['image'] = $request->file('image')->store('profile-images');
@@ -226,6 +227,27 @@ class ParticipantController extends Controller
             return redirect('/update-profile');
         }
         
+        if($request->file('id_card')) {
+            if($validatedData['id_card'] && $getData->id_card) {
+                Storage::delete($getData->id_card);
+            }
+        }
+        if($request->file('ak1')) {
+            if($validatedData['ak1'] && $getData->ak1) {
+                Storage::delete($getData->ak1);
+            }
+        }
+        if($request->file('ijazah')) {
+            if($validatedData['ijazah'] && $getData->ijazah) {
+                Storage::delete($getData->ijazah);
+            }
+        }
+        if($request->file('image')) {
+            if($validatedData['image'] && $getData->image) {
+                Storage::delete($getData->image);
+            }
+        }
+        // dd($validatedData);
         $result = Participant::where(['number'=> $number])->update($validatedData);
         if($result) {
             $request->session()->flash('success', 'Data Berhasil diperbaharui');

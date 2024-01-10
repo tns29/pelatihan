@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Training;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class TrainingController extends Controller
 {
@@ -139,7 +140,13 @@ class TrainingController extends Controller
         $validatedData['updated_at'] = date('Y-m-d H:i:s');
         $validatedData['updated_by'] = Auth::guard('admin')->user()->username;
         
-        $result = Training::where(['id' => $id])->update($validatedData);
+        $dataTraining = Training::find($id);
+        if($request->file('image')) {
+            if($validatedData['image'] && $dataTraining->image) {
+                Storage::delete($dataTraining->image);
+            }
+        }
+        $result = $dataTraining->update($validatedData);
         if($result) {
             $request->session()->flash('success', 'Pelatihan berhasil dibuat');
         } else {
@@ -155,7 +162,11 @@ class TrainingController extends Controller
      */
     public function destroy(Request $request, int $id)
     {
-        $result = Training::find($id)->delete();
+        $data = Training::find($id);
+        if($data->image) {
+            Storage::delete($data->image);
+        }
+        $result = $data->delete();
         if($result) {
             $request->session()->flash('success', 'Data berhasil dihapus');
         } else {

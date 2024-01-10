@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -173,7 +174,12 @@ class AdminController extends Controller
             $request->session()->flash('failed', 'Proses gagal, Anda tidak dapat menghapus akun anda sendiri');
             return redirect('/data-admin');
         }
-        $data = Admin::where(['number' => $number]);
+        $data = Admin::find($number);
+
+        if($data->image) {
+            Storage::delete($data->image);
+        }
+
         $result = $data->delete();
         if($result) {
             $request->session()->flash('success', 'Data berhasil dihapus');
@@ -204,7 +210,20 @@ class AdminController extends Controller
             $request->session()->flash('message', 'Akun tidak dapat dihapus, karna telah mengikuti pelatihan');
             return redirect('/registrant-data');
         }
-        $data = Participant::where(['number' => $number]);
+        $data = Participant::find($number);
+        // dd($data);
+        if($data->id_card) {
+            Storage::delete($data->id_card);
+        }
+        if($data->ak1) {
+            Storage::delete($data->ak1);
+        }
+        if($data->ijazah) {
+            Storage::delete($data->ijazah);
+        }
+        if($data->image) {
+            Storage::delete($data->image);
+        }
         $result = $data->delete();
         if($result) {
             $request->session()->flash('success', 'Data berhasil dihapus');
