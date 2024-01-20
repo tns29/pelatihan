@@ -17,7 +17,7 @@
 <section class="content">
     <div class="container-fluid">
         <div class="card mx-3 elevation-1 p-3">
-            <form action="/edit-new-admin" method="POST" enctype="multipart/form-data">
+            <form action="/add-new-staff" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row my-4 mx-3">
                     <div class="col-lg-6 col-md-6 col-sm-12" >
@@ -27,21 +27,21 @@
                             <input type="hidden" id="invalid" value="<?= session()->has('failed') ?>">
     
                             <div class="col-lg-7 col-md-7 col-sm-12 mt-2">
-                                <label for="number">Nomor Admin</label>
-                                <input type="text" class="form-control" name="number" id="number" value="{{$data_admin->number}}" readonly>
+                                <label for="number">Nomor Staff</label>
+                                <input type="text" class="form-control" name="number" id="number" value="{{getLasNumberStaff()}}" readonly>
                             </div>
                             
                             <div class="col-lg-5 col-md-5 col-sm-5 mt-2">
                                 <div class="form-check mt-1">
                                     <label for="is_active">Status Aktif ?</label>
-                                    <input class="form-check-input mt-5" type="checkbox" {{ $data_admin->is_active == 'Y' ? "checked" : "" }} value="Y" name="is_active" id="is_active" style="width: 1.3rem; height: 1.3rem; top:-1rem; left: 2.5rem;">
+                                    <input class="form-check-input mt-5" type="checkbox" checked value="Y" name="is_active" id="is_active" style="width: 1.3rem; height: 1.3rem; top:-1rem; left: 2.5rem;">
                                     <div class="form-check-label" style="margin-left: 30px">Ya</div>
                                 </div>
                             </div>
                             
                             <div class="col-lg-12 col-md-12 col-sm-12 mt-2">
                                 <label for="fullname">Nema Lengkap</label>
-                                <input type="text" autocomplete="off" class="form-control @error('fullname')is-invalid @enderror" name="fullname" id="fullname" maxlength="50" placeholder="Nama lengkap" value="{{ $data_admin->fullname, old('fullname') }}">
+                                <input type="text" autocomplete="off" class="form-control @error('fullname')is-invalid @enderror" name="fullname" id="fullname" maxlength="50" placeholder="Nama lengkap" onkeyup="generateUsername()" value="{{ old('fullname') }}">
                                 @error('fullname')
                                     <small class="invalid-feedback">
                                         Nama Lengkap {{ $message }}
@@ -50,8 +50,7 @@
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 mt-2">
                                 <label for="username">Username</label>
-                                <input type="text" autocomplete="off" class="form-control @error('username')is-invalid @enderror" name="username" id="username" maxlength="10" onkeyup="changeUsername()" value="{{ $data_admin->username, old('username') }}">
-                                <input type="hidden" name="username1" value="{{$data_admin->username}}">
+                                <input type="text" autocomplete="off" class="form-control @error('username')is-invalid @enderror" name="username" id="username" maxlength="10" onkeyup="changeUsername()" value="{{ old('username') }}">
                                 @error('username')
                                     <small class="invalid-feedback">
                                         Username {{ $message }}
@@ -63,8 +62,8 @@
                                 <label for="gender">Jenis Kelamin</label>
                                 <select class="form-control @error('gender')is-invalid @enderror" name="gender" id="gender">
                                     <option value="">Pilih</option>
-                                    <option value="M" {{ $data_admin->gender == "M" ? 'selected' : '' }}>Laki-laki</option>
-                                    <option value="F" {{ $data_admin->gender == "F" ? 'selected' : '' }}>Perempuan</option>
+                                    <option value="M" {{ old('gender') == "M" ? 'selected' : '' }}>Laki-laki</option>
+                                    <option value="F" {{ old('gender') == "F" ? 'selected' : '' }}>Perempuan</option>
                                 </select>
                                 @error('gender')
                                 <small class="invalid-feedback">
@@ -77,9 +76,11 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 mt-2">
                                 <label for="level_id">Level</label>
                                 <select class="form-control @error('level_id')is-invalid @enderror" name="level_id" id="level_id">
-                                    <option value="">Pilih</option>
-                                    @foreach ($level as $val)
-                                        <option value="{{$val->id}}" {{ $data_admin->level_id == $val->id ? 'selected' : '' }} >{{ $val->id . ' - ' . $val->name }}</option>
+                                    {{-- <option value="">Pilih</option> --}}
+                                    @foreach ($level_id as $val)
+                                        @if ($val->id == 2)
+                                            <option value="{{$val->id}}" {{ old('level_id') == $val->id ? 'selected' : '' }} >{{ $val->name }}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                                 @error('level_id')
@@ -91,7 +92,7 @@
                             
                             <div class="col-lg-6 col-md-6 col-sm-12 mt-2">
                                 <label for="no_telp">No. Telp</label>
-                                <input type="text" class="form-control @error('no_telp')is-invalid @enderror" name="no_telp" id="no_telp" value="{{ $data_admin->no_telp, old('no_telp') }}">
+                                <input type="text" class="form-control @error('no_telp')is-invalid @enderror" name="no_telp" id="no_telp" value="{{ old('no_telp') }}">
                                 @error('no_telp')
                                 <small class="invalid-feedback">
                                     Level {{ $message }}
@@ -101,7 +102,7 @@
     
                             <div class="col-lg-6 col-md-6 col-sm-12 mt-2">
                                 <label for="email">Email</label>
-                                <input type="email" class="form-control @error('email')is-invalid @enderror" name="email" id="email" value="{{ $data_admin->email, old('email') }}" readonly>
+                                <input type="email" class="form-control @error('email')is-invalid @enderror" name="email" id="email" value="{{ old('email') }}">
                                 @error('email')
                                 <small class="invalid-feedback">
                                     Email {{ $message }}
@@ -111,7 +112,7 @@
     
                             <div class="col-lg-6 col-md-6 col-sm-12 mt-2">
                                 <label for="place_of_birth">Tempat lahir</label>
-                                <input type="text" class="form-control @error('place_of_birth')is-invalid @enderror" name="place_of_birth" id="place_of_birth" value="{{ $data_admin->place_of_birth, old('place_of_birth') }}">
+                                <input type="text" class="form-control @error('place_of_birth')is-invalid @enderror" name="place_of_birth" id="place_of_birth" value="{{ old('place_of_birth') }}">
                                 @error('place_of_birth')
                                 <small class="invalid-feedback">
                                     Tempat Lahir {{ $message }}
@@ -121,7 +122,7 @@
     
                             <div class="col-lg-6 col-md-6 col-sm-12 mt-2">
                                 <label for="date_of_birth">Tanggal Lahir</label>
-                                <input type="date" class="form-control @error('date_of_birth')is-invalid @enderror" name="date_of_birth" id="date_of_birth" value="{{ $data_admin->date_of_birth, old('date_of_birth') }}">
+                                <input type="date" class="form-control @error('date_of_birth')is-invalid @enderror" name="date_of_birth" id="date_of_birth" value="{{ old('date_of_birth') }}">
                                 @error('date_of_birth')
                                 <small class="invalid-feedback">
                                     Tanggal Lahir {{ $message }}
@@ -130,8 +131,8 @@
                             </div>
     
                             <div class="col-lg-12 col-md-12 col-sm-12 mt-2">
-                                <label for="address">Alamat Lengkap</label>
-                                <textarea name="address" id="address" class="form-control" cols="30" rows="5">{{ $data_admin->address }}</textarea>
+                                <label for="date_of_birth">Alamat Lengkap</label>
+                                <textarea name="address" id="address" class="form-control" cols="30" rows="5"></textarea>
                             </div>
     
                         </div>
@@ -139,11 +140,7 @@
                     <div class="bg-transparent col" style="max-width: 5%"></div>
                     <div class="col" >
                         <div class="elevation-1">
-                            @if ($data_admin->images)
-                                <img src="{{ asset('/storage').'/'.$data_admin->images }}"" class="img-fluid" alt="defaul_user" id="blah" style="height: 390px; padding: 10px;">
-                                @else
-                                <img src="{{ asset('img/who_icon.jpg')}}" class="img-fluid" alt="defaul_user" id="blah" style="height: 390px; padding: 10px;">
-                            @endif
+                            <img src="{{ asset('img/who_icon.jpg')}}" class="img-fluid" alt="defaul_user" id="blah" style="height: 390px; padding: 10px;">
                             <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 10px; margin-top: -10px;">
                                 <input type="file" name="images" id="images" class="form-control border-0 @error('images')is-invalid @enderror">
                                 @error('images')
@@ -154,8 +151,8 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 mt-4"> 
-                                <label for="password">Password</label> <small class="text-danger"> ( Kosongkan jika tidak ingin mengubah password )</small> 
+                            <div class="col-lg-12 col-md-12 col-sm-12 mt-4">
+                                <label for="password">Password</label>
                                 <input type="password" class="form-control @error('password')is-invalid @enderror" name="password" id="password">
                                 @error('password')
                                 <small class="invalid-feedback">
@@ -171,8 +168,9 @@
                 <div class="row justify-content-end mx-3">
                     <section class="col-lg-4">
                         <section style="float: right;">
-                            <a href="/data-admin" class="btn btn-outline-secondary mr-2"><i class="fas fa-backspace"></i> Batal</a>
+                            <a href="/data-staff" class="btn btn-outline-secondary mr-2"><i class="fas fa-backspace"></i> Batal</a>
                             <button class="btn my-button-save"><i class="far fa-save"></i> Simpan</button>
+    
                         </section>
                     </section>
                 </div>
@@ -207,4 +205,5 @@
 
     </div>
 </section>
+
 @endsection

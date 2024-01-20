@@ -57,7 +57,7 @@
                         <p> Daftar Berita </p>
                     </a> 
                 </li> 
-                <li class="nav-item {{ Request::segment(1) === 'data-admin' || Request::segment(1) === 'registrant-data' || Request::segment(1) === 'detail-participant' || Request::segment(1) === 'candidate-data' ? 'menu-is-opening menu-open' : '' }}">
+                <li class="nav-item {{ Request::segment(1) === 'data-admin' || Request::segment(1) === 'data-staff' || Request::segment(1) === 'registrant-data' || Request::segment(1) === 'detail-participant' || Request::segment(1) === 'candidate-data' ? 'menu-is-opening menu-open' : '' }}">
                     <a href="#" class="nav-link ">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
@@ -70,6 +70,12 @@
                             <a href="/data-admin" class="nav-link {{ Request::segment(1) === 'data-admin' ? 'submenu-active' : '' }}">
                                 » &nbsp;
                                 <p>Data Admin</p>
+                            </a> 
+                        </li>
+                        <li class="nav-item">
+                            <a href="/data-staff" class="nav-link {{ Request::segment(1) === 'data-staff' ? 'submenu-active' : '' }}">
+                                » &nbsp;
+                                <p>Data Staff</p>
                             </a> 
                         </li>
                         <li class="nav-item">

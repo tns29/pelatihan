@@ -125,6 +125,21 @@ function getLasNumberAdmin() {
     return $numberFix;
 }
 
+function getLasNumberStaff() {
+        
+    $lastCode = Admin::max('number');
+
+    if($lastCode) {
+        $lastCode = substr($lastCode, -4);
+        $code_ = sprintf('%04d', $lastCode+1);
+        $numberFix = "STF".date('Ymd').$code_;
+    } else {
+        $numberFix = "STF".date('Ymd')."0001";
+    }
+
+    return $numberFix;
+}
+
 function getLasIdTraining() {
         
     $lastId = Training::max('id');

@@ -26,7 +26,7 @@
             </div>
           @endif
           <div class="row justify-content-end mb-2 w-100">
-            <a href="/form-add-admin" class="btn float-right btn-add "><i class="fas fa-plus-square"></i> &nbsp; Data</a>
+            <a href="/form-add-staff" class="btn float-right btn-add "><i class="fas fa-plus-square"></i> &nbsp; Data</a>
           </div>
           <table class="table table-bordered table-sm">
               <thead>
@@ -40,7 +40,7 @@
                   </tr>
               </thead>
               <tbody>
-                @foreach ($dataAdmin as $row)
+                @foreach ($dataStaff as $row)
                   <tr>
                       <td>{{ $row->number }}</td>
                       <td>{{ $row->fullname }}</td>
@@ -48,7 +48,7 @@
                       <td>{{ $row->email }}</td>
                       <td>{{ $row->admin_level->name }}</td>
                       <td style=" text-align: center;">
-                        <a href="/form-edit-admin/{{$row->number}}" class="text-warning"><i class="fas fa-edit"></i></a>
+                        <a href="/form-edit-staff/{{$row->number}}" class="text-warning"><i class="fas fa-edit"></i></a>
                         &nbsp;
                         <a href="#" onclick="delete_data(`{{$row->number}}`, `{{$row->name}}`)" class="text-danger"><i class="fas fa-trash-alt"></i></a>
                       </td>

@@ -31,6 +31,7 @@ class Admin extends Authenticatable
         'is_active',
         'email',
         'password',
+        'images',
         'created_at',
         'created_by',
         'updated_at',

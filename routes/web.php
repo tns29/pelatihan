@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PostsController;
+use App\Http\Controllers\StaffController;
 use App\Http\Controllers\FE\HomeController;
 use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\CategoryController;
@@ -55,6 +56,15 @@ Route::middleware('admin')->group(function () {
     Route::get('/form-edit-admin/{number}', [AdminController::class, 'editFormAdmin']);
     Route::post('/edit-new-admin', [AdminController::class, 'updateAdmin']);
     Route::delete('/delete-admin/{number}', [AdminController::class, 'deleteAdmin']);
+
+    Route::get('/data-staff', [StaffController::class, 'dataStaff']);
+    Route::get('/getDetailStaff', [StaffController::class, 'getDetailStaff']);
+    Route::get('/form-add-staff', [StaffController::class, 'addFormStaff']);
+    Route::post('/add-new-staff', [StaffController::class, 'storeStaff']);
+    Route::get('/form-edit-staff/{number}', [StaffController::class, 'editFormStaff']);
+    Route::post('/edit-new-staff', [StaffController::class, 'updateStaff']);
+    Route::delete('/delete-staff/{number}', [StaffController::class, 'deleteStaff']);
+
     Route::get('/getRegistrant', [GeneralController::class, 'getRegistrant']);
 
     Route::get('/registrant-data', [AdminController::class, 'registrantData']); // pendaftar akun
