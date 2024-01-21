@@ -128,7 +128,14 @@
             
             <div class=" mt-2 d-flex">
                 <label for="last_education" class="col-md-3 ms-3">Pendidikan Terakhir <i class="text-danger">*</i></label>
-                <input type="text" class="form-control @error('last_education')is-invalid @enderror" name="last_education" id="last_education" value="{{ old('last_education', $auth_user->last_education) }}">
+                <select name="last_education" id="last_education" class="form-control form-select @error('last_education')is-invalid @enderror">
+                    <option value="">Pilih Pendidikan Terakhir</option>
+                    <option value="SD" {{ old('SD', $auth_user->last_education == 'SD' ? 'selected' : '' ) }}> » &nbsp; SD</option>
+                    <option value="SLTP" {{ old('SLTP', $auth_user->last_education == 'SLTP' ? 'selected' : '' ) }}> » &nbsp; SLTP</option>
+                    <option value="SLTA-Sederajat" {{ old('SLTA-Sederajat', $auth_user->last_education == 'SLTA-Sederajat' ? 'selected' : '' ) }}> » &nbsp; SLTA/Sederajat</option>
+                    <option value="DIPLOMA" {{ old('DIPLOMA', $auth_user->last_education == 'DIPLOMA' ? 'selected' : '' ) }}> » &nbsp; DIPLOMA</option>
+                    <option value="S1" {{ old('S1', $auth_user->last_education == 'S1' ? 'selected' : '' ) }}> » &nbsp; S1</option>
+                </select>
                 @error('last_education')
                 <small class="invalid-feedback ms-3">
                     Pendidikan Terakhir {{ $message }}

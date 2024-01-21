@@ -117,7 +117,15 @@
 
                             <div class="col-lg-6 col-md-6 mt-2">
                                 <label for="religion" class="ml-1">Pendidikan Terakhir</label>
-                                <input type="text" name="last_education" id="last_education" class="form-control" style="text-transform: uppercase" maxlength="10">
+                                {{-- <input type="text" name="last_education" id="last_education" class="form-control" style="text-transform: uppercase" maxlength="10"> --}}
+                                <select name="last_education" id="last_education" class="form-control form-select @error('last_education')is-invalid @enderror">
+                                    <option value="">Pilih Pendidikan Terakhir</option>
+                                    <option value="SD"> » &nbsp; SD</option>
+                                    <option value="SLTP"> » &nbsp; SLTP</option>
+                                    <option value="SLTA-Sederajat"> » &nbsp; SLTA/Sederajat</option>
+                                    <option value="DIPLOMA"> » &nbsp; DIPLOMA</option>
+                                    <option value="S1"> » &nbsp; S1</option>
+                                </select>
                             </div>
 
                             <div class="col-lg-6 col-md-6 mt-2">
