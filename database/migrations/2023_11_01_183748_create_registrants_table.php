@@ -24,7 +24,7 @@ return new class extends Migration
             $table->enum('approve', ["Y", "N"])->nullable(); // Y APPROVED N REJECTED // DEFAULT NULL
             $table->dateTime('approval_on')->nullable();
             $table->string('approval_by', 50)->nullable();
-            $table->enum('passed', ["Y", "N"])->nullable(); // Y LULUS N Tidak Lulus // DEFAULT NULL
+            $table->enum('passed', ["Y", "N", "C"])->nullable(); // Y LULUS N Tidak Lulus // DEFAULT NULL
             $table->dateTime('passed_on')->nullable();
         });
     }

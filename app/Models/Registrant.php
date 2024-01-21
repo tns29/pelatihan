@@ -63,8 +63,12 @@ class Registrant extends Model
             $where['registrants.Passed'] = "Y";
         } else if($ispassed == 'N') {
             $where['registrants.Passed'] = "N";
+        } else if($ispassed == 'C') {
+            $where['registrants.Passed'] = "C";
+        } else {
+            // $where['registrants.Passed'] = null;
         }
-        // dd($where);
+        // dd($ispassed);
         return DB::table('registrants')
                 ->select('registrants.*',
                         'participants.fullname as fullname', 'participants.gender as gender', 'participants.email as email',
@@ -74,7 +78,7 @@ class Registrant extends Model
                 ->leftJoin('trainings', 'trainings.id', '=', 'registrants.training_id')
                 ->leftJoin('periods', 'periods.id', '=', 'trainings.period_id') 
                 ->leftJoin('categories', 'categories.id', '=', 'trainings.category_id')
-                ->where('registrants.Passed', '!=', NULL)
+                // ->where('registrants.Passed', '!=', NULL)
                 ->where($where)
                 ->where('participants.fullname', 'like', '%' . $fullname . '%')
                 ->get();

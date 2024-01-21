@@ -344,6 +344,24 @@ class AdminController extends Controller
         return redirect('registrant');
     }
 
+    function updateStatusPassed(Request $request) {
+        $data = Auth::guard('admin')->user();
+        
+        $selectedId = explode(',', $request->selectedId);
+        foreach ($selectedId as $value) {
+            
+            $dataUpdate = [
+                'approval_on' => date('Y-m-d H:i:s'),
+                'approval_by' => $data->username,
+                'passed' =>  $request->status_passed,
+            ];
+    
+            Registrant::where(['id'=> $value])->update($dataUpdate);
+        }
+        
+        return response()->json(['status' => 'success']);
+    }
+
 
     // DETAIL PESERTA PELATIHAN YANG TELAH DI APPROVE
     function detailParticipantAppr(string $number, int $training_id) {

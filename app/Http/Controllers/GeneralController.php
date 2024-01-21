@@ -20,6 +20,11 @@ class GeneralController extends Controller {
         echo json_encode($data);
     }
     
+    function getTrainings(Request $request) {
+        $data = Training::where(['category_id' => $request->category_id])->get();
+        echo json_encode($data);
+    }
+    
     function getRegistrant(Request $request) {
         $result = Registrant::where(['training_id' => $request->training_id])->get();
         echo json_encode($result);
@@ -33,8 +38,9 @@ class GeneralController extends Controller {
         return redirect('/registrant-data');
     }
 
-    function checkDataUser(Request $request,int $serviceId) {
+    function checkDataUser(Request $request, int $serviceId) {
         $user = Auth::guard('participant')->user();
+        $active_period = Period::where('is_active', 'Y')->first();
         // dd($user->number);
         if($user->nik == null OR
             $user->place_of_birth == null OR
@@ -60,9 +66,14 @@ class GeneralController extends Controller {
                 $request->session()->flash('failed3', 'Anda belum bisa mendaftar, akun anda masih dalam pengecekan oleh admin');
                 return redirect('/pelatihan/'.$serviceId);
             }
-
             
-            $active_period = Period::where('is_active', 'Y')->first();
+            // dd($active_period->id);
+            $checkIsRegisterTraining = Registrant::where(['participant_number' => $user->number, 'period_id' => $active_period->id])->first();
+
+            if($checkIsRegisterTraining) {
+                $request->session()->flash('registered', 'Proses gagal, Anda telah mendaftar pelatihan pada gelombang saat ini.');
+                return redirect('/pelatihan/'.$serviceId);
+            }
             
             $usia = hitung_umur($user->date_of_birth);
             
@@ -94,6 +105,11 @@ class GeneralController extends Controller {
             $registrant->year = date('Y');
             $registrant->is_active = 'Y';
             $registrant->period_id = $active_period->id;
+            if(!$checkIsRegisterTraining) {
+                $registrant->approve = "Y";
+            } else {
+                $registrant->approve = "N";
+            }
             // dd($registrant);
             $registrant->save();
             
@@ -291,13 +307,21 @@ class GeneralController extends Controller {
         } else {
             session()->forget('material_status');
         }
-        if($request->religion) {
-            if($request->session()->get('religion') != $request->religion) {
-                session()->forget('religion');
+        // if($request->religion) {
+        //     if($request->session()->get('religion') != $request->religion) {
+        //         session()->forget('religion');
+        //     }
+        //     $request->session()->push('religion', $request->religion);
+        // } else {
+        //     session()->forget('religion');
+        // }
+        if($request->last_education) {
+            if($request->session()->get('last_education') != $request->last_education) {
+                session()->forget('last_education');
             }
-            $request->session()->push('religion', $request->religion);
+            $request->session()->push('last_education', $request->last_education);
         } else {
-            session()->forget('religion');
+            session()->forget('last_education');
         }
         
         if($request->period) {
@@ -345,8 +369,11 @@ class GeneralController extends Controller {
         if($request->session()->get('material_status')) {
             $where['participants.material_status'] = $request->session()->get('material_status')[0];
         }
-        if($request->session()->get('religion')) {
-            $where['participants.religion'] = $request->session()->get('religion')[0];
+        // if($request->session()->get('religion')) {
+        //     $where['participants.religion'] = $request->session()->get('religion')[0];
+        // }
+        if($request->session()->get('last_education')) {
+            $where['participants.last_education'] = $request->session()->get('last_education')[0];
         }
         if($request->session()->get('period')) {
             $where['trainings.period_id'] = $request->session()->get('period')[0];

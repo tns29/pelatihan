@@ -70,6 +70,7 @@
                                     <option value="">Pilih status</option>
                                     <option value="Y" {{ $resultData->passed == 'Y' ? 'selected':'' }}>Lulus</option>
                                     <option value="N" {{ $resultData->passed == 'N' ? 'selected':'' }}>Tidak Lulus</option>
+                                    <option value="C" {{ $resultData->passed == 'C' ? 'selected':'' }}>Cadangan</option>
                                 </select>
                             </td>
                         </tr>

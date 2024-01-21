@@ -36,6 +36,7 @@
                       <option value=""> Semua </option>
                       <option value="Y" {{ $passed == 'Y' ? 'selected' : '' }}> Lulus</option>
                       <option value="N" {{ $passed == 'N' ? 'selected' : '' }}> Tidak Lulus</option>
+                      <option value="C" {{ $passed == 'C' ? 'selected' : '' }}> Cadangan</option>
                     </select>
                   </div>
                 </div>
@@ -43,9 +44,18 @@
 
             </form>
           </div>
+          <div class="row justify-content-start mb-2 w-100" id="update-status-passed">
+            <input type="text" name="selectedId" id="selectedId">
+            <div class="col-lg-4">
+              <button type="button" onclick="passedUpdate('Y')" class="mr-1 btn btn-sm btn-outline-primary">Lulus</button>
+              <button type="button" onclick="passedUpdate('N')" class="mr-1 btn btn-sm btn-outline-danger">Tidak Lulus</button>
+              <button type="button" onclick="passedUpdate('C')" class="mr-1 btn btn-sm btn-outline-warning">Cadangan</button>
+            </div>
+          </div>
           <table class="table table-bordered table-sm">
               <thead>
                   <tr class="my-bg-primary text-white">
+                      <th style="width: 4%">Pilih</th>
                       <th style="width: 11%">Nomor</th>
                       <th>Nama</th>
                       <th style="width: 11%">Jenis Kelamin</th>
@@ -58,6 +68,9 @@
               <tbody>
                 @foreach ($participant as $row)
                   <tr>
+                      <td>
+                        <input class="text-center" type="checkbox" value="{{ $row->id }}" id="items" onclick="selectItem(`{{ $row->id }}`, `{{ $row->participant_number }}`)" style="height: 20px; width: 20px;">
+                      </td>
                       <td>{{ $row->participant_number }}</td>
                       <td>{{ $row->fullname }}</td>
                       <td>{{ $row->gender == 'M' ? 'Laki-laki' : 'Perempuan' }}</td>
@@ -70,8 +83,10 @@
                             <span class="text-success"><i class="fas fa-check-square text-success"> </i> Lulus</span>
                           @elseif($row->passed == "N")
                             <span class="text-red"><i class="fas fa-window-close text-danger"> </i> Tidak Lulus</span>
-                            @else
-                            <span class="text-secondary"><i class="far fa-question-circle text-secondary"> </i> Berlangsung</span>
+                          @elseif($row->passed == "C")
+                            <span class="text-warning"><i class="fas fa-exclamation-triangle text-warning"></i> Cadangan</span>
+                          @else
+                            <span class="text-secondary"><i class="far fa-question-circle text-secondary"> </i> Menunggu</span>
                           @endif
                         @else
                           TELAH SELESAI

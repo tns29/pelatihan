@@ -7,6 +7,13 @@ $(document).ready(function () {
         loadVillages($("#sub_district").val());
     });
 
+    $("#category_id").on("change", function () {
+        $("#training_id").html("");
+        $("#training_id").val("");
+
+        loadTraining($("#category_id").val());
+    });
+
     $(".select-fullname").select2({
         placeholder: "Pilih Peserta",
         width: "760",
@@ -43,6 +50,29 @@ function loadVillages(id) {
     });
 }
 
+function loadTraining(id) {
+    $.ajax({
+        type: "GET",
+        dataType: "JSON",
+        url: "/getTrainings",
+        data: { category_id: id },
+        async: false,
+        success: function (result) {
+            var html = `<option value="">Pilih Pelatihan</option>`;
+            result.map((item) => {
+                html +=
+                    `<option value="` +
+                    item.id +
+                    `">  » &nbsp; ` +
+                    item.title +
+                    `</option>`;
+            });
+
+            $("#training_id").append(html);
+        },
+    });
+}
+
 var village = $("#village_").val();
 $("#village").val(village).change();
 
@@ -54,7 +84,8 @@ $("#submitRpt").on("click", function () {
     var sub_district = $("#sub_district").val();
     var village = $("#village").val();
     var material_status = $("#material_status").val();
-    var religion = $("#religion").val();
+    // var religion = $("#religion").val();
+    var last_education = $("#last_education").val();
     var period = $("#period").val();
     var year = $("#year").val();
 
@@ -70,7 +101,8 @@ $("#submitRpt").on("click", function () {
             sub_district: sub_district,
             village: village,
             material_status: material_status,
-            religion: religion,
+            // religion: religion,
+            last_education: last_education,
             period: period,
             year: year,
         },

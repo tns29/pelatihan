@@ -103,7 +103,7 @@
                                     @endforeach --}}
                                 </select>
                             </div>
-                            <div class="col-lg-6 col-md-6 mt-2">
+                            {{-- <div class="col-lg-6 col-md-6 mt-2">
                                 <label for="religion" class="ml-1">Agama</label>
                                 <select name="religion" id="religion" class="form-control form-select">
                                     <option value="">Pilih agama</option>
@@ -113,6 +113,11 @@
                                     <option value="Budha"> » &nbsp; Budha</option>
                                     <option value="Konghucu"> » &nbsp; Konghucu</option>
                                 </select>
+                            </div> --}}
+
+                            <div class="col-lg-6 col-md-6 mt-2">
+                                <label for="religion" class="ml-1">Pendidikan Terakhir</label>
+                                <input type="text" name="last_education" id="last_education" class="form-control" style="text-transform: uppercase" maxlength="10">
                             </div>
 
                             <div class="col-lg-6 col-md-6 mt-2">

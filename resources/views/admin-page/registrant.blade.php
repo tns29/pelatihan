@@ -37,6 +37,7 @@
                       <option value=""> Menunggu</option>
                       <option value="Y" {{ $status == 'Y' ? 'selected' : '' }}> Diterima</option>
                       <option value="N" {{ $status == 'N' ? 'selected' : '' }}> Ditolak</option>
+                      <option value="C" {{ $status == 'C' ? 'selected' : '' }}> Cadangan</option>
                     </select>
                   </div>
                 </div>

@@ -84,6 +84,7 @@ Route::middleware('admin')->group(function () {
     Route::put('/passed-participant/{number}', [AdminController::class, 'passedParticipant']);
     
     Route::get('/participant-passed', [AdminController::class, 'participantPassed']);
+    Route::put('/update-status-passed', [AdminController::class, 'updateStatusPassed']);
     
     Route::get('/participant-already-working', [AdminController::class, 'participantAlreadyWorking']);
     
@@ -121,6 +122,7 @@ Route::get('/pelatihan', [ServiceController::class, 'index']);
 Route::get('/pelatihan/{id}', [ServiceController::class, 'detail']);
 Route::get('/getDataServices', [ServiceController::class, 'getDataServices']);
 Route::get('/getVillages/', [GeneralController::class, 'getVillages']);
+Route::get('/getTrainings/', [GeneralController::class, 'getTrainings']);
 
 Route::middleware('participant')->group(function () {
     Route::get('/wishlist', [ParticipantController::class, 'wishlist']);

@@ -31,6 +31,11 @@
             {{ session()->get('failed3') }}
         </div>
     @endif
+    @if (session()->has('registered'))
+        <div class="alert alert-danger py-1 text-center">
+            {{ session()->get('registered') }}
+        </div>
+    @endif
     <div class="col-lg-3 col-md-3 col-sm-6 mb-3">
     
         <div class="card shadow-sm p-2" style="width: 100%;">
