@@ -35,6 +35,7 @@ class Participant extends Authenticatable
         'village',
         'email',
         'password',
+        'participant',
         'created_at',
         'created_by',
         'updated_at',

@@ -90,6 +90,10 @@ $date_of_birth = $auth_user->date_of_birth ? date('d, M Y', strtotime($auth_user
                     <td><b> : &nbsp; {{ $auth_user->height ? $auth_user->height.'cm' : '' }} </b></td>
                 </tr>
                 <tr>
+                    <th style="width: 30%;">Ukuran Seragam</th>
+                    <td><b> : &nbsp; {{ $auth_user->size_uniform ? $auth_user->size_uniform : '' }} </b></td>
+                </tr>
+                <tr>
                     <th style="width: 30%;">Pendidikan Terakhir</th>
                     <td><b> : &nbsp; {{ $auth_user->last_education }} </b></td>
                 </tr>

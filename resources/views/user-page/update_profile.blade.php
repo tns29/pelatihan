@@ -83,6 +83,17 @@
                 </small>
                 @enderror
             </div>
+            
+            <div class=" mt-2 d-flex">
+                <label for="size_uniform" class="col-md-3 ms-3">Ukuran Seragam <i class="text-danger">*</i></label>
+                <input type="text" class="form-control inline-block @error('size_uniform')is-invalid @enderror" name="size_uniform" id="size_uniform" value="{{ old('size_uniform', $auth_user->size_uniform) }}" maxlength="5" style="text-transform: uppercase">
+                @error('size_uniform')
+                <small class="invalid-feedback ms-3">
+                    Ukuran Seragam {{ $message }}
+                </small>
+                @enderror
+            </div>
+            
             <div class=" mt-2 d-flex">
                 <label for="religion" class="col-md-3 ms-3">Agama <i class="text-danger">*</i></label>
                 <select name="religion" id="religion" class="form-control form-select @error('religion')is-invalid @enderror">

@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('no_telp', 20)->nullable();
             $table->string('no_wa', 20)->nullable();
             $table->string('address')->nullable();
-            $table->string('email', 100)->unique('users_email_unique');
             $table->double('height')->nullable();
+            $table->char('size_uniform', 5)->nullable();
             $table->string('religion', 20)->nullable();
             $table->string('material_status', 30)->nullable();
             $table->string('last_education', 30)->nullable();
@@ -34,10 +34,11 @@ return new class extends Migration
             $table->text('ak1')->nullable();
             $table->text('ijazah')->nullable();
             $table->text('image')->nullable();
+            $table->string('email', 100)->unique('users_email_unique');
             $table->string('password');
             // $table->unsignedBigInteger('grade_id')->nullable(false);
             // $table->foreign('grade_id')->on('grades')->references('id');
-            $table->enum('participant', ["Y", "N"])->default('N');
+            $table->enum('participant', ["Y", "N"])->default('Y');
             $table->enum('is_active', ["Y", "N"])->default('N');
             $table->dateTime('created_at')->nullable()->default(date('Y-m-d H:i:s'));
             $table->string('created_by', 50)->nullable();

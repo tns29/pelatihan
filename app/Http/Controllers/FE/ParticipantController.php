@@ -38,6 +38,7 @@ class ParticipantController extends Controller
         $validatedData['created_by'] = $validatedData['username'];
         $validatedData['password'] = Hash::make($validatedData['password']);
         $validatedData['is_active'] = "Y";
+        $validatedData['participant'] = "Y";
         // dd($validatedData);
         $result = Participant::create($validatedData);
         if($result) {
@@ -159,6 +160,7 @@ class ParticipantController extends Controller
             'no_wa'    => 'required|max:15',
             'place_of_birth'    => 'required|max:30',
             'date_of_birth'    => 'required',
+            'size_uniform'    => 'required|max:3',
             'address'            => 'required|max:200',
             'height'            => 'required|max:10',
             'religion'          => 'required|max:20',
@@ -247,6 +249,7 @@ class ParticipantController extends Controller
                 Storage::delete($getData->image);
             }
         }
+        $validatedData['size_uniform'] = strtoupper($request['size_uniform']);
         // dd($validatedData);
         $result = Participant::where(['number'=> $number])->update($validatedData);
         if($result) {

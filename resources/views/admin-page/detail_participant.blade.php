@@ -79,6 +79,10 @@ $date_of_birth = $detailParticipant->date_of_birth ? date('d, M Y', strtotime($d
                         <td> {{ $detailParticipant->height ? $detailParticipant->height.'cm' : '' }} </td>
                     </tr>
                     <tr>
+                        <th style="width: 30%;">Ukuran Seragam</th>
+                        <td> {{ $detailParticipant->size_uniform }} </td>
+                    </tr>
+                    <tr>
                         <th style="width: 30%;">Pendidikan Terakhir</th>
                         <td> {{ $detailParticipant->last_education }} </td>
                     </tr>
@@ -137,10 +141,10 @@ $date_of_birth = $detailParticipant->date_of_birth ? date('d, M Y', strtotime($d
                         </div>
                     </tr>
                     @if ($candidate != 'Y') 
-                    <form action="/acc-participant/{{ $detailParticipant->number }}" method="POST">
+                    {{-- <form action="/acc-participant/{{ $detailParticipant->number }}" method="POST">
                         @csrf
-                        @method('PUT')
-                        <tr>
+                        @method('PUT') --}}
+                        {{-- <tr>
                             <th>Terima Calon Peserta</th>
                             <td>
                                 <select name="acc" id="acc" class="form-control form-select">
@@ -149,22 +153,23 @@ $date_of_birth = $detailParticipant->date_of_birth ? date('d, M Y', strtotime($d
                                     <option value="N" {{ $detailParticipant->participant == 'N' ? 'selected':'' }}>Tolak</option>
                                 </select>
                             </td>
-                        </tr>
-                        <tr>
-                            <td><a href="#" onclick="popUpResetPassword()">Reset Password</a></td>
-                            <td colspan="2"><button class="btn btn-outline-info py-1 float-right w-full">Simpan dan keluar &nbsp; <i class="fas fa-share-square"></i> </button></td>
-                        </tr>
-                        <tr class="bg-success">
-                            @if (session()->has('success'))
-                                <td colspan="3">
-                                    <span class="alert alert-success py-1" id="success">
-                                        <?= session()->get('success') ?>
-                                    </span>
-                                </td>
-                            @endif
-                        </tr>
+                        </tr> --}}
+                    <tr>
+                        <td><a href="#" onclick="popUpResetPassword()">Reset Password</a></td>
+                        {{-- <td colspan="2"><button class="btn btn-outline-info py-1 float-right w-full">Simpan dan keluar &nbsp; <i class="fas fa-share-square"></i> </button></td> --}}
+                        <td colspan="2"><a href="/registrant-data" class="btn btn-outline-info py-1 float-right w-full">Keluar &nbsp; <i class="fas fa-share-square"></i> </a></td>
+                    </tr>
+                    <tr class="bg-success">
+                        @if (session()->has('success'))
+                            <td colspan="3">
+                                <span class="alert alert-success py-1" id="success">
+                                    <?= session()->get('success') ?>
+                                </span>
+                            </td>
+                        @endif
+                    </tr>
                         
-                    </form>
+                    {{-- </form> --}}
                     @elseif($candidate == 'Y')
                     <tr>
                         <th>Status Calon Peserta</th>

@@ -57,7 +57,7 @@
                         <p> Daftar Berita </p>
                     </a> 
                 </li> 
-                <li class="nav-item {{ Request::segment(1) === 'data-admin' || Request::segment(1) === 'data-staff' || Request::segment(1) === 'registrant-data' || Request::segment(1) === 'detail-participant' || Request::segment(1) === 'candidate-data' ? 'menu-is-opening menu-open' : '' }}">
+                <li class="nav-item {{ Request::segment(1) === 'data-admin' || Request::segment(1) === 'data-staff' ? 'menu-is-opening menu-open' : '' }}">
                     <a href="#" class="nav-link ">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
@@ -78,32 +78,53 @@
                                 <p>Data Staff</p>
                             </a> 
                         </li>
+                    </ul>
+                </li>
+                
+                <li class="nav-item {{ Request::segment(1) === 'registrant-data' || Request::segment(1) === 'detail-participant' || Request::segment(1) === 'candidate-data' || Request::segment(1) === 'registrant' || Request::segment(1) === 'participant-passed' ? 'menu-is-opening menu-open' : '' }}">
+                    <a href="#" class="nav-link ">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Data Peserta
+                        <i class="fas fa-angle-right right"></i> 
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview ml-3">
                         <li class="nav-item">
                             <a href="/registrant-data" class="nav-link {{ Request::segment(1) === 'registrant-data' || Request::segment(1) === 'detail-participant' && Request::segment(3) != 'Y' ? 'submenu-active' : '' }}">
                                 » &nbsp;
                                 <p>Data Pendaftar Akun</p>
                             </a> 
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="/candidate-data" class="nav-link {{ Request::segment(1) === 'candidate-data' ? 'submenu-active' : '' }} {{ Request::segment(3) === 'Y' ? 'submenu-active' : ''}}">
                                 » &nbsp;
                                 <p>Data Calon Peserta</p>
                             </a> 
-                        </li>
+                        </li> --}}
+                        <li class="nav-item ">
+                            <a href="/registrant" class="nav-link {{ Request::segment(1) === 'registrant' ||  Request::segment(1) === 'detail-participant-appr' ? 'menu-active' : '' }}">
+                                {{-- <i class="nav-icon fas fa-book"></i> --}}
+                                » &nbsp;
+                                <p> Data Pendaftar Pelatihan </p>
+                            </a> 
+                        </li> 
+
+                        <li class="nav-item ">
+                            <a href="/participant-passed" class="nav-link {{ Request::segment(1) === 'participant-passed' ||  Request::segment(1) === 'detail-participant-appr' ? 'menu-active' : '' }}">
+                                {{-- <i class="nav-icon fas fa-book"></i> --}}
+                                » &nbsp;
+                                <p>Data Kelulusan Peserta </p>
+                            </a> 
+                        </li> 
                     </ul>
                 </li>
+
                 
                 <li class="nav-item ">
-                    <a href="/registrant" class="nav-link {{ Request::segment(1) === 'registrant' ||  Request::segment(1) === 'detail-participant-appr' ? 'menu-active' : '' }}">
+                    <a href="/participant-passed" class="nav-link {{ Request::segment(1) === 'participant-already-working' ||  Request::segment(1) === 'detail-participant-appr' ? 'menu-active' : '' }}">
                         <i class="nav-icon fas fa-book"></i>
-                        <p> Pendaftar Pelatihan </p>
-                    </a> 
-                </li> 
-
-                <li class="nav-item ">
-                    <a href="/participant-passed" class="nav-link {{ Request::segment(1) === 'participant-passed' ||  Request::segment(1) === 'detail-participant-appr' ? 'menu-active' : '' }}">
-                        <i class="nav-icon fas fa-book"></i>
-                        <p> Kelulusan Peserta </p>
+                        <p>Peserta Sudah Bekerja </p>
                     </a> 
                 </li> 
 

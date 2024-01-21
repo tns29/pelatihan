@@ -85,6 +85,8 @@ Route::middleware('admin')->group(function () {
     
     Route::get('/participant-passed', [AdminController::class, 'participantPassed']);
     
+    Route::get('/participant-already-working', [AdminController::class, 'participantAlreadyWorking']);
+    
 
     Route::resource('/category', CategoryController::class)->only("index", "store", "update", "destroy");
     
