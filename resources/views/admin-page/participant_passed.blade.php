@@ -45,7 +45,7 @@
             </form>
           </div>
           <div class="row justify-content-start mb-2 w-100" id="update-status-passed">
-            <input type="text" name="selectedId" id="selectedId">
+            <input type="hidden" name="selectedId" id="selectedId">
             <div class="col-lg-4">
               <button type="button" onclick="passedUpdate('Y')" class="mr-1 btn btn-sm btn-outline-primary">Lulus</button>
               <button type="button" onclick="passedUpdate('N')" class="mr-1 btn btn-sm btn-outline-danger">Tidak Lulus</button>
