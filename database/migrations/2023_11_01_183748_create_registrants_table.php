@@ -19,12 +19,12 @@ return new class extends Migration
             $table->foreign('training_id')->on('trainings')->references('id');
             $table->dateTime('date')->nullable(false);
             $table->year('year')->nullable(false);
-            $table->int('period_id', 11)->nullable(false);
+            $table->integer('period_id')->nullable(false);
             $table->enum('is_active', ["Y", "N"]); // FOR STATUS KELULUSAN, JIKA N TELAH LULUS, DEFAULT Y MASIH AKTIF PELATIHAN
             $table->enum('approve', ["Y", "N"])->nullable(); // Y APPROVED N REJECTED // DEFAULT NULL
             $table->dateTime('approval_on')->nullable();
             $table->string('approval_by', 50)->nullable();
-            $table->enum('passed', ["Y", "N", "C"])->nullable(); // Y LULUS N Tidak Lulus // DEFAULT NULL
+            $table->enum('passed', ["Y", "N", "C"])->nullable(); // Y LULUS N Tidak Lulus C Cadangan // DEFAULT NULL
             $table->dateTime('passed_on')->nullable();
         });
     }

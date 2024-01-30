@@ -87,7 +87,8 @@ Route::middleware('admin')->group(function () {
     Route::put('/update-status-passed', [AdminController::class, 'updateStatusPassed']);
     
     Route::get('/participant-already-working', [AdminController::class, 'participantAlreadyWorking']);
-    
+    Route::get('/add-participant-work', [AdminController::class, 'addParticipantWork']);
+    Route::post('/store-participant-work', [AdminController::class, 'storeParticipantWord']);
 
     Route::resource('/category', CategoryController::class)->only("index", "store", "update", "destroy");
     

@@ -119,10 +119,9 @@
                         </li> 
                     </ul>
                 </li>
-
                 
                 <li class="nav-item ">
-                    <a href="/participant-passed" class="nav-link {{ Request::segment(1) === 'participant-already-working' ||  Request::segment(1) === 'detail-participant-appr' ? 'menu-active' : '' }}">
+                    <a href="/participant-already-working" class="nav-link {{ Request::segment(1) === 'participant-already-working' ||  Request::segment(1) === 'detail-participant-appr' ? 'menu-active' : '' }}">
                         <i class="nav-icon fas fa-book"></i>
                         <p>Peserta Sudah Bekerja </p>
                     </a> 

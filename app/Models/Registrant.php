@@ -18,15 +18,16 @@ class Registrant extends Model
     public $timestamps = false;
 
     /**
-     * Get the user that owns the Registrant
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
+    * Get the user that owns the Registrant
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+    */
 
-     public function participants(): BelongsTo
-     {
-         return $this->belongsTo(Participant::class, 'participant_number', 'number');
-     }
+    public function participants(): BelongsTo
+    {
+        return $this->belongsTo(Participant::class, 'participant_number', 'number');
+    }
+    
     public function service(): BelongsTo
     {
         return $this->belongsTo(Training::class, 'training_id', 'id');

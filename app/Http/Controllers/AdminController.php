@@ -7,6 +7,7 @@ use App\Models\AdminLevel;
 use App\Models\Registrant;
 use App\Models\Participant;
 use Illuminate\Http\Request;
+use App\Models\ParticipantWork;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
@@ -370,7 +371,7 @@ class AdminController extends Controller
         $filename_script = getContentScript(true, $filename);
 
         $data = Auth::guard('admin')->user();  
-        $participant = new Participant;
+        // $participant = new Participant;
         // $data_part = $participant->getUserProfileByNumber($number);
         $resultData = Registrant::with('participants', 'service.service_detail', 'service.periods')
                                 ->where(['participant_number'=> $number, 'training_id' => $training_id])->first();
@@ -396,6 +397,59 @@ class AdminController extends Controller
         Registrant::where(['participant_number'=> $number, 'training_id' => $request->training_id])->update($dataUpdate);
         
         return redirect('registrant');
+    }
+
+    function participantAlreadyWorking() {
+         $filename = 'participant_already_working';
+         $filename_script = getContentScript(true, $filename);
+ 
+         $data = Auth::guard('admin')->user();  
+         // $data_part = $participant->getUserProfileByNumber($number);
+         $resultData = ParticipantWork::with('participants')->get();
+         
+         return view('admin-page.'.$filename, [
+             'script' => $filename_script,
+             'title' => 'Daftar Peserta Sudah Bekerja',
+             'auth_user' => $data,
+             // 'detailParticipant' => $data_part,
+             'resultData' => $resultData
+         ]);
+    }
+
+    function addParticipantWork() {
+        $filename = 'add_participant_already_working';
+        $filename_script = getContentScript(true, $filename);
+
+        $data = Auth::guard('admin')->user();
+        
+        return view('admin-page.'.$filename, [
+            'script' => $filename_script,
+            'title' => 'Tambah Peserta Sudah Bekerja',
+            'auth_user' => $data,
+            // 'detailParticipant' => $data_part,
+            'participantData' => Participant::get()
+        ]);
+    }
+
+    function storeParticipantWord(Request $request) {
+        
+        $validatedData = $request->validate([
+            'participant_number' => 'required',
+            'date_year' => 'required|max:10',
+            'company_name' => 'required|max:100',
+            'position' => 'required|max:50',
+        ]);
+
+        $validatedData['date_year'] = date('m-Y', strtotime($request->date_year));
+        // dd($validatedData);
+        $result = ParticipantWork::create($validatedData);
+
+        if($result) {
+            return redirect('/participant-already-working');
+        } else {
+            die('Proses gagal, Hubungi administrator');
+        }
+        
     }
     
 }
