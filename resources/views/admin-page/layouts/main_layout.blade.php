@@ -33,6 +33,10 @@
         -webkit-transform: rotate(90deg);
         transform: rotate(90deg);
     }
+
+    .content-wrapper {
+        height: auto;
+    }
   </style>
 </head>
 
