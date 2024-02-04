@@ -1,5 +1,20 @@
 @extends('admin-page.layouts.main_layout')
 
+<style>
+    #image-preview {
+        display: flex;
+        flex-wrap: wrap;
+        max-height: 300px; /* Set a maximum height for vertical scrolling */
+        overflow-x: auto; /* Enable vertical scrollbar if content exceeds the height */
+    }
+
+    .preview-image {
+        width: auto;
+        max-height: 250px;
+        margin: 8px 15px;
+    }
+</style>
+
 @section('content-pages')
 
 <div class="content-header">
@@ -38,7 +53,7 @@
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 mt-2">
                         <label for="image">Gambar</label>
-                        <input type="file" name="image" id="image" class="form-control @error('image')is-invalid @enderror">
+                        <input type="file" name="image[]" id="image" class="form-control @error('image')is-invalid @enderror" multiple accept="image/*" onchange="previewImages()">
                         
                         @error('image')
                         <small class="invalid-feedback">
@@ -46,7 +61,8 @@
                         </small>
                         @enderror
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 mt-2">
+
+                    {{-- <div class="col-lg-6 col-md-6 col-sm-6 mt-2">
                         <label for="image">&nbsp;</label> 
                         <div class="card img-bordered ml-5 p-2">
                             @if ($post->image)
@@ -55,7 +71,7 @@
                                 <img id="blah" src="{{ asset('/img/no_preview.jpg') }}" alt="preview" style="height: 250px;"/>
                             @endif
                         </div>
-                    </div>
+                    </div> --}}
                     
                     {{-- <div class="col-lg-6 col-md-6 col-sm-6 mt-2">
                         <label for="date">Tanggal</label>
@@ -67,6 +83,15 @@
                         @enderror
                     </div> --}}
 
+                </div>
+
+                <div class="row">
+                    <br>
+                    <div id="image-preview">
+                        @foreach ($dataimage as $item)
+                        <img src="{{ asset('/storage').'/'.$item->image }}" alt="img-post" class="preview-image">
+                        @endforeach
+                    </div>
                 </div>
 
                 <hr style="margin: 0 22px 20px;">

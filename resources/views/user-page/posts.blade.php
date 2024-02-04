@@ -1,36 +1,9 @@
 
 @extends('user-page.layouts.user_main')
 
-{{-- @section('header-pages')
-<div class="banner">
-  <div id="carouselExampleIndicators" class="carousel slide">
-      <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      </div>
-      <div class="carousel carousel-inner">
-      <div class="carousel-item item active">
-          <img src="{{ asset('img/header1.png') }}" class="d-block w-100" alt="header1">
-      </div>
-      <div class="carousel-item item">
-          <img src="{{ asset('img/header2.png') }}" class="d-block w-100" alt="header2">
-      </div> 
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-      </button>
-  </div>
-</div>
-@endsection --}}
-
 @section('content-pages')
 
-<div class="explain-product my-5">
+<div class="explain-product my-5 mx-3">
   <div class="heading text-center ">
     <div class="mt-3">
       <span style="font-size: 26px; font-weight: 600">{{$title}}</span>
@@ -40,10 +13,10 @@
   @if (count($posts) > 0)
     @foreach ($posts as $item)
       <div class="row shadow bg-white rounded-3 p-3 mt-3">
-        <div class="col">
+        <div class="col" style="border-right: 1px solid #acacac !important;">
           <h3 class="h3">{{ $item->title }}</h3>
-          <div class="col-lg-12 col-md-12 col-sm-12">
-            <?= $item->body ?>
+          <div class="col-lg-12 col-md-12 col-sm-12 pe-3">
+            <?= Str::substr($item->body, 0, 200) ?>
           </div>
           <small>
             @if ($item->updated_at)
@@ -54,9 +27,32 @@
           </small>
         </div>
         <div class="col-md-4">
-          <img src="{{ asset('/storage').'/'.$item->image }}" class="img-fluid shadow p-2" style="max-width: 300px;" alt="img-news">
-          <div class="mt-2">
-            <a href="{{ asset('/storage').'/'.$item->image }}" class="text-decoration-none" download>Download gambar</a>
+          
+          <div id="carouselExample" class="carousel slide">
+            <div class="carousel-inner">
+
+              <?php $key = 0; ?>
+              @foreach ($item->picturePost as $row)
+              <?php $key++ ?>
+              <div class="carousel-item {{ $key == 1 ? 'active' : ''}} " style="background: #f1f1f16b">
+                  <img src="{{ asset('/storage').'/'.$row->image }}" class="d-block p-2 img-fluid" alt="img-news"
+                  style="min-width: 350px; margin:auto">
+                  <div class="mt-2 ms-2 text-center">
+                    <a href="{{ asset('/storage').'/'.$row->image }}" class="text-decoration-none" download>Download gambar</a>
+                  </div>
+                </div>
+              @endforeach
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+              {{-- <span class="carousel-control-prev-icon" aria-hidden="true" style="color: black !important; box-shadow: 5px 5px 10px #888888;"></span> --}}
+              <span style="font-size: 50px; color:black"> «</span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+              {{-- <span class="carousel-control-next-icon" aria-hidden="true" style="color: black !important; box-shadow: 5px 5px 10px #888888;"></span> --}}
+              <span style="font-size: 50px; color:black"> »</span>
+              <span class="visually-hidden">Next</span>
+            </button>
           </div>
         </div>
       </div>

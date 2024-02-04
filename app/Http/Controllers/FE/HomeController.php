@@ -19,9 +19,11 @@ class HomeController extends Controller
     }
 
     function posts() {
-        $post = Post::orderBy('id', 'DESC')->get();
+        $modelPost = new Post;
+        $post = Post::with('picturePost')->orderBy('id', 'DESC')->get();
+        
         return view('user-page/posts', [
-            'title' => 'Pemberitahuan',
+            'title' => 'Berita & Inovasi Dinas Tenaga Kerja',
             'posts' => $post,
             'brand_name' => 'UPTD'
         ]);

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\PicturePost;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -53,17 +55,33 @@ class PostsController extends Controller
         $validatedData = $request->validate([
             'title'      => 'required|max:100',
             'body'      => 'required',
-            'image'     => 'image|file|max:1024'
         ]);
-
-        if($request->file('image')) {
-            $validatedData['image'] = $request->file('image')->store('service-images');
+        
+        if($request->image) {
+            $validatedImage = $request->validate([
+                'image.*'   => 'image|mimes:jpeg,png,jpg,gif|max:1024', // Adjust file types and size as needed
+            ]);
         }
 
+        $validatedData['title'] = ucwords($validatedData['title']);
         $validatedData['created_at'] = date('Y-m-d H:i:s');
         $validatedData['created_by'] = Auth::guard('admin')->user()->username;
         
         $result = Post::create($validatedData);
+        // $newRecordId = DB::table('posts')->insertGetId($validatedData);
+        $dataResult = json_decode($result, true);
+
+        $post_id = $dataResult['id'];
+        
+        foreach ($request->file('image') as $image) {
+            $image_name = $image->store('post-images');
+            $dataPostImage = [
+                'post_id' => $post_id,
+                'image' => $image_name
+            ];
+            PicturePost::create($dataPostImage);
+        }
+        
         if($result) {
             $request->session()->flash('success', 'Berita berhasil dibuat');
         } else {
@@ -90,13 +108,15 @@ class PostsController extends Controller
 
         $user = Auth::guard('admin')->user();
         $data = Post::find($id);
+        $dataimage = PicturePost::where(['post_id' => $id])->get();
         if(!$data) return redirect('/posts');
 
         return view('admin-page.'.$filename, [
             'script' => $filename_script,
             'title' => 'Edit Data Berita',
             'auth_user' => $user,
-            'post' => $data
+            'post' => $data,
+            'dataimage' => $dataimage
         ]);
     }
 
@@ -108,17 +128,43 @@ class PostsController extends Controller
          $validatedData = $request->validate([
             'title'      => 'required|max:100',
             'body'      => 'required',
-            'image'     => 'image|file|max:1024'
         ]);
-
-        if($request->file('image')) {
-            $validatedData['image'] = $request->file('image')->store('post-images');
+        
+        if($request->image) {
+            $validatedImage = $request->validate([
+                'image.*'   => 'image|mimes:jpeg,png,jpg,gif|max:1024', // Adjust file types and size as needed
+            ]);
         }
 
+        $validatedData['title'] = ucwords($validatedData['title']);
         $validatedData['updated_at'] = date('Y-m-d H:i:s');
         $validatedData['updated_by'] = Auth::guard('admin')->user()->username;
         
         $result = Post::where(['id' => $id])->update($validatedData);
+
+        $post_id = $id;
+
+        if($request->file('image')) {
+            $dataPicturePost = PicturePost::where(['post_id' => $post_id])->get();
+            // dd($dataPicturePost);
+            foreach ($dataPicturePost as $item) {
+                if($item->image) {
+                    Storage::delete($item->image);
+                }
+            }
+            // dd($request->file('image'));
+            PicturePost::where(['post_id' => $post_id])->delete();
+            foreach ($request->file('image') as $image) {
+                $image_name = $image->store('post-images');
+                $dataPostImage = [
+                    'post_id' => $post_id,
+                    'image' => $image_name
+                ];
+                PicturePost::create($dataPostImage);
+            }
+        }
+        
+
         if($result) {
             $request->session()->flash('success', 'Berita berhasil dibuat');
         } else {

@@ -157,7 +157,7 @@ class ParticipantController extends Controller
     function updateProfileData(Request $request, string $number) {
         // dd($request);
         $validatedData = $request->validate([
-            'nik'    => 'required|max:16',
+            // 'nik'    => 'required|max:16',
             'no_wa'    => 'required|max:15',
             'place_of_birth'    => 'required|max:30',
             'date_of_birth'    => 'required',
@@ -177,7 +177,7 @@ class ParticipantController extends Controller
         ]);
 
         if($request->nik != $request->nik1) {
-            $validatedData['nik'] = $request->validate([
+            $validatedData= $request->validate([
                 'nik'    => 'required|max:16|unique:participants',
             ]);
         }

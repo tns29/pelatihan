@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('picture_posts', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 120);
-            $table->text('body');
-            $table->double('seen')->default(0);
+            $table->integer('post_id')->nullable('false');
+            $table->text('image')->nullable();
             $table->dateTime('created_at')->nullable()->default(date('Y-m-d H:i:s'));
             $table->string('created_by', 50)->nullable();
             $table->dateTime('updated_at')->nullable();
             $table->string('updated_by', 50)->nullable();
+            // $table->timestamps();
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('picture_posts');
     }
 };
