@@ -52,6 +52,10 @@
               <a class="nav-link {{ Request::segment(1) == '#' ? 'active-link' : '' }}" href="https://disnaker.tangerangkab.go.id/" target="_blank">Website Dinas Tenaga Kerja</a>
             </li>
             
+            <li class="nav-item mx-2">
+              <a class="nav-link {{ Request::segment(1) == '#' ? 'active-link' : '' }}" href="https://siapkerja.tangerangkab.go.id/home" target="_blank">Siap kerja</a>
+            </li>
+            
             @if (auth()->guard('participant')->user())
               <li class="nav-item mx-2">
                 <a href="/wishlist" class="btn {{ Request::segment(1) == 'wishlist' ? 'btn-success' : 'btn-outline-success' }} register py-1 mt-1" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Pelatihan saya">

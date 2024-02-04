@@ -20,7 +20,7 @@ class PostsController extends Controller
         $filename_script = getContentScript(true, $filename);
 
         $user = Auth::guard('admin')->user();
-        $data = Post::get();
+        $data = Post::orderBy('id', 'DESC')->get();
         return view('admin-page.'.$filename, [
             'script' => $filename_script,
             'title' => 'Daftar Berita',
