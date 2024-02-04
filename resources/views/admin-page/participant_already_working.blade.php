@@ -47,18 +47,18 @@
               <tbody>
                 @foreach ($resultData as $row)
                   <tr>
-                      <td>{{ $row->participants->nik }}</td>
-                      <td>{{ $row->participants->fullname }}</td>
-                      <td>Pelatihan terakhir</td>
-                      <td>{{ $row->participants->no_wa }}</td>
-                      <td>{{ isset($row->participants->sub_districts->name) ? $row->participants->sub_districts->name : ''}}</td>
+                      <td>{{ $row->nik }}</td>
+                      <td>{{ $row->fullname }}</td>
+                      <td>{{ $row->training_name }}</td>
+                      <td>{{ $row->no_wa }}</td>
+                      <td>{{ isset($row->sub_districts_name) ? $row->sub_districts_name : ''}}</td>
                       <td>{{ $row->company_name }}</td>
                       <td>{{ $row->position }}</td>
                       <td>{{ $row->date_year }}</td>
                       <td style=" text-align: center;">
-                        <a href="/detail-participant/{{ $row->participant_number }}" class="text-warning"> <i class="fas fa-edit"></i></a>
+                        <a href="/edit-participant-work/{{ $row->participant_number }}" class="text-warning"> <i class="fas fa-edit"></i></a>
                         &nbsp;
-                        <a href="#" onclick="delete_data(`{{ $row->participant_number }}`, `{{ $row->participants->fullname }}`)" class="text-danger"> <i class="fas fa-trash"></i></a>
+                        <a href="#" onclick="delete_data(`{{ $row->participant_number }}`, `{{ $row->fullname }}`)" class="text-danger"> <i class="fas fa-trash"></i></a>
                       </td>
                   </tr>
                 @endforeach

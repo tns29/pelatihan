@@ -73,6 +73,7 @@ class PostsController extends Controller
 
         $post_id = $dataResult['id'];
         
+        if($request->file('image'))
         foreach ($request->file('image') as $image) {
             $image_name = $image->store('post-images');
             $dataPostImage = [

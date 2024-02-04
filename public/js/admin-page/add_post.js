@@ -45,7 +45,6 @@ ClassicEditor.create(document.querySelector("#body"), {
 // };
 
 function previewImages() {
-    alert(0);
     var previewContainer = document.getElementById("image-preview");
     var files = document.getElementById("image").files;
     console.log(files);

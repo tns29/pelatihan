@@ -407,6 +407,9 @@ class AdminController extends Controller
          // $data_part = $participant->getUserProfileByNumber($number);
          $resultData = ParticipantWork::with('participants')->get();
          
+         $modelParticipantWorlk = new ParticipantWork;
+         $resultData = $modelParticipantWorlk->dataPartisipantWork();
+        //  dd($resultData);
          return view('admin-page.'.$filename, [
              'script' => $filename_script,
              'title' => 'Daftar Peserta Sudah Bekerja',
@@ -414,6 +417,23 @@ class AdminController extends Controller
              // 'detailParticipant' => $data_part,
              'resultData' => $resultData
          ]);
+    }
+
+    function getDetailParticipant(Request $request) {
+        $participant_number = $request->number;
+        $result = Participant::with('sub_districts')->find($participant_number);
+
+        $getLatestTraining = Registrant::with('service')->where('participant_number', $participant_number)->orderBy('id', 'DESC')->limit('1')->first();
+        
+        if($getLatestTraining) {
+            if($result) {
+                return response()->json(['status' => 'success', 'data' => $result, 'training_name' => $getLatestTraining->service->title]);
+            } else {
+                return response()->json(['status' => 'failed']);
+            }
+        } else {
+            return response()->json(['status' => 'warning', 'message' => "Peserta belum pernah mengikuti pelatihan"]);
+        }
     }
 
     function addParticipantWork() {
@@ -449,6 +469,38 @@ class AdminController extends Controller
         } else {
             die('Proses gagal, Hubungi administrator');
         }
+        
+    }
+
+    function editParticipantWork(Request $request, string $number) {
+        $filename = 'edit_participant_already_working';
+        $filename_script = getContentScript(true, $filename);
+
+        $data = Auth::guard('admin')->user();
+        $resultData = ParticipantWork::where('participant_number', $number)->first();
+        
+        return view('admin-page.'.$filename, [
+            'script' => $filename_script,
+            'title' => 'Tambah Peserta Sudah Bekerja',
+            'auth_user' => $data,
+            'resultData' => $resultData,
+            'participantData' => Participant::get()
+        ]);
+    }
+
+    function updateParticipantWord(Request $request, string $number) {
+        
+        $validatedData = $request->validate([
+            'date_year' => 'required|max:10',
+            'company_name' => 'required|max:100',
+            'position' => 'required|max:50',
+        ]);
+
+        $validatedData['date_year'] = date('m-Y', strtotime($request->date_year));
+        // dd($validatedData);
+        $result = ParticipantWork::where('participant_number', $number)->update($validatedData);
+
+        return redirect('/participant-already-working');
         
     }
     

@@ -89,6 +89,9 @@ Route::middleware('admin')->group(function () {
     Route::get('/participant-already-working', [AdminController::class, 'participantAlreadyWorking']);
     Route::get('/add-participant-work', [AdminController::class, 'addParticipantWork']);
     Route::post('/store-participant-work', [AdminController::class, 'storeParticipantWord']);
+    Route::get('/getDetailParticipant', [AdminController::class, 'getDetailParticipant']);
+    Route::get('/edit-participant-work/{number}', [AdminController::class, 'editParticipantWork']);
+    Route::post('/update-participant-work/{number}', [AdminController::class, 'updateParticipantWord']);
 
     Route::resource('/category', CategoryController::class)->only("index", "store", "update", "destroy");
     
@@ -118,6 +121,7 @@ Route::middleware('admin')->group(function () {
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/berita', [HomeController::class, 'posts']);
+Route::get('/detail-berita/{id}', [HomeController::class, 'detailPosts']);
 
 Route::get('/pelatihan', [ServiceController::class, 'index']);
 Route::get('/pelatihan/{id}', [ServiceController::class, 'detail']);

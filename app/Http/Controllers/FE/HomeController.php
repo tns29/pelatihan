@@ -19,12 +19,30 @@ class HomeController extends Controller
     }
 
     function posts() {
-        $modelPost = new Post;
         $post = Post::with('picturePost')->orderBy('id', 'DESC')->get();
         
         return view('user-page/posts', [
             'title' => 'Berita & Inovasi Dinas Tenaga Kerja',
             'posts' => $post,
+            'brand_name' => 'UPTD'
+        ]);
+    }
+
+    function detailPosts(int $id) {
+        $resultPost = Post::with('picturePost')->where('id', $id)->first();
+
+        if($resultPost) {
+            $currentSeen = $resultPost->seen;
+            $seenValUpdate = $currentSeen+1;
+            Post::where('id', $id)->update(['seen' => $seenValUpdate]);
+        }
+
+        $post = Post::with('picturePost')->orderBy('id', 'DESC')->get();
+        // dd($post);
+        return view('user-page/detail_posts', [
+            'title' => 'Berita & Inovasi Dinas Tenaga Kerja',
+            'post' => $post,
+            'resultPost' => $resultPost,
             'brand_name' => 'UPTD'
         ]);
     }
