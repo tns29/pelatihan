@@ -48,12 +48,13 @@ class Registrant extends Model
                 ->select('registrants.*',
                         'participants.fullname as fullname', 'participants.gender as gender', 'participants.email as email',
                         'trainings.title as trainingsTitle', 'trainings.description as description', 'trainings.image as image',
-                        'periods.name as gelombang', 'categories.name as category')
+                        'periods.name as gelombang', 'categories.name as category', 'sub_districts.name AS sub_district_name')
                 ->leftJoin('participants', 'participants.number', '=', 'registrants.participant_number')
                 ->leftJoin('trainings', 'trainings.id', '=', 'registrants.training_id')
                 ->leftJoin('periods', 'periods.id', '=', 'trainings.period_id') 
                 ->leftJoin('categories', 'categories.id', '=', 'trainings.category_id')
-                ->where(['registrants.approve' => $status])
+                ->leftJoin('sub_districts', 'sub_districts.id', '=', 'participants.sub_district')
+                // ->where(['registrants.approve' => $status])
                 ->where('participants.fullname', 'like', '%' . $fullname . '%')
                 ->get();
     }

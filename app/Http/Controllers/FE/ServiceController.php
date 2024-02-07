@@ -30,6 +30,8 @@ class ServiceController extends Controller
     }
 
     function getDataServices(Request $request) {
+        date_default_timezone_set('Asia/Jakarta');
+        
         $active_period = Period::where('is_active', 'Y')->first();
         
         $categorySelected = $request->categoryId;
@@ -44,7 +46,6 @@ class ServiceController extends Controller
                             ->where($filter)
                             ->where('title', 'like', '%' . $search_name . '%')
                             ->get();
-        
 
         $start_date = $active_period->start_date ? date('Y-m-d', strtotime($active_period->start_date)) : null;
         $end_date = $active_period->end_date ? date('Y-m-d', strtotime($active_period->end_date)) : null;
@@ -56,10 +57,14 @@ class ServiceController extends Controller
         $end = new DateTime($end_date);
         // $jarak_mulai = $now->diff($start);
         // $jarak_selesai = $end->diff($now);
+
+        // $interval = $start->diff($now);
+        // $interval = $now->diff($start);
+        // dd($interval);
         
-        $jarak_mulai  = date_diff($now, $start);
+        $jarak_mulai  = date_diff($now, $start, true);
         $jarak_selesai  = date_diff($now, $end);
-        if($jarak_mulai->days > 0 && $jarak_mulai->invert > 0) {
+        if($jarak_mulai->days == 0 && ($jarak_mulai->h > 0 OR $jarak_mulai->i > 0 OR $jarak_mulai->s > 0)) {
             $telah_dimulai = true;
         } else {
             $telah_dimulai = false;
@@ -69,9 +74,11 @@ class ServiceController extends Controller
         } else {
             $telah_selesai = false;
         }
+        
+        // dd($telah_selesai);
         // dd($jarak_mulai);
-
-        if($start_date != null) {
+        
+        if($start_date != null && $telah_dimulai == true) {
 
             // if($curent_date >= $start_date) {
             if($telah_dimulai == true && $telah_selesai == false) {

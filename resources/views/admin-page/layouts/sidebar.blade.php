@@ -81,7 +81,7 @@
                     </ul>
                 </li>
                 
-                <li class="nav-item {{ Request::segment(1) === 'registrant-data' || Request::segment(1) === 'detail-participant' || Request::segment(1) === 'candidate-data' || Request::segment(1) === 'registrant' || Request::segment(1) === 'participant-passed' ? 'menu-is-opening menu-open' : '' }}">
+                <li class="nav-item {{ Request::segment(1) === 'registrant-data' || Request::segment(1) === 'detail-participant' || Request::segment(1) === 'candidate-data' || Request::segment(1) === 'registrant' || Request::segment(1) === 'participant-passed' ||  Request::segment(1) === 'detail-participant-appr'? 'menu-is-opening menu-open' : '' }}">
                     <a href="#" class="nav-link ">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
@@ -111,7 +111,7 @@
                         </li> 
 
                         <li class="nav-item ">
-                            <a href="/participant-passed" class="nav-link {{ Request::segment(1) === 'participant-passed' ||  Request::segment(1) === 'detail-participant-appr' ? 'menu-active' : '' }}">
+                            <a href="/participant-passed" class="nav-link {{ Request::segment(1) === 'participant-passed' ? 'menu-active' : '' }}">
                                 {{-- <i class="nav-icon fas fa-book"></i> --}}
                                 » &nbsp;
                                 <p>Data Kelulusan Peserta </p>
@@ -121,7 +121,7 @@
                 </li>
                 
                 <li class="nav-item ">
-                    <a href="/participant-already-working" class="nav-link {{ Request::segment(1) === 'participant-already-working' ||  Request::segment(1) === 'detail-participant-appr' ? 'menu-active' : '' }}">
+                    <a href="/participant-already-working" class="nav-link {{ Request::segment(1) === 'participant-already-working' ? 'menu-active' : '' }}">
                         <i class="nav-icon fas fa-book"></i>
                         <p>Peserta Sudah Bekerja </p>
                     </a> 

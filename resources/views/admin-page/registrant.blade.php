@@ -30,7 +30,7 @@
                 <div class="col-lg-1">
                   <button type="button" id="search" class="btn btn-outline-secondary">Cari</button>
                 </div>
-                <div class="col-lg-4">
+                {{-- <div class="col-lg-4">
                   <div class="d-flex w-100" style="float: right; right:0 !important;">
                     <span class="pr-3 pt-2">Status </span>
                     <select name="status" id="status" class="form-select form-control" style="display: inline">
@@ -40,10 +40,11 @@
                       <option value="C" {{ $status == 'C' ? 'selected' : '' }}> Cadangan</option>
                     </select>
                   </div>
-                </div>
+                </div> --}}
               </div>
 
             </form>
+            
           </div>
           <table class="table table-bordered table-sm">
               <thead>
@@ -53,8 +54,8 @@
                       <th style="width: 11%">Jenis Kelamin</th>
                       <th>Pelatihan</th>
                       <th style="width: 15%;">Tanggal Dftr Pelatihan</th>
+                      <th style="width: 13%;">Kecamatan </th>
                       <th>Periode </th>
-                      <th style="text-align: center; width: 9%;">Status </th>
                       <th style="width: 8%; text-align: center;">Aksi</th>
                   </tr>
               </thead>
@@ -66,8 +67,9 @@
                       <td>{{ $row->gender == 'M' ? 'Laki-laki' : 'Perempuan' }}</td>
                       <td>{{ $row->trainingsTitle }}</td>
                       <td>{{ date('d M Y', strtotime($row->date)) }}</td>
+                      <td>{{ $row->sub_district_name }}</td>
                       <td>{{ $row->gelombang }}</td>
-                      <td style=" text-align: center;">
+                      {{-- <td style=" text-align: center;">
                         @if ($row->is_active == "Y")
                           @if ($row->approve == 'Y')
                             <span class="text-success"><i class="fas fa-check-square text-success"> </i> Approved</span>
@@ -79,7 +81,7 @@
                         @else
                           TELAH SELESAI
                         @endif
-                      </td>
+                      </td> --}}
                       <td style=" text-align: center;">
                         @if ($row->is_active == "Y")
                           @if ($row->approve == "Y")
