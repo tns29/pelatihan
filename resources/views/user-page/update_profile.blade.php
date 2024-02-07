@@ -103,6 +103,7 @@
                     <option value="Hindu" {{ old('religion', $auth_user->religion) == 'Hindu' ? 'selected' : ''}}> » &nbsp; Hindu</option>
                     <option value="Budha" {{ old('religion', $auth_user->religion) == 'Budha' ? 'selected' : ''}}> » &nbsp; Budha</option>
                     <option value="Konghucu" {{ old('religion', $auth_user->religion) == 'Konghucu' ? 'selected' : ''}}> » &nbsp; Konghucu</option>
+                    <option value="Katholik " {{ old('religion', $auth_user->religion) == 'Katholik ' ? 'selected' : ''}}> » &nbsp; Katholik </option>
                 </select>
                 @error('religion')
                 <small class="invalid-feedback ms-3">
