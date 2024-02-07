@@ -180,7 +180,8 @@ body {
 }
 
 .img-services {
-    height: 210px;
+    min-height: 220px;
+    max-height: 250px;
     width: auto;
     background-origin: border-box;
     background-repeat: no-repeat;

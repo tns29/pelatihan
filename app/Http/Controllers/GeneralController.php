@@ -96,7 +96,19 @@ class GeneralController extends Controller {
                 $request->session()->flash('failed1', 'Anda telah mendaftar untuk pelatihan ini.');
                 return redirect('/pelatihan/'.$serviceId);
             }
-
+            
+            $checkIsRegisterTrainingAgain = Registrant::where(['participant_number' => $user->number])->orderBy('period_id', 'DESC')->first();
+            if($checkIsRegisterTrainingAgain->passed != "Y") {
+                $request->session()->flash('failed1', 'Proses gagal, karna anda belum lulus pada pelatihan sebelumnya.');
+                return redirect('/pelatihan/'.$serviceId);
+            }
+            
+            if($checkIsRegisterTrainingAgain) {
+                // $previous_period = $checkIsRegisterTrainingAgain->period_id;
+                $need_approval = true;
+            } else {
+                $need_approval = false;
+            }
             $registrant = new Registrant;
 
             $registrant->participant_number = $user->number;
@@ -105,10 +117,10 @@ class GeneralController extends Controller {
             $registrant->year = date('Y');
             $registrant->is_active = 'Y';
             $registrant->period_id = $active_period->id;
-            if(!$checkIsRegisterTraining) {
-                $registrant->approve = "Y";
+            if($need_approval) {
+                $registrant->approve = NULL;
             } else {
-                $registrant->approve = "N";
+                $registrant->approve = "Y";
             }
             // dd($registrant);
             $registrant->save();

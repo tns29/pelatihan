@@ -36,9 +36,9 @@ class ServiceController extends Controller
         
         $categorySelected = $request->categoryId;
         if($categorySelected) {
-            $filter = ['period_id'  => $active_period->id, 'is_active' => 'Y', 'category_id' => $categorySelected];
+            $filter = ['is_active' => 'Y', 'category_id' => $categorySelected];
         } else {
-            $filter = ['period_id'  => $active_period->id, 'is_active' => 'Y'];
+            $filter = ['is_active' => 'Y'];
         }
         $search_name = $request->search_name;
 
