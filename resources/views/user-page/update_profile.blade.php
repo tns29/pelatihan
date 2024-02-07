@@ -7,7 +7,7 @@
 <form action="/update-profile/{{ auth('participant')->user()->number }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
-    <div class="p-3 row rounded-2 shadow mx-2">
+    <div class="p-3 row rounded-2 shadow mx-2" style="background-image: linear-gradient(to top, rgba(247, 247, 247, 0.604), #88d4e546);">
         <div class="col-lg-3 col-md-3 col-sm-3 mt-2">
             <label for="image">&nbsp; </label> 
             <div class="card img-bordered ml-5 p-2">
