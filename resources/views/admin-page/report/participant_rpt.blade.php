@@ -120,7 +120,7 @@
                                 @default
                                     {{$item->approve == 'Y' ? '' : ''}}
                                     @if ($item->approve == 'Y')
-                                        <span style="color: rgb(0, 189, 0)"><b>Sedang Berlangsung</b></span>
+                                        <span style="color: rgb(0, 189, 0)"><b>Pendaftar</b></span>
                                     @elseif($item->approve == 'N')
                                         <span style="color: red"><b>X </b> Ditolak</span>
                                     @else
