@@ -28,7 +28,8 @@
                   <input type="text" name="fullname" id="fullname" class="form-control ml-2" placeholder="Cari Nama" value="{{ $search_name }}">
                 </div>
                 <div class="col-lg-1">
-                  <button type="button" id="search" class="btn btn-outline-secondary">Cari</button>
+                  <button type="button" id="search" class="btn btn-outline-warning"><i class="fas fa-search"></i></button>
+                  <button type="button" id="reset" class="btn btn-outline-danger"><i class="fas fa-eraser"></i></button>
                 </div>
                 {{-- <div class="col-lg-4">
                   <div class="d-flex w-100" style="float: right; right:0 !important;">

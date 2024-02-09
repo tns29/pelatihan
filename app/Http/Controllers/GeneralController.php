@@ -98,9 +98,12 @@ class GeneralController extends Controller {
             }
             
             $checkIsRegisterTrainingAgain = Registrant::where(['participant_number' => $user->number])->orderBy('period_id', 'DESC')->first();
-            if($checkIsRegisterTrainingAgain->passed != "Y") {
-                $request->session()->flash('failed1', 'Proses gagal, karna anda belum lulus pada pelatihan sebelumnya.');
-                return redirect('/pelatihan/'.$serviceId);
+            
+            if($checkIsRegisterTrainingAgain) {
+                if($checkIsRegisterTrainingAgain->passed == null) {
+                    $request->session()->flash('failed1', 'Proses gagal, karna anda belum menyelesaikan pelatihan sebelumnya.');
+                    return redirect('/pelatihan/'.$serviceId);
+                }
             }
             
             if($checkIsRegisterTrainingAgain) {

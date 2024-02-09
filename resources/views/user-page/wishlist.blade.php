@@ -93,7 +93,7 @@
                   <td id="date"></td>
                 </tr>
                 <tr id="tr_approve">
-                  <th>Status Kelulusan</th>
+                  <th>Status</th>
                   <td> : </td>
                   <td id="passed"></td>
                 </tr>
