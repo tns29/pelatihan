@@ -41,12 +41,16 @@
                             </div>
                             
                             <div class="col-lg-6 col-md-6 col-sm-12 mt-2">
-                                <label for="training">Pelatihan Terakhir</label>
-                                <input type="text" class="form-control" name="training" id="training" value="" readonly>
+                                <label for="nik">Pelatihan Terakhir</label>
+                                <input type="text" class="form-control" name="nik" id="nik" value="" readonly>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 mt-2">
                                 <label for="no_telp">No. Telp</label>
                                 <input type="text" class="form-control" name="no_telp" id="no_telp" value="" readonly>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 mt-2">
+                                <label for="training">Pelatihan Terakhir</label>
+                                <input type="text" class="form-control" name="training" id="training" value="" readonly>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 mt-2">
                                 <label for="sub_district">Kecamatan</label>

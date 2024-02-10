@@ -305,7 +305,7 @@ class AdminController extends Controller
         $filename = 'participant_passed';
         $filename_script = getContentScript(true, $filename);
         
-        $status_passed = $request->passed ? $request->passed : NULL;
+        $status_passed = $request->passed ? $request->passed : "X";
 
         $data = Auth::guard('admin')->user();  
         $registrant = new Registrant;
@@ -424,7 +424,7 @@ class AdminController extends Controller
         $result = Participant::with('sub_districts')->find($participant_number);
 
         $getLatestTraining = Registrant::with('service')->where('participant_number', $participant_number)->orderBy('id', 'DESC')->limit('1')->first();
-        
+        // dd($getLatestTraining->passed);
         if($getLatestTraining) {
             if($result) {
                 return response()->json(['status' => 'success', 'data' => $result, 'training_name' => $getLatestTraining->service->title]);
@@ -454,7 +454,7 @@ class AdminController extends Controller
     function storeParticipantWord(Request $request) {
         
         $validatedData = $request->validate([
-            'participant_number' => 'required',
+            'participant_number' => 'required|unique:participant_works',
             'date_year' => 'required|max:10',
             'company_name' => 'required|max:100',
             'position' => 'required|max:50',

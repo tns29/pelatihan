@@ -8,7 +8,8 @@ $(function () {
             success: (response) => {
                 if (response.status == "success") {
                     var data = response.data;
-                    console.log(data);
+                    // console.log(data);
+                    $("#nik").val(data.nik);
                     $("#no_telp").val(data.no_telp);
                     $("#sub_district").val(data.sub_districts.name);
                     $("#training").val(response.training_name);
