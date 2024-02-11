@@ -38,7 +38,7 @@ class Registrant extends Model
                 ->select('registrants.*','trainings.title as trainingsTitle',  'trainings.duration', 'trainings.description as description', 'trainings.image as image',
                         'periods.name as gelombang', 'categories.name as category')
                 ->leftJoin('trainings', 'trainings.id', '=', 'registrants.training_id')
-                ->leftJoin('periods', 'periods.id', '=', 'trainings.period_id') 
+                ->leftJoin('periods', 'periods.id', '=', 'registrants.period_id') 
                 ->leftJoin('categories', 'categories.id', '=', 'trainings.category_id')
                 ->where(['participant_number' => $number])->get();
     }
