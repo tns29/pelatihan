@@ -62,10 +62,16 @@ class ServiceController extends Controller
         // $interval = $now->diff($start);
         // dd($interval);
         
-        $jarak_mulai  = date_diff($now, $start, true);
+        $jarak_mulai  = date_diff($now, $start);
         $jarak_selesai  = date_diff($now, $end);
-        if($jarak_mulai->days == 0 && ($jarak_mulai->h > 0 OR $jarak_mulai->i > 0 OR $jarak_mulai->s > 0)) {
+        $telah_dimulai = false;
+        if($jarak_mulai->days >= 0 && ($jarak_mulai->h > 0 OR $jarak_mulai->i > 0 )) {
             $telah_dimulai = true;
+            if($jarak_mulai->days == 0 && $jarak_mulai->invert > 0) {
+                $telah_dimulai = true;
+            } else {
+                $telah_dimulai = false;
+            }
         } else {
             $telah_dimulai = false;
         }
@@ -75,7 +81,7 @@ class ServiceController extends Controller
             $telah_selesai = false;
         }
         
-        // dd($telah_selesai);
+        // var_dump($telah_dimulai);
         // dd($jarak_mulai);
         
         if($start_date != null && $telah_dimulai == true) {
