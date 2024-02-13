@@ -1,6 +1,11 @@
 
 @extends('user-page.layouts.user_main')
 
+<style>
+  #wmark {
+  }
+</style>
+
 @section('content-pages')
 
 <div class="explain-product my-4">
@@ -64,44 +69,50 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <div class="row" id="content">
+          <div id="content">
+            <div class="row" id="wmark" style="
+            background-image: url('<?= asset('/img/wmark.jpg') ?>'); 
+            background-position: center;
+            background-size: cover;
+            width: 20px; height: 20px;"> </div>
+            <div class="col-md-4 col-lg-4">
+              <img src="{{ asset('/storage').'/'.auth()->guard('participant')->user()->image }}" class="img-fluid" style="height: 200px; padding: 14px !important;" alt="logo">
+            </div>
             <div class="col">
               <table class="table">
                 <tr>
-                  <th>Nomor Peserta</th>
+                  <th style="text-align: left !important;">Nomor Peserta</th>
                   <td> : </td>
                   <td id="number">{{auth()->guard('participant')->user()->number}}</td>
                 </tr>
                 <tr>
-                  <th>Nama Lengkap</th>
+                  <th style="text-align: left !important;">Nama Lengkap</th>
                   <td> : </td>
                   <td id="name">{{ auth()->guard('participant')->user()->fullname }}</td>
                 </tr>
                 <tr>
-                  <th>Nama Pelatihan</th>
+                  <th style="text-align: left !important;">Nama Pelatihan</th>
                   <td> : </td>
                   <td id="training_name"></td>
                 </tr>
                 <tr>
-                  <th>Gelombang</th>
+                  <th style="text-align: left !important;">Gelombang</th>
                   <td> : </td>
                   <td id="periode"></td>
                 </tr>
                 <tr>
-                  <th>Tanggal Pendaftaran</th>
+                  <th style="text-align: left !important;">Tanggal Pendaftaran</th>
                   <td> : </td>
                   <td id="date"></td>
                 </tr>
                 <tr id="tr_approve">
-                  <th>Status</th>
+                  <th style="text-align: left !important;">Status</th>
                   <td> : </td>
                   <td id="passed"></td>
                 </tr>
               </table>
             </div>
-            <div class="col-md-4 col-lg-4">
-              <img src="{{ asset('/storage').'/'.auth()->guard('participant')->user()->image }}" class="img-fluid" style="height: 200px;" alt="logo">
-            </div>
+
           </div>
         </div>
         <div class="modal-footer">

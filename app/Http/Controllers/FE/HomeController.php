@@ -22,7 +22,7 @@ class HomeController extends Controller
         $post = Post::with('picturePost')->orderBy('id', 'DESC')->get();
         
         return view('user-page/posts', [
-            'title' => 'Berita & Inovasi Dinas Tenaga Kerja',
+            'title' => 'Berita & Inovasi UPTD Latihan Kerja',
             'posts' => $post,
             'brand_name' => 'UPTD'
         ]);
@@ -40,7 +40,7 @@ class HomeController extends Controller
         $post = Post::with('picturePost')->orderBy('id', 'DESC')->get();
         // dd($post);
         return view('user-page/detail_posts', [
-            'title' => 'Berita & Inovasi Dinas Tenaga Kerja',
+            'title' => 'Berita & Inovasi UPTD Latihan Kerja',
             'post' => $post,
             'resultPost' => $resultPost,
             'brand_name' => 'UPTD'

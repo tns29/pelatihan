@@ -27,7 +27,7 @@ function printCard(periode, training_name, date, is_passed, approve) {
 
 function printDiv() {
     var divContents = document.getElementById("content").innerHTML;
-    var a = window.open("", "", "height=500, width=500");
+    var a = window.open("", "", "height=720, width=1500");
     a.document.write("<html>");
     a.document.write("<body > <h1>Kartu Pelatihan <br>");
     a.document.write(divContents);
