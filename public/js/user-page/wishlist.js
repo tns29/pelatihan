@@ -27,9 +27,39 @@ function printCard(periode, training_name, date, is_passed, approve) {
 
 function printDiv() {
     var divContents = document.getElementById("content").innerHTML;
-    var a = window.open("", "", "height=720, width=1500");
+    var style = `<style>
+                #wmark {
+                    background-position: center;
+                    background-size: cover;
+                    width: 340px; height: 400px;
+                    margin-left:-20px;
+                    margin-top: 5px;
+                    filter: blur(5px);
+                    -webkit-filter: blur(5px);
+                }
+                .content-body {
+                    position: absolute;
+                    top: 33%;
+                    left: 14%;
+                    margin-top: 5px;
+                    padding: 25px 55px;
+                    transform: translate(-50%, -50%);
+                    z-index: 2;
+                    background-color: rgba(255,255,255, 0.4);
+                    color: white;
+                    font-weight: bold;
+                }
+                .content-body img {
+                    margin-left:20px; 
+                }
+                </style>`;
+    console.log(divContents);
+    var a = window.open("", "", "height=720, width=1300");
     a.document.write("<html>");
-    a.document.write("<body > <h1>Kartu Pelatihan <br>");
+    a.document.write(style);
+    a.document.write(
+        "<body > <h1 style='margin-left:15px;'>Kartu Pelatihan <br>"
+    );
     a.document.write(divContents);
     a.document.write("</body></html>");
     a.document.close();

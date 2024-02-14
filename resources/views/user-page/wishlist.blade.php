@@ -71,10 +71,9 @@
         <div class="modal-body">
           <div id="content">
             <div class="row" id="wmark" style="
-            background-image: url('<?= asset('/img/wmark.jpg') ?>'); 
-            background-position: center;
-            background-size: cover;
-            width: 20px; height: 20px;"> </div>
+            background-image: url('<?= asset('/img/wmark.jpg') ?>');"> 
+          </div>
+          <div class="content-body">
             <div class="col-md-4 col-lg-4">
               <img src="{{ asset('/storage').'/'.auth()->guard('participant')->user()->image }}" class="img-fluid" style="height: 200px; padding: 14px !important;" alt="logo">
             </div>
@@ -112,6 +111,7 @@
                 </tr>
               </table>
             </div>
+          </div>  
 
           </div>
         </div>
