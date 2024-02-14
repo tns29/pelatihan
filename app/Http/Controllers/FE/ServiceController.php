@@ -67,7 +67,7 @@ class ServiceController extends Controller
         $telah_dimulai = false;
         if($jarak_mulai->days >= 0 && ($jarak_mulai->h > 0 OR $jarak_mulai->i > 0 )) {
             $telah_dimulai = true;
-            if($jarak_mulai->days > 0 && $jarak_mulai->invert > 0) {
+            if($jarak_mulai->days >= 0 && $jarak_mulai->invert > 0) {
                 $telah_dimulai = true;
             } else {
                 $telah_dimulai = false;
