@@ -423,8 +423,12 @@ class AdminController extends Controller
         $participant_number = $request->number;
         $result = Participant::with('sub_districts')->find($participant_number);
 
-        $getLatestTraining = Registrant::with('service')->where('participant_number', $participant_number)->orderBy('id', 'DESC')->limit('1')->first();
-        // dd($getLatestTraining->passed);
+        $where = [
+            'participant_number' => $participant_number,
+            'passed' => 'Y'
+        ];
+        $getLatestTraining = Registrant::with('service')->where($where)->orderBy('id', 'DESC')->limit('1')->first();
+        // dd($getLatestTraining);
         if($getLatestTraining) {
             if($result) {
                 return response()->json(['status' => 'success', 'data' => $result, 'training_name' => $getLatestTraining->service->title]);
@@ -432,7 +436,7 @@ class AdminController extends Controller
                 return response()->json(['status' => 'failed']);
             }
         } else {
-            return response()->json(['status' => 'warning', 'message' => "Peserta belum pernah mengikuti pelatihan"]);
+            return response()->json(['status' => 'warning', 'message' => "Peserta belum lulus mengikuti pelatihan"]);
         }
     }
 

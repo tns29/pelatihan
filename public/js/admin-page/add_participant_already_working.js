@@ -15,6 +15,11 @@ $(function () {
                     $("#training").val(response.training_name);
                 } else if (response.status == "warning") {
                     alert(response.message);
+                    $("#nik").val("");
+                    $("#no_telp").val("");
+                    $("#sub_district").val("");
+                    $("#training").val("");
+                    $("#participant_number").val("");
                 } else {
                     alert("Data tidak ditemukan, hubungi administrator.");
                 }
