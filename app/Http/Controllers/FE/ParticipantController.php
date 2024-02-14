@@ -157,7 +157,11 @@ class ParticipantController extends Controller
     function updateProfileData(Request $request, string $number) {
         // dd($request);
         $validatedData = $request->validate([
+            'fullname'    => 'required|max:100',
+            'username'    => 'required|max:30',
+            'email'    => 'required|email|max:100',
             'nik'    => 'required|max:16',
+            'no_telp'    => 'required|max:15',
             'no_wa'    => 'required|max:15',
             'place_of_birth'    => 'required|max:30',
             'date_of_birth'    => 'required',
@@ -179,6 +183,16 @@ class ParticipantController extends Controller
         if($request->nik != $request->nik1) {
             $validatedData = $request->validate([
                 'nik'    => 'required|max:16|unique:participants',
+            ]);
+        }
+        if($request->email != $request->email1) {
+            $validatedData = $request->validate([
+                'email'    => 'required|max:100|email|unique:participants',
+            ]);
+        }
+        if($request->username != $request->username1) {
+            $validatedData = $request->validate([
+                'username'    => 'required|max:100|unique:participants',
             ]);
         }
 

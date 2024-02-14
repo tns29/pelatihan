@@ -34,6 +34,35 @@
         </div>
         <div class="col-lg-9 col-md-9 col-sm-9 mt-4">
             <div class=" mt-2 d-flex">
+                <label for="fullname" class="col-md-3 ms-3">Nama Lengkap <i class="text-danger">*</i></label>
+                <input type="text" class="form-control inline-block @error('fullname')is-invalid @enderror" maxlength="16" name="fullname" id="fullname" value="{{ old('fullname', $auth_user->fullname) }}">
+                @error('fullname')
+                <small class="invalid-feedback ms-3">
+                    Nama Lengkap {{ $message }}
+                </small>
+                @enderror
+            </div>
+            <div class=" mt-2 d-flex">
+                <label for="username" class="col-md-3 ms-3">Username <i class="text-danger">*</i></label>
+                <input type="text" class="form-control inline-block @error('username')is-invalid @enderror" maxlength="16" name="username" id="username" value="{{ old('username', $auth_user->username) }}">
+                <input type="hidden" name="username1" value="{{ old('username', $auth_user->username) }}">
+                @error('username')
+                <small class="invalid-feedback ms-3">
+                    Username {{ $message }}
+                </small>
+                @enderror
+            </div>
+            <div class=" mt-2 d-flex">
+                <label for="email" class="col-md-3 ms-3">Email <i class="text-danger">*</i></label>
+                <input type="text" class="form-control inline-block @error('email')is-invalid @enderror" maxlength="16" name="email" id="email" value="{{ old('email', $auth_user->email) }}">
+                <input type="hidden" name="email1" value="{{ old('email', $auth_user->email) }}">
+                @error('email')
+                <small class="invalid-feedback ms-3">
+                    Email {{ $message }}
+                </small>
+                @enderror
+            </div>
+            <div class=" mt-2 d-flex">
                 <label for="nik" class="col-md-3 ms-3">NIK <i class="text-danger">*</i></label>
                 <input type="text" class="form-control inline-block @error('nik')is-invalid @enderror" maxlength="16" name="nik" id="nik" value="{{ old('nik', $auth_user->nik) }}" onkeyup="onlyNumbers(this)">
                 <input type="hidden" name="nik1" value="{{ old('nik', $auth_user->nik) }}">
@@ -49,6 +78,15 @@
                 @error('no_wa')
                 <small class="invalid-feedback ms-3">
                     No. WA {{ $message }}
+                </small>
+                @enderror
+            </div>
+            <div class=" mt-2 d-flex">
+                <label for="no_telp" class="col-md-3 ms-3">No. Telp <i class="text-danger">*</i></label>
+                <input type="text" class="form-control inline-block @error('no_telp')is-invalid @enderror" maxlength="15" name="no_telp" id="no_telp" value="{{ old('no_telp', $auth_user->no_telp) }}" onkeyup="onlyNumbers(this)">
+                @error('no_telp')
+                <small class="invalid-feedback ms-3">
+                    No. Telp {{ $message }}
                 </small>
                 @enderror
             </div>
@@ -222,7 +260,8 @@
                 @endif
             </div>
             <hr>
-            <div class="ms-2 text-danger">* Form Wajib diisi *</div>
+            <small class="ms-2 text-danger">* Form Wajib diisi</small> <br>
+            <small class="ms-2 text-danger">* Max file upload 2 MB</small>
         </div>
         <button type="submit" class="btn btn-outline-success mt-3">Simpan Data</button>
     </div>
