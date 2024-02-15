@@ -59,26 +59,33 @@
                             <img src="{{ asset('/storage').'/'.$resultData->participants->image }}" class="shadow mb-2" style="width : 100%;" alt="User Image">
                         @endif
                     </tr>
-                    <form action="/passed-participant/{{ $resultData->participants->number }}" method="POST">
-                        @csrf
-                        @method('PUT')
-                        <tr>
-                            <th>Update Status Kelulusan</th>
-                            <td>
-                                <input type="hidden" name="training_id" id="training_id" value="{{ $resultData->training_id }}">
-                                <select name="passed" id="passed" class="form-control form-select">
-                                    <option value="">Pilih status</option>
-                                    <option value="Y" {{ $resultData->passed == 'Y' ? 'selected':'' }}>Lulus</option>
-                                    <option value="N" {{ $resultData->passed == 'N' ? 'selected':'' }}>Tidak Lulus</option>
-                                    <option value="C" {{ $resultData->passed == 'C' ? 'selected':'' }}>Cadangan</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><button class="btn btn-outline-info py-1 float-right w-full">Simpan dan keluar &nbsp; <i class="fas fa-share-square"></i> </button></td>
-                        </tr>
-                        
-                    </form>
+
+                    @if ($resultData->approve != "N")
+                      <form action="/passed-participant/{{ $resultData->participants->number }}" method="POST">
+                          @csrf
+                          @method('PUT')
+                          <tr>
+                              <th>Update Status Kelulusan</th>
+                              <td>
+                                  <input type="hidden" name="training_id" id="training_id" value="{{ $resultData->training_id }}">
+                                  <select name="passed" id="passed" class="form-control form-select">
+                                      <option value="">Pilih status</option>
+                                      <option value="Y" {{ $resultData->passed == 'Y' ? 'selected':'' }}>Lulus</option>
+                                      <option value="N" {{ $resultData->passed == 'N' ? 'selected':'' }}>Tidak Lulus</option>
+                                      <option value="C" {{ $resultData->passed == 'C' ? 'selected':'' }}>Cadangan</option>
+                                  </select>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td colspan="2"><button class="btn btn-outline-info py-1 float-right w-full">Simpan dan keluar &nbsp; <i class="fas fa-share-square"></i> </button></td>
+                          </tr>
+                          
+                      </form>    
+                    @else
+                      <tr>
+                        <th>Pendaftaran Ditolak</th>
+                      </tr>
+                    @endif
 
                 </table>
             </div>

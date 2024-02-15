@@ -31,17 +31,18 @@
                   <button type="button" id="search" class="btn btn-outline-warning"><i class="fas fa-search"></i></button>
                   <button type="button" id="reset" class="btn btn-outline-danger"><i class="fas fa-eraser"></i></button>
                 </div>
-                {{-- <div class="col-lg-4">
+                <div class="col-lg-4">
                   <div class="d-flex w-100" style="float: right; right:0 !important;">
                     <span class="pr-3 pt-2">Status </span>
                     <select name="status" id="status" class="form-select form-control" style="display: inline">
-                      <option value=""> Menunggu</option>
+                      <option value="">Semua</option>
+                      <option value="Z" {{ $status == 'Z' ? 'selected' : '' }}> Belum Diproses</option>
                       <option value="Y" {{ $status == 'Y' ? 'selected' : '' }}> Diterima</option>
                       <option value="N" {{ $status == 'N' ? 'selected' : '' }}> Ditolak</option>
                       <option value="C" {{ $status == 'C' ? 'selected' : '' }}> Cadangan</option>
                     </select>
                   </div>
-                </div> --}}
+                </div>
               </div>
 
             </form>
@@ -63,7 +64,12 @@
               <tbody>
                 @foreach ($participant as $row)
                   <tr>
-                      <td>{{ $row->participant_number }}</td>
+                      <td>
+                        <a href="/detail-participant-appr/{{ $row->participant_number }}/{{$row->training_id}}" class="text-info">
+                          {{$row->participant_number}}
+                        </a>
+                      </td>
+                      {{-- <td>{{ $row->participant_number }}</td> --}}
                       <td>{{ $row->fullname }}</td>
                       <td>{{ $row->gender == 'M' ? 'Laki-laki' : 'Perempuan' }}</td>
                       <td>{{ $row->trainingsTitle }}</td>
@@ -88,11 +94,11 @@
                           @if ($row->approve == "Y")
                             <a href="/detail-participant-appr/{{ $row->participant_number }}/{{$row->training_id}}" class="text-success"> <i class="fas fa-user-check"></i> Detail</a>
                           @elseif($row->approve == "N")
-                            <i class="fas fa-minus-circle text-danger"></i>  
+                            <i class="fas fa-minus-circle text-danger"></i><a href="#" class="text-danger"> Ditolak</a>
                           @else
                             <a href="#" onclick="approve(`{{$row->participant_number}}`, `{{$row->fullname}}`, `{{$row->training_id}}`, `{{$row->trainingsTitle}}`)" class="text-warning">
                               <i class="fas fa-user-edit"></i>
-                            </a>
+                            </a> &nbsp;-&nbsp;
                             <a href="#" onclick="decline(`{{$row->participant_number}}`, `{{$row->fullname}}`, `{{$row->training_id}}`, `{{$row->trainingsTitle}}`)" class="text-danger">
                               <i class="fas fa-times-circle"></i>
                             </a>

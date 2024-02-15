@@ -33,7 +33,7 @@ function approve(nomor, name, training_nomor, trainingsTitle) {
 
 function decline(nomor, name, training_id, trainingsTitle) {
     $("#modal-delete").modal("show");
-    $(".modal-title").text("Hapus Data");
+    $(".modal-title").text("Tolak Pelatihan");
     $("#modal-delete form").attr("action", "/decline/" + nomor);
     $("#content-delete").html("");
 
