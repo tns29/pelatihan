@@ -51,7 +51,7 @@ class Registrant extends Model
                         'periods.name as gelombang', 'categories.name as category', 'sub_districts.name AS sub_district_name')
                 ->leftJoin('participants', 'participants.number', '=', 'registrants.participant_number')
                 ->leftJoin('trainings', 'trainings.id', '=', 'registrants.training_id')
-                ->leftJoin('periods', 'periods.id', '=', 'trainings.period_id') 
+                ->leftJoin('periods', 'periods.id', '=', 'registrants.period_id') 
                 ->leftJoin('categories', 'categories.id', '=', 'trainings.category_id')
                 ->leftJoin('sub_districts', 'sub_districts.id', '=', 'participants.sub_district')
                 // ->where(['registrants.approve' => $status])
