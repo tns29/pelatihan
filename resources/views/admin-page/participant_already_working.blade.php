@@ -18,7 +18,34 @@
     <div class="container-fluid">
         <div class="row mx-1">
           <div class="row justify-content-end mb-2 w-100">
-            <a href="/add-participant-work" class="btn float-right btn-add "><i class="fas fa-plus-square"></i> &nbsp; Data</a>
+            <form id="submitForm" action="/participant-already-working" method="GET" class="w-100">
+              @csrf
+              <div class="row justify-content-evenly">
+                <div class="col-lg-6">
+                  <input type="text" name="fullname" id="fullname" class="form-control ml-2" placeholder="Cari Nama" value="{{ $search_name }}">
+                </div>
+                <div class="col-lg-1">
+                  <button type="button" id="search" class="btn px-2 btn-outline-warning"><i class="fas fa-search"></i></button>
+                  <button type="button" id="reset" class="btn px-2 btn-outline-danger"><i class="fas fa-eraser"></i></button>
+                </div>
+                <div class="col-lg-4">
+                  <div class="d-flex w-75" style="float: left; left:0 !important;">
+                    <span class="pr-3 pt-2">Kecamatan </span>
+                    <select name="sub_district" id="sub_district" class="form-select form-control" style="display: inline">
+                      <option value="">Semua</option>
+                      @foreach ($sub_district_data as $item)
+                        <option value="{{ $item->id }}" {{ $filter == $item->id  ? 'selected' : '' }}> »&nbsp; {{ $item->name }}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                </div>
+                <div class="col-lg-1">
+                  <a href="/add-participant-work" class="btn float-right btn-add "><i class="fas fa-plus-square"></i> &nbsp; Data</a>
+                </div>
+              </div>
+
+            </form>
+            
             @if (session()->has('success'))
               <div class="alert alert-success py-1" id="success">
                 <?= session()->get('success') ?>

@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Models\AdminLevel;
 use App\Models\Registrant;
 use App\Models\Participant;
+use App\Models\SubDistrict;
 use Illuminate\Http\Request;
 use App\Models\ParticipantWork;
 use Illuminate\Support\Facades\Auth;
@@ -399,24 +400,26 @@ class AdminController extends Controller
         return redirect('registrant');
     }
 
-    function participantAlreadyWorking() {
-         $filename = 'participant_already_working';
-         $filename_script = getContentScript(true, $filename);
+    function participantAlreadyWorking(Request $request) {
+        $filename = 'participant_already_working';
+        $filename_script = getContentScript(true, $filename);
  
-         $data = Auth::guard('admin')->user();  
-         // $data_part = $participant->getUserProfileByNumber($number);
-         $resultData = ParticipantWork::with('participants')->get();
+        $data = Auth::guard('admin')->user();  
          
-         $modelParticipantWorlk = new ParticipantWork;
-         $resultData = $modelParticipantWorlk->dataPartisipantWork();
+        $filter = $request->sub_district ? $request->sub_district : NULL;
+         
+        $modelParticipantWorlk = new ParticipantWork;
+        $resultData = $modelParticipantWorlk->dataPartisipantWork($filter, $request->fullname);
         //  dd($resultData);
-         return view('admin-page.'.$filename, [
-             'script' => $filename_script,
-             'title' => 'Daftar Peserta Sudah Bekerja',
-             'auth_user' => $data,
-             // 'detailParticipant' => $data_part,
-             'resultData' => $resultData
-         ]);
+        return view('admin-page.'.$filename, [
+            'script' => $filename_script,
+            'filter' => $filter,
+            'sub_district_data' => SubDistrict::get(),
+            'search_name' => $request->fullname,
+            'title' => 'Daftar Peserta Sudah Bekerja',
+            'auth_user' => $data,
+            'resultData' => $resultData
+        ]);
     }
 
     function getDetailParticipant(Request $request) {
