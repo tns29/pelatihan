@@ -130,7 +130,7 @@ class Registrant extends Model
                             'periods.name as gelombang', 'categories.name as category')
                     ->leftJoin('participants', 'participants.number', '=', 'registrants.participant_number')
                     ->leftJoin('trainings', 'trainings.id', '=', 'registrants.training_id')
-                    ->leftJoin('periods', 'periods.id', '=', 'trainings.period_id') 
+                    ->leftJoin('periods', 'periods.id', '=', 'registrants.period_id') 
                     ->leftJoin('categories', 'categories.id', '=', 'trainings.category_id')
                     ->where($where)
                     ->where('registrants.approve', '!=', "N")
