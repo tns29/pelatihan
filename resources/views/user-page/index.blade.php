@@ -9,7 +9,7 @@
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
       </div> --}}
       <div class="carousel carousel-inner">
-        <div class="carousel-item item active" style="height: 400;">
+        <div class="carousel-item item active" style="height: 390;">
             <img src="{{ asset('img/PJBUPATI1.jpg') }}" class="d-block w-100 px-0 bg-white" alt="header1">
         </div>
         {{-- <div class="carousel-item item">
