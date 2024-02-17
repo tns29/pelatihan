@@ -9,8 +9,8 @@
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
       </div> --}}
       <div class="carousel carousel-inner">
-        <div class="carousel-item item active" style="height: 360px;">
-            <img src="{{ asset('img/uptdlk.jpg') }}" class="d-block w-100 px-5 bg-white" alt="header1">
+        <div class="carousel-item item active" style="height: 400;">
+            <img src="{{ asset('img/PJBUPATI1.jpg') }}" class="d-block w-100 px-0 bg-white" alt="header1">
         </div>
         {{-- <div class="carousel-item item">
             <img src="{{ asset('img/header2.png') }}" class="d-block w-100" alt="header2">
