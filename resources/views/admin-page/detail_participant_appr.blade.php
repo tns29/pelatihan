@@ -41,7 +41,7 @@
                     </tr>
                     <tr>
                         <th>Gelombang</th>
-                        <td> : &nbsp; {{ $resultData->service->periods->name }} </td>
+                        <td> : &nbsp; {{ $resultData->periods->name }} </td>
                     </tr>
                     <tr>
                         <th>Tanggal Daftar</th>

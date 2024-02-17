@@ -33,6 +33,11 @@ class Registrant extends Model
         return $this->belongsTo(Training::class, 'training_id', 'id');
     }
 
+    public function periods() : BelongsTo
+    {
+        return $this->belongsTo(Period::class, 'period_id', 'id');
+    }
+
     function getWishlist($number) {
         return DB::table('registrants')
                 ->select('registrants.*','trainings.title as trainingsTitle',  'trainings.duration', 'trainings.description as description', 'trainings.image as image',

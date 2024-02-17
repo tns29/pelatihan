@@ -373,7 +373,7 @@ class AdminController extends Controller
         $data = Auth::guard('admin')->user();  
         // $participant = new Participant;
         // $data_part = $participant->getUserProfileByNumber($number);
-        $resultData = Registrant::with('participants', 'service.service_detail', 'service.periods')
+        $resultData = Registrant::with('participants', 'periods', 'service.service_detail', 'service.periods')
                                 ->where(['participant_number'=> $number, 'training_id' => $training_id])->first();
         // dd($resultData);
         return view('admin-page.'.$filename, [
