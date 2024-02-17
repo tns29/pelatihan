@@ -33,16 +33,16 @@ function printDiv() {
                     background-size: cover;
                     width: 340px; height: 400px;
                     margin-left:-20px;
-                    margin-top: 5px;
+                    margin-top: -20px;
                     filter: blur(5px);
                     -webkit-filter: blur(5px);
                 }
                 .content-body {
                     position: absolute;
-                    top: 33%;
-                    left: 14%;
+                    top: 32%;
+                    left: 13%;
                     margin-top: 5px;
-                    padding: 25px 55px;
+                    padding: 45px 55px;
                     transform: translate(-50%, -50%);
                     z-index: 2;
                     background-color: rgba(255,255,255, 0.4);
@@ -58,7 +58,7 @@ function printDiv() {
     a.document.write("<html>");
     a.document.write(style);
     a.document.write(
-        "<body > <h1 style='margin-left:15px;'>Kartu Pelatihan <br>"
+        "<body > <h1 style='margin-left:15px;'>Kartu Pelatihan</h1> <br>"
     );
     a.document.write(divContents);
     a.document.write("</body></html>");
