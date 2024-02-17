@@ -27,13 +27,13 @@
                   <input type="text" name="fullname" id="fullname" class="form-control ml-2" placeholder="Cari Nama" value="{{ $search_name }}">
                 </div>
                 <div class="col-lg-1">
-                  <button type="button" id="search" class="btn btn-outline-warning"><i class="fas fa-search"></i></button>
-                  <button type="button" id="reset" class="btn btn-outline-danger"><i class="fas fa-eraser"></i></button>
+                  <button type="button" id="search" class="btn px-2 btn-outline-warning"><i class="fas fa-search"></i></button>
+                  <button type="button" id="reset" class="btn px-2 btn-outline-danger"><i class="fas fa-eraser"></i></button>
                 </div>
                 <div class="col-lg-4">
                   <div class="d-flex w-100" style="float: right; right:0 !important;">
                     <span class="pr-3 pt-2"> &nbsp; Status</span>
-                    <select name="passed" id="passed" class="form-select form-control" style="width:80%; position:absolute; float: right; right: 0.5% !important;" >
+                    <select name="passed" id="passed" class="form-select form-control" style="width:70%; position:absolute; float: right; right: 0.5% !important;" >
                       <option value="ALL" {{ $passed == 'ALL' ? 'selected' : '' }}> Semua</option>
                       @if ($passed)
                         <option value="X" {{ $passed == 'X' ? 'selected' : '' }}> Belum Diproses</option>
