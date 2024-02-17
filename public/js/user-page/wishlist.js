@@ -39,7 +39,7 @@ function printDiv() {
                 }
                 .content-body {
                     position: absolute;
-                    top: 33%;
+                    top: 34.5%;
                     left: 13%;
                     margin-top: 5px;
                     padding: 45px 55px;
