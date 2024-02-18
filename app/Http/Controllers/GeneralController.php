@@ -100,18 +100,29 @@ class GeneralController extends Controller {
             $checkIsRegisterTrainingAgain = Registrant::where(['participant_number' => $user->number])->orderBy('period_id', 'DESC')->first();
             
             if($checkIsRegisterTrainingAgain) {
-                if($checkIsRegisterTrainingAgain->passed == null) {
-                    $request->session()->flash('failed1', 'Proses gagal, karna anda belum menyelesaikan pelatihan sebelumnya.');
-                    return redirect('/pelatihan/'.$serviceId);
+
+                $checkIsRegisterTrainingPassed = Registrant::where(['participant_number' => $user->number, 'passed' => 'Y'])->orderBy('period_id', 'DESC')->first();
+                if($checkIsRegisterTrainingPassed) {
+                    $need_approval = true;
+                } else {
+                    if($checkIsRegisterTrainingAgain->passed == "Y") {
+                        $need_approval = true;
+                    } else {
+                        $need_approval = false;
+                    }
+
+                    if($checkIsRegisterTrainingAgain->passed == NULL) {
+                        $request->session()->flash('failed1', 'Proses gagal, karna anda belum menyelesaikan pelatihan sebelumnya.');
+                        return redirect('/pelatihan/'.$serviceId);
+                    }
                 }
-            }
-            
-            if($checkIsRegisterTrainingAgain) {
-                // $previous_period = $checkIsRegisterTrainingAgain->period_id;
-                $need_approval = true;
+                
+
             } else {
                 $need_approval = false;
             }
+            
+            // die($need_approval);
             $registrant = new Registrant;
 
             $registrant->participant_number = $user->number;
@@ -391,7 +402,7 @@ class GeneralController extends Controller {
             $where['participants.last_education'] = $request->session()->get('last_education')[0];
         }
         if($request->session()->get('period')) {
-            $where['trainings.period_id'] = $request->session()->get('period')[0];
+            $where['registrants.period_id'] = $request->session()->get('period')[0];
         }
         if($request->session()->get('year')) {
             $where['registrants.year'] = $request->session()->get('year')[0];
