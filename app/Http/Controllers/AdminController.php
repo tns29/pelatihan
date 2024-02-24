@@ -407,7 +407,22 @@ class AdminController extends Controller
         $data = Auth::guard('admin')->user();  
          
         $filter = $request->sub_district ? $request->sub_district : NULL;
-         
+        if($request->fullname) {
+            if($request->session()->get('fullname') != $request->fullname) {
+                session()->forget('fullname');
+            }
+            $request->session()->push('fullname', $request->fullname);
+        } else {
+            session()->forget('fullname');
+        }
+        if($request->sub_district) {
+            if($request->session()->get('sub_district') != $request->sub_district) {
+                session()->forget('sub_district');
+            }
+            $request->session()->push('sub_district', $request->sub_district);
+        } else {
+            session()->forget('sub_district');
+        }
         $modelParticipantWorlk = new ParticipantWork;
         $resultData = $modelParticipantWorlk->dataPartisipantWork($filter, $request->fullname);
         //  dd($resultData);

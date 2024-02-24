@@ -8,6 +8,12 @@
       <div class="col-sm-6">
         <h3 class="m-0 ml-2">{{ $title }} </h3>
       </div><!-- /.col --> 
+      <div class="col">
+        <a href="/export_participant_already_work" style="float: right;" class="text-decoration-none text-success">
+          Export Data <img src="{{ asset('img/excel.png') }}" alt="excel" style="height: 40px;">
+          <br>
+        </a>
+      </div>
     </div><!-- /.row -->
     <hr style="margin-bottom: 0">
   </div><!-- /.container-fluid -->
