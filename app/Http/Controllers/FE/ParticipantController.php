@@ -262,7 +262,23 @@ class ParticipantController extends Controller
                 Storage::delete($getData->image);
             }
         }
+        $validatedData['fullname'] = ucwords($request['fullname']);
+        $validatedData['username'] = strtolower($request['username']);
+        $validatedData['email'] = strtolower($request['email']);
+        $validatedData['nik'] = $request['nik'];
+        $validatedData['no_telp'] = $request['no_telp'];
+        $validatedData['no_wa'] = $request['no_wa'];
+        $validatedData['place_of_birth'] = ucwords($request['place_of_birth']);
+        $validatedData['date_of_birth'] = $request['date_of_birth'];
         $validatedData['size_uniform'] = strtoupper($request['size_uniform']);
+        $validatedData['address'] = ucwords($request['address']);
+        $validatedData['height'] = $request['height'];
+        $validatedData['religion'] = $request['religion'];
+        $validatedData['material_status'] = $request['material_status'];
+        $validatedData['last_education'] = $request['last_education'];
+        $validatedData['graduation_year'] = $request['graduation_year'];
+        $validatedData['sub_district'] = $request['sub_district'];
+        $validatedData['village'] = $request['sub_district'];
         // dd($validatedData);
         $result = Participant::where(['number'=> $number])->update($validatedData);
         if($result) {

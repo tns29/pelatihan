@@ -111,6 +111,11 @@
             <div class=" mt-2 d-flex">
                 <label for="address" class="col-md-3 ms-3">Alamat  <i class="text-danger">*</i></label>
                 <input type="text" class="form-control inline-block @error('address')is-invalid @enderror" name="address" id="address" value="{{ old('address', $auth_user->address) }}">
+                @error('address')
+                <small class="invalid-feedback ms-3">
+                    Tinggi Badan {{ $message }}
+                </small>
+                @enderror
             </div>
             <div class=" mt-2 d-flex">
                 <label for="height" class="col-md-3 ms-3">Tinggi Badan <i class="text-danger">(cm)</i> <i class="text-danger">*</i></label>
@@ -151,12 +156,12 @@
             </div>
             <div class=" mt-2 d-flex">
                 <label for="material_status" class="col-md-3 ms-3">Status Pernikahan <i class="text-danger">*</i></label>
-                <select name="material_status" id="material_status" class="form-control form-select">
+                <select name="material_status" id="material_status" class="form-control form-select @error('material_status')is-invalid @enderror">
                     <option value="">Pilih status</option>
-                    <option value="Kawin" {{ old('Kawin', $auth_user->material_status == 'Kawin' ? 'selected' : '' ) }}> » &nbsp; Kawin</option>
-                    <option value="Belum Kawin" {{ old('Belum', $auth_user->material_status == 'Belum Kawin' ? 'selected' : '' ) }}> » &nbsp; Belum Kawin</option>
-                    <option value="Janda" {{ old('Janda', $auth_user->material_status == 'Janda' ? 'selected' : '' ) }}> » &nbsp; Janda</option>
-                    <option value="Duda" {{ old('Duda', $auth_user->material_status == 'Duda' ? 'selected' : '' ) }}> » &nbsp; Duda</option>
+                    <option value="Kawin" {{ old('material_status', $auth_user->material_status) == 'Kawin' ? 'selected' : ''  }}> » &nbsp; Kawin</option>
+                    <option value="Belum Kawin" {{ old('material_status', $auth_user->material_status) == 'Belum Kawin' ? 'selected' : '' }}> » &nbsp; Belum Kawin</option>
+                    <option value="Janda" {{ old('material_status', $auth_user->material_status) == 'Janda' ? 'selected' : '' }}> » &nbsp; Janda</option>
+                    <option value="Duda" {{ old('material_status', $auth_user->material_status) == 'Duda' ? 'selected' : '' }}> » &nbsp; Duda</option>
                 </select>
                 @error('material_status')
                 <small class="invalid-feedback ms-3">
@@ -169,11 +174,11 @@
                 <label for="last_education" class="col-md-3 ms-3">Pendidikan Terakhir <i class="text-danger">*</i></label>
                 <select name="last_education" id="last_education" class="form-control form-select @error('last_education')is-invalid @enderror">
                     <option value="">Pilih Pendidikan Terakhir</option>
-                    <option value="SD" {{ old('SD', $auth_user->last_education == 'SD' ? 'selected' : '' ) }}> » &nbsp; SD</option>
-                    <option value="SLTP" {{ old('SLTP', $auth_user->last_education == 'SLTP' ? 'selected' : '' ) }}> » &nbsp; SLTP</option>
-                    <option value="SLTA-Sederajat" {{ old('SLTA-Sederajat', $auth_user->last_education == 'SLTA-Sederajat' ? 'selected' : '' ) }}> » &nbsp; SLTA/Sederajat</option>
-                    <option value="DIPLOMA" {{ old('DIPLOMA', $auth_user->last_education == 'DIPLOMA' ? 'selected' : '' ) }}> » &nbsp; DIPLOMA</option>
-                    <option value="S1" {{ old('S1', $auth_user->last_education == 'S1' ? 'selected' : '' ) }}> » &nbsp; S1</option>
+                    <option value="SD" {{ old('last_education', $auth_user->last_education) == 'SD' ? 'selected' : '' }}> » &nbsp; SD</option>
+                    <option value="SLTP" {{ old('last_education', $auth_user->last_education) == 'SLTP' ? 'selected' : '' }}> » &nbsp; SLTP</option>
+                    <option value="SLTA-Sederajat" {{ old('last_education', $auth_user->last_education) == 'SLTA-Sederajat' ? 'selected' : '' }}> » &nbsp; SLTA/Sederajat</option>
+                    <option value="DIPLOMA" {{ old('last_education', $auth_user->last_education) == 'DIPLOMA' ? 'selected' : '' }}> » &nbsp; DIPLOMA</option>
+                    <option value="S1" {{ old('last_education', $auth_user->last_education) == 'S1' ? 'selected' : '' }}> » &nbsp; S1</option>
                 </select>
                 @error('last_education')
                 <small class="invalid-feedback ms-3">
@@ -192,7 +197,7 @@
             </div>
             <div class=" mt-2 d-flex">
                 <label for="sub_district" class="col-md-3 ms-3">Kecamatan <i class="text-danger">*</i> </label>
-                <select name="sub_district" id="sub_district" class="form-control form-select">
+                <select name="sub_district" id="sub_district" class="form-control form-select @error('sub_district')is-invalid @enderror">
                     <option value="">Pilih kecamatan</option>
                     @foreach ($subDistrict as $item)
                         <option value="{{ $item->id }}" {{ $item->id == $auth_user->sub_district || $item->id == old('sub_district') ? 'selected' : '' }} >
@@ -209,7 +214,7 @@
             <div class=" mt-2 d-flex">
                 <input type="hidden" id="village_" value="{{$auth_user->village}}">
                 <label for="village" class="col-md-3 ms-3">Desa / Kelurahan <i class="text-danger">*</i> </label>
-                <select name="village" id="village" class="form-control form-select">
+                <select name="village" id="village" class="form-control form-select @error('village')is-invalid @enderror">
                     {{-- <option value="">Pilih kelurahan</option> --}}
                     {{-- load in script --}}
                 </select>
