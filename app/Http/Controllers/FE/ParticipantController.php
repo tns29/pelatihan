@@ -278,7 +278,7 @@ class ParticipantController extends Controller
         $validatedData['last_education'] = $request['last_education'];
         $validatedData['graduation_year'] = $request['graduation_year'];
         $validatedData['sub_district'] = $request['sub_district'];
-        $validatedData['village'] = $request['sub_district'];
+        $validatedData['village'] = $request['village'];
         // dd($validatedData);
         $result = Participant::where(['number'=> $number])->update($validatedData);
         if($result) {
