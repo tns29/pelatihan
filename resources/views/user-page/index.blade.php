@@ -8,14 +8,22 @@
     margin-left: 20px;
     height: 100px !important;
     width: auto;
-    animation: bounce 1s infinite alternate;
+    opacity: 0; /* Start with 0 opacity */
+    animation: fadeIn 3.5s ease-in-out infinite ;
+    /* animation: bounce 1s infinite alternate; */
   }
-  @keyframes bounce {
+  @keyframes fadeIn {
       0% {
-        top: 0;
+        /* top: 0; */
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+        /* top: 20px; */
       }
       100% {
-        top: 20px;
+        opacity: 0;
+        /* top: 10px; */
       }
   }
 </style>
@@ -31,7 +39,7 @@
       </div> --}}
       <div class="carousel carousel-inner">
         <div class="carousel-item item active" style="height: 380px;">
-            <img src="{{ asset('img/naker_digi.png') }}" class="img-small">
+            <img src="{{ asset('img/digi.png') }}" class="img-small">
             <img src="{{ asset('img/PJBUPATI1.jpg') }}" class="d-block w-100 px-0 bg-white" alt="header1">
         </div>
         {{-- <div class="carousel-item item">
