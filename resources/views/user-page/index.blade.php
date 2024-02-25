@@ -1,8 +1,29 @@
 
 @extends('user-page.layouts.user_main')
 
+<style>
+  .item img.img-small {
+    position: absolute;
+    margin-top: 20px;
+    margin-left: 20px;
+    height: 100px !important;
+    width: auto;
+    animation: bounce 1s infinite alternate;
+  }
+  @keyframes bounce {
+      0% {
+        top: 0;
+      }
+      100% {
+        top: 20px;
+      }
+  }
+</style>
+
 @section('header-pages')
+
 <div class="banner">
+  
   <div id="carouselExampleIndicators" class="carousel slide">
       {{-- <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -10,6 +31,7 @@
       </div> --}}
       <div class="carousel carousel-inner">
         <div class="carousel-item item active" style="height: 380px;">
+            <img src="{{ asset('img/naker_digi.png') }}" class="img-small">
             <img src="{{ asset('img/PJBUPATI1.jpg') }}" class="d-block w-100 px-0 bg-white" alt="header1">
         </div>
         {{-- <div class="carousel-item item">

@@ -85,7 +85,8 @@ body {
 }
 .item img {
     border-radius: 20px;
-    min-height: 300px;
+    height: 445px;
+    width: auto;
     background-position: center;
     background-size: cover;
 }
