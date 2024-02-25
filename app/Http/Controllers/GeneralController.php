@@ -202,6 +202,14 @@ class GeneralController extends Controller {
         } else {
             session()->forget('village');
         }
+        if($request->year) {
+            if($request->session()->get('year') != $request->year) {
+                session()->forget('year');
+            }
+            $request->session()->push('year', $request->year);
+        } else {
+            session()->forget('year');
+        }
 
         echo json_encode('{}');
     }
@@ -221,6 +229,11 @@ class GeneralController extends Controller {
         if($request->session()->get('village')) {
             $where['participants.village'] = $request->session()->get('village')[0];
         }
+        if($request->session()->get('year')) {
+            $year = $request->session()->get('year')[0];
+        } else {
+            $year = '';
+        }
 
         // dd($where);
         
@@ -229,12 +242,14 @@ class GeneralController extends Controller {
             ->leftJoin('sub_districts', 'participants.sub_district', '=', 'sub_districts.id')
             ->leftJoin('villages', 'participants.village', '=', 'villages.id')
             ->where($where)
+            ->where('participants.created_at', 'LIKE', '%' . $year . '%')
             ->get();
         $count = DB::table('participants')
             ->select('participants.*','sub_districts.name as sub_district_name', 'villages.name as village_name')
             ->leftJoin('sub_districts', 'participants.sub_district', '=', 'sub_districts.id')
             ->leftJoin('villages', 'participants.village', '=', 'villages.id')
             ->where($where)
+            ->where('participants.created_at', 'LIKE', '%' . $year . '%')
             ->count();
             
         return view('admin-page.report.registrant_rpt', [

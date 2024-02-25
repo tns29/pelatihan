@@ -143,7 +143,6 @@
                             <div class="col-lg-6 col-md-6 mt-2">
                                 <label for="year" class="ml-1">Tahun</label>
                                 <select name="year" id="year" class="form-control form-select"></select>
-                            
                             </div>
                         </div>
                     </div>

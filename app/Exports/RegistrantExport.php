@@ -74,6 +74,7 @@ class RegistrantExport implements FromCollection, WithHeadings, ShouldAutoSize, 
         $gender = $this->session->get('gender') ? $this->session->get('gender')[0] : false;
         $sub_district = $this->session->get('sub_district') ? $this->session->get('sub_district')[0] : false;
         $village = $this->session->get('village') ? $this->session->get('village')[0] : false;
+        $year = $this->session->get('year') ? $this->session->get('year')[0] : '';
 
         $where = ['participants.is_active' => 'Y'];
         
@@ -101,6 +102,7 @@ class RegistrantExport implements FromCollection, WithHeadings, ShouldAutoSize, 
         ->leftJoin('sub_districts', 'participants.sub_district', '=', 'sub_districts.id')
         ->leftJoin('villages', 'participants.village', '=', 'villages.id')
         ->where($where)
+        ->where('participants.created_at', 'LIKE', '%' . $year . '%')
         ->get();
         
         return $data;

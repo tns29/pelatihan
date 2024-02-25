@@ -81,6 +81,7 @@ class ParticipantExport implements FromCollection, WithHeadings, ShouldAutoSize,
         $material_status = $this->session->get('material_status') ? $this->session->get('material_status')[0] : false;
         $religion = $this->session->get('religion') ? $this->session->get('religion')[0] : false;
         $period = $this->session->get('period') ? $this->session->get('period')[0] : false;
+        $year = $this->session->get('year') ? $this->session->get('year')[0] : false;
 
         $where = ['participants.is_active' => 'Y'];
         
@@ -111,6 +112,9 @@ class ParticipantExport implements FromCollection, WithHeadings, ShouldAutoSize,
         }
         if($period) {
             $where = ['trainings.period_id' => $period];
+        }
+        if($year) {
+            $where['registrants.year'] = $year;
         }
 
         $data = DB::table('registrants')
