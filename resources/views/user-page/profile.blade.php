@@ -11,11 +11,13 @@ $date_of_birth = $auth_user->date_of_birth ? date('d, M Y', strtotime($auth_user
     <div class="row justify-content-center">
         <h3 class="text-center mb-4"><b> {{ $auth_user->fullname }} </b></h3>
         <div class="col-lg-3">
-            @if(!$auth_user->image)
-                <img src="{{ asset('img/userDefault.png') }}" class="shadow mb-2" style="width : 282px;" alt="User Image">
-            @else
-                <img src="{{ asset('/storage').'/'.$auth_user->image }}" class="shadow mb-2" style="width : 282px;" alt="User Image">
-            @endif
+            <div style=" width: 300px; height: 290px; overflow: hidden;">
+                @if(!$auth_user->image)
+                    <img src="{{ asset('img/userDefault.png') }}" class="shadow mb-2" style="width : 100%; height:100%; object-fit: cover; background-position: center; background-size: cover;" alt="User Image">
+                @else
+                    <img src="{{ asset('/storage').'/'.$auth_user->image }}" class="shadow mb-2" style="width : 100%; height:100%; object-fit: cover; background-position: center; background-size: cover;" alt="User Image">
+                @endif
+            </div>
             <span class="text-left"><small class="pt-2">Bergabung sejak, {{ date('d, M Y', strtotime($auth_user->created_at)) }}</small></span>
         </div>
         <div class="col-lg-9">
