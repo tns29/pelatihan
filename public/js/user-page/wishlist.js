@@ -40,7 +40,7 @@ function printDiv() {
                 .content-body {
                     position: absolute;
                     top: 35%;
-                    left: 13%;
+                    left: 16%;
                     margin-top: 5px;
                     padding: 45px 55px;
                     transform: translate(-50%, -50%);
