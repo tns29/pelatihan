@@ -12,7 +12,7 @@ class ExportDataController extends Controller
 {
     public function registrant(Request $request) 
     {
-        return Excel::download(new RegistrantExport($request), 'pendaftar_report'.date('_Ymd_His').'.xlsx');
+        return Excel::download(new RegistrantExport($request), 'registrant_report'.date('_Ymd_His').'.xlsx');
     }
 
     public function participant(Request $request) 

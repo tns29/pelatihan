@@ -54,7 +54,7 @@
         <h1> {{ $title }} </h1>
         <div class="row-export">
             <div class="icon-export">
-                <a href="/export_participant">
+                <a href="/export_registrant">
                     <img src="{{ asset('img/excel.png') }}" alt="excel" style="height: 40px;">
                     <label for="print" style="display : block; font-size: 12px; margin-left: 4px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">export</label>
                     <br>

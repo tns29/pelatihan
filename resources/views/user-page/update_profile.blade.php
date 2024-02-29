@@ -228,7 +228,7 @@
             {{-- DOKUMEN --}}
     
             <div class=" mt-2 d-flex">
-                <label for="id_card" class="col-md-3 ms-3">KTP <i class="text-danger">* </i> </label>
+                <label for="id_card" class="col-md-3 ms-3">KTP <i class="text-danger">* <small>|jpg/jpeg/png|</small></i> </label>
                 <input type="file" name="id_card" id="id_card" class="form-control @if(session()->has('id_card') == true)is-invalid @endif" value="{{ old('id_card', $auth_user->id_card) }}">
                 @if ($auth_user->id_card)
                     <small class="w-25 pt-2 ms-2"><b> &nbsp; <a href="{{asset('/storage/'.$auth_user->id_card)}}" target="_blank">Lihat file</a> </b></small>
@@ -241,7 +241,7 @@
             </div>
 
             <div class=" mt-2 d-flex">
-                <label for="ak1" class="col-md-3 ms-3">Ak1 / Kartu Kuning <i class="text-danger">* <small>|image/PDF|</small></i></i> </label>
+                <label for="ak1" class="col-md-3 ms-3">Ak1 / Kartu Kuning <i class="text-danger">* <small>|image/PDF|</small></i></label>
                 <input type="file" name="ak1" id="ak1" class="form-control @if(session()->has('ak1') == true)is-invalid @endif" >
                 @if ($auth_user->ak1)
                     <small class="w-25 pt-2 ms-2"><b> &nbsp; <a href="{{asset('/storage/'.$auth_user->ak1)}}" target="_blank">Lihat file</a> </b></small>
