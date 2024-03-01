@@ -510,7 +510,7 @@ class AdminController extends Controller
         ]);
     }
 
-    function updateParticipantWord(Request $request, string $number) {
+    function updateParticipantWork(Request $request, string $number) {
         
         $validatedData = $request->validate([
             'date_year' => 'required|max:10',
@@ -524,6 +524,18 @@ class AdminController extends Controller
 
         return redirect('/participant-already-working');
         
+    }
+
+    function deleteParticipantWork(Request $request, string $number) {
+        
+        $data = ParticipantWork::where(['participant_number' => $number ]);
+        $result = $data->delete();
+        if($result) {
+            $request->session()->flash('success', 'Data berhasil dihapus');
+        } else {
+            $request->session()->flash('failed', 'Proses gagal, Hubungi administrator');
+        }
+        return redirect('/participant-already-working');
     }
     
 }

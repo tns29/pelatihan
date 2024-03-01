@@ -88,12 +88,13 @@ Route::middleware('admin')->group(function () {
     
     Route::get('/participant-already-working', [AdminController::class, 'participantAlreadyWorking']);
     Route::get('/export_participant_already_work', [ExportDataController::class, 'participantAlreadyWorkExcel']);
-
+    
     Route::get('/add-participant-work', [AdminController::class, 'addParticipantWork']);
     Route::post('/store-participant-work', [AdminController::class, 'storeParticipantWord']);
     Route::get('/getDetailParticipant', [AdminController::class, 'getDetailParticipant']);
     Route::get('/edit-participant-work/{number}', [AdminController::class, 'editParticipantWork']);
-    Route::post('/update-participant-work/{number}', [AdminController::class, 'updateParticipantWord']);
+    Route::post('/update-participant-work/{number}', [AdminController::class, 'updateParticipantWork']);
+    Route::delete('/delete-participant-work/{number}', [AdminController::class, 'deleteParticipantWork']); // hapus pendaftar akun
 
     Route::resource('/category', CategoryController::class)->only("index", "store", "update", "destroy");
     
