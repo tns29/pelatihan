@@ -92,9 +92,11 @@ class RegistrantExport implements FromCollection, WithHeadings, ShouldAutoSize, 
         }
 
         $data = DB::table('participants')
-        ->select('participants.number','participants.nik','participants.fullname',
+        ->select('participants.number',
+        DB::raw("CONCAT(\"'\", participants.nik) AS nik"),
+        'participants.fullname',
         DB::raw('(CASE WHEN participants.gender = "M" THEN "Laki-laki" ELSE "Perempuan" END) AS gender'),
-        'participants.no_wa', 
+        DB::raw("CONCAT(\"'\", participants.no_wa) AS no_wa"),
         'sub_districts.name as sub_district_name', 'villages.name as village_name',
         'participants.address', 'participants.email', 'participants.religion', 'participants.last_education', 'participants.graduation_year', 
         DB::raw('(CASE WHEN participants.participant = "Y" THEN "✅" ELSE "❌" END) AS participant')
