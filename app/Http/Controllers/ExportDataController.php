@@ -12,16 +12,16 @@ class ExportDataController extends Controller
 {
     public function registrant(Request $request) 
     {
-        return Excel::download(new RegistrantExport($request), 'registrant_report'.date('_Ymd_His').'.xlsx');
+        return Excel::download(new RegistrantExport($request), 'registrant_report'.date('_Ymd_His').'.csv');
     }
 
     public function participant(Request $request) 
     {
-        return Excel::download(new ParticipantExport($request), 'participant_report'.date('_Ymd_His').'.xlsx');
+        return Excel::download(new ParticipantExport($request), 'participant_report'.date('_Ymd_His').'.csv');
     }
     
     public function participantAlreadyWorkExcel(Request $request) 
     {
-        return Excel::download(new ParticipantAlreadyWorkExport($request), 'participant_already_working_report'.date('_Ymd_His').'.xlsx');
+        return Excel::download(new ParticipantAlreadyWorkExport($request), 'participant_already_working_report'.date('_Ymd_His').'.csv');
     }
 }
