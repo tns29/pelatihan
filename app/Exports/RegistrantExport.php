@@ -28,6 +28,7 @@ class RegistrantExport implements FromCollection, WithHeadings, ShouldAutoSize, 
             'NIK',
             'Nama Lengkap',
             'Jenis Kelamin',
+            'Tempat Tanggal Lahir',
             'No. Whatsapp',
             'Kecamatan',
             'Desa / Kelurahan',
@@ -96,6 +97,7 @@ class RegistrantExport implements FromCollection, WithHeadings, ShouldAutoSize, 
         DB::raw("CONCAT(\"'\", participants.nik) AS nik"),
         'participants.fullname',
         DB::raw('(CASE WHEN participants.gender = "M" THEN "Laki-laki" ELSE "Perempuan" END) AS gender'),
+        DB::raw("CONCAT(participants.place_of_birth, \" - \", DATE_FORMAT(participants.date_of_birth, '%d/%m/%Y')) AS ttl"),
         DB::raw("CONCAT(\"'\", participants.no_wa) AS no_wa"),
         'sub_districts.name as sub_district_name', 'villages.name as village_name',
         'participants.address', 'participants.email', 'participants.religion', 'participants.last_education', 'participants.graduation_year', 
@@ -106,7 +108,7 @@ class RegistrantExport implements FromCollection, WithHeadings, ShouldAutoSize, 
         ->where($where)
         ->where('participants.created_at', 'LIKE', '%' . $year . '%')
         ->get();
-        
+
         return $data;
     }
 }

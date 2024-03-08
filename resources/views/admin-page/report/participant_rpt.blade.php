@@ -15,12 +15,14 @@
         }
         h1 {
             font-family: "Nutino";
+            padding: 0;
+            margin: 0;
         }
         table, td, th {
             border: 1px solid black;
             padding: 0 5px;
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 13.5px;
+            font-size: 11.7px;
         }
 
         .table {
@@ -73,8 +75,8 @@
                     <th style="text-align: left;">Nomor</th>
                     <th style="text-align: left;">Nik</th>
                     <th style="text-align: left;">Nama Lengkap</th>
-                    <th style="text-align: left;">Jenis Kelamin</th>
-                    {{-- <th style="text-align: left;">No. Telp</th> --}}
+                    <th style="text-align: left; max-width: 65px;">Jenis Kelamin</th>
+                    <th style="text-align: left;">Tempat Tanggal Lahir</th>
                     <th style="text-align: left;">No. WA</th>
                     <th style="text-align: left;">Kecamatan</th>
                     <th style="text-align: left;">Desa / Kelurahan</th>
@@ -96,7 +98,7 @@
                         <td>{{$item->nik}}</td>
                         <td>{{$item->fullname}}</td>
                         <td>{{$item->gender == 'M' ? 'Laki-laki' : 'Perempuan'}}</td>
-                        {{-- <td>{{$item->no_telp}}</td> --}}
+                        <td>{{$item->place_of_birth . ' - ' . date('d/m/Y', strtotime($item->date_of_birth))}}</td>
                         <td>{{$item->no_wa}}</td>
                         <td>{{$item->sub_district_name}}</td>
                         <td>{{$item->village_name}}</td>
