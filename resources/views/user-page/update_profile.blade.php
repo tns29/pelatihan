@@ -54,7 +54,7 @@
             </div>
             <div class=" mt-2 d-flex">
                 <label for="email" class="col-md-3 ms-3">Email <i class="text-danger">*</i></label>
-                <input type="text" class="form-control inline-block @error('email')is-invalid @enderror" maxlength="16" name="email" id="email" value="{{ old('email', $auth_user->email) }}">
+                <input type="text" class="form-control inline-block @error('email')is-invalid @enderror" maxlength="100" name="email" id="email" value="{{ old('email', $auth_user->email) }}">
                 <input type="hidden" name="email1" value="{{ old('email', $auth_user->email) }}">
                 @error('email')
                 <small class="invalid-feedback ms-3">
@@ -119,7 +119,7 @@
             </div>
             <div class=" mt-2 d-flex">
                 <label for="height" class="col-md-3 ms-3">Tinggi Badan <i class="text-danger">(cm)</i> <i class="text-danger">*</i></label>
-                <input type="text" class="form-control inline-block @error('height')is-invalid @enderror" name="height" id="height" value="{{ old('height', $auth_user->height) }}">
+                <input type="number" class="form-control inline-block @error('height')is-invalid @enderror" name="height" id="height" value="{{ old('height', $auth_user->height) }}" autocomplete="off">
                 @error('height')
                 <small class="invalid-feedback ms-3">
                     Tinggi Badan {{ $message }}
