@@ -112,7 +112,7 @@ class ParticipantExport implements FromCollection, WithHeadings, ShouldAutoSize,
             $where = ['participants.religion' => $religion];
         }
         if($period) {
-            $where = ['trainings.period_id' => $period];
+            $where = ['registrants.period_id' => $period];
         }
         if($year) {
             $where['registrants.year'] = $year;
@@ -130,7 +130,7 @@ class ParticipantExport implements FromCollection, WithHeadings, ShouldAutoSize,
         'registrants.date',  'periods.name as gelombang',
         DB::raw('(CASE WHEN registrants.approve = "Y" THEN "Peliatihan Sedang Berlangsung" ELSE "Menunggu Persetujuan" END) AS approve') )
         ->leftJoin('trainings', 'trainings.id', '=', 'registrants.training_id')
-        ->leftJoin('periods', 'periods.id', '=', 'trainings.period_id')
+        ->leftJoin('periods', 'periods.id', '=', 'registrants.period_id')
         ->leftJoin('participants', 'participants.number', '=', 'registrants.participant_number')
         ->leftJoin('sub_districts', 'participants.sub_district', '=', 'sub_districts.id')
         ->leftJoin('villages', 'participants.village', '=', 'villages.id')
