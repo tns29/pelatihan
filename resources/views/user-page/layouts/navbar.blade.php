@@ -14,12 +14,17 @@
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="https://www.tiktok.com/@uptdlkkab.tangerang?lang=en" target="_blank" aria-label="instagram">
+              <i class="fab fa-tiktok" style="font-size: 18px;"></i>
+            </a>
+          </li>
+          {{-- <li class="nav-item">
             <a class="nav-link" href="https://www.instagram.com/uptdlkdisnakerkab.tangerang?igshid=NGVhN2U2NjQ0Yg%3D%3D" target="_blank" aria-label="instagram">
               <i class="fab fa-instagram" style="font-size: 18px;"></i>
             </a>
-          </li>
+          </li> --}}
           <li class="nav-item">
-            <a class="nav-link" href="https://web.facebook.com/rezaandhika27?mibextid=LQQJ4d&_rdc=1&_rdr" target="_blank" aria-label="facebook">
+            <a class="nav-link" href="https://www.facebook.com/profile.php?id=61559736093992" target="_blank" aria-label="facebook">
               <i class="fab fa-facebook" style="font-size: 18px;"></i>
             </a>
           </li>
