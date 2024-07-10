@@ -463,13 +463,15 @@ class AdminController extends Controller
         $filename_script = getContentScript(true, $filename);
 
         $data = Auth::guard('admin')->user();
-        
+
+        $getParticipant = Registrant::with('participants')->where('passed', 'Y')->get();
+
         return view('admin-page.'.$filename, [
             'script' => $filename_script,
             'title' => 'Tambah Peserta Sudah Bekerja',
             'auth_user' => $data,
             // 'detailParticipant' => $data_part,
-            'participantData' => Participant::get()
+            'participantData' => $getParticipant
         ]);
     }
 
@@ -500,13 +502,15 @@ class AdminController extends Controller
 
         $data = Auth::guard('admin')->user();
         $resultData = ParticipantWork::where('participant_number', $number)->first();
+
+        $getParticipant = Registrant::with('participants')->where('passed', 'Y')->get();
         
         return view('admin-page.'.$filename, [
             'script' => $filename_script,
             'title' => 'Tambah Peserta Sudah Bekerja',
             'auth_user' => $data,
             'resultData' => $resultData,
-            'participantData' => Participant::get()
+            'participantData' => $getParticipant
         ]);
     }
 
