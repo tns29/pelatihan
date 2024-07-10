@@ -28,7 +28,8 @@ class ParticipantExport implements FromCollection, WithHeadings, ShouldAutoSize,
             'NIK',
             'Nama Lengkap',
             'Jenis Kelamin',
-            'Tempat Tanggal Lahir',
+            'Tempat Lahir',
+            'Tanggal Lahir',
             'No. Whatsapp',
             'Kecamatan',
             'Desa / Kelurahan',
@@ -123,12 +124,20 @@ class ParticipantExport implements FromCollection, WithHeadings, ShouldAutoSize,
         DB::raw("CONCAT(\"'\", participants.nik) AS nik"),
         'participants.fullname',
         DB::raw('(CASE WHEN participants.gender = "M" THEN "Laki-laki" ELSE "Perempuan" END) AS gender'),
-        DB::raw("CONCAT(participants.place_of_birth, \" - \", DATE_FORMAT(participants.date_of_birth, '%d/%m/%Y')) AS ttl"),
+        'participants.place_of_birth', 
+        DB::raw("DATE_FORMAT(participants.date_of_birth, '%d/%m/%Y') AS date_of_birth"),
         DB::raw("CONCAT(\"'\", participants.no_wa) AS no_wa"),
         'sub_districts.name as sub_district_name', 'villages.name as village_name',
         'trainings.title', 'participants.email', 'participants.religion', 'participants.last_education', 'participants.graduation_year', 
         'registrants.date',  'periods.name as gelombang',
-        DB::raw('(CASE WHEN registrants.approve = "Y" THEN "Peliatihan Sedang Berlangsung" ELSE "Menunggu Persetujuan" END) AS approve') )
+        DB::raw('(CASE 
+                WHEN registrants.passed = "Y" THEN "Telah Lulus"
+                WHEN registrants.passed = "N" THEN "Tidak Lulus"
+                WHEN registrants.approve = "Y" THEN "Peliatihan Sedang Berlangsung"
+                WHEN registrants.approve = "N" THEN "Ditolak"
+                ELSE "Menunggu Persetujuan"
+                END) AS status'))
+        // DB::raw('(CASE WHEN registrants.approve = "Y" THEN "Peliatihan Sedang Berlangsung" ELSE "Menunggu Persetujuan" END) AS approve') )
         ->leftJoin('trainings', 'trainings.id', '=', 'registrants.training_id')
         ->leftJoin('periods', 'periods.id', '=', 'registrants.period_id')
         ->leftJoin('participants', 'participants.number', '=', 'registrants.participant_number')

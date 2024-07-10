@@ -122,9 +122,9 @@
                                             <span style="color: red"><b>X </b> Tidak Lulus</span>
                                         @break
                                     @default
-                                        {{$item->approve == 'Y' ? '' : ''}}
+                                        {{-- {{$item->approve == 'Y' ? '' : ''}} --}}
                                         @if ($item->approve == 'Y')
-                                            <span style="color: rgb(0, 189, 0)"><b>Pendaftar</b></span>
+                                            <span style="color: rgba(0, 189, 164, 0.835)"><b>Pendaftar</b></span>
                                         @elseif($item->approve == 'N')
                                             <span style="color: red"><b>X </b> Ditolak</span>
                                         @else
