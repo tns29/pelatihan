@@ -1,4 +1,9 @@
 $(function () {
+    $(".select-participant").select2({
+        placeholder: "Pilih Peserta",
+        width: "100%",
+    });
+
     $("#date_year").change(function () {
         console.log($(this).val());
     });

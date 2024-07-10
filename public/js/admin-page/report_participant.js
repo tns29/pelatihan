@@ -16,7 +16,7 @@ $(document).ready(function () {
 
     $(".select-fullname").select2({
         placeholder: "Pilih Peserta",
-        width: "760",
+        width: "100%",
     });
 
     let startYear = 2010;

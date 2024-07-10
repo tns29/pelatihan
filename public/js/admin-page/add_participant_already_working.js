@@ -1,4 +1,9 @@
 $(function () {
+    $(".select-participant").select2({
+        placeholder: "Pilih Peserta",
+        width: "100%",
+    })
+
     $("#participant_number").on("change", function () {
         $.ajax({
             type: "GET",

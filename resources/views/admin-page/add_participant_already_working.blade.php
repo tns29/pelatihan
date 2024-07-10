@@ -2,6 +2,16 @@
 
 @section('content-pages')
 
+<style>
+    .select2-container--default .select2-selection--single {
+        /* width: 760px; Set the width */
+        height: 40px !important; /* Set the height */
+        padding: 10px;
+        border: 1px solid black;
+    }
+</style>
+    
+
 <div class="content-header">
   <div class="container-fluid">
     <div class="row my-2">
@@ -24,12 +34,12 @@
                         <div class="row">
 
                             <div class="col-lg-12 col-md-12 col-sm-12 mt-2">
-                                <label for="code">Peserta</label>
-                                <select name="participant_number" id="participant_number" class="form-control form-select @error('participant_number')is-invalid @enderror">
+                                <label for="participant_number">Peserta</label>
+                                <select class="select-participant form-control" name="participant_number" id="participant_number" class="@error('participant_number')is-invalid @enderror">
                                     <option value="">Pilih Peserta</option>
                                     @foreach ($participantData as $item)
-                                        <option value="{{ $item->number }}">
-                                            {{ $item->nik ? $item->nik : "XXXXXXXXXXXXXXXX" }} - {{ $item->fullname }}
+                                        <option value="{{ $item->participant_number }}">
+                                            {{ $item->participants->nik ? $item->participants->nik : "XXXXXXXXXXXXXXXX" }} - {{ $item->participants->fullname }}
                                         </option>
                                     @endforeach
                                 </select>

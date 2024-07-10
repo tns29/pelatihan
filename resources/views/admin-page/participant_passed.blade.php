@@ -69,7 +69,7 @@
                       <th>Nama</th>
                       <th style="width: 11%">Jenis Kelamin</th>
                       <th>Pelatihan</th>
-                      <th style="width: 15%;">Tanggal Daftar</th>
+                      <th style="width: 11%;">Tanggal Daftar</th>
                       <th>Periode </th>
                       <th style="text-align: center; width: 10%;">Status</th>
                   </tr>
