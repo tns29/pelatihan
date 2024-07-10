@@ -54,11 +54,11 @@
                   <tr class="my-bg-primary text-white">
                       <th style="width: 11%">Nomor</th>
                       <th>Nama</th>
-                      <th style="width: 11%">Jenis Kelamin</th>
-                      <th>Pelatihan</th>
-                      <th style="width: 15%;">Tanggal Dftr Pelatihan</th>
+                      <th style="width: 10%">Jenis Kelamin</th>
+                      <th style="width: 13%;">Pelatihan</th>
+                      <th style="width: 12%;">Tanggal Daftar</th>
                       <th style="width: 13%;">Kecamatan </th>
-                      <th>Periode </th>
+                      <th style="width: 9%;">Periode </th>
                       <th style="width: 8%; text-align: center;">Aksi</th>
                   </tr>
               </thead>
@@ -73,7 +73,7 @@
                       {{-- <td>{{ $row->participant_number }}</td> --}}
                       <td>{{ $row->fullname }}</td>
                       <td>{{ $row->gender == 'M' ? 'Laki-laki' : 'Perempuan' }}</td>
-                      <td>{{ $row->trainingsTitle }}</td>
+                      <td> {{ Str::substr($row->trainingsTitle, 0, 16) }}{{ strlen($row->trainingsTitle) > 16 ? '...' : '' }}</td>
                       <td>{{ date('d M Y', strtotime($row->date)) }}</td>
                       <td>{{ $row->sub_district_name }}</td>
                       <td>{{ $row->gelombang }}</td>
