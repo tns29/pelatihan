@@ -90,7 +90,7 @@ class GeneralController extends Controller {
                 return redirect('/pelatihan/'.$serviceId);
             }
 
-            $checkRegistrantId = Registrant::where(['training_id' => $serviceId, 'participant_number' => $user->number])->first();
+            $checkRegistrantId = Registrant::where(['training_id' => $serviceId, 'participant_number' => $user->number, 'period_id' => $active_period->id])->first();
             
             if($checkRegistrantId) {
                 $request->session()->flash('failed1', 'Anda telah mendaftar untuk pelatihan ini.');
