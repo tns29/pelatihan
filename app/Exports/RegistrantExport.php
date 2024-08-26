@@ -30,6 +30,7 @@ class RegistrantExport implements FromCollection, WithHeadings, ShouldAutoSize, 
             'Jenis Kelamin',
             'Tempat Tanggal Lahir',
             'No. Whatsapp',
+            'No. Telp',
             'Kecamatan',
             'Desa / Kelurahan',
             'Alamat Lengkap',
@@ -47,7 +48,7 @@ class RegistrantExport implements FromCollection, WithHeadings, ShouldAutoSize, 
             // Style the first row as bold text.
             1    => [
                 'font' => [
-                    'bold' => true, 
+                    'bold' => true,
                     'size' => 12,
                 ],
             ],
@@ -78,7 +79,7 @@ class RegistrantExport implements FromCollection, WithHeadings, ShouldAutoSize, 
         $year = $this->session->get('year') ? $this->session->get('year')[0] : '';
 
         $where = ['participants.is_active' => 'Y'];
-        
+
         if($fullname) {
             $where = ['participants.number' => $fullname];
         }
@@ -99,8 +100,9 @@ class RegistrantExport implements FromCollection, WithHeadings, ShouldAutoSize, 
         DB::raw('(CASE WHEN participants.gender = "M" THEN "Laki-laki" ELSE "Perempuan" END) AS gender'),
         DB::raw("CONCAT(participants.place_of_birth, \" - \", DATE_FORMAT(participants.date_of_birth, '%d/%m/%Y')) AS ttl"),
         DB::raw("CONCAT(\"'\", participants.no_wa) AS no_wa"),
+        DB::raw("CONCAT(\"'\", participants.no_telp) AS no_telp"),
         'sub_districts.name as sub_district_name', 'villages.name as village_name',
-        'participants.address', 'participants.email', 'participants.religion', 'participants.last_education', 'participants.graduation_year', 
+        'participants.address', 'participants.email', 'participants.religion', 'participants.last_education', 'participants.graduation_year',
         DB::raw('(CASE WHEN participants.participant = "Y" THEN "✅" ELSE "❌" END) AS participant')
         )
         ->leftJoin('sub_districts', 'participants.sub_district', '=', 'sub_districts.id')

@@ -37,7 +37,7 @@
         }
 
         .icon-export {
-            float: right; 
+            float: right;
             padding: 0px;
         }
 
@@ -46,7 +46,7 @@
             clear: both;
             display: table;
         }
-        
+
     </style>
 </head>
 
@@ -61,13 +61,13 @@
                     <label for="print" style="display : block; font-size: 12px; margin-left: 4px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">export</label>
                     <br>
                 </a>
-            </div> 
+            </div>
         </div>
         <div style=" background: black; width:100% height:100px;">
             <div style="float: right; right:0;font-family: 'Nutino';">
                 <small><b>Total Pendaftar Akun : {{$count}}</b></small>
             </div>
-        </div> 
+        </div>
 
         <div style="display: flex; width: 100%;">
             <table class="table" style="width: 100%; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
@@ -78,6 +78,7 @@
                     <th style="text-align: left; max-width: 80px;">Jenis Kelamin</th>
                     <th style="text-align: left;">Tempat Tanggal Lahir</th>
                     <th style="text-align: left;">No. WA</th>
+                    <th style="text-align: left;">No. Telp</th>
                     <th style="text-align: left;">Kecamatan</th>
                     <th style="text-align: left;">Desa / Kelurahan</th>
                     <th style="text-align: left;">Alamat Lengkap</th>
@@ -96,6 +97,7 @@
                         <td>{{$item->gender == 'M' ? 'Laki-laki' : 'Perempuan'}}</td>
                         <td>{{$item->place_of_birth . ' - ' . date('d/m/Y', strtotime($item->date_of_birth))}}</td>
                         <td>{{$item->no_wa}}</td>
+                        <td>{{$item->no_telp}}</td>
                         <td>{{$item->sub_district_name}}</td>
                         <td>{{$item->village_name}}</td>
                         <td>{{$item->address}}</td>
@@ -109,6 +111,6 @@
             </table>
         </div>
     </div>
-        
+
 </body>
 </html>
