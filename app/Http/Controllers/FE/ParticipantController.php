@@ -178,10 +178,10 @@ class ParticipantController extends Controller
             'graduation_year'    => 'required|max:4',
             'sub_district'    => 'required|max:100',
             'village'    => 'required|max:100',
-            'image'     => 'image|file|max:1024',
-            'id_card'     => 'image|file|max:512',
-            'ak1'     => 'file|max:512',
-            'ijazah'     => 'file|max:512',
+            'image'     => 'image|file|max:2048',
+            'id_card'     => 'image|file|max:2048',
+            'ak1'     => 'file|max:2048',
+            'ijazah'     => 'file|max:2048',
         ]);
 
         if($request->nik != $request->nik1) {
@@ -291,7 +291,8 @@ class ParticipantController extends Controller
         } else {
             $request->session()->flash('failed', 'Proses gagal, Hubungi administrator');
         }
-        return redirect('/_profile');
+        return redirect('/pelatihan');
+        // return redirect('/_profile');
     }
 
     // LOGOUT PARTICIPANT //
