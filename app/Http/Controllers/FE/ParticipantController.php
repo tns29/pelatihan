@@ -179,9 +179,9 @@ class ParticipantController extends Controller
             'sub_district'    => 'required|max:100',
             'village'    => 'required|max:100',
             'image'     => 'image|file|max:1024',
-            'id_card'     => 'image|file|max:2048',
-            'ak1'     => 'file|max:2048',
-            'ijazah'     => 'file|max:2048',
+            'id_card'     => 'image|file|max:512',
+            'ak1'     => 'file|max:512',
+            'ijazah'     => 'file|max:512',
         ]);
 
         if($request->nik != $request->nik1) {
@@ -242,7 +242,8 @@ class ParticipantController extends Controller
             $request->session()->flash('ijazah', 'Ijazah belum di upload');
         }
 
-        if(!$is_valid_image || !$is_valid_id_card || !$is_valid_ak1 || !$is_valid_ijazah) {
+        // if(!$is_valid_image || !$is_valid_id_card || !$is_valid_ak1 || !$is_valid_ijazah) {
+        if(!$is_valid_image) {
             return redirect('/update-profile');
         }
 
