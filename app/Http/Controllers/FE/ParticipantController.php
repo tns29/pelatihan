@@ -76,9 +76,29 @@ class ParticipantController extends Controller
         // dd(auth('participant')->attempt($credentials));
         if (auth('participant')->attempt($credentials)) {
 
-            $isActive = Auth::guard('participant')->user()->is_active == "Y";
-            if ($isActive == true) {
-                return redirect()->intended('/update-profile');
+            $user = Auth::guard('participant')->user();
+            if ($user->is_active == "Y") {
+
+                if($user->nik == null OR
+                    $user->place_of_birth == null OR
+                    $user->date_of_birth == null OR
+                    $user->no_telp == null OR
+                    $user->no_wa == null OR
+                    $user->address == null OR
+                    $user->height == null OR
+                    $user->religion == null OR
+                    $user->material_status == null OR
+                    $user->last_education == null OR
+                    $user->graduation_year == null OR
+                    $user->sub_district == null OR
+                    $user->village == null OR
+                    $user->image == null
+                ) {
+                    return redirect()->intended('/update-profile');
+                } else {
+                    return redirect()->intended('/pelatihan');
+                }
+
             } else {
                 Auth::guard('participant')->logout();
                 $request->session()->flash('failed', 'Akun belum aktif, Hubungi Administrator.');
@@ -229,7 +249,7 @@ class ParticipantController extends Controller
             $is_valid_ak1 = true;
         } else {
             $is_valid_ak1 = false;
-            $request->session()->flash('ak1', 'AK1 belum di upload');
+            // $request->session()->flash('ak1', 'AK1 belum di upload');
         }
 
         if($request->file('ijazah')) {
@@ -239,7 +259,7 @@ class ParticipantController extends Controller
             $is_valid_ijazah = true;
         } else {
             $is_valid_ijazah = false;
-            $request->session()->flash('ijazah', 'Ijazah belum di upload');
+            // $request->session()->flash('ijazah', 'Ijazah belum di upload');
         }
 
         // if(!$is_valid_image || !$is_valid_id_card || !$is_valid_ak1 || !$is_valid_ijazah) {
