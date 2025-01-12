@@ -4,12 +4,15 @@
 @section('content-pages')
 
 <hr>
+<div class="mx-2">
+    <h4>Lengkapi Biodata</h4>
+</div>
 <form action="/update-profile/{{ auth('participant')->user()->number }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     <div class="p-3 row rounded-2 shadow mx-2" style="background-image: linear-gradient(to top, rgba(247, 247, 247, 0.604), #88d4e546);">
         <div class="col-lg-3 col-md-3 col-sm-3 mt-2">
-            <label for="image">&nbsp; </label> 
+            <label for="image">&nbsp; </label>
             <div class="card img-bordered ml-5 p-2">
                 @if ($auth_user->image)
                     <img id="preview" src="{{ asset('/storage').'/'.$auth_user->image }}" alt="preview" style="height: 240px;"/>
@@ -126,7 +129,7 @@
                 </small>
                 @enderror
             </div>
-            
+
             <div class=" mt-2 d-flex">
                 <label for="size_uniform" class="col-md-3 ms-3">Ukuran Seragam <i class="text-danger">*</i></label>
                 <input type="text" class="form-control inline-block @error('size_uniform')is-invalid @enderror" name="size_uniform" id="size_uniform" value="{{ old('size_uniform', $auth_user->size_uniform) }}" maxlength="5" style="text-transform: uppercase">
@@ -136,7 +139,7 @@
                 </small>
                 @enderror
             </div>
-            
+
             <div class=" mt-2 d-flex">
                 <label for="religion" class="col-md-3 ms-3">Agama <i class="text-danger">*</i></label>
                 <select name="religion" id="religion" class="form-control form-select @error('religion')is-invalid @enderror">
@@ -169,7 +172,7 @@
                 </small>
                 @enderror
             </div>
-            
+
             <div class=" mt-2 d-flex">
                 <label for="last_education" class="col-md-3 ms-3">Pendidikan Terakhir <i class="text-danger">*</i></label>
                 <select name="last_education" id="last_education" class="form-control form-select @error('last_education')is-invalid @enderror">
@@ -224,11 +227,11 @@
                 </small>
                 @enderror
             </div>
-    
+
             {{-- DOKUMEN --}}
-    
+
             <div class=" mt-2 d-flex">
-                <label for="id_card" class="col-md-3 ms-3">KTP <i class="text-danger">* <small>|jpg/jpeg/png|</small></i> </label>
+                <label for="id_card" class="col-md-3 ms-3">KTP </label>
                 <input type="file" name="id_card" id="id_card" class="form-control @if(session()->has('id_card') == true)is-invalid @endif" value="{{ old('id_card', $auth_user->id_card) }}">
                 @if ($auth_user->id_card)
                     <small class="w-25 pt-2 ms-2"><b> &nbsp; <a href="{{asset('/storage/'.$auth_user->id_card)}}" target="_blank">Lihat file</a> </b></small>
@@ -241,7 +244,7 @@
             </div>
 
             <div class=" mt-2 d-flex">
-                <label for="ak1" class="col-md-3 ms-3">Ak1 / Kartu Kuning <i class="text-danger">* <small>|image/PDF|</small></i></label>
+                <label for="ak1" class="col-md-3 ms-3">Ak1 / Kartu Kuning</label>
                 <input type="file" name="ak1" id="ak1" class="form-control @if(session()->has('ak1') == true)is-invalid @endif" >
                 @if ($auth_user->ak1)
                     <small class="w-25 pt-2 ms-2"><b> &nbsp; <a href="{{asset('/storage/'.$auth_user->ak1)}}" target="_blank">Lihat file</a> </b></small>
@@ -253,7 +256,7 @@
                 @endif
             </div>
             <div class=" mt-2 d-flex">
-                <label for="ijazah" class="col-md-3 ms-3">Ijazah Terakhir <i class="text-danger">* &nbsp; <small>|image/PDF|</small></i> </label>
+                <label for="ijazah" class="col-md-3 ms-3">Ijazah Terakhir </label>
                 <input type="file" name="ijazah" id="ijazah" class="form-control @if(session()->has('ijazah') == true)is-invalid @endif">
                 @if ($auth_user->ijazah)
                     <small class="w-25 pt-2 ms-2"><b> &nbsp; <a href="{{asset('/storage/'.$auth_user->ijazah)}}" target="_blank">Lihat file</a> </b></small>
@@ -265,8 +268,9 @@
                 @endif
             </div>
             <hr>
-            <small class="ms-2 text-danger">* Form Wajib diisi</small> <br>
-            <small class="ms-2 text-danger">* Max file upload 2 MB</small>
+            <small class="ms-2 text-danger">- Form Wajib diisi</small> <br>
+            <small class="ms-2 text-danger">- File upload | jpg / jpeg / png |</small> <br>
+            <small class="ms-2 text-danger">- Max file upload 500 KB</small>
         </div>
         <button type="submit" class="btn btn-outline-success mt-3">Simpan Data</button>
     </div>

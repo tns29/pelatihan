@@ -21,7 +21,7 @@ class ParticipantController extends Controller
     }
 
     public function store(Request $request) {
-        
+
         $validatedData = $request->validate([
             'fullname'      => 'required|max:90',
             'username'      => 'required|max:30|unique:participants',
@@ -31,7 +31,10 @@ class ParticipantController extends Controller
             'password'      => 'required|confirmed|min:6|max:255',
             'password_confirmation' => 'required|min:6|max:255'
         ]);
-        
+
+        $forLogin['email'] = $validatedData['email'];
+        $forLogin['password'] = $validatedData['password'];
+
         $validatedData['fullname'] = ucwords($validatedData['fullname']);
         $validatedData['number'] = $this->getLasNumber();
         $validatedData['created_at'] = date('Y-m-d H:i:s');
@@ -43,7 +46,8 @@ class ParticipantController extends Controller
         $result = Participant::create($validatedData);
         if($result) {
             $request->session()->flash('success', 'Akun berhasil dibuat');
-            return redirect('/login');
+            // return redirect('/login');
+            return $this->loginValidation(new Request($forLogin));
         } else {
             $request->session()->flash('success', 'Proses gagal, Hubungi administrator');
             return redirect('/register');
@@ -57,24 +61,24 @@ class ParticipantController extends Controller
     }
 
     public function loginValidation(Request $request) {
-        
+
         $credentials = $request->validate([
             'email'  => 'required',
             'password'  => 'required'
         ]);
         // dd($credentials);
         $resultUser = Participant::where('email', $credentials['email'])->count();
-        
+
         if(!$resultUser) {
             $request->session()->flash('failed', 'Akun tidak terdaftar.');
             return redirect('/login');
         }
-        // dd(auth('participant'));
+        // dd(auth('participant')->attempt($credentials));
         if (auth('participant')->attempt($credentials)) {
-        
+
             $isActive = Auth::guard('participant')->user()->is_active == "Y";
-            if ($isActive == true) { 
-                return redirect()->intended('/');
+            if ($isActive == true) {
+                return redirect()->intended('/update-profile');
             } else {
                 Auth::guard('participant')->logout();
                 $request->session()->flash('failed', 'Akun belum aktif, Hubungi Administrator.');
@@ -86,7 +90,7 @@ class ParticipantController extends Controller
     }
 
     function getLasNumber() {
-        
+
         $lastNumber = Participant::max('number');
 
         if($lastNumber) {
@@ -102,7 +106,7 @@ class ParticipantController extends Controller
 
     // Pelatihan saya //
     function wishlist() {
-        
+
         $filename = 'wishlist';
         $filename_script = getContentScript(false, $filename);
 
@@ -123,11 +127,11 @@ class ParticipantController extends Controller
     function profile() {
         $filename = 'profile';
         $filename_script = getContentScript(false, $filename);
-        
+
         if(!auth('participant')->user()) {
             return redirect('/login');
         }
-        
+
         $participant = new Participant;
         $data = $participant->getUserProfile();
 
@@ -143,8 +147,8 @@ class ParticipantController extends Controller
         $filename_script = getContentScript(false, $filename);
 
         $number = Auth::guard('participant')->user()->number;
-        $data = Participant::where('number', $number)->first();  
-        
+        $data = Participant::where('number', $number)->first();
+
         $subDistrict = SubDistrict::get();
         return view('user-page.'.$filename, [
             'script' => $filename_script,
@@ -197,7 +201,7 @@ class ParticipantController extends Controller
         }
 
         $getData = Participant::find($number);
-        
+
         if($request->file('image')) {
             $validatedData['image'] = $request->file('image')->store('profile-images');
             $is_valid_image = true;
@@ -207,7 +211,7 @@ class ParticipantController extends Controller
             $is_valid_image = false;
             $request->session()->flash('image', 'Pas Foto belum di upload');
         }
-        
+
         if($request->file('id_card')) {
             $validatedData['id_card'] = $request->file('id_card')->store('doc');
             $is_valid_id_card = true;
@@ -217,7 +221,7 @@ class ParticipantController extends Controller
             $is_valid_id_card = false;
             $request->session()->flash('id_card', 'KTP belum di upload');
         }
-        
+
         if($request->file('ak1')) {
             $is_valid_ak1 = true;
             $validatedData['ak1'] = $request->file('ak1')->store('doc');
@@ -227,7 +231,7 @@ class ParticipantController extends Controller
             $is_valid_ak1 = false;
             $request->session()->flash('ak1', 'AK1 belum di upload');
         }
-        
+
         if($request->file('ijazah')) {
             $is_valid_ijazah = true;
             $validatedData['ijazah'] = $request->file('ijazah')->store('doc');
@@ -241,7 +245,7 @@ class ParticipantController extends Controller
         if(!$is_valid_image || !$is_valid_id_card || !$is_valid_ak1 || !$is_valid_ijazah) {
             return redirect('/update-profile');
         }
-        
+
         if($request->file('id_card')) {
             if($validatedData['id_card'] && $getData->id_card) {
                 Storage::delete($getData->id_card);
@@ -292,7 +296,7 @@ class ParticipantController extends Controller
     // LOGOUT PARTICIPANT //
     function logout(Request $request) {
         Auth::guard('participant')->logout();
-        
+
         $request->session()->flash('success', 'Anda berhasil logout');
         return redirect('/login');
     }

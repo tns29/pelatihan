@@ -43,6 +43,13 @@ body {
     color: #fa2601;
 }
 
+.brand-name {
+    /* font-size: 10px; */
+    @media (max-width: 768px) {
+        font-size: 13px;
+    }
+}
+
 .header-babble {
     height: auto;
 }
@@ -73,8 +80,8 @@ body {
 }
 .layout-box {
     position: relative;
-    margin: 10px 65px;
-    width: 91%;
+    margin: 10px auto;
+    width: 95%;
 }
 
 .banner {

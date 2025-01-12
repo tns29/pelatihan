@@ -1,7 +1,6 @@
-
 <nav class="navbar navbar-expand-lg bg-body-tertiary rounded-2" style="background-image: linear-gradient(to left, #c2f9ff, #ffffff, #ffffff)">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/" aria-label="Brand Name"><b>UPTD Latihan Kerja Dinas Tenaga Kerja Kab. Tangerang</b></a>
+    <a class="navbar-brand brand-name" href="/" aria-label="Brand Name"><b>UPTD Latihan Kerja Dinas Tenaga Kerja Kab. Tangerang</b></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -57,15 +56,15 @@
             <li class="nav-item mx-2">
               <a class="nav-link {{ Request::segment(1) == 'pelatihan' ? 'active-link' : '' }}" href="/pelatihan">Pelatihan</a>
             </li>
-            
+
             <li class="nav-item mx-2">
               <a class="nav-link {{ Request::segment(1) == '#' ? 'active-link' : '' }}" href="https://disnaker.tangerangkab.go.id/" target="_blank">Website Dinas Tenaga Kerja</a>
             </li>
-            
+
             <li class="nav-item mx-2">
               <a class="nav-link {{ Request::segment(1) == '#' ? 'active-link' : '' }}" href="https://siapkerja.tangerangkab.go.id/home" target="_blank">Siap kerja</a>
             </li>
-            
+
             @if (auth()->guard('participant')->user())
               <li class="nav-item mx-2">
                 <a href="/wishlist" class="btn {{ Request::segment(1) == 'wishlist' ? 'btn-success' : 'btn-outline-success' }} register py-1 mt-1" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Pelatihan saya">
