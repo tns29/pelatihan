@@ -1,5 +1,9 @@
 $(function () {
-    console.log("ready");
+    // console.log("ready");
+
+    $("#search").on("click", function () {
+        $("#submitForm").submit();
+    });
 
     setTimeout(() => {
         $("#message").hide(500);

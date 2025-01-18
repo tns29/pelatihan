@@ -7,13 +7,13 @@
     <div class="row my-2">
       <div class="col-sm-6">
         <h3 class="m-0 ml-2">{{ $title }} </h3>
-      </div><!-- /.col --> 
+      </div><!-- /.col -->
     </div><!-- /.row -->
     <hr style="margin-bottom: 0">
   </div><!-- /.container-fluid -->
 </div>
 
-<?php 
+<?php
 $candidatePage = $candidate == "Y" ? "Y"  : '';
 ?>
 
@@ -22,6 +22,24 @@ $candidatePage = $candidate == "Y" ? "Y"  : '';
     <div class="container-fluid">
         <div class="row mx-2">
           <div class="row justify-content-end mb-2 w-100">
+            <form id="submitForm" action="/registrant-data" method="GET" class="w-100">
+                @csrf
+
+                <div class="row justify-content-evenly">
+                  <div class="col-lg-7">
+                    <input type="text" name="fullname" id="fullname" class="form-control ml-2" placeholder="Cari Nama" value="{{ $search_name }}">
+                  </div>
+                  <div class="col-lg-1">
+                    <button type="button" id="search" class="btn px-2 btn-outline-warning"><i class="fas fa-search"></i></button>
+                    <button type="button" id="reset" class="btn px-2 btn-outline-danger"><i class="fas fa-eraser"></i></button>
+                  </div>
+                  <div class="col-lg-4">
+                  </div>
+                </div>
+
+              </form>
+
+            </div>
             {{-- <a href="/add-data-admin" class="btn float-right btn-add "><i class="fas fa-plus-square"></i> &nbsp; Data</a> --}}
             @if (session()->has('success'))
               <div class="alert alert-success py-1" id="success">
@@ -79,7 +97,7 @@ $candidatePage = $candidate == "Y" ? "Y"  : '';
           </table>
         </div>
     </div>
-</section> 
+</section>
 
 <div class="modal fade" id="modal-delete" tabindex="-1">
   <div class="modal-dialog modal-md">
@@ -95,9 +113,9 @@ $candidatePage = $candidate == "Y" ? "Y"  : '';
         @method('DELETE')
         <div class="modal-body p-3">
           <div class="row" id="content-delete">
-            
+
           </div>
-        </div> 
+        </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
           <button type="submit" class="btn btn-primary">Ya</button>

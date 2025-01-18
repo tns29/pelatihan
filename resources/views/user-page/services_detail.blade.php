@@ -3,7 +3,7 @@
 
 @section('content-pages')
 
-<?php 
+<?php
 // dd(session());
 ?>
 
@@ -11,8 +11,9 @@
 
   <div class="row my-3 p-3">
     @if (session()->has('success'))
-        <div class="alert alert-success py-1 text-center">
-            <a href="#" class="text-decoration-none text-dark font-weight-bolder"> {{ session()->get('success') }}</a>
+        <div class="alert alert-success py-3 mx-3 text-center">
+            {{-- <img src="{{ asset('img/successed.gif') }}" class="mb-2" style="width : 100px; height:100%; object-fit: cover; background-position: center; background-size: cover;" alt="successed"> --}}
+            <a href="#" class="text-decoration-none text-dark font-weight-bolder fs-4"> {{ session()->get('success') }} </a>
         </div>
     @endif
     @if (session()->has('failed1'))
@@ -37,7 +38,7 @@
         </div>
     @endif
     <div class="col-lg-3 col-md-3 col-sm-6 mb-3">
-    
+
         <div class="card shadow-sm p-2" style="width: 100%;">
             @if ($service->image)
                 <img src="{{ asset('/storage').'/'.$service->image }}" class="card-img-top" alt="{{$service->id}}">
@@ -55,20 +56,20 @@
         </div>
         <small class="alert alert-primary py-0">Durasi : {{ $service->duration }}</small>
         {{-- <p hidden>
-            <small class="card-text"> 
-                <i class="fas fa-calendar-minus me-2"></i>  
+            <small class="card-text">
+                <i class="fas fa-calendar-minus me-2"></i>
                 Periode
                 {{ date('d M Y', strtotime($setting->start_date)) }} s/d
                 {{ date('d M Y', strtotime($setting->end_date)) }}
             </small>
         </p> --}}
         <p>
-            <small class="card-text"> 
+            <small class="card-text">
                 {{-- <i class="fas fa-calendar-minus me-2"></i>   --}}
                 Min Usia : &nbsp; {{ $service->min_age }} Tahun
-            </small> 
+            </small>
             <br>
-            <small class="card-text"> 
+            <small class="card-text">
                 {{-- <i class="fas fa-calendar-minus me-2"></i>   --}}
                 Max Usia : &nbsp; {{ $service->max_age }} Tahun
             </small>
@@ -78,7 +79,7 @@
 
     </div>
     <hr class="mx-3 mt-3">
-    
+
     <div class="card mx-3 mt-3">
     @foreach ($services_detail as $item)
         <div class="row pt-2 justify-content-start">
@@ -97,7 +98,7 @@
                 @if ($item->image)
                     <img src="{{ asset('/storage/'.$item->image) }}" alt="conntent-img" style="height: auto; max-width: 420px;">
                 @else
-                    
+
                 @endif
             </div>
         </div>

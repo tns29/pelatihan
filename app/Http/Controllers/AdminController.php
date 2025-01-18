@@ -18,19 +18,19 @@ class AdminController extends Controller
 {
     function index() {
         $number = Auth::guard('admin')->user()->number;
-        $data = Admin::with('admin_level')->find($number)->first();  
+        $data = Admin::with('admin_level')->find($number)->first();
         return view('admin-page.profile', [
             'title' => 'Profile',
             'auth_user' => $data
         ]);
     }
-    
+
     function dataAdmin() {
         $filename = 'data_admin';
         $filename_script = getContentScript(true, $filename);
 
-        $data = Auth::guard('admin')->user();  
-        $admin = Admin::with('admin_level')->where('level_id', 1)->get();  
+        $data = Auth::guard('admin')->user();
+        $admin = Admin::with('admin_level')->where('level_id', 1)->get();
         return view('admin-page.'.$filename, [
             'script' => $filename_script,
             'title' => 'Data Admin',
@@ -56,9 +56,9 @@ class AdminController extends Controller
         $filename = 'add_new_admin';
         $filename_script = getContentScript(true, $filename);
 
-        $data = Auth::guard('admin')->user();  
-        $admin = Admin::with('admin_level')->get();  
-        $admin_level = AdminLevel::get();  
+        $data = Auth::guard('admin')->user();
+        $admin = Admin::with('admin_level')->get();
+        $admin_level = AdminLevel::get();
         return view('admin-page.'.$filename, [
             'script' => $filename_script,
             'title' => 'Tambah Data Admin',
@@ -85,7 +85,7 @@ class AdminController extends Controller
         if($request->file('images')) {
             $validatedData['images'] = $request->file('images')->store('profile-images');
         }
-        
+
         $validatedData['number'] = getLasNumberAdmin();
         $validatedData['address'] = $request['address'];
         $validatedData['created_at'] = date('Y-m-d H:i:s');
@@ -102,7 +102,7 @@ class AdminController extends Controller
             $request->session()->flash('failed', 'Proses gagal, Hubungi administrator');
             return redirect('/form-add-admin');
         }
-        
+
     }
 
     function editFormAdmin($number) {
@@ -111,7 +111,7 @@ class AdminController extends Controller
 
         $data = Auth::guard('admin')->user();
         $data_admin = Admin::find($number);
-        $admin_level = AdminLevel::get();  
+        $admin_level = AdminLevel::get();
         return view('admin-page.'.$filename, [
             'script' => $filename_script,
             'title' => 'Edit Data Admin',
@@ -133,12 +133,12 @@ class AdminController extends Controller
             'no_telp'       => 'required|max:15',
             'images'     => 'image|file|max:1024',
         ]);
-        
+
         $username_exist = false;
         if($request['username1'] != $request['username']) {
             $username_exist = Admin::where('username', $request['username'])->first();
         }
-        
+
         if($request->file('images')) {
             $validatedData['images'] = $request->file('images')->store('profile-images');
         }
@@ -152,10 +152,10 @@ class AdminController extends Controller
         }
         $validatedData['level_id'] = $validatedData['level_id'];
         $validatedData['is_active'] = $request['is_active'] ? "Y" : "N";
-        
+
         if($username_exist === false) {
             $result = Admin::where(['number' => $validatedData['number']])->update($validatedData);
-            
+
             if($result) {
                 $request->session()->flash('success', 'Akun berhasil dibuat');
                 return redirect('/data-admin');
@@ -191,14 +191,20 @@ class AdminController extends Controller
         return redirect('/data-admin');
     }
 
-    function registrantData() {
+    function registrantData(Request $request) {
         $filename = 'data_participant';
         $filename_script = getContentScript(true, $filename);
 
-        $data = Auth::guard('admin')->user();  
-        $dataParticipants = Participant::get();
+        $data = Auth::guard('admin')->user();
+        $dataParticipants = Participant::
+                            when(request('fullname'), function ($q) use ($request) {
+                                // $q->where('fullname', $request->fullname);
+                                $q->where('fullname', 'like', "%{$request->fullname}%");
+                            })
+                            ->get();
         return view('admin-page.'.$filename, [
             'candidate' => '',
+            'search_name' => $request->fullname,
             'script' => $filename_script,
             'title' => 'Data Pendaftar Akun',
             'auth_user' => $data,
@@ -239,7 +245,7 @@ class AdminController extends Controller
         $filename = 'data_participant';
         $filename_script = getContentScript(true, $filename);
 
-        $data = Auth::guard('admin')->user();  
+        $data = Auth::guard('admin')->user();
         $dataParticipants = Participant::with('sub_districts')->where('participant', 'Y')->get();
         return view('admin-page.'.$filename, [
             'candidate' => 'Y',
@@ -250,12 +256,12 @@ class AdminController extends Controller
         ]);
     }
 
-    // DETAIL CALON PESERTA 
+    // DETAIL CALON PESERTA
     function detailParticipant(string $number, $pageCandidate = '') {
         $filename = 'detail_participant';
         $filename_script = getContentScript(true, $filename);
 
-        $data = Auth::guard('admin')->user();  
+        $data = Auth::guard('admin')->user();
         $participant = new Participant;
         $data_part = $participant->getUserProfileByNumber($number);
         // dd($participant);
@@ -267,13 +273,13 @@ class AdminController extends Controller
             'detailParticipant' => $data_part
         ]);
     }
-    
+
     function resetPassword(Request $request, string $number) {
-        
+
         $password = Hash::make($request->password);
 
         $result = Participant::where('number', $number)->update(['password'=>$password]);
-        
+
         if($result) {
             $request->session()->flash('success', 'Password baru berhasil disimpan');
         } else {
@@ -285,10 +291,10 @@ class AdminController extends Controller
     function registrant(Request $request) {
         $filename = 'registrant';
         $filename_script = getContentScript(true, $filename);
-        
+
         $status_approve = $request->status ? $request->status : NULL;
 
-        $data = Auth::guard('admin')->user();  
+        $data = Auth::guard('admin')->user();
         $registrant = new Registrant;
         $result = $registrant->getRegistrants($status_approve,$request->fullname);
         // dd($result);
@@ -301,14 +307,14 @@ class AdminController extends Controller
             'participant' => $result
         ]);
     }
-    
+
     function participantPassed(Request $request) {
         $filename = 'participant_passed';
         $filename_script = getContentScript(true, $filename);
-        
+
         $status_passed = $request->passed ? $request->passed : "X";
 
-        $data = Auth::guard('admin')->user();  
+        $data = Auth::guard('admin')->user();
         $registrant = new Registrant;
         $result = $registrant->getParticipantPassed($status_passed, $request->fullname);
         // dd($result);
@@ -333,10 +339,10 @@ class AdminController extends Controller
         ];
 
         Registrant::where(['participant_number'=> $number, 'training_id' => $request->training_id])->update($dataUpdate);
-        
+
         return redirect('registrant');
     }
-    
+
     function declineParticipant(Request $request, $number) {
         // dd($request);
         $dataUpdate = [
@@ -348,19 +354,19 @@ class AdminController extends Controller
 
     function updateStatusPassed(Request $request) {
         $data = Auth::guard('admin')->user();
-        
+
         $selectedId = explode(',', $request->selectedId);
         foreach ($selectedId as $value) {
-            
+
             $dataUpdate = [
                 'approval_on' => date('Y-m-d H:i:s'),
                 'approval_by' => $data->username,
                 'passed' =>  $request->status_passed,
             ];
-    
+
             Registrant::where(['id'=> $value])->update($dataUpdate);
         }
-        
+
         return response()->json(['status' => 'success']);
     }
 
@@ -371,7 +377,7 @@ class AdminController extends Controller
         $filename = 'detail_participant_appr';
         $filename_script = getContentScript(true, $filename);
 
-        $data = Auth::guard('admin')->user();  
+        $data = Auth::guard('admin')->user();
         // $participant = new Participant;
         // $data_part = $participant->getUserProfileByNumber($number);
         $resultData = Registrant::with('participants', 'periods', 'service.service_detail', 'service.periods')
@@ -396,16 +402,16 @@ class AdminController extends Controller
         ];
 
         Registrant::where(['participant_number'=> $number, 'training_id' => $request->training_id])->update($dataUpdate);
-        
+
         return redirect('registrant');
     }
 
     function participantAlreadyWorking(Request $request) {
         $filename = 'participant_already_working';
         $filename_script = getContentScript(true, $filename);
- 
-        $data = Auth::guard('admin')->user();  
-         
+
+        $data = Auth::guard('admin')->user();
+
         $filter = $request->sub_district ? $request->sub_district : NULL;
         if($request->fullname) {
             if($request->session()->get('fullname') != $request->fullname) {
@@ -476,7 +482,7 @@ class AdminController extends Controller
     }
 
     function storeParticipantWord(Request $request) {
-        
+
         $validatedData = $request->validate([
             'participant_number' => 'required|unique:participant_works',
             'date_year' => 'required|max:10',
@@ -493,7 +499,7 @@ class AdminController extends Controller
         } else {
             die('Proses gagal, Hubungi administrator');
         }
-        
+
     }
 
     function editParticipantWork(Request $request, string $number) {
@@ -504,7 +510,7 @@ class AdminController extends Controller
         $resultData = ParticipantWork::where('participant_number', $number)->first();
 
         $getParticipant = Registrant::with('participants')->where('passed', 'Y')->get();
-        
+
         return view('admin-page.'.$filename, [
             'script' => $filename_script,
             'title' => 'Tambah Peserta Sudah Bekerja',
@@ -515,7 +521,7 @@ class AdminController extends Controller
     }
 
     function updateParticipantWork(Request $request, string $number) {
-        
+
         $validatedData = $request->validate([
             'date_year' => 'required|max:10',
             'company_name' => 'required|max:100',
@@ -527,11 +533,11 @@ class AdminController extends Controller
         $result = ParticipantWork::where('participant_number', $number)->update($validatedData);
 
         return redirect('/participant-already-working');
-        
+
     }
 
     function deleteParticipantWork(Request $request, string $number) {
-        
+
         $data = ParticipantWork::where(['participant_number' => $number ]);
         $result = $data->delete();
         if($result) {
@@ -541,5 +547,5 @@ class AdminController extends Controller
         }
         return redirect('/participant-already-working');
     }
-    
+
 }

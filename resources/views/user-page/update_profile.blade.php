@@ -269,7 +269,7 @@
             </div>
             <hr>
             <small class="ms-2 text-danger">- Form Wajib diisi</small> <br>
-            <small class="ms-2 text-danger">- File upload | jpg / jpeg / png |</small> <br>
+            <small class="ms-2 text-danger">- File upload | jpg / jpeg / png / pdf |</small> <br>
             <small class="ms-2 text-danger">- Max file upload 500 KB</small>
         </div>
         <button type="submit" class="btn btn-outline-success mt-3">Simpan Data</button>

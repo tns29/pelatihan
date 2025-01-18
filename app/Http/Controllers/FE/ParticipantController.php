@@ -24,9 +24,10 @@ class ParticipantController extends Controller
 
         $validatedData = $request->validate([
             'fullname'      => 'required|max:90',
-            'username'      => 'required|max:30|unique:participants',
+            // 'username'      => 'required|max:30|unique:participants',
+            'username'      => 'required|max:30',
             'gender'        => 'required',
-            'no_telp'       => 'required|numeric',
+            'no_telp'       => 'required|max:15|numeric|unique:participants',
             'email'         => 'required|email|unique:participants',
             'password'      => 'required|confirmed|min:6|max:255',
             'password_confirmation' => 'required|min:6|max:255'
