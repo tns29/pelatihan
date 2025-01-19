@@ -27,7 +27,7 @@ class Registrant extends Model
     {
         return $this->belongsTo(Participant::class, 'participant_number', 'number');
     }
-    
+
     public function service(): BelongsTo
     {
         return $this->belongsTo(Training::class, 'training_id', 'id');
@@ -43,7 +43,7 @@ class Registrant extends Model
                 ->select('registrants.*','trainings.title as trainingsTitle',  'trainings.duration', 'trainings.description as description', 'trainings.image as image',
                         'periods.name as gelombang', 'categories.name as category')
                 ->leftJoin('trainings', 'trainings.id', '=', 'registrants.training_id')
-                ->leftJoin('periods', 'periods.id', '=', 'registrants.period_id') 
+                ->leftJoin('periods', 'periods.id', '=', 'registrants.period_id')
                 ->leftJoin('categories', 'categories.id', '=', 'trainings.category_id')
                 ->where(['participant_number' => $number])->get();
     }
@@ -70,7 +70,7 @@ class Registrant extends Model
                             'periods.name as gelombang', 'categories.name as category', 'sub_districts.name AS sub_district_name')
                     ->leftJoin('participants', 'participants.number', '=', 'registrants.participant_number')
                     ->leftJoin('trainings', 'trainings.id', '=', 'registrants.training_id')
-                    ->leftJoin('periods', 'periods.id', '=', 'registrants.period_id') 
+                    ->leftJoin('periods', 'periods.id', '=', 'registrants.period_id')
                     ->leftJoin('categories', 'categories.id', '=', 'trainings.category_id')
                     ->leftJoin('sub_districts', 'sub_districts.id', '=', 'participants.sub_district')
                     // ->where($where)
@@ -84,7 +84,7 @@ class Registrant extends Model
                             'periods.name as gelombang', 'categories.name as category', 'sub_districts.name AS sub_district_name')
                     ->leftJoin('participants', 'participants.number', '=', 'registrants.participant_number')
                     ->leftJoin('trainings', 'trainings.id', '=', 'registrants.training_id')
-                    ->leftJoin('periods', 'periods.id', '=', 'registrants.period_id') 
+                    ->leftJoin('periods', 'periods.id', '=', 'registrants.period_id')
                     ->leftJoin('categories', 'categories.id', '=', 'trainings.category_id')
                     ->leftJoin('sub_districts', 'sub_districts.id', '=', 'participants.sub_district')
                     ->where($where)
@@ -93,51 +93,49 @@ class Registrant extends Model
 
         }
     }
-    
-    function getParticipantPassed($ispassed, $fullname) {
-        
-        if($ispassed == 'Y') {
-            $where['registrants.passed'] = "Y";
-        } else if($ispassed == 'N') {
-            $where['registrants.passed'] = "N";
-        } else if($ispassed == 'C') {
-            $where['registrants.passed'] = "C";
-        } else if($ispassed == 'X') {
-            $where['registrants.passed'] = null;
-        } else {
-            $where = null;
-        }
-        
-        if($ispassed == "ALL" && $where == null ) {
-            return DB::table('registrants')
-                    ->select('registrants.*',
-                            'participants.fullname as fullname', 'participants.gender as gender', 'participants.email as email',
-                            'trainings.title as trainingsTitle', 'trainings.description as description', 'trainings.image as image',
-                            'periods.name as gelombang', 'categories.name as category')
-                    ->leftJoin('participants', 'participants.number', '=', 'registrants.participant_number')
-                    ->leftJoin('trainings', 'trainings.id', '=', 'registrants.training_id')
-                    ->leftJoin('periods', 'periods.id', '=', 'registrants.period_id') 
-                    ->leftJoin('categories', 'categories.id', '=', 'trainings.category_id')
-                    ->where('registrants.approve', '!=', "N")
-                    ->where('participants.fullname', 'like', '%' . $fullname . '%')
-                    ->orderBy('date', 'DESC')
-                    ->get();
-        } else {
-            return DB::table('registrants')
-                    ->select('registrants.*',
-                            'participants.fullname as fullname', 'participants.gender as gender', 'participants.email as email',
-                            'trainings.title as trainingsTitle', 'trainings.description as description', 'trainings.image as image',
-                            'periods.name as gelombang', 'categories.name as category')
-                    ->leftJoin('participants', 'participants.number', '=', 'registrants.participant_number')
-                    ->leftJoin('trainings', 'trainings.id', '=', 'registrants.training_id')
-                    ->leftJoin('periods', 'periods.id', '=', 'registrants.period_id') 
-                    ->leftJoin('categories', 'categories.id', '=', 'trainings.category_id')
-                    ->where($where)
-                    ->where('registrants.approve', '!=', "N")
-                    ->where('participants.fullname', 'like', '%' . $fullname . '%')
-                    ->orderBy('date', 'DESC')
-                    ->get();
+
+    function getParticipantPassed($ispassed, $fullname, $training) {
+        // Define the base query
+        $query = DB::table('registrants')
+            ->select(
+                'registrants.*',
+                'participants.fullname as fullname',
+                'participants.gender as gender',
+                'participants.email as email',
+                'trainings.title as trainingsTitle',
+                'trainings.description as description',
+                'trainings.image as image',
+                'periods.name as gelombang',
+                'categories.name as category'
+            )
+            ->leftJoin('participants', 'participants.number', '=', 'registrants.participant_number')
+            ->leftJoin('trainings', 'trainings.id', '=', 'registrants.training_id')
+            ->leftJoin('periods', 'periods.id', '=', 'registrants.period_id')
+            ->leftJoin('categories', 'categories.id', '=', 'trainings.category_id')
+            ->where('registrants.approve', '!=', 'N')
+            ->where('participants.fullname', 'like', '%' . $fullname . '%')
+            ->where('trainings.id', 'like', '%' . $training . '%')
+            ->orderBy('date', 'DESC');
+
+        // Determine the condition for `ispassed`
+        switch ($ispassed) {
+            case 'Y':
+            case 'N':
+            case 'C':
+                $query->where('registrants.passed', $ispassed);
+                break;
+            case 'X':
+                $query->whereNull('registrants.passed');
+                break;
+            case 'ALL':
+                // No additional condition for 'ALL'
+                break;
+            default:
+                return collect(); // Return an empty collection for invalid input
         }
 
+        // Execute and return the query
+        return $query->get();
     }
+
 }

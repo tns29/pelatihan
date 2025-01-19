@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Training;
 use App\Models\AdminLevel;
 use App\Models\Registrant;
 use App\Models\Participant;
@@ -312,11 +313,13 @@ class AdminController extends Controller
         $filename = 'participant_passed';
         $filename_script = getContentScript(true, $filename);
 
+        $training_id = $request->training_id;
+
         $status_passed = $request->passed ? $request->passed : "X";
 
         $data = Auth::guard('admin')->user();
         $registrant = new Registrant;
-        $result = $registrant->getParticipantPassed($status_passed, $request->fullname);
+        $result = $registrant->getParticipantPassed($status_passed, $request->fullname, $training_id);
         // dd($result);
         return view('admin-page.'.$filename, [
             'passed' => $status_passed,
@@ -324,7 +327,9 @@ class AdminController extends Controller
             'script' => $filename_script,
             'title' => 'Data Kelulusan Pelatihan',
             'auth_user' => $data,
-            'participant' => $result
+            'participant' => $result,
+            'trainings' => Training::get(),
+            'training_id' => $training_id,
         ]);
     }
 

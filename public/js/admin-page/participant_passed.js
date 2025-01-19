@@ -3,6 +3,9 @@ $(function () {
     $("#passed").on("change", function () {
         $("#submitForm").submit();
     });
+    $("#training_id").on("change", function () {
+        $("#submitForm").submit();
+    });
     $("#search").on("click", function () {
         $("#submitForm").submit();
     });
