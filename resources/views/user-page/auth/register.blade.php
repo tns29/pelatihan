@@ -67,7 +67,7 @@
                             </div>
                             <div class="col">
                                 <div class="form-floating">
-                                    <input type="text" autocomplete="off" class="form-control @error('no_telp')is-invalid @enderror" name="no_telp" id="no_telp" maxlength="20" placeholder="08XXXXXXXX" value="{{ old('no_telp') }}">
+                                    <input type="text" autocomplete="off" class="form-control @error('no_telp')is-invalid @enderror" name="no_telp" id="no_telp" maxlength="20" placeholder="08XXXXXXXX" value="{{ old('no_telp') }}" onkeyup="onlyNumbers(this)">
                                     <label for="floatingInput">No. Telp</label>
                                     @error('no_telp')
                                     <small class="invalid-feedback">
@@ -148,6 +148,11 @@
         <script src="{{ asset('js/bootstrap.bundle.min.js') }}" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
         <script>
+            function onlyNumbers(input) {
+                // Remove non-numeric characters using a regular expression
+                input.value = input.value.replace(/[^0-9]/g, "");
+            }
+
             function changeUsername() {
                 const username = document.getElementById('username').value
                 const usnm = username.replaceAll(' ', '_')
