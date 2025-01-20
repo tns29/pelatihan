@@ -191,7 +191,7 @@
             </div>
             <div class=" mt-2 d-flex">
                 <label for="graduation_year" class="col-md-3 ms-3">Tahun Lulus <i class="text-danger">*</i> </label>
-                <input type="text" class="form-control @error('graduation_year')is-invalid @enderror" name="graduation_year" id="graduation_year" value="{{ old('graduation_year', $auth_user->graduation_year) }}">
+                <input type="text" class="form-control @error('graduation_year')is-invalid @enderror" name="graduation_year" id="graduation_year" value="{{ old('graduation_year', $auth_user->graduation_year) }}" maxlength="4" onkeyup="onlyNumbers(this)">
                 @error('graduation_year')
                 <small class="invalid-feedback ms-3">
                     Tahun Lulus {{ $message }}

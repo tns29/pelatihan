@@ -196,7 +196,7 @@ class ParticipantController extends Controller
             'religion'          => 'required|max:20',
             'material_status'    => 'required|max:30',
             'last_education'    => 'required|max:30',
-            'graduation_year'    => 'required|max:4',
+            // 'graduation_year'    => 'required|max:4',
             'sub_district'    => 'required|max:100',
             'village'    => 'required|max:100',
             'image'     => 'image|file|max:2048',
