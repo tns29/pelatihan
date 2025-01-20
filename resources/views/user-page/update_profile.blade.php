@@ -177,11 +177,12 @@
                 <label for="last_education" class="col-md-3 ms-3">Pendidikan Terakhir <i class="text-danger">*</i></label>
                 <select name="last_education" id="last_education" class="form-control form-select @error('last_education')is-invalid @enderror">
                     <option value="">Pilih Pendidikan Terakhir</option>
-                    <option value="SD" {{ old('last_education', $auth_user->last_education) == 'SD' ? 'selected' : '' }}> » &nbsp; SD</option>
-                    <option value="SLTP" {{ old('last_education', $auth_user->last_education) == 'SLTP' ? 'selected' : '' }}> » &nbsp; SLTP</option>
-                    <option value="SLTA-Sederajat" {{ old('last_education', $auth_user->last_education) == 'SLTA-Sederajat' ? 'selected' : '' }}> » &nbsp; SLTA/Sederajat</option>
+                    <option value="SD" {{ old('last_education', $auth_user->last_education) == 'SD' ? 'selected' : '' }}> » &nbsp; SD/MI/Paket A</option>
+                    <option value="SLTP" {{ old('last_education', $auth_user->last_education) == 'SLTP' ? 'selected' : '' }}> » &nbsp; SLTP/SMP/Paket B</option>
+                    <option value="SLTA-Sederajat" {{ old('last_education', $auth_user->last_education) == 'SLTA-Sederajat' ? 'selected' : '' }}> » &nbsp; SLTA/SMA/Ma/Paket C</option>
                     <option value="DIPLOMA" {{ old('last_education', $auth_user->last_education) == 'DIPLOMA' ? 'selected' : '' }}> » &nbsp; DIPLOMA</option>
                     <option value="S1" {{ old('last_education', $auth_user->last_education) == 'S1' ? 'selected' : '' }}> » &nbsp; S1</option>
+                    <option value="TTSD" {{ old('last_education', $auth_user->last_education) == 'TTSD' ? 'selected' : '' }}> » &nbsp; TIDAK TAMAT SD</option>
                 </select>
                 @error('last_education')
                 <small class="invalid-feedback ms-3">
