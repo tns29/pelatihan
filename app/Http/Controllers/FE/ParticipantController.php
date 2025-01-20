@@ -27,7 +27,7 @@ class ParticipantController extends Controller
             // 'username'      => 'required|max:30|unique:participants',
             'username'      => 'required|max:30',
             'gender'        => 'required',
-            'no_telp'       => 'required|max:15|numeric|unique:participants',
+            'no_telp'       => 'required|max:20|numeric|unique:participants',
             'email'         => 'required|email|unique:participants',
             'password'      => 'required|confirmed|min:6|max:255',
             'password_confirmation' => 'required|min:6|max:255'

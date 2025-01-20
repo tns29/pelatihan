@@ -77,7 +77,9 @@
           <table class="table table-bordered table-sm">
               <thead>
                   <tr class="my-bg-primary text-white">
-                      <th style="width: 4%">Pilih</th>
+                      <th style="width: 3%">
+                        <input type="checkbox" class="mt-2 mx-auto" id="checkAll" onclick="selectAllItems(this)" style="height: 20px; width: 20px;">
+                      </th>
                       <th style="width: 11%">Nomor</th>
                       <th>Nama</th>
                       <th style="width: 11%">Jenis Kelamin</th>
@@ -172,6 +174,5 @@
     </div>
   </div>
 </div>
-
 
 @endsection

@@ -67,7 +67,7 @@
                             </div>
                             <div class="col">
                                 <div class="form-floating">
-                                    <input type="text" autocomplete="off" class="form-control @error('no_telp')is-invalid @enderror" name="no_telp" id="no_telp" maxlength="15" placeholder="08XXXXXXXX" value="{{ old('no_telp') }}">
+                                    <input type="text" autocomplete="off" class="form-control @error('no_telp')is-invalid @enderror" name="no_telp" id="no_telp" maxlength="20" placeholder="08XXXXXXXX" value="{{ old('no_telp') }}">
                                     <label for="floatingInput">No. Telp</label>
                                     @error('no_telp')
                                     <small class="invalid-feedback">
