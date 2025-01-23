@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use App\Models\Training;
 use App\Models\AdminLevel;
+use App\Models\Category;
 use App\Models\Registrant;
 use App\Models\Participant;
 use App\Models\SubDistrict;
@@ -395,6 +396,48 @@ class AdminController extends Controller
             // 'detailParticipant' => $data_part,
             'resultData' => $resultData
         ]);
+    }
+
+    // DETAIL PESERTA PELATIHAN YANG TELAH DI APPROVE || EDIT
+    function detailParticipantApprEdit(string $number, int $training_id) {
+        // dd($training_id);
+        $filename = 'detail_participant_appr_edit';
+        $filename_script = getContentScript(true, $filename);
+
+        $categories = Category::get();
+        $trainings = Training::get();
+
+        $data = Auth::guard('admin')->user();
+        // $participant = new Participant;
+        // $data_part = $participant->getUserProfileByNumber($number);
+        $resultData = Registrant::with('participants', 'periods', 'service.service_detail', 'service.periods')
+                                ->where(['participant_number'=> $number, 'training_id' => $training_id])->first();
+        // dd($resultData);
+        return view('admin-page.'.$filename, [
+            'script' => $filename_script,
+            'title' => 'Detail Peserta Pelatihan',
+            'auth_user' => $data,
+            'training_id' => $training_id,
+            'categories' => $categories,
+            'trainings' => $trainings,
+            'resultData' => $resultData
+        ]);
+    }
+
+    // DETAIL PESERTA PELATIHAN YANG TELAH DI APPROVE || EDIT
+    function UpdateParticipantApprEdit(Request $request, string $number, int $training_id) {
+        // dd($request->all());
+
+        $params = [
+            'training_id' => $request->training_id
+        ];
+
+        $getRegistrant = Registrant::where([
+            'participant_number' => $number,
+            'training_id' => $training_id
+        ])->update($params);
+
+        return redirect('/registrant');
     }
 
     function passedParticipant(Request $request, $number) {

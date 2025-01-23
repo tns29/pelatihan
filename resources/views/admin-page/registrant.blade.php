@@ -7,7 +7,7 @@
     <div class="row my-2">
       <div class="col-sm-6">
         <h3 class="m-0 ml-2">{{ $title}}</h3>
-      </div><!-- /.col --> 
+      </div><!-- /.col -->
     </div><!-- /.row -->
     <hr style="margin-bottom: 0">
   </div><!-- /.container-fluid -->
@@ -19,10 +19,10 @@
     <div class="container-fluid">
         <div class="row mx-2">
           <div class="row justify-content-end mb-2 w-100">
-            
+
             <form id="submitForm" action="/registrant" method="GET" class="w-100">
               @csrf
-              
+
               <div class="row justify-content-evenly">
                 <div class="col-lg-7">
                   <input type="text" name="fullname" id="fullname" class="form-control ml-2" placeholder="Cari Nama" value="{{ $search_name }}">
@@ -46,9 +46,9 @@
               </div>
 
             </form>
-            
+
           </div>
-          
+
           <table class="table table-bordered table-sm">
               <thead>
                   <tr class="my-bg-primary text-white">
@@ -56,7 +56,7 @@
                       <th>Nama</th>
                       <th style="width: 10%">Jenis Kelamin</th>
                       <th style="width: 13%;">Pelatihan</th>
-                      <th style="width: 12%;">Tanggal Daftar</th>
+                      <th style="width: 10%;">Tanggal Daftar</th>
                       <th style="width: 13%;">Kecamatan </th>
                       <th style="width: 9%;">Periode </th>
                       <th style="width: 8%; text-align: center;">Aksi</th>
@@ -92,8 +92,10 @@
                       </td> --}}
                       <td style=" text-align: center;">
                         @if ($row->is_active == "Y")
+                            <a href="/detail-participant-appr-edit/{{ $row->participant_number }}/{{$row->training_id}}" class="text-warning"> <i class="fas fa-edit"></i> </a>
+                            &nbsp;
                           @if ($row->approve == "Y")
-                            <a href="/detail-participant-appr/{{ $row->participant_number }}/{{$row->training_id}}" class="text-success"> <i class="fas fa-user-check"></i> Detail</a>
+                            <a href="/detail-participant-appr/{{ $row->participant_number }}/{{$row->training_id}}" class="text-success"> <i class="fas fa-info-circle"></i> </a>
                           @elseif($row->approve == "N")
                             <i class="fas fa-minus-circle text-danger"></i><a href="#" class="text-danger"> Ditolak</a>
                           @else
@@ -105,11 +107,11 @@
                             </a>
                           @endif
                           &nbsp;
-                          
+
                         @else
                           <i class="fas fa-minus-circle text-danger"></i>
                         @endif
-                        
+
                       </td>
                   </tr>
                 @endforeach
@@ -117,7 +119,7 @@
           </table>
         </div>
     </div>
-</section> 
+</section>
 
 <div class="modal fade" id="modal-edit" tabindex="-1">
   <div class="modal-dialog modal-md">
@@ -132,9 +134,9 @@
         @csrf
         <div class="modal-body p-3">
           <div class="row" id="content-edit">
-            
+
           </div>
-        </div> 
+        </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
           <button type="submit" class="btn btn-success">Ya</button>
@@ -158,9 +160,9 @@
         @method('DELETE')
         <div class="modal-body p-3">
           <div class="row" id="content-delete">
-            
+
           </div>
-        </div> 
+        </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
           <button type="submit" class="btn btn-primary">Ya</button>

@@ -7,7 +7,7 @@
     <div class="row my-2">
       <div class="col-sm-6">
         <h3 class="m-0 ml-2">{{ $title}}</h3>
-      </div><!-- /.col --> 
+      </div><!-- /.col -->
     </div><!-- /.row -->
     <hr style="margin-bottom: 0">
   </div><!-- /.container-fluid -->
@@ -20,7 +20,7 @@
             <div class="col-lg-7">
                 <table class="table">
                     <tr>
-                        <th>Nomor Peserta</th>
+                        <th style="width: 30%">Nomor Peserta</th>
                         <td> : &nbsp; {{ $resultData->participants->number }} </td>
                     </tr>
                     <tr>
@@ -28,11 +28,15 @@
                         <td> : &nbsp; {{ $resultData->participants->fullname }} </td>
                     </tr>
                     <tr>
+                        <th>Jenis Kelamin</th>
+                        <td> : &nbsp; {{ $resultData->participants->gender == 'M' ? 'Laki-laki' : 'Perempuan' }} </td>
+                    </tr>
+                    <tr>
                         <th>Nama Pelatihan</th>
                         <td> : &nbsp; {{ $resultData->service->title }} </td>
                     </tr>
                     <tr>
-                        <th>Kategori</th>
+                        <th>Kategori Pelatihan</th>
                         <td> : &nbsp; {{ $resultData->service->category->name }} </td>
                     </tr>
                     <tr>
@@ -79,8 +83,8 @@
                           <tr>
                               <td colspan="2"><button class="btn btn-outline-info py-1 float-right w-full">Simpan dan keluar &nbsp; <i class="fas fa-share-square"></i> </button></td>
                           </tr>
-                          
-                      </form>    
+
+                      </form>
                     @else
                       <tr>
                         <th>Pendaftaran Ditolak</th>
@@ -92,7 +96,7 @@
 
         </div>
     </div>
-</section> 
+</section>
 
 <div class="modal fade" id="modal-detail" tabindex="-1">
   <div class="modal-dialog modal-lg">
@@ -111,9 +115,9 @@
           </div>
           <div class="col-lg-8">
             <table class="table table-striped" id="tb-detail"></table>
-          </div> 
+          </div>
         </div>
-      </div> 
+      </div>
     </div>
   </div>
 </div>

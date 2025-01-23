@@ -32,7 +32,7 @@ Route::middleware('guest')->group(function () {
     Route::get('/admin', function () {
         return redirect('/login-admin');
     });
-    
+
     Route::get('/login-admin', [AuthAdmin::class, 'index']);
     Route::post('/login-admin', [AuthAdmin::class, 'auth']);
     Route::get('/register-admin', [AuthAdmin::class, 'register']);
@@ -44,7 +44,7 @@ Route::middleware('guest')->group(function () {
 Route::middleware('admin')->group(function () {
     Route::get('/profile', [AdminController::class, 'index']);
     Route::get('/dashboard', [Dashboard::class, 'index']);
-    
+
     Route::resource('/posts', PostsController::class)->except('show');
 
     Route::get('/export/admin', [ExportDataController::class, 'export']);
@@ -74,21 +74,23 @@ Route::middleware('admin')->group(function () {
     Route::put('/reset-password/{number}', [AdminController::class, 'resetPassword']); // reset password pendaftar akun
     Route::get('/detail-participant/{number}/{page}', [AdminController::class, 'detailParticipant']);
     Route::put('/acc-participant/{number}', [GeneralController::class, 'accParticipant']);
-    
+
     Route::get('/registrant', [AdminController::class, 'registrant']);
     Route::post('/approve/{number}', [AdminController::class, 'approveParticipant']);
     Route::delete('/decline/{number}', [AdminController::class, 'declineParticipant']);
-    
+
     // DETAIL PESERTA PELATIHAN YANG TELAH DI APPROVE
     Route::get('/detail-participant-appr/{number}/{id}', [AdminController::class, 'detailParticipantAppr']);
     Route::put('/passed-participant/{number}', [AdminController::class, 'passedParticipant']);
-    
+    Route::get('/detail-participant-appr-edit/{number}/{id}', [AdminController::class, 'detailParticipantApprEdit']);
+    Route::put('/update-participant-data/{number}/{id}', [AdminController::class, 'updateParticipantApprEdit']);
+
     Route::get('/participant-passed', [AdminController::class, 'participantPassed']);
     Route::put('/update-status-passed', [AdminController::class, 'updateStatusPassed']);
-    
+
     Route::get('/participant-already-working', [AdminController::class, 'participantAlreadyWorking']);
     Route::get('/export_participant_already_work', [ExportDataController::class, 'participantAlreadyWorkExcel']);
-    
+
     Route::get('/add-participant-work', [AdminController::class, 'addParticipantWork']);
     Route::post('/store-participant-work', [AdminController::class, 'storeParticipantWord']);
     Route::get('/getDetailParticipant', [AdminController::class, 'getDetailParticipant']);
@@ -97,10 +99,10 @@ Route::middleware('admin')->group(function () {
     Route::delete('/delete-participant-work/{number}', [AdminController::class, 'deleteParticipantWork']); // hapus pendaftar akun
 
     Route::resource('/category', CategoryController::class)->only("index", "store", "update", "destroy");
-    
+
     Route::resource('/service', TrainingController::class)->except("show");
     Route::resource('/service-detail', TrainingContentController::class)->except("show");
-    
+
     // REPORTING //
     Route::get('/registrant-report', [GeneralController::class, 'registrantReport']);
     Route::get('/registrant-rpt', [GeneralController::class, 'registrantRpt']);
@@ -118,7 +120,7 @@ Route::middleware('admin')->group(function () {
     Route::post('/settings', [SettingsController::class, 'update']);
     Route::get('/set-period', [SettingsController::class, 'setPeriod']);
     Route::post('/set-period', [SettingsController::class, 'savePeriodActive']);
-    
+
     Route::post('/logout-admin', [AuthAdmin::class, 'logout']);
 });
 
@@ -138,7 +140,7 @@ Route::middleware('participant')->group(function () {
     Route::get('/update-profile', [ParticipantController::class, 'updateProfile']);
     Route::put('/update-profile/{number}', [ParticipantController::class, 'updateProfileData']);
     Route::get('/checkDataUser/{id}', [GeneralController::class, 'checkDataUser']);
-    
+
     Route::post('/logout', [ParticipantController::class, 'logout']);
 });
 
