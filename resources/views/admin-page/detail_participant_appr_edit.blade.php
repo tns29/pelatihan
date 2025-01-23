@@ -48,6 +48,7 @@
                         </select>
                     </div>
                     <button type="submit" class="btn btn-outline-info">Simpan Data</button>
+                    <a href="{{ url()->previous() }}" class="btn btn-outline-secondary">Kembali</a>
                 </form>
             </div>
         </div>
