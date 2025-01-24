@@ -185,7 +185,7 @@ class ParticipantController extends Controller
             'fullname'    => 'required|max:100',
             'username'    => 'required|max:30',
             'email'    => 'required|email|max:100',
-            'nik'    => 'required|max:16',
+            'nik'    => 'required|max:16|min:16',
             'no_telp'    => 'required|max:20',
             'no_wa'    => 'required|max:20',
             'place_of_birth'    => 'required|max:30',
@@ -200,14 +200,14 @@ class ParticipantController extends Controller
             'sub_district'    => 'required|max:100',
             'village'    => 'required|max:100',
             'image'     => 'image|file|max:2048',
-            'id_card'     => 'image|file|max:2048',
+            'id_card'     => 'file|max:2048',
             'ak1'     => 'file|max:2048',
             'ijazah'     => 'file|max:2048',
         ]);
 
         if($request->nik != $request->nik1) {
             $validatedData = $request->validate([
-                'nik'    => 'required|max:16|unique:participants',
+                'nik'    => 'required|max:16|min:16|unique:participants',
             ]);
         }
         if($request->email != $request->email1) {

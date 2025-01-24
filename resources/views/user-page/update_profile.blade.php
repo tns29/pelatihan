@@ -67,11 +67,11 @@
             </div>
             <div class=" mt-2 d-flex">
                 <label for="nik" class="col-md-3 ms-3">NIK <i class="text-danger">*</i></label>
-                <input type="text" class="form-control inline-block @error('nik')is-invalid @enderror" maxlength="16" name="nik" id="nik" value="{{ old('nik', $auth_user->nik) }}" onkeyup="onlyNumbers(this)">
+                <input type="text" class="form-control inline-block @error('nik')is-invalid @enderror" minlength="16" maxlength="16" name="nik" id="nik" value="{{ old('nik', $auth_user->nik) }}" onkeyup="onlyNumbers(this)">
                 <input type="hidden" name="nik1" value="{{ old('nik', $auth_user->nik) }}">
                 @error('nik')
                 <small class="invalid-feedback ms-3">
-                    Nik {{ $message }}
+                    {{ $message }}
                 </small>
                 @enderror
             </div>
