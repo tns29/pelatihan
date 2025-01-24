@@ -113,8 +113,12 @@ class Registrant extends Model
             ->leftJoin('periods', 'periods.id', '=', 'registrants.period_id')
             ->leftJoin('categories', 'categories.id', '=', 'trainings.category_id')
             ->where('registrants.approve', '!=', 'N')
-            ->where('participants.fullname', 'like', '%' . $fullname . '%')
-            ->where('trainings.id', 'like', '%' . $training . '%')
+            ->when($fullname, function ($q) use ($fullname) {
+                $q->where('participants.fullname', 'like', '%' . $fullname . '%');
+            })
+            ->when($training, function ($q) use ($training) {
+                $q->where('registrants.training_id', $training);
+            })
             ->orderBy('date', 'DESC');
 
         // Determine the condition for `ispassed`
