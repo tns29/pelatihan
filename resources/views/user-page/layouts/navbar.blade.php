@@ -6,7 +6,7 @@
     </button>
     <div class="d-flex">
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav social-media">
           <li class="nav-item">
             <a class="nav-link" href="https://wa.me/+6285179626211" target="_blank" aria-label="whatsapp">
               <i class="fab fa-whatsapp" style="font-size: 18px;"></i>

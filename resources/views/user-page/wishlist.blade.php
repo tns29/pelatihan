@@ -25,22 +25,22 @@
                         <span class="alert alert-danger py-0">Durasi {{$item->duration}}</span>
                         <p class="mt-2">{{$item->description}}</p>
                         <p>
-                          <span class="alert alert-warning px-2 py-0"> {{$item->gelombang}}</span>
+                            <span class="alert alert-warning px-2 py-0"> {{$item->gelombang}}</span>
                         </p>
-                        
+
                         {{-- <br> --}}
                         @if ($item->passed == NULL)
-                          @if ($item->approve == 'Y')
-                            <small class="alert alert-success py-1">Pelatihan telah disetujui</small>
-                          @elseif ($item->approve == 'N')
-                            <small class="alert alert-danger py-1">Pelatihan ditolak</small>
-                          @else
-                            <small class="alert alert-warning py-1">Menunggu Persetujuan</small>
-                          @endif
-                          <br>
-                          <div class="text-success ms-1 mt-3">{{ $item->approve == 'Y' ? 'Pelatihan Sedang Berlangsung' : ''}}</div>
+                            @if ($item->approve == 'Y')
+                                <small class="alert alert-success py-1">Pelatihan telah disetujui</small>
+                            @elseif ($item->approve == 'N')
+                                <small class="alert alert-danger py-1">Pelatihan ditolak</small>
+                            @else
+                                <small class="alert alert-warning py-1">Menunggu Persetujuan</small>
+                            @endif
+                            <br>
+                            <div class="text-success ms-1 mt-3">{{ $item->approve == 'Y' ? 'Pelatihan Sedang Berlangsung' : ''}}</div>
                         @else
-                          <div class="text-primary ms-1 mt-3">{{ $item->approve == 'Y' ? 'Telah Selesai' : ''}}</div>
+                            <div class="text-primary ms-1 mt-3">{{ $item->approve == 'Y' ? 'Telah Selesai' : ''}}</div>
                         @endif
                         <br>
                         <button class="btn btn-success btn-sm mt-3" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Kartu Pelatihan" onclick="printCard(`{{$item->gelombang}}`, `{{$item->trainingsTitle}}`, `{{ date('d-m-Y', strtotime($item->date)) }}`, `{{$item->passed}}`, `{{ $item->approve }}`)">
@@ -71,7 +71,7 @@
         <div class="modal-body">
           <div id="content">
             <div class="row" id="wmark" style="
-            background-image: url('<?= asset('/img/wmark.jpg') ?>');"> 
+            background-image: url('<?= asset('/img/wmark.jpg') ?>');">
           </div>
           <div class="content-body">
             <div class="col-md-4 col-lg-4">
@@ -111,7 +111,7 @@
                 </tr>
               </table>
             </div>
-          </div>  
+          </div>
 
           </div>
         </div>

@@ -1,6 +1,33 @@
 
 @extends('user-page.layouts.user_main')
 
+<style>
+    div.box {
+        padding: 1rem;
+    }
+    @media (max-width: 768px) {
+        div.box {
+            padding: 0;
+        }
+        .box-input label {
+            font-size: 10px;
+            width: 35%;
+            margin-left: 0.2rem !important;
+            margin-right: 0.8rem !important;
+        }
+        .box-input input {
+            font-size: 10px;
+        }
+        .box-input select {
+            font-size: 10px;
+        }
+
+        small.note {
+            font-size: 11px;
+        }
+    }
+</style>
+
 @section('content-pages')
 
 <hr>
@@ -10,7 +37,7 @@
 <form action="/update-profile/{{ auth('participant')->user()->number }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
-    <div class="p-3 row rounded-2 shadow mx-2" style="background-image: linear-gradient(to top, rgba(247, 247, 247, 0.604), #88d4e546);">
+    <div class="box row rounded-2 shadow mx-2" style="background-image: linear-gradient(to top, rgba(247, 247, 247, 0.604), #88d4e546);">
         <div class="col-lg-3 col-md-3 col-sm-3 mt-2">
             <label for="image">&nbsp; </label>
             <div class="card img-bordered ml-5 p-2">
@@ -20,7 +47,7 @@
                     <img id="preview" src="{{ asset('/img/no_preview.jpg') }}" alt="preview" style="height: 240px;"/>
                 @endif
             </div>
-            <div class=" mt-2">
+            <div class="box-input mt-2">
                 <label for="image">Pas Foto</label>
                 <input type="file" name="image" id="image" class="form-control @if(session()->has('image') == true)is-invalid @endif @error('image')is-invalid @enderror">
                 @if(session()->has('image') == true)
@@ -36,7 +63,7 @@
             </div>
         </div>
         <div class="col-lg-9 col-md-9 col-sm-9 mt-4">
-            <div class=" mt-2 d-flex">
+            <div class="box-input mt-2 d-flex">
                 <label for="fullname" class="col-md-3 ms-3">Nama Lengkap <i class="text-danger">*</i></label>
                 <input type="text" class="form-control inline-block @error('fullname')is-invalid @enderror" maxlength="16" name="fullname" id="fullname" value="{{ old('fullname', $auth_user->fullname) }}">
                 @error('fullname')
@@ -45,7 +72,7 @@
                 </small>
                 @enderror
             </div>
-            <div class=" mt-2 d-flex">
+            <div class="box-input mt-2 d-flex">
                 <label for="username" class="col-md-3 ms-3">Username <i class="text-danger">*</i></label>
                 <input type="text" class="form-control inline-block @error('username')is-invalid @enderror" maxlength="16" name="username" id="username" value="{{ old('username', $auth_user->username) }}">
                 <input type="hidden" name="username1" value="{{ old('username', $auth_user->username) }}">
@@ -55,7 +82,7 @@
                 </small>
                 @enderror
             </div>
-            <div class=" mt-2 d-flex">
+            <div class="box-input mt-2 d-flex">
                 <label for="email" class="col-md-3 ms-3">Email <i class="text-danger">*</i></label>
                 <input type="text" class="form-control inline-block @error('email')is-invalid @enderror" maxlength="100" name="email" id="email" value="{{ old('email', $auth_user->email) }}">
                 <input type="hidden" name="email1" value="{{ old('email', $auth_user->email) }}">
@@ -65,7 +92,7 @@
                 </small>
                 @enderror
             </div>
-            <div class=" mt-2 d-flex">
+            <div class="box-input mt-2 d-flex">
                 <label for="nik" class="col-md-3 ms-3">NIK <i class="text-danger">*</i></label>
                 <input type="text" class="form-control inline-block @error('nik')is-invalid @enderror" minlength="16" maxlength="16" name="nik" id="nik" value="{{ old('nik', $auth_user->nik) }}" onkeyup="onlyNumbers(this)">
                 <input type="hidden" name="nik1" value="{{ old('nik', $auth_user->nik) }}">
@@ -75,7 +102,7 @@
                 </small>
                 @enderror
             </div>
-            <div class=" mt-2 d-flex">
+            <div class="box-input mt-2 d-flex">
                 <label for="no_wa" class="col-md-3 ms-3">No. WA <i class="text-danger">*</i></label>
                 <input type="text" class="form-control inline-block @error('no_wa')is-invalid @enderror" maxlength="15" name="no_wa" id="no_wa" value="{{ old('no_wa', $auth_user->no_wa) }}" onkeyup="onlyNumbers(this)">
                 @error('no_wa')
@@ -84,7 +111,7 @@
                 </small>
                 @enderror
             </div>
-            <div class=" mt-2 d-flex">
+            <div class="box-input mt-2 d-flex">
                 <label for="no_telp" class="col-md-3 ms-3">No. Telp <i class="text-danger">*</i></label>
                 <input type="text" class="form-control inline-block @error('no_telp')is-invalid @enderror" maxlength="15" name="no_telp" id="no_telp" value="{{ old('no_telp', $auth_user->no_telp) }}" onkeyup="onlyNumbers(this)">
                 @error('no_telp')
@@ -93,7 +120,7 @@
                 </small>
                 @enderror
             </div>
-            <div class=" mt-2 d-flex">
+            <div class="box-input mt-2 d-flex">
                 <label for="place_of_birth" class="col-md-3 ms-3">Tempat Lahir <i class="text-danger">*</i></label>
                 <input type="text" class="form-control inline-block @error('place_of_birth')is-invalid @enderror" name="place_of_birth" id="place_of_birth" value="{{ old('place_of_birth', $auth_user->place_of_birth) }}">
                 @error('place_of_birth')
@@ -102,7 +129,7 @@
                 </small>
                 @enderror
             </div>
-            <div class=" mt-2 d-flex">
+            <div class="box-input mt-2 d-flex">
                 <label for="date_of_birth" class="col-md-3 ms-3">Tanggal Lahir <i class="text-danger">*</i></label>
                 <input type="date" class="form-control inline-block @error('date_of_birth')is-invalid @enderror" name="date_of_birth" id="date_of_birth" value="{{ old('date_of_birth', $auth_user->date_of_birth) }}">
                 @error('date_of_birth')
@@ -111,7 +138,7 @@
                 </small>
                 @enderror
             </div>
-            <div class=" mt-2 d-flex">
+            <div class="box-input mt-2 d-flex">
                 <label for="address" class="col-md-3 ms-3">Alamat  <i class="text-danger">*</i></label>
                 <input type="text" class="form-control inline-block @error('address')is-invalid @enderror" name="address" id="address" value="{{ old('address', $auth_user->address) }}">
                 @error('address')
@@ -120,7 +147,7 @@
                 </small>
                 @enderror
             </div>
-            <div class=" mt-2 d-flex">
+            <div class="box-input mt-2 d-flex">
                 <label for="height" class="col-md-3 ms-3">Tinggi Badan <i class="text-danger">(cm)</i> <i class="text-danger">*</i></label>
                 <input type="number" class="form-control inline-block @error('height')is-invalid @enderror" name="height" id="height" value="{{ old('height', $auth_user->height) }}" autocomplete="off">
                 @error('height')
@@ -130,7 +157,7 @@
                 @enderror
             </div>
 
-            <div class=" mt-2 d-flex">
+            <div class="box-input mt-2 d-flex">
                 <label for="size_uniform" class="col-md-3 ms-3">Ukuran Seragam <i class="text-danger">*</i></label>
                 <input type="text" class="form-control inline-block @error('size_uniform')is-invalid @enderror" name="size_uniform" id="size_uniform" value="{{ old('size_uniform', $auth_user->size_uniform) }}" maxlength="5" style="text-transform: uppercase">
                 @error('size_uniform')
@@ -140,7 +167,7 @@
                 @enderror
             </div>
 
-            <div class=" mt-2 d-flex">
+            <div class="box-input mt-2 d-flex">
                 <label for="religion" class="col-md-3 ms-3">Agama <i class="text-danger">*</i></label>
                 <select name="religion" id="religion" class="form-control form-select @error('religion')is-invalid @enderror">
                     <option value="">Pilih agama</option>
@@ -157,7 +184,7 @@
                 </small>
                 @enderror
             </div>
-            <div class=" mt-2 d-flex">
+            <div class="box-input mt-2 d-flex">
                 <label for="material_status" class="col-md-3 ms-3">Status Pernikahan <i class="text-danger">*</i></label>
                 <select name="material_status" id="material_status" class="form-control form-select @error('material_status')is-invalid @enderror">
                     <option value="">Pilih status</option>
@@ -173,7 +200,7 @@
                 @enderror
             </div>
 
-            <div class=" mt-2 d-flex">
+            <div class="box-input mt-2 d-flex">
                 <label for="last_education" class="col-md-3 ms-3">Pendidikan Terakhir <i class="text-danger">*</i></label>
                 <select name="last_education" id="last_education" class="form-control form-select @error('last_education')is-invalid @enderror">
                     <option value="">Pilih Pendidikan Terakhir</option>
@@ -190,7 +217,7 @@
                 </small>
                 @enderror
             </div>
-            <div class=" mt-2 d-flex">
+            <div class="box-input mt-2 d-flex">
                 <label for="graduation_year" class="col-md-3 ms-3">Tahun Lulus <i class="text-danger">*</i> </label>
                 <input type="text" class="form-control @error('graduation_year')is-invalid @enderror" name="graduation_year" id="graduation_year" value="{{ old('graduation_year', $auth_user->graduation_year) }}" maxlength="4" onkeyup="onlyNumbers(this)">
                 @error('graduation_year')
@@ -199,7 +226,7 @@
                 </small>
                 @enderror
             </div>
-            <div class=" mt-2 d-flex">
+            <div class="box-input mt-2 d-flex">
                 <label for="sub_district" class="col-md-3 ms-3">Kecamatan <i class="text-danger">*</i> </label>
                 <select name="sub_district" id="sub_district" class="form-control form-select @error('sub_district')is-invalid @enderror">
                     <option value="">Pilih kecamatan</option>
@@ -215,7 +242,7 @@
                 </small>
                 @enderror
             </div>
-            <div class=" mt-2 d-flex">
+            <div class="box-input mt-2 d-flex">
                 <input type="hidden" id="village_" value="{{$auth_user->village}}">
                 <label for="village" class="col-md-3 ms-3">Desa / Kelurahan <i class="text-danger">*</i> </label>
                 <select name="village" id="village" class="form-control form-select @error('village')is-invalid @enderror">
@@ -231,7 +258,7 @@
 
             {{-- DOKUMEN --}}
 
-            <div class=" mt-2 d-flex">
+            <div class="box-input mt-2 d-flex">
                 <label for="id_card" class="col-md-3 ms-3">KTP </label>
                 <input type="file" name="id_card" id="id_card" class="form-control @if(session()->has('id_card') == true)is-invalid @endif" value="{{ old('id_card', $auth_user->id_card) }}">
                 @if ($auth_user->id_card)
@@ -244,7 +271,7 @@
                 @endif
             </div>
 
-            <div class=" mt-2 d-flex">
+            <div class="box-input mt-2 d-flex">
                 <label for="ak1" class="col-md-3 ms-3">Ak1 / Kartu Kuning</label>
                 <input type="file" name="ak1" id="ak1" class="form-control @if(session()->has('ak1') == true)is-invalid @endif" >
                 @if ($auth_user->ak1)
@@ -256,7 +283,7 @@
                     </small>
                 @endif
             </div>
-            <div class=" mt-2 d-flex">
+            <div class="box-input mt-2 d-flex">
                 <label for="ijazah" class="col-md-3 ms-3">Ijazah Terakhir </label>
                 <input type="file" name="ijazah" id="ijazah" class="form-control @if(session()->has('ijazah') == true)is-invalid @endif">
                 @if ($auth_user->ijazah)
@@ -269,9 +296,9 @@
                 @endif
             </div>
             <hr>
-            <small class="ms-2 text-danger">- Form Wajib diisi</small> <br>
-            <small class="ms-2 text-danger">- File upload | jpg / jpeg / png / pdf |</small> <br>
-            <small class="ms-2 text-danger">- Max file upload 500 KB</small>
+            <small class="note ms-2 text-danger">- Form Wajib diisi</small> <br>
+            <small class="note ms-2 text-danger">- File upload | jpg / jpeg / png / pdf |</small> <br>
+            <small class="note ms-2 text-danger">- Max file upload 500 KB</small>
         </div>
         <button type="submit" class="btn btn-outline-success mt-3">Simpan Data</button>
     </div>

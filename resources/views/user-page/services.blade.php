@@ -1,6 +1,21 @@
 
 @extends('user-page.layouts.user_main')
 
+<style>
+    .carousel-item img.service-banner {
+        width: 100%;
+    }
+    @media (max-width: 768px) {
+        .carousel .item {
+            height: 25% !important;
+        }
+        .carousel-item img.service-banner {
+            width: 100%;
+            height: 100%;
+        }
+    }
+</style>
+
 @section('header-pages')
 <div class="banner">
   <div id="carouselExampleIndicators" class="carousel slide">
@@ -10,11 +25,11 @@
         </div>
         <div class="carousel carousel-inner">
           <div class="carousel-item item active">
-          <img src="{{ asset('img/p2.png') }}" class="d-block w-100" alt="p2">
+          <img src="{{ asset('img/p2.png') }}" class="d-block service-banner" alt="p2">
         </div>
         <div class="carousel-item item">
-          <img src="{{ asset('img/p1.png') }}" class="d-block w-100" alt="p1">
-        </div> 
+          <img src="{{ asset('img/p1.png') }}" class="d-block service-banner" alt="p1">
+        </div>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -30,22 +45,22 @@
 
 @section('content-pages')
 
-<div class="explain-product my-4">
+<div class="explain-product my-3">
   <div class="heading text-center ">
     <div class="pt-3">
       <h3 style="font-size: 26px; font-weight: 600"> Pilih Program Impian </h3>
     </div>
   </div>
 
-  <div class="row mt-3">
+  <div class="mt-3">
     <section class="mb-1 row">
       <div class="col-lg-10" style="width: 92%; padding-right: 0 !important;">
         <input type="text" class="form-control" name="keyword" id="keyword" placeholder="Apa yg ingin anda pelajari ?">
       </div>
       <div class="col" style="width: 8%; padding: 0 !important;">
-        
+
         <button class="btn btn-info float-end" onclick="searchButton()">
-          <i class="fas fa-search pe-2"></i> Cari
+          <i class="fas fa-search py-1"></i>
         </button>
       </div>
     </section>
@@ -58,7 +73,7 @@
       </div>
       <input type="hidden" name="count-id-category" id="count-id-category" value="{{ count($category) }}">
       <input type="hidden" name="category" id="category" value="">
-      
+
     </section>
 
     <div class="row" id="services-list">

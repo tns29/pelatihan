@@ -1,8 +1,24 @@
 
 @extends('user-page.layouts.user_main')
 
+<style>
+    .image-profile {
+        width : 100%; height:100%; object-fit: cover; background-position: center; background-size: cover;
+    }
+    @media (max-width: 768px) {
+        .image-profile {
+            width : 95%; height:95%; object-fit: cover; background-position: center; background-size: cover;
+            border-radius: 50%;
+        }
+        table tr th,
+        table tr td {
+            font-size: 12px;
+        }
+    }
+</style>
+
 @section('content-pages')
-<?php 
+<?php
 // dd($auth_user->date_of_birth);
 $date_of_birth = $auth_user->date_of_birth ? date('d, M Y', strtotime($auth_user->date_of_birth)) : '-- / -- / ----';
 ?>
@@ -13,15 +29,15 @@ $date_of_birth = $auth_user->date_of_birth ? date('d, M Y', strtotime($auth_user
         <div class="col-lg-3">
             <div style=" width: 300px; height: 290px; overflow: hidden;">
                 @if(!$auth_user->image)
-                    <img src="{{ asset('img/userDefault.png') }}" class="shadow mb-2" style="width : 100%; height:100%; object-fit: cover; background-position: center; background-size: cover;" alt="User Image">
+                    <img src="{{ asset('img/userDefault.png') }}" class="shadow mb-2 image-profile" alt="User Image">
                 @else
-                    <img src="{{ asset('/storage').'/'.$auth_user->image }}" class="shadow mb-2" style="width : 100%; height:100%; object-fit: cover; background-position: center; background-size: cover;" alt="User Image">
+                    <img src="{{ asset('/storage').'/'.$auth_user->image }}" class="shadow mb-2 image-profile" alt="User Image">
                 @endif
             </div>
             <span class="text-left"><small class="pt-2">Bergabung sejak, {{ date('d, M Y', strtotime($auth_user->created_at)) }}</small></span>
         </div>
         <div class="col-lg-9">
-            
+
             <table class="table table-info">
                 <tr>
                     <th style="width: 30%;">Nomor Peserta</th>
@@ -43,11 +59,11 @@ $date_of_birth = $auth_user->date_of_birth ? date('d, M Y', strtotime($auth_user
                     <th style="width: 30%;">No. Whatsapp</th>
                     <td><b> : &nbsp; {{ $auth_user->no_wa }}</b></td>
                 </tr>
-                
+
                 <tr>
                     <th style="width: 30%;">Tempat Tanggal Lahir</th>
                     <td>
-                        <b> : &nbsp; 
+                        <b> : &nbsp;
                         {{ $auth_user->place_of_birth.', '. $date_of_birth }}
                         </b>
                     </td>

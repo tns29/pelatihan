@@ -1,10 +1,22 @@
 
 @extends('user-page.layouts.user_main')
 
+<style>
+    img.image-post {
+        width: 100%;
+        margin:auto;
+    }
+    @media (max-width: 768px) {
+        img.image-post {
+            /* width: 65%; */
+        }
+    }
+</style>
+
 @section('content-pages')
 
 <div class="explain-product my-4 mx-3">
-  
+
   <div class="heading text-center ">
     <div class="mt-3">
       <span style="font-size: 26px; font-weight: 600">{{$title}}</span>
@@ -13,7 +25,7 @@
 
   @if ($resultPost)
     <div class="row shadow bg-white rounded-3 p-3 mt-3">
-    
+
     <div class="col-md-12">
         <small>
         @if ($resultPost->updated_at)
@@ -22,10 +34,10 @@
             <i>posted at </i> {{ date('d M Y', strtotime($resultPost->created_at)) }}
         @endif
         </small>
-        &nbsp; | &nbsp; 
+        &nbsp; | &nbsp;
         <small> Pembaca  {{ $resultPost->seen }} </small>
     </div>
-    
+
     <div class="col-md-8" style="border-right: 1px solid #acacac !important;">
         <h3 class="h3 mt-3">{{ $resultPost->title }}</h3>
 
@@ -36,8 +48,7 @@
                 @foreach ($resultPost->picturePost as $row)
                 <?php $key++ ?>
                 <div class="carousel-item {{ $key == 1 ? 'active' : ''}} " style="background: #f1f1f16b">
-                    <img src="{{ asset('/storage').'/'.$row->image }}" class="d-block p-2 img-fluid" alt="img-news"
-                    style="min-width: 650px; margin:auto">
+                    <img src="{{ asset('/storage').'/'.$row->image }}" class="d-block p-2 img-fluid image-post" alt="img-news">
                     <div class="mt-2 ms-2 text-center">
                     {{-- <a href="{{ asset('/storage').'/'.$row->image }}" class="text-decoration-none" download >Download gambar</a> --}}
                     <div onclick="downloadImg(`{{ asset('/storage').'/'.$row->image }}`, `image-post-{{$row->id}}`, this)">Download gambar</div>
@@ -73,7 +84,7 @@
                     <i>posted at </i> {{ date('d M Y', strtotime($item->created_at)) }}
                     @endif
                 </small>
-            &nbsp; | &nbsp; 
+            &nbsp; | &nbsp;
             <small> {{ $item->seen }} Pembaca </small>
             <div class="row">
                 <h3 class="h3 mt-3">{{ $item->title }}</h3>
@@ -97,7 +108,7 @@
     </span>
     </div>
   @endif
-  
+
 </div>
 
 @endsection

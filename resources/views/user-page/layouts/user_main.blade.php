@@ -6,6 +6,7 @@
     <title>Pelatihan - UPTD </title>
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/mystyle.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/mystyle_v_mobile.css') }}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
 
@@ -29,7 +30,7 @@
       <footer style="bottom:0 !important;">
         <br>
         <hr>
-        <div> Copyright &copy; UPTD Kab. Tangerang {{ date('Y') }}
+        <div class="text-footer"> Copyright &copy; UPTD Kab. Tangerang {{ date('Y') }}
             {{-- by  --}}
             {{-- <a href="https://yusufarya.my.id" target="_blank" class="text-decoration-none">29tech.id</a> --}}
             All rights reserved.</div>

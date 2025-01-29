@@ -1,11 +1,19 @@
 
 @extends('user-page.layouts.user_main')
 
-@section('content-pages')
+<style>
+    .content-img {
+        height: auto; max-width: 420px;
+    }
 
-<?php
-// dd(session());
-?>
+    @media (max-width: 768px) {
+        .content-img {
+            height: auto; max-width: 240px; margin: 0 auto;
+        }
+    }
+</style>
+
+@section('content-pages')
 
 <div class="explain-product my-5 rounded">
 
@@ -96,7 +104,7 @@
             </div>
             <div class="col-md-4">
                 @if ($item->image)
-                    <img src="{{ asset('/storage/'.$item->image) }}" alt="conntent-img" style="height: auto; max-width: 420px;">
+                    <img src="{{ asset('/storage/'.$item->image) }}" alt="content-img" class="content-img">
                 @else
 
                 @endif
