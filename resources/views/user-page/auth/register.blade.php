@@ -13,13 +13,42 @@
 
     </head>
 
-    <body class="d-flex align-items-center py-4 bg-white">
+    <style>
+        body {
+            padding: 1.5rem 0;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 1.5rem 0;
+                margin-top: 100px;
+            }
+            .form-register {
+                max-width: 100%;
+                padding: 1rem;
+                margin: 0px;
+            }
+            .box-input label {
+                font-size: 12px;
+                /* width: 35%; */
+                margin-left: 0.2rem !important;
+                margin-right: 0.8rem !important;
+            }
+            .box-input input {
+                font-size: 12px;
+            }
+            .box-input select {
+                font-size: 10px;
+            }
+        }
+    </style>
+
+    <body class="d-flex align-items-center bg-white">
 
         <main class="row">
-            <div class="col-lg-7 col-md-7 col-sm-7 p-5">
-                <img class="hero-img" src="{{asset('img/hero.png')}}" alt="">
+            <div class="col-lg-7 col-md-6 col-sm-6">
+                <img class="hero-img" src="{{asset('img/hero.png')}}" alt="" style="width: 97%; height:auto">
             </div>
-            <div class="col-lg-5 col-md-5 col-sm-5 pe-5">
+            <div class="col-lg-5 col-md-6 col-sm-6">
                 <section class="form-register">
                     <input type="hidden" id="valid" value="<?= session()->has('success') ?>">
                     <input type="hidden" id="invalid" value="<?= session()->has('failed') ?>">
@@ -29,7 +58,7 @@
 
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12">
-                                <div class="form-floating">
+                                <div class="form-floating box-input">
                                     <input type="text" autocomplete="off" class="form-control @error('fullname')is-invalid @enderror" name="fullname" id="fullname" maxlength="50" placeholder="Nama lengkap" onkeyup="generateUsername()" value="{{ old('fullname') }}">
                                     <label for="floatingInput">Nama Lengkap</label>
                                     @error('fullname')
@@ -40,7 +69,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
-                                <div class="form-floating">
+                                <div class="form-floating box-input">
                                     <input type="text" autocomplete="off" class="form-control @error('username')is-invalid @enderror" name="username" id="username" maxlength="20" placeholder="name@example.com" onkeyup="changeUsername()" value="{{ old('username') }}">
                                     <label for="floatingInput">Username</label>
                                     @error('username')
@@ -51,7 +80,7 @@
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="form-floating">
+                                <div class="form-floating box-input">
                                     <select class="form-control @error('gender')is-invalid @enderror" name="gender" id="gender">
                                         <option value="">Pilih</option>
                                         <option value="M" {{ old('gender') == "M" ? 'selected' : '' }}>Laki-laki</option>
@@ -66,7 +95,7 @@
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="form-floating">
+                                <div class="form-floating box-input">
                                     <input type="text" autocomplete="off" class="form-control @error('no_telp')is-invalid @enderror" name="no_telp" id="no_telp" maxlength="20" placeholder="08XXXXXXXX" value="{{ old('no_telp') }}" onkeyup="onlyNumbers(this)">
                                     <label for="floatingInput">No. Telp</label>
                                     @error('no_telp')
@@ -78,7 +107,7 @@
                             </div>
 
                             <div class="col-lg-12 col-md-12 col-sm-12">
-                                <div class="form-floating">
+                                <div class="form-floating box-input">
                                     <input type="email" autocomplete="off" class="form-control @error('email')is-invalid @enderror" name="email" id="email" placeholder="name@example.com" value="{{ old('email') }}">
                                     <label for="floatingInput">Email</label>
                                     @error('email')
@@ -89,7 +118,7 @@
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="form-floating">
+                                <div class="form-floating box-input">
                                     <input type="password" autocomplete="off" class="form-control @error('password')is-invalid @enderror" name="password" id="password" placeholder="Password">
                                     <label for="floatingPassword">Password</label>
                                     @error('password')
@@ -100,7 +129,7 @@
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="form-floating">
+                                <div class="form-floating box-input">
                                     <input type="password" autocomplete="off" class="form-control @error('password_confirmation')is-invalid @enderror" name="password_confirmation" id="password_confirmation" placeholder="Password">
                                     <label for="floatingPassword">Konfirmasi Password</label>@error('password')
                                     <small class="invalid-feedback">
@@ -114,7 +143,7 @@
 
                         <button class="btn my-bg-primary auth-button w-100 py-2 mt-2" type="submit">Register</button>
                         <p class="mt-2 ml-2 text-sm">Sudah punya akun ? <a href="/login"> Masuk disini.</a></p>
-                        <p class="mt-5 mb-3 text-body-secondary">Pelatihan &copy; {{date('Y')}}</p>
+                        <p class="mt-5 mb-3 text-body-secondary">UPTD | Kab. Tangerang &copy; {{date('Y')}}</p>
                     </form>
                 </section>
             </div>
