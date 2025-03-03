@@ -7,7 +7,7 @@
       <div class="row my-2">
         <div class="col-sm-6">
           <h3 class="m-0 ml-2">{{ $title}}</h3>
-        </div><!-- /.col --> 
+        </div><!-- /.col -->
       </div><!-- /.row -->
       <hr style="margin-bottom: 0">
     </div><!-- /.container-fluid -->
@@ -34,11 +34,11 @@
                         </small>
                         @enderror
                     </div>
-                    
+
                     <div class="col-lg-2 col-md-2 col-sm-2 mt-2">
                         <div class="form-check mt-1">
                             <label for="duration">Durasi</label>
-                            <input type="text" name="duration" id="duration" class="form-control @error('title')is-invalid @enderror" value="{{ old('duration') }}">
+                            <input type="text" name="duration" id="duration" class="form-control @error('duration')is-invalid @enderror" value="{{ old('duration') }}">
                             @error('duration')
                             <small class="invalid-feedback">
                                 Durasi {{ $message }}
@@ -50,7 +50,7 @@
                     <div class="col-lg-2 col-md-2 col-sm-2 mt-2">
                         <div class="form-check mt-1">
                             <label for="min_age">Usia Min</label>
-                            <input type="text" name="min_age" id="min_age" class="form-control @error('title')is-invalid @enderror" value="{{ old('min_age') }}">
+                            <input type="text" name="min_age" id="min_age" class="form-control @error('min_age')is-invalid @enderror" value="{{ old('min_age') }}">
                             @error('min_age')
                             <small class="invalid-feedback">
                                 Usia {{ $message }}
@@ -60,8 +60,8 @@
                     </div>
                     <div class="col-lg-2 col-md-2 col-sm-2 mt-2">
                         <div class="form-check mt-1">
-                            <label for="is_active">Usia Max</label>
-                            <input type="text" name="max_age" id="max_age" class="form-control @error('title')is-invalid @enderror" value="{{ old('max_age') }}">
+                            <label for="max_age">Usia Max</label>
+                            <input type="text" name="max_age" id="max_age" class="form-control @error('max_age')is-invalid @enderror" value="{{ old('max_age') }}">
                             @error('max_age')
                             <small class="invalid-feedback">
                                 Usia {{ $message }}
@@ -92,7 +92,7 @@
                     <div class="col-lg-6 col-md-6 col-sm-6 mt-2">
                         <label for="image">Gambar</label>
                         <input type="file" name="image" id="image" class="form-control @error('image')is-invalid @enderror">
-                        
+
                         @error('image')
                         <small class="invalid-feedback">
                             File {{ $message }}
@@ -100,12 +100,12 @@
                         @enderror
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 mt-2">
-                        <label for="image">&nbsp;</label> 
+                        <label for="image">&nbsp;</label>
                         <div class="card img-bordered ml-5 p-2">
                             <img id="blah" src="{{ asset('/img/no_preview.jpg') }}" alt="preview" style="height: 250px;"/>
                         </div>
                     </div>
-                    
+
                     {{-- <div class="col-lg-6 col-md-6 col-sm-6 mt-2">
                         <label for="date">Tanggal</label>
                         <input type="date" class="form-control @error('date')is-invalid @enderror" name="date" id="date" value="{{ old('date') }}">
@@ -127,10 +127,10 @@
                         </section>
                     </section>
                 </div>
-                
+
             </form>
         </div>
     </div>
-</section> 
-    
+</section>
+
 @endsection

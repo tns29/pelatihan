@@ -38,13 +38,13 @@ class TrainingController extends Controller
         $filename = 'add_training';
         $filename_script = getContentScript(true, $filename);
 
-        $code = Auth::guard('admin')->user(); 
+        $code = Auth::guard('admin')->user();
         $category = Category::get();
         return view('admin-page.'.$filename, [
             'script' => $filename_script,
             'title' => 'Tambah Pelatihan',
-            'auth_user' => $code, 
-            'dataCategory' => $category, 
+            'auth_user' => $code,
+            'dataCategory' => $category,
         ]);
     }
 
@@ -54,12 +54,12 @@ class TrainingController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'title'      => 'required|max:90',
-            'category_id'      => 'required',
+            'title'         => 'required|max:90',
+            'category_id'   => 'required',
             'duration'      => 'required',
-            'min_age'      => 'required|max:3',
-            'max_age'      => 'required|max:3',
-            'image'     => 'image|file|max:1024'
+            'min_age'       => 'required|numeric|max:3',
+            'max_age'       => 'required|numeric|max:3',
+            'image'         => 'image|file|max:1024'
         ]);
 
         if($request->file('image')) {
@@ -75,7 +75,7 @@ class TrainingController extends Controller
         $validatedData['description'] = ucwords($request['description']);
         $validatedData['created_at'] = date('Y-m-d H:i:s');
         $validatedData['created_by'] = Auth::guard('admin')->user()->username;
-        
+
         $result = Training::create($validatedData);
         if($result) {
             $request->session()->flash('success', 'Pelatihan berhasil dibuat');
@@ -100,18 +100,18 @@ class TrainingController extends Controller
     {
         $filename = 'edit_training';
         $filename_script = getContentScript(true, $filename);
-        
-        $code = Auth::guard('admin')->user(); 
+
+        $code = Auth::guard('admin')->user();
         $category = Category::get();
         $data = Training::find($id);
         if(!$data) return redirect('/posts');
-        
+
         return view('admin-page.'.$filename, [
             'script' => $filename_script,
             'title' => 'Edit Pelatihan ',
-            'auth_user' => $code, 
-            'dataCategory' => $category, 
-            'dataTraining' => $data 
+            'auth_user' => $code,
+            'dataCategory' => $category,
+            'dataTraining' => $data
         ]);
     }
 
@@ -121,25 +121,25 @@ class TrainingController extends Controller
     public function update(Request $request, string $id)
     {
         $validatedData = $request->validate([
-            'title'      => 'required|max:90',
+            'title'         => 'required|max:90',
             'duration'      => 'required',
-            'category_id'      => 'required',
-            'min_age'      => 'required|max:3',
-            'max_age'      => 'required|max:3',
-            'image'     => 'image|file|max:1024'
+            'category_id'   => 'required',
+            'min_age'       => 'required|numeric|max:3',
+            'max_age'       => 'required|numeric|max:3',
+            'image'         => 'image|file|max:1024'
         ]);
 
         if($request->file('image')) {
             $validatedData['image'] = $request->file('image')->store('service-images');
         }
-        
+
         $validatedData['initials'] = getLasIdTraining().$validatedData['category_id'];
         $validatedData['is_active'] = $request['is_active'] == 'Y' ? 'Y' : "N";
         $validatedData['title'] = ucwords($validatedData['title']);
         $validatedData['description'] = ucwords($request['description']);
         $validatedData['updated_at'] = date('Y-m-d H:i:s');
         $validatedData['updated_by'] = Auth::guard('admin')->user()->username;
-        
+
         $dataTraining = Training::find($id);
         if($request->file('image')) {
             if($validatedData['image'] && $dataTraining->image) {
