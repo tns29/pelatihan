@@ -57,8 +57,8 @@ class TrainingController extends Controller
             'title'         => 'required|max:90',
             'category_id'   => 'required',
             'duration'      => 'required',
-            'min_age'       => 'required|numeric|max:3',
-            'max_age'       => 'required|numeric|max:3',
+            'min_age'       => 'required|numeric|max_digits:3',
+            'max_age'       => 'required|numeric|max_digits:3',
             'image'         => 'image|file|max:1024'
         ]);
 
@@ -124,8 +124,8 @@ class TrainingController extends Controller
             'title'         => 'required|max:90',
             'duration'      => 'required',
             'category_id'   => 'required',
-            'min_age'       => 'required|numeric|max:3',
-            'max_age'       => 'required|numeric|max:3',
+            'min_age'       => 'required|numeric|max_digits:3',
+            'max_age'       => 'required|numeric|max_digits:3',
             'image'         => 'image|file|max:1024'
         ]);
 
