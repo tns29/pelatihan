@@ -112,14 +112,17 @@ class ParticipantController extends Controller
 
     function getLasNumber() {
 
-        $lastNumber = Participant::max('number');
+        $lastNumber = Participant::whereDate('created_at', date('Y-m-d'))
+            ->orderByRaw('LENGTH(number) DESC')
+            ->orderByDesc('number')
+            ->value('number');
 
         if($lastNumber) {
-            $lastNumber = substr($lastNumber, -4);
-            $code_ = sprintf('%04d', $lastNumber+1);
+            $lastNumber = substr($lastNumber, -5);
+            $code_ = sprintf('%05d', $lastNumber+1);
             $numberFix = "UPTD".date('Ymd').$code_;
         } else {
-            $numberFix = "UPTD".date('Ymd')."0001";
+            $numberFix = "UPTD".date('Ymd')."00001";
         }
 
         return $numberFix;
