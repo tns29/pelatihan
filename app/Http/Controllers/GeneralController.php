@@ -69,7 +69,7 @@ class GeneralController extends Controller {
             }
 
             // dd($active_period->id);
-            $checkIsRegisterTraining = Registrant::where(['participant_number' => $user->number, 'period_id' => $active_period->id])->first();
+            $checkIsRegisterTraining = Registrant::where(['participant_number' => $user->number, 'period_id' => $active_period->id, 'year' => date('Y')])->first();
 
             if($checkIsRegisterTraining) {
                 $request->session()->flash('registered', 'Proses gagal, Anda telah mendaftar pelatihan pada gelombang saat ini.');
@@ -128,7 +128,6 @@ class GeneralController extends Controller {
                 $need_approval = false;
             }
 
-            // die($need_approval);
             $registrant = new Registrant;
 
             $registrant->participant_number = $user->number;
