@@ -387,7 +387,11 @@ class AdminController extends Controller
         // $participant = new Participant;
         // $data_part = $participant->getUserProfileByNumber($number);
         $resultData = Registrant::with('participants', 'periods', 'service.service_detail', 'service.periods')
-                                ->where(['participant_number'=> $number, 'training_id' => $training_id])->first();
+                                ->where([
+                                    'participant_number'=> $number,
+                                    'training_id' => $training_id,
+                                    'year' => date('y')
+                                ])->first();
         // dd($resultData);
         return view('admin-page.'.$filename, [
             'script' => $filename_script,
