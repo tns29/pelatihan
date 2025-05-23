@@ -378,7 +378,7 @@ class AdminController extends Controller
 
 
     // DETAIL PESERTA PELATIHAN YANG TELAH DI APPROVE
-    function detailParticipantAppr(string $number, int $training_id) {
+    function detailParticipantAppr(string $number, int $training_id, string $period_id) {
         // dd($training_id);
         $filename = 'detail_participant_appr';
         $filename_script = getContentScript(true, $filename);
@@ -389,7 +389,8 @@ class AdminController extends Controller
         $resultData = Registrant::with('participants', 'periods', 'service.service_detail', 'service.periods')
                                 ->where([
                                     'participant_number'=> $number,
-                                    'training_id' => $training_id
+                                    'training_id' => $training_id,
+                                    'period_id' => $period_id
                                 ])
                                 ->orderBy('year', 'desc')
                                 ->first();

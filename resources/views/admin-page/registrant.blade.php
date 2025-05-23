@@ -66,7 +66,7 @@
                 @foreach ($participant as $row)
                   <tr>
                       <td>
-                        <a href="/detail-participant-appr/{{ $row->participant_number }}/{{$row->training_id}}" class="text-info">
+                        <a href="/detail-participant-appr/{{ $row->participant_number }}/{{$row->training_id}}/{{$row->period_id}}" class="text-info">
                           {{$row->participant_number}}
                         </a>
                       </td>
@@ -95,7 +95,7 @@
                             <a href="/detail-participant-appr-edit/{{ $row->participant_number }}/{{$row->training_id}}" class="text-warning"> <i class="fas fa-edit"></i> </a>
                             &nbsp;
                           @if ($row->approve == "Y")
-                            <a href="/detail-participant-appr/{{ $row->participant_number }}/{{$row->training_id}}" class="text-success"> <i class="fas fa-info-circle"></i> </a>
+                            <a href="/detail-participant-appr/{{ $row->participant_number }}/{{$row->training_id}}/{{$row->period_id}}" class="text-success"> <i class="fas fa-info-circle"></i> </a>
                           @elseif($row->approve == "N")
                             <i class="fas fa-minus-circle text-danger"></i><a href="#" class="text-danger"> Ditolak</a>
                           @else

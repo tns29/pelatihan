@@ -80,7 +80,7 @@ Route::middleware('admin')->group(function () {
     Route::delete('/decline/{number}', [AdminController::class, 'declineParticipant']);
 
     // DETAIL PESERTA PELATIHAN YANG TELAH DI APPROVE
-    Route::get('/detail-participant-appr/{number}/{id}', [AdminController::class, 'detailParticipantAppr']);
+    Route::get('/detail-participant-appr/{number}/{id}/{period_id}', [AdminController::class, 'detailParticipantAppr']);
     Route::put('/passed-participant/{number}', [AdminController::class, 'passedParticipant']);
     Route::get('/detail-participant-appr-edit/{number}/{id}', [AdminController::class, 'detailParticipantApprEdit']);
     Route::put('/update-participant-data/{number}/{id}', [AdminController::class, 'updateParticipantApprEdit']);
